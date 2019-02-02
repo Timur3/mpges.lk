@@ -1,0 +1,6 @@
+framework module Pods_MPGES_LK {
+  umbrella header "Pods-MPGES.LK-umbrella.h"
+
+  export *
+  module * { export * }
+}

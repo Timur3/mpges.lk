@@ -1,0 +1,595 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22D94E3321FA340A003F9A5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E3221FA340A003F9A5F /* AppDelegate.swift */; };
+		22D94E3521FA340A003F9A5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E3421FA340A003F9A5F /* ViewController.swift */; };
+		22D94E3821FA340A003F9A5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D94E3621FA340A003F9A5F /* Main.storyboard */; };
+		22D94E3A21FA340D003F9A5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22D94E3921FA340D003F9A5F /* Assets.xcassets */; };
+		22D94E3D21FA340D003F9A5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D94E3B21FA340D003F9A5F /* LaunchScreen.storyboard */; };
+		22D94E4821FA340D003F9A5F /* MPGES_LKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E4721FA340D003F9A5F /* MPGES_LKTests.swift */; };
+		83E3F1914271F6F78DD9B704 /* Pods_MPGES_LKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E944B534A937F75E4A9286 /* Pods_MPGES_LKTests.framework */; };
+		E305EB5855E78F54B8785F21 /* Pods_MPGES_LK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1408B8D0FCD9822F6E48E8D /* Pods_MPGES_LK.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22D94E4421FA340D003F9A5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22D94E2721FA340A003F9A5F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22D94E2E21FA340A003F9A5F;
+			remoteInfo = MPGES.LK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		22D94E2F21FA340A003F9A5F /* MPGES.LK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MPGES.LK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D94E3221FA340A003F9A5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		22D94E3421FA340A003F9A5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		22D94E3721FA340A003F9A5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		22D94E3921FA340D003F9A5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22D94E3C21FA340D003F9A5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		22D94E3E21FA340D003F9A5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22D94E4321FA340D003F9A5F /* MPGES.LKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MPGES.LKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D94E4721FA340D003F9A5F /* MPGES_LKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPGES_LKTests.swift; sourceTree = "<group>"; };
+		22D94E4921FA340D003F9A5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F147DC77D455753D0231A5F /* Pods-MPGES.LK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MPGES.LK.debug.xcconfig"; path = "Target Support Files/Pods-MPGES.LK/Pods-MPGES.LK.debug.xcconfig"; sourceTree = "<group>"; };
+		A1B41E3896355099B2D52FF2 /* Pods-MPGES.LKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MPGES.LKTests.release.xcconfig"; path = "Target Support Files/Pods-MPGES.LKTests/Pods-MPGES.LKTests.release.xcconfig"; sourceTree = "<group>"; };
+		B03C64895418C1196A572ABF /* Pods-MPGES.LK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MPGES.LK.release.xcconfig"; path = "Target Support Files/Pods-MPGES.LK/Pods-MPGES.LK.release.xcconfig"; sourceTree = "<group>"; };
+		B4E944B534A937F75E4A9286 /* Pods_MPGES_LKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MPGES_LKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B80C98150D25C39205B71B9A /* Pods-MPGES.LKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MPGES.LKTests.debug.xcconfig"; path = "Target Support Files/Pods-MPGES.LKTests/Pods-MPGES.LKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E1408B8D0FCD9822F6E48E8D /* Pods_MPGES_LK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MPGES_LK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22D94E2C21FA340A003F9A5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E305EB5855E78F54B8785F21 /* Pods_MPGES_LK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D94E4021FA340D003F9A5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E3F1914271F6F78DD9B704 /* Pods_MPGES_LKTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22D94E2621FA340A003F9A5F = {
+			isa = PBXGroup;
+			children = (
+				22D94E3121FA340A003F9A5F /* MPGES.LK */,
+				22D94E4621FA340D003F9A5F /* MPGES.LKTests */,
+				22D94E3021FA340A003F9A5F /* Products */,
+				A0555635D0536BA648B431F1 /* Pods */,
+				53EC6B2D4943C89AF8E0868C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		22D94E3021FA340A003F9A5F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22D94E2F21FA340A003F9A5F /* MPGES.LK.app */,
+				22D94E4321FA340D003F9A5F /* MPGES.LKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22D94E3121FA340A003F9A5F /* MPGES.LK */ = {
+			isa = PBXGroup;
+			children = (
+				22D94E5321FA3568003F9A5F /* Core */,
+				22D94E5221FA3558003F9A5F /* App */,
+				22D94E3221FA340A003F9A5F /* AppDelegate.swift */,
+				22D94E3421FA340A003F9A5F /* ViewController.swift */,
+				22D94E3621FA340A003F9A5F /* Main.storyboard */,
+				22D94E3921FA340D003F9A5F /* Assets.xcassets */,
+				22D94E3B21FA340D003F9A5F /* LaunchScreen.storyboard */,
+				22D94E3E21FA340D003F9A5F /* Info.plist */,
+			);
+			path = MPGES.LK;
+			sourceTree = "<group>";
+		};
+		22D94E4621FA340D003F9A5F /* MPGES.LKTests */ = {
+			isa = PBXGroup;
+			children = (
+				22D94E4721FA340D003F9A5F /* MPGES_LKTests.swift */,
+				22D94E4921FA340D003F9A5F /* Info.plist */,
+			);
+			path = MPGES.LKTests;
+			sourceTree = "<group>";
+		};
+		22D94E5221FA3558003F9A5F /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		22D94E5321FA3568003F9A5F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		53EC6B2D4943C89AF8E0868C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1408B8D0FCD9822F6E48E8D /* Pods_MPGES_LK.framework */,
+				B4E944B534A937F75E4A9286 /* Pods_MPGES_LKTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A0555635D0536BA648B431F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F147DC77D455753D0231A5F /* Pods-MPGES.LK.debug.xcconfig */,
+				B03C64895418C1196A572ABF /* Pods-MPGES.LK.release.xcconfig */,
+				B80C98150D25C39205B71B9A /* Pods-MPGES.LKTests.debug.xcconfig */,
+				A1B41E3896355099B2D52FF2 /* Pods-MPGES.LKTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22D94E2E21FA340A003F9A5F /* MPGES.LK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22D94E4C21FA340D003F9A5F /* Build configuration list for PBXNativeTarget "MPGES.LK" */;
+			buildPhases = (
+				17FDF6A3A2484471B5EE7C56 /* [CP] Check Pods Manifest.lock */,
+				22D94E2B21FA340A003F9A5F /* Sources */,
+				22D94E2C21FA340A003F9A5F /* Frameworks */,
+				22D94E2D21FA340A003F9A5F /* Resources */,
+				428DADB33329100A76DE0CEA /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MPGES.LK;
+			productName = MPGES.LK;
+			productReference = 22D94E2F21FA340A003F9A5F /* MPGES.LK.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22D94E4221FA340D003F9A5F /* MPGES.LKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22D94E4F21FA340D003F9A5F /* Build configuration list for PBXNativeTarget "MPGES.LKTests" */;
+			buildPhases = (
+				F54A44CA94D158B698E7048D /* [CP] Check Pods Manifest.lock */,
+				22D94E3F21FA340D003F9A5F /* Sources */,
+				22D94E4021FA340D003F9A5F /* Frameworks */,
+				22D94E4121FA340D003F9A5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22D94E4521FA340D003F9A5F /* PBXTargetDependency */,
+			);
+			name = MPGES.LKTests;
+			productName = MPGES.LKTests;
+			productReference = 22D94E4321FA340D003F9A5F /* MPGES.LKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22D94E2721FA340A003F9A5F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Timur;
+				TargetAttributes = {
+					22D94E2E21FA340A003F9A5F = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					22D94E4221FA340D003F9A5F = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 22D94E2E21FA340A003F9A5F;
+					};
+				};
+			};
+			buildConfigurationList = 22D94E2A21FA340A003F9A5F /* Build configuration list for PBXProject "MPGES.LK" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22D94E2621FA340A003F9A5F;
+			productRefGroup = 22D94E3021FA340A003F9A5F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22D94E2E21FA340A003F9A5F /* MPGES.LK */,
+				22D94E4221FA340D003F9A5F /* MPGES.LKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22D94E2D21FA340A003F9A5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D94E3D21FA340D003F9A5F /* LaunchScreen.storyboard in Resources */,
+				22D94E3A21FA340D003F9A5F /* Assets.xcassets in Resources */,
+				22D94E3821FA340A003F9A5F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D94E4121FA340D003F9A5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17FDF6A3A2484471B5EE7C56 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MPGES.LK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		428DADB33329100A76DE0CEA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MPGES.LK/Pods-MPGES.LK-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MPGES.LK/Pods-MPGES.LK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F54A44CA94D158B698E7048D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MPGES.LKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22D94E2B21FA340A003F9A5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D94E3521FA340A003F9A5F /* ViewController.swift in Sources */,
+				22D94E3321FA340A003F9A5F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D94E3F21FA340D003F9A5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D94E4821FA340D003F9A5F /* MPGES_LKTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22D94E4521FA340D003F9A5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22D94E2E21FA340A003F9A5F /* MPGES.LK */;
+			targetProxy = 22D94E4421FA340D003F9A5F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		22D94E3621FA340A003F9A5F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22D94E3721FA340A003F9A5F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		22D94E3B21FA340D003F9A5F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22D94E3C21FA340D003F9A5F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		22D94E4A21FA340D003F9A5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		22D94E4B21FA340D003F9A5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22D94E4D21FA340D003F9A5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F147DC77D455753D0231A5F /* Pods-MPGES.LK.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8P5Z32Z62F;
+				INFOPLIST_FILE = MPGES.LK/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ChTT.MPGES-LK";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22D94E4E21FA340D003F9A5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B03C64895418C1196A572ABF /* Pods-MPGES.LK.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8P5Z32Z62F;
+				INFOPLIST_FILE = MPGES.LK/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ChTT.MPGES-LK";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22D94E5021FA340D003F9A5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B80C98150D25C39205B71B9A /* Pods-MPGES.LKTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8P5Z32Z62F;
+				INFOPLIST_FILE = MPGES.LKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ChTT.MPGES-LKTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MPGES.LK.app/MPGES.LK";
+			};
+			name = Debug;
+		};
+		22D94E5121FA340D003F9A5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1B41E3896355099B2D52FF2 /* Pods-MPGES.LKTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8P5Z32Z62F;
+				INFOPLIST_FILE = MPGES.LKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ChTT.MPGES-LKTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MPGES.LK.app/MPGES.LK";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22D94E2A21FA340A003F9A5F /* Build configuration list for PBXProject "MPGES.LK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D94E4A21FA340D003F9A5F /* Debug */,
+				22D94E4B21FA340D003F9A5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22D94E4C21FA340D003F9A5F /* Build configuration list for PBXNativeTarget "MPGES.LK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D94E4D21FA340D003F9A5F /* Debug */,
+				22D94E4E21FA340D003F9A5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22D94E4F21FA340D003F9A5F /* Build configuration list for PBXNativeTarget "MPGES.LKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D94E5021FA340D003F9A5F /* Debug */,
+				22D94E5121FA340D003F9A5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22D94E2721FA340A003F9A5F /* Project object */;
+}

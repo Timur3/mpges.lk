@@ -1,0 +1,6 @@
+framework module Pods_MPGES_LKTests {
+  umbrella header "Pods-MPGES.LKTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
