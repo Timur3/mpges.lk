@@ -3,20 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		220429F7235E22460054D4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220429F6235E22460054D4DD /* AppDelegate.swift */; };
 		220429F9235E22460054D4DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220429F8235E22460054D4DD /* SceneDelegate.swift */; };
 		220429FB235E22460054D4DD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220429FA235E22460054D4DD /* LoginViewController.swift */; };
-		220429FE235E22460054D4DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220429FC235E22460054D4DD /* Main.storyboard */; };
 		22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 220429FF235E22460054D4DD /* mpges_lk.xcdatamodeld */; };
 		22042A03235E224D0054D4DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22042A02235E224D0054D4DD /* Assets.xcassets */; };
 		22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A04235E224D0054D4DD /* LaunchScreen.storyboard */; };
 		22042A0E235F5DA20054D4DD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22042A0D235F5DA20054D4DD /* MainViewController.swift */; };
-		22042A10235F5F9B0054D4DD /* RecoveryPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A0F235F5F9B0054D4DD /* RecoveryPassword.storyboard */; };
 		22042A13235F60730054D4DD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A12235F60730054D4DD /* Login.storyboard */; };
+		226AA7C723CE24BF003F006A /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7C623CE24BF003F006A /* ApiService.swift */; };
+		22A08CB423CD8832008A33BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A08CB323CD8832008A33BD /* Main.storyboard */; };
+		22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */; };
 		55C0B670DA5D35AE2F8E1084 /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,14 +27,15 @@
 		220429F6235E22460054D4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		220429F8235E22460054D4DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		220429FA235E22460054D4DD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		220429FD235E22460054D4DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22042A00235E22460054D4DD /* mpges_lk.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mpges_lk.xcdatamodel; sourceTree = "<group>"; };
 		22042A02235E224D0054D4DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22042A05235E224D0054D4DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22042A07235E224D0054D4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22042A0D235F5DA20054D4DD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		22042A0F235F5F9B0054D4DD /* RecoveryPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecoveryPassword.storyboard; sourceTree = "<group>"; };
 		22042A12235F60730054D4DD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		226AA7C623CE24BF003F006A /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		22A08CB323CD8832008A33BD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordViewController.swift; sourceTree = "<group>"; };
 		70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.debug.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,12 +73,13 @@
 		220429F5235E22460054D4DD /* mpges.lk */ = {
 			isa = PBXGroup;
 			children = (
+				226AA7C923CE24DA003F006A /* Models */,
 				22F5DDA923CCE7AF000C3F32 /* App */,
 				22F5DDA823CCE6EF000C3F32 /* Core */,
 				22042A11235F602F0054D4DD /* Account */,
 				220429F6235E22460054D4DD /* AppDelegate.swift */,
 				220429F8235E22460054D4DD /* SceneDelegate.swift */,
-				220429FC235E22460054D4DD /* Main.storyboard */,
+				22A08CB323CD8832008A33BD /* Main.storyboard */,
 				22042A0D235F5DA20054D4DD /* MainViewController.swift */,
 				22042A02235E224D0054D4DD /* Assets.xcassets */,
 				22042A04235E224D0054D4DD /* LaunchScreen.storyboard */,
@@ -90,15 +93,39 @@
 			isa = PBXGroup;
 			children = (
 				220429FA235E22460054D4DD /* LoginViewController.swift */,
-				22042A0F235F5F9B0054D4DD /* RecoveryPassword.storyboard */,
+				22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */,
 				22042A12235F60730054D4DD /* Login.storyboard */,
 			);
 			path = Account;
 			sourceTree = "<group>";
 		};
+		226AA7C523CE2480003F006A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				226AA7C623CE24BF003F006A /* ApiService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		226AA7C823CE24CA003F006A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		226AA7C923CE24DA003F006A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		22F5DDA823CCE6EF000C3F32 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				226AA7C823CE24CA003F006A /* Protocols */,
+				226AA7C523CE2480003F006A /* Services */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -124,7 +151,6 @@
 				B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */,
 				0B27E50C44215D2371686D40 /* Pods-mpges.lk.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -188,11 +214,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22042A10235F5F9B0054D4DD /* RecoveryPassword.storyboard in Resources */,
+				22A08CB423CD8832008A33BD /* Main.storyboard in Resources */,
 				22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */,
 				22042A03235E224D0054D4DD /* Assets.xcassets in Resources */,
 				22042A13235F60730054D4DD /* Login.storyboard in Resources */,
-				220429FE235E22460054D4DD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +274,8 @@
 				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
 				220429F9235E22460054D4DD /* SceneDelegate.swift in Sources */,
 				22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */,
+				22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */,
+				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
 				22042A0E235F5DA20054D4DD /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,14 +283,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		220429FC235E22460054D4DD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				220429FD235E22460054D4DD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		22042A04235E224D0054D4DD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

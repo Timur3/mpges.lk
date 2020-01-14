@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0WJ-E1-lSB">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,14 +12,14 @@
             <objects>
                 <viewController id="0WJ-E1-lSB" customClass="LoginViewController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xts-Ve-Ibl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIk-dS-0P2">
-                                <rect key="frame" x="16" y="20" width="288" height="528"/>
+                                <rect key="frame" x="16" y="20" width="343" height="627"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eT5-Gm-T2x">
-                                        <rect key="frame" x="44" y="159" width="200" height="34"/>
+                                        <rect key="frame" x="71.5" y="159" width="200" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="7Gk-Gn-698"/>
                                         </constraints>
@@ -27,7 +27,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qS-Vb-OXY">
-                                        <rect key="frame" x="119" y="130" width="50" height="21"/>
+                                        <rect key="frame" x="146.5" y="130" width="50" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="RRD-pM-85d"/>
                                         </constraints>
@@ -36,7 +36,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пароль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTL-pi-yml">
-                                        <rect key="frame" x="114" y="201" width="60" height="21"/>
+                                        <rect key="frame" x="141.5" y="201" width="60" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="MQe-ub-IbS"/>
                                         </constraints>
@@ -45,7 +45,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ko4-oa-dpd">
-                                        <rect key="frame" x="44" y="230" width="200" height="34"/>
+                                        <rect key="frame" x="71.5" y="230" width="200" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="Njp-vZ-rfa"/>
                                         </constraints>
@@ -53,22 +53,20 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCd-Pp-abB">
-                                        <rect key="frame" x="44" y="272" width="200" height="30"/>
+                                        <rect key="frame" x="71.5" y="272" width="200" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="6py-4A-v8X"/>
                                         </constraints>
                                         <state key="normal" title="Войти"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-O8-bfQ">
-                                        <rect key="frame" x="44" y="310" width="200" height="30"/>
+                                        <rect key="frame" x="71.5" y="310" width="200" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="XRE-k0-i6C"/>
                                         </constraints>
                                         <state key="normal" title="Забыли пароль"/>
                                         <connections>
-                                            <segue destination="KlK-6G-UeO" kind="popoverPresentation" popoverAnchorView="fJJ-O8-bfQ" id="dnV-qp-UK5">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="gLb-TM-whi" kind="show" id="3Qk-mA-dST"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -104,13 +102,41 @@
             </objects>
             <point key="canvasLocation" x="-4" y="65"/>
         </scene>
-        <!--RecoveryPassword-->
-        <scene sceneID="zK5-Fe-WSt">
+        <!--Recovery Password View Controller-->
+        <scene sceneID="jwu-KA-KMD">
             <objects>
-                <viewControllerPlaceholder storyboardName="RecoveryPassword" id="KlK-6G-UeO" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hVF-bJ-xSx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="gLb-TM-whi" customClass="RecoveryPasswordViewController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EVZ-pt-GK2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Введите Email указанный при регистрации" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrl-3v-3Vg">
+                                <rect key="frame" x="67" y="153" width="240" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vFp-HW-acG">
+                                <rect key="frame" x="65" y="205" width="245" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UaR-Wk-GXd">
+                                <rect key="frame" x="103" y="271" width="168" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Напомнить"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="49D-Dk-fKq"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qld-eq-GW9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PxI-FG-omG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892" y="-111"/>
+            <point key="canvasLocation" x="703" y="63"/>
         </scene>
     </scenes>
 </document>
