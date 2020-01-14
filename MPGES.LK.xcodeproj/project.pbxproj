@@ -7,139 +7,122 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22D94E3321FA340A003F9A5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E3221FA340A003F9A5F /* AppDelegate.swift */; };
-		22D94E3521FA340A003F9A5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E3421FA340A003F9A5F /* ViewController.swift */; };
-		22D94E3821FA340A003F9A5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D94E3621FA340A003F9A5F /* Main.storyboard */; };
-		22D94E3A21FA340D003F9A5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22D94E3921FA340D003F9A5F /* Assets.xcassets */; };
-		22D94E3D21FA340D003F9A5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D94E3B21FA340D003F9A5F /* LaunchScreen.storyboard */; };
-		22D94E4821FA340D003F9A5F /* MPGES_LKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E4721FA340D003F9A5F /* MPGES_LKTests.swift */; };
-		83E3F1914271F6F78DD9B704 /* Pods_MPGES_LKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E944B534A937F75E4A9286 /* Pods_MPGES_LKTests.framework */; };
-		E305EB5855E78F54B8785F21 /* Pods_MPGES_LK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1408B8D0FCD9822F6E48E8D /* Pods_MPGES_LK.framework */; };
+		220429F7235E22460054D4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220429F6235E22460054D4DD /* AppDelegate.swift */; };
+		220429F9235E22460054D4DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220429F8235E22460054D4DD /* SceneDelegate.swift */; };
+		220429FB235E22460054D4DD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220429FA235E22460054D4DD /* LoginViewController.swift */; };
+		220429FE235E22460054D4DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220429FC235E22460054D4DD /* Main.storyboard */; };
+		22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 220429FF235E22460054D4DD /* mpges_lk.xcdatamodeld */; };
+		22042A03235E224D0054D4DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22042A02235E224D0054D4DD /* Assets.xcassets */; };
+		22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A04235E224D0054D4DD /* LaunchScreen.storyboard */; };
+		22042A0E235F5DA20054D4DD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22042A0D235F5DA20054D4DD /* MainViewController.swift */; };
+		22042A10235F5F9B0054D4DD /* RecoveryPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A0F235F5F9B0054D4DD /* RecoveryPassword.storyboard */; };
+		22042A13235F60730054D4DD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A12235F60730054D4DD /* Login.storyboard */; };
+		55C0B670DA5D35AE2F8E1084 /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		22D94E4421FA340D003F9A5F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22D94E2721FA340A003F9A5F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22D94E2E21FA340A003F9A5F;
-			remoteInfo = MPGES.LK;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		22D94E2F21FA340A003F9A5F /* MPGES.LK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MPGES.LK.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22D94E3221FA340A003F9A5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		22D94E3421FA340A003F9A5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		22D94E3721FA340A003F9A5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		22D94E3921FA340D003F9A5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		22D94E3C21FA340D003F9A5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		22D94E3E21FA340D003F9A5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22D94E4321FA340D003F9A5F /* MPGES.LKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MPGES.LKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22D94E4721FA340D003F9A5F /* MPGES_LKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPGES_LKTests.swift; sourceTree = "<group>"; };
-		22D94E4921FA340D003F9A5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F147DC77D455753D0231A5F /* Pods-MPGES.LK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MPGES.LK.debug.xcconfig"; path = "Target Support Files/Pods-MPGES.LK/Pods-MPGES.LK.debug.xcconfig"; sourceTree = "<group>"; };
-		A1B41E3896355099B2D52FF2 /* Pods-MPGES.LKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MPGES.LKTests.release.xcconfig"; path = "Target Support Files/Pods-MPGES.LKTests/Pods-MPGES.LKTests.release.xcconfig"; sourceTree = "<group>"; };
-		B03C64895418C1196A572ABF /* Pods-MPGES.LK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MPGES.LK.release.xcconfig"; path = "Target Support Files/Pods-MPGES.LK/Pods-MPGES.LK.release.xcconfig"; sourceTree = "<group>"; };
-		B4E944B534A937F75E4A9286 /* Pods_MPGES_LKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MPGES_LKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B80C98150D25C39205B71B9A /* Pods-MPGES.LKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MPGES.LKTests.debug.xcconfig"; path = "Target Support Files/Pods-MPGES.LKTests/Pods-MPGES.LKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E1408B8D0FCD9822F6E48E8D /* Pods_MPGES_LK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MPGES_LK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B27E50C44215D2371686D40 /* Pods-mpges.lk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.release.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.release.xcconfig"; sourceTree = "<group>"; };
+		220429F3235E22460054D4DD /* mpges.lk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mpges.lk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		220429F6235E22460054D4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		220429F8235E22460054D4DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		220429FA235E22460054D4DD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		220429FD235E22460054D4DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		22042A00235E22460054D4DD /* mpges_lk.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mpges_lk.xcdatamodel; sourceTree = "<group>"; };
+		22042A02235E224D0054D4DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22042A05235E224D0054D4DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		22042A07235E224D0054D4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22042A0D235F5DA20054D4DD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		22042A0F235F5F9B0054D4DD /* RecoveryPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecoveryPassword.storyboard; sourceTree = "<group>"; };
+		22042A12235F60730054D4DD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.debug.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		22D94E2C21FA340A003F9A5F /* Frameworks */ = {
+		220429F0235E22460054D4DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E305EB5855E78F54B8785F21 /* Pods_MPGES_LK.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22D94E4021FA340D003F9A5F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				83E3F1914271F6F78DD9B704 /* Pods_MPGES_LKTests.framework in Frameworks */,
+				55C0B670DA5D35AE2F8E1084 /* Pods_mpges_lk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		22D94E2621FA340A003F9A5F = {
+		220429EA235E22460054D4DD = {
 			isa = PBXGroup;
 			children = (
-				22D94E3121FA340A003F9A5F /* MPGES.LK */,
-				22D94E4621FA340D003F9A5F /* MPGES.LKTests */,
-				22D94E3021FA340A003F9A5F /* Products */,
-				A0555635D0536BA648B431F1 /* Pods */,
-				53EC6B2D4943C89AF8E0868C /* Frameworks */,
+				220429F5235E22460054D4DD /* mpges.lk */,
+				220429F4235E22460054D4DD /* Products */,
+				BA77AB06EDE1428D2A79D9E3 /* Pods */,
+				5E5FDB0E4D4E9FB466307D27 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		22D94E3021FA340A003F9A5F /* Products */ = {
+		220429F4235E22460054D4DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22D94E2F21FA340A003F9A5F /* MPGES.LK.app */,
-				22D94E4321FA340D003F9A5F /* MPGES.LKTests.xctest */,
+				220429F3235E22460054D4DD /* mpges.lk.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22D94E3121FA340A003F9A5F /* MPGES.LK */ = {
+		220429F5235E22460054D4DD /* mpges.lk */ = {
 			isa = PBXGroup;
 			children = (
-				22D94E5321FA3568003F9A5F /* Core */,
-				22D94E5221FA3558003F9A5F /* App */,
-				22D94E3221FA340A003F9A5F /* AppDelegate.swift */,
-				22D94E3421FA340A003F9A5F /* ViewController.swift */,
-				22D94E3621FA340A003F9A5F /* Main.storyboard */,
-				22D94E3921FA340D003F9A5F /* Assets.xcassets */,
-				22D94E3B21FA340D003F9A5F /* LaunchScreen.storyboard */,
-				22D94E3E21FA340D003F9A5F /* Info.plist */,
+				22F5DDA923CCE7AF000C3F32 /* App */,
+				22F5DDA823CCE6EF000C3F32 /* Core */,
+				22042A11235F602F0054D4DD /* Account */,
+				220429F6235E22460054D4DD /* AppDelegate.swift */,
+				220429F8235E22460054D4DD /* SceneDelegate.swift */,
+				220429FC235E22460054D4DD /* Main.storyboard */,
+				22042A0D235F5DA20054D4DD /* MainViewController.swift */,
+				22042A02235E224D0054D4DD /* Assets.xcassets */,
+				22042A04235E224D0054D4DD /* LaunchScreen.storyboard */,
+				22042A07235E224D0054D4DD /* Info.plist */,
+				220429FF235E22460054D4DD /* mpges_lk.xcdatamodeld */,
 			);
-			path = MPGES.LK;
+			path = mpges.lk;
 			sourceTree = "<group>";
 		};
-		22D94E4621FA340D003F9A5F /* MPGES.LKTests */ = {
+		22042A11235F602F0054D4DD /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				22D94E4721FA340D003F9A5F /* MPGES_LKTests.swift */,
-				22D94E4921FA340D003F9A5F /* Info.plist */,
+				220429FA235E22460054D4DD /* LoginViewController.swift */,
+				22042A0F235F5F9B0054D4DD /* RecoveryPassword.storyboard */,
+				22042A12235F60730054D4DD /* Login.storyboard */,
 			);
-			path = MPGES.LKTests;
+			path = Account;
 			sourceTree = "<group>";
 		};
-		22D94E5221FA3558003F9A5F /* App */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		22D94E5321FA3568003F9A5F /* Core */ = {
+		22F5DDA823CCE6EF000C3F32 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		53EC6B2D4943C89AF8E0868C /* Frameworks */ = {
+		22F5DDA923CCE7AF000C3F32 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				E1408B8D0FCD9822F6E48E8D /* Pods_MPGES_LK.framework */,
-				B4E944B534A937F75E4A9286 /* Pods_MPGES_LKTests.framework */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5E5FDB0E4D4E9FB466307D27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A0555635D0536BA648B431F1 /* Pods */ = {
+		BA77AB06EDE1428D2A79D9E3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9F147DC77D455753D0231A5F /* Pods-MPGES.LK.debug.xcconfig */,
-				B03C64895418C1196A572ABF /* Pods-MPGES.LK.release.xcconfig */,
-				B80C98150D25C39205B71B9A /* Pods-MPGES.LKTests.debug.xcconfig */,
-				A1B41E3896355099B2D52FF2 /* Pods-MPGES.LKTests.release.xcconfig */,
+				B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */,
+				0B27E50C44215D2371686D40 /* Pods-mpges.lk.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -148,64 +131,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22D94E2E21FA340A003F9A5F /* MPGES.LK */ = {
+		220429F2235E22460054D4DD /* mpges.lk */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22D94E4C21FA340D003F9A5F /* Build configuration list for PBXNativeTarget "MPGES.LK" */;
+			buildConfigurationList = 22042A0A235E224D0054D4DD /* Build configuration list for PBXNativeTarget "mpges.lk" */;
 			buildPhases = (
-				17FDF6A3A2484471B5EE7C56 /* [CP] Check Pods Manifest.lock */,
-				22D94E2B21FA340A003F9A5F /* Sources */,
-				22D94E2C21FA340A003F9A5F /* Frameworks */,
-				22D94E2D21FA340A003F9A5F /* Resources */,
-				428DADB33329100A76DE0CEA /* [CP] Embed Pods Frameworks */,
+				AF762B380121D3AE6C387348 /* [CP] Check Pods Manifest.lock */,
+				220429EF235E22460054D4DD /* Sources */,
+				220429F0235E22460054D4DD /* Frameworks */,
+				220429F1235E22460054D4DD /* Resources */,
+				3525EC9DFF41762D27B35893 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MPGES.LK;
-			productName = MPGES.LK;
-			productReference = 22D94E2F21FA340A003F9A5F /* MPGES.LK.app */;
+			name = mpges.lk;
+			productName = mpges.lk;
+			productReference = 220429F3235E22460054D4DD /* mpges.lk.app */;
 			productType = "com.apple.product-type.application";
-		};
-		22D94E4221FA340D003F9A5F /* MPGES.LKTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22D94E4F21FA340D003F9A5F /* Build configuration list for PBXNativeTarget "MPGES.LKTests" */;
-			buildPhases = (
-				F54A44CA94D158B698E7048D /* [CP] Check Pods Manifest.lock */,
-				22D94E3F21FA340D003F9A5F /* Sources */,
-				22D94E4021FA340D003F9A5F /* Frameworks */,
-				22D94E4121FA340D003F9A5F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22D94E4521FA340D003F9A5F /* PBXTargetDependency */,
-			);
-			name = MPGES.LKTests;
-			productName = MPGES.LKTests;
-			productReference = 22D94E4321FA340D003F9A5F /* MPGES.LKTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		22D94E2721FA340A003F9A5F /* Project object */ = {
+		220429EB235E22460054D4DD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = Timur;
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = ChalimovTimur;
 				TargetAttributes = {
-					22D94E2E21FA340A003F9A5F = {
-						CreatedOnToolsVersion = 10.1;
-					};
-					22D94E4221FA340D003F9A5F = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = 22D94E2E21FA340A003F9A5F;
+					220429F2235E22460054D4DD = {
+						CreatedOnToolsVersion = 11.1;
 					};
 				};
 			};
-			buildConfigurationList = 22D94E2A21FA340A003F9A5F /* Build configuration list for PBXProject "MPGES.LK" */;
+			buildConfigurationList = 220429EE235E22460054D4DD /* Build configuration list for PBXProject "mpges.lk" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -213,83 +173,50 @@
 				en,
 				Base,
 			);
-			mainGroup = 22D94E2621FA340A003F9A5F;
-			productRefGroup = 22D94E3021FA340A003F9A5F /* Products */;
+			mainGroup = 220429EA235E22460054D4DD;
+			productRefGroup = 220429F4235E22460054D4DD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22D94E2E21FA340A003F9A5F /* MPGES.LK */,
-				22D94E4221FA340D003F9A5F /* MPGES.LKTests */,
+				220429F2235E22460054D4DD /* mpges.lk */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		22D94E2D21FA340A003F9A5F /* Resources */ = {
+		220429F1235E22460054D4DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22D94E3D21FA340D003F9A5F /* LaunchScreen.storyboard in Resources */,
-				22D94E3A21FA340D003F9A5F /* Assets.xcassets in Resources */,
-				22D94E3821FA340A003F9A5F /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22D94E4121FA340D003F9A5F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				22042A10235F5F9B0054D4DD /* RecoveryPassword.storyboard in Resources */,
+				22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */,
+				22042A03235E224D0054D4DD /* Assets.xcassets in Resources */,
+				22042A13235F60730054D4DD /* Login.storyboard in Resources */,
+				220429FE235E22460054D4DD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		17FDF6A3A2484471B5EE7C56 /* [CP] Check Pods Manifest.lock */ = {
+		3525EC9DFF41762D27B35893 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MPGES.LK-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		428DADB33329100A76DE0CEA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MPGES.LK/Pods-MPGES.LK-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MPGES.LK/Pods-MPGES.LK-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F54A44CA94D158B698E7048D /* [CP] Check Pods Manifest.lock */ = {
+		AF762B380121D3AE6C387348 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,7 +231,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MPGES.LKTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-mpges.lk-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -314,46 +241,33 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		22D94E2B21FA340A003F9A5F /* Sources */ = {
+		220429EF235E22460054D4DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22D94E3521FA340A003F9A5F /* ViewController.swift in Sources */,
-				22D94E3321FA340A003F9A5F /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22D94E3F21FA340D003F9A5F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22D94E4821FA340D003F9A5F /* MPGES_LKTests.swift in Sources */,
+				220429FB235E22460054D4DD /* LoginViewController.swift in Sources */,
+				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
+				220429F9235E22460054D4DD /* SceneDelegate.swift in Sources */,
+				22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */,
+				22042A0E235F5DA20054D4DD /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		22D94E4521FA340D003F9A5F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22D94E2E21FA340A003F9A5F /* MPGES.LK */;
-			targetProxy = 22D94E4421FA340D003F9A5F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		22D94E3621FA340A003F9A5F /* Main.storyboard */ = {
+		220429FC235E22460054D4DD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				22D94E3721FA340A003F9A5F /* Base */,
+				220429FD235E22460054D4DD /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		22D94E3B21FA340D003F9A5F /* LaunchScreen.storyboard */ = {
+		22042A04235E224D0054D4DD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				22D94E3C21FA340D003F9A5F /* Base */,
+				22042A05235E224D0054D4DD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -361,7 +275,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		22D94E4A21FA340D003F9A5F /* Debug */ = {
+		22042A08235E224D0054D4DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -393,7 +307,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -412,7 +325,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -422,7 +335,7 @@
 			};
 			name = Debug;
 		};
-		22D94E4B21FA340D003F9A5F /* Release */ = {
+		22042A09235E224D0054D4DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -454,7 +367,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -467,7 +379,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -477,119 +389,79 @@
 			};
 			name = Release;
 		};
-		22D94E4D21FA340D003F9A5F /* Debug */ = {
+		22042A0B235E224D0054D4DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F147DC77D455753D0231A5F /* Pods-MPGES.LK.debug.xcconfig */;
+			baseConfigurationReference = B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8P5Z32Z62F;
-				INFOPLIST_FILE = MPGES.LK/Info.plist;
+				INFOPLIST_FILE = mpges.lk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ChTT.MPGES-LK";
+				PRODUCT_BUNDLE_IDENTIFIER = "ChalimovTimur.mpges-lk";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		22D94E4E21FA340D003F9A5F /* Release */ = {
+		22042A0C235E224D0054D4DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B03C64895418C1196A572ABF /* Pods-MPGES.LK.release.xcconfig */;
+			baseConfigurationReference = 0B27E50C44215D2371686D40 /* Pods-mpges.lk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8P5Z32Z62F;
-				INFOPLIST_FILE = MPGES.LK/Info.plist;
+				INFOPLIST_FILE = mpges.lk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ChTT.MPGES-LK";
+				PRODUCT_BUNDLE_IDENTIFIER = "ChalimovTimur.mpges-lk";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		22D94E5021FA340D003F9A5F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B80C98150D25C39205B71B9A /* Pods-MPGES.LKTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8P5Z32Z62F;
-				INFOPLIST_FILE = MPGES.LKTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ChTT.MPGES-LKTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MPGES.LK.app/MPGES.LK";
-			};
-			name = Debug;
-		};
-		22D94E5121FA340D003F9A5F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1B41E3896355099B2D52FF2 /* Pods-MPGES.LKTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8P5Z32Z62F;
-				INFOPLIST_FILE = MPGES.LKTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ChTT.MPGES-LKTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MPGES.LK.app/MPGES.LK";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22D94E2A21FA340A003F9A5F /* Build configuration list for PBXProject "MPGES.LK" */ = {
+		220429EE235E22460054D4DD /* Build configuration list for PBXProject "mpges.lk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22D94E4A21FA340D003F9A5F /* Debug */,
-				22D94E4B21FA340D003F9A5F /* Release */,
+				22042A08235E224D0054D4DD /* Debug */,
+				22042A09235E224D0054D4DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22D94E4C21FA340D003F9A5F /* Build configuration list for PBXNativeTarget "MPGES.LK" */ = {
+		22042A0A235E224D0054D4DD /* Build configuration list for PBXNativeTarget "mpges.lk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22D94E4D21FA340D003F9A5F /* Debug */,
-				22D94E4E21FA340D003F9A5F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22D94E4F21FA340D003F9A5F /* Build configuration list for PBXNativeTarget "MPGES.LKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22D94E5021FA340D003F9A5F /* Debug */,
-				22D94E5121FA340D003F9A5F /* Release */,
+				22042A0B235E224D0054D4DD /* Debug */,
+				22042A0C235E224D0054D4DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		220429FF235E22460054D4DD /* mpges_lk.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				22042A00235E22460054D4DD /* mpges_lk.xcdatamodel */,
+			);
+			currentVersion = 22042A00235E22460054D4DD /* mpges_lk.xcdatamodel */;
+			path = mpges_lk.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
-	rootObject = 22D94E2721FA340A003F9A5F /* Project object */;
+	rootObject = 220429EB235E22460054D4DD /* Project object */;
 }

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_MPGES_LKVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_MPGES_LKVersionString[];
+FOUNDATION_EXPORT double Pods_mpges_lkVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_mpges_lkVersionString[];
 

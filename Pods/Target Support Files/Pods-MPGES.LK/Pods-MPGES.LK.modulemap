@@ -1,5 +1,5 @@
-framework module Pods_MPGES_LK {
-  umbrella header "Pods-MPGES.LK-umbrella.h"
+framework module Pods_mpges_lk {
+  umbrella header "Pods-mpges.lk-umbrella.h"
 
   export *
   module * { export * }

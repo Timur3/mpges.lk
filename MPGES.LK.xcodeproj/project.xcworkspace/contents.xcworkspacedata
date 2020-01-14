@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MPGES.LK.xcodeproj">
+      location = "self:mpges.lk.xcodeproj">
    </FileRef>
 </Workspace>
