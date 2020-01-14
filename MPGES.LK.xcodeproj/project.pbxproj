@@ -16,6 +16,11 @@
 		22042A0E235F5DA20054D4DD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22042A0D235F5DA20054D4DD /* MainViewController.swift */; };
 		22042A13235F60730054D4DD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A12235F60730054D4DD /* Login.storyboard */; };
 		226AA7C723CE24BF003F006A /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7C623CE24BF003F006A /* ApiService.swift */; };
+		226AA7CB23CE30DC003F006A /* ApiServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7CA23CE30DC003F006A /* ApiServiceProtocol.swift */; };
+		226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7CC23CE30F7003F006A /* UserDataService.swift */; };
+		226AA7CF23CE310E003F006A /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7CE23CE310E003F006A /* UserDataProtocol.swift */; };
+		226AA7D123CE34BF003F006A /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7D023CE34BF003F006A /* Options.swift */; };
+		226AA7D323CE3C44003F006A /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7D223CE3C44003F006A /* SingUpViewController.swift */; };
 		22A08CB423CD8832008A33BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A08CB323CD8832008A33BD /* Main.storyboard */; };
 		22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */; };
 		55C0B670DA5D35AE2F8E1084 /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */; };
@@ -34,6 +39,11 @@
 		22042A0D235F5DA20054D4DD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		22042A12235F60730054D4DD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		226AA7C623CE24BF003F006A /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		226AA7CA23CE30DC003F006A /* ApiServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceProtocol.swift; sourceTree = "<group>"; };
+		226AA7CC23CE30F7003F006A /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
+		226AA7CE23CE310E003F006A /* UserDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
+		226AA7D023CE34BF003F006A /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		226AA7D223CE3C44003F006A /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		22A08CB323CD8832008A33BD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordViewController.swift; sourceTree = "<group>"; };
 		70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +105,7 @@
 				220429FA235E22460054D4DD /* LoginViewController.swift */,
 				22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */,
 				22042A12235F60730054D4DD /* Login.storyboard */,
+				226AA7D223CE3C44003F006A /* SingUpViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -103,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				226AA7C623CE24BF003F006A /* ApiService.swift */,
+				226AA7CC23CE30F7003F006A /* UserDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -110,6 +122,8 @@
 		226AA7C823CE24CA003F006A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				226AA7CA23CE30DC003F006A /* ApiServiceProtocol.swift */,
+				226AA7CE23CE310E003F006A /* UserDataProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -133,6 +147,7 @@
 		22F5DDA923CCE7AF000C3F32 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				226AA7D023CE34BF003F006A /* Options.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -270,12 +285,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226AA7CB23CE30DC003F006A /* ApiServiceProtocol.swift in Sources */,
 				220429FB235E22460054D4DD /* LoginViewController.swift in Sources */,
 				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
+				226AA7D123CE34BF003F006A /* Options.swift in Sources */,
+				226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */,
 				220429F9235E22460054D4DD /* SceneDelegate.swift in Sources */,
 				22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */,
+				226AA7CF23CE310E003F006A /* UserDataProtocol.swift in Sources */,
 				22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */,
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
+				226AA7D323CE3C44003F006A /* SingUpViewController.swift in Sources */,
 				22042A0E235F5DA20054D4DD /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
