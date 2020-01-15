@@ -10,7 +10,7 @@
         <!--Вход-->
         <scene sceneID="RgF-H2-63K">
             <objects>
-                <viewController id="0WJ-E1-lSB" customClass="LoginViewController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0WJ-E1-lSB" customClass="SingInViewController" customModule="mpges_lk" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xts-Ve-Ibl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -18,7 +18,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIk-dS-0P2">
                                 <rect key="frame" x="16" y="64" width="343" height="583"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eT5-Gm-T2x">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="timon2006tevriz@mail.ru" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eT5-Gm-T2x">
                                         <rect key="frame" x="71.5" y="159" width="200" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="7Gk-Gn-698"/>
@@ -58,6 +58,9 @@
                                             <constraint firstAttribute="width" constant="200" id="6py-4A-v8X"/>
                                         </constraints>
                                         <state key="normal" title="Войти"/>
+                                        <connections>
+                                            <action selector="AuthButton:" destination="0WJ-E1-lSB" eventType="touchUpInside" id="cGo-zh-MCm"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-O8-bfQ">
                                         <rect key="frame" x="71.5" y="310" width="200" height="30"/>
@@ -97,10 +100,25 @@
                         <viewLayoutGuide key="safeArea" id="YB1-2P-Dia"/>
                     </view>
                     <navigationItem key="navigationItem" title="Вход" id="uHt-8m-9G4"/>
+                    <connections>
+                        <outlet property="emailTF" destination="eT5-Gm-T2x" id="xA0-z9-BJo"/>
+                        <outlet property="passwordTF" destination="ko4-oa-dpd" id="3av-Kb-1zh"/>
+                        <segue destination="fp2-tc-YPH" kind="push" identifier="ToMainTabBar" id="kV7-Ng-AFh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRg-rn-B2Q" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1049" y="-313"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="QX6-S3-omL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="fp2-tc-YPH" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Che-2O-aEs"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ssr-Kw-guy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1579" y="-721"/>
         </scene>
         <!--Восстановление пароля-->
         <scene sceneID="jwu-KA-KMD">
@@ -136,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PxI-FG-omG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1770" y="-313"/>
+            <point key="canvasLocation" x="1830" y="-313"/>
         </scene>
         <!--Регистрация-->
         <scene sceneID="0b5-Hk-xAY">
@@ -156,7 +174,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qB4-cg-IaZ">
                                 <rect key="frame" x="139" y="147" width="97" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Juz-W6-hk4">
@@ -212,14 +230,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDS-fp-qCr">
-                                <rect key="frame" x="165" y="520" width="44" height="30"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="5zp-4Z-oi1">
+                                <rect key="frame" x="82" y="159" width="213" height="277"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Войти"/>
-                                <connections>
-                                    <segue destination="0WJ-E1-lSB" kind="show" id="qhX-xx-js3"/>
-                                </connections>
-                            </button>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJz-YV-kYN">
                                 <rect key="frame" x="142" y="584" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -228,10 +242,14 @@
                                     <segue destination="XHc-Xn-fEj" kind="show" id="vcb-Nq-xoB"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Vkontakte" translatesAutoresizingMaskIntoConstraints="NO" id="5zp-4Z-oi1">
-                                <rect key="frame" x="81" y="195" width="213" height="277"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDS-fp-qCr">
+                                <rect key="frame" x="128" y="529" width="120" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <state key="normal" title="Войти"/>
+                                <connections>
+                                    <segue destination="0WJ-E1-lSB" kind="show" id="qhX-xx-js3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="mOc-yh-2FY"/>
@@ -262,6 +280,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Vkontakte" width="801" height="801"/>
+        <image name="Logo" width="1182" height="1588"/>
     </resources>
 </document>

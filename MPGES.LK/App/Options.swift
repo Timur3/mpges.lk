@@ -13,7 +13,7 @@ class Options {
     let versionApi: String
        
     init() {
-        baseUrl = "http://webapi.mp-ges.ru/api"
+        baseUrl = "https://webapi.mp-ges.ru/api/"
         versionApi = "1"
     }
 }
