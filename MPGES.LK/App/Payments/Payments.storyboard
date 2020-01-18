@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d4x-hG-T6J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4gs-ek-gWx">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Начисления-->
+        <!--Платежи-->
         <scene sceneID="0tn-hr-Grz">
             <objects>
-                <tableViewController id="d4x-hG-T6J" sceneMemberID="viewController">
+                <tableViewController id="d4x-hG-T6J" customClass="PaymentsTVController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xfi-J2-DaM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,12 +29,31 @@
                             <outlet property="delegate" destination="d4x-hG-T6J" id="PxY-f5-zC5"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Начисления" image="dollarsign.circle" catalog="system" id="rIL-75-5rm"/>
+                    <navigationItem key="navigationItem" title="Платежи" id="qj6-o1-nbm"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V9T-Zu-8ts" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2221" y="731"/>
+            <point key="canvasLocation" x="3159.1999999999998" y="730.88455772113946"/>
+        </scene>
+        <!--Платежи-->
+        <scene sceneID="cNa-fR-sL0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4gs-ek-gWx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Платежи" image="dollarsign.circle" catalog="system" id="rIL-75-5rm"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zm3-uh-fN9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="d4x-hG-T6J" kind="relationship" relationship="rootViewController" id="96F-1g-FgV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xj2-iW-iXt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2220" y="730.88455772113946"/>
         </scene>
     </scenes>
     <resources>

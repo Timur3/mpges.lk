@@ -16,11 +16,16 @@
 		22042A0E235F5DA20054D4DD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22042A0D235F5DA20054D4DD /* MainViewController.swift */; };
 		22042A13235F60730054D4DD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A12235F60730054D4DD /* Login.storyboard */; };
 		223FDF8023D0303E0029E547 /* Contracts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223FDF7F23D0303E0029E547 /* Contracts.storyboard */; };
-		223FDF8323D031230029E547 /* Profiles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223FDF8223D031230029E547 /* Profiles.storyboard */; };
+		223FDF8323D031230029E547 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223FDF8223D031230029E547 /* Profile.storyboard */; };
 		223FDF8523D08A600029E547 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF8423D08A600029E547 /* DeviceModel.swift */; };
 		223FDF8723D0928C0029E547 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF8623D0928C0029E547 /* PaymentModel.swift */; };
 		223FDF8923D092BD0029E547 /* ContractModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF8823D092BD0029E547 /* ContractModel.swift */; };
 		223FDF8B23D093180029E547 /* InvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF8A23D093180029E547 /* InvoiceModel.swift */; };
+		223FDF8D23D0C56C0029E547 /* CalculationsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF8C23D0C56C0029E547 /* CalculationsTVController.swift */; };
+		223FDF8F23D0CD5F0029E547 /* DevicesTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF8E23D0CD5F0029E547 /* DevicesTVController.swift */; };
+		223FDF9123D0CFFC0029E547 /* ContractsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF9023D0CFFC0029E547 /* ContractsTVController.swift */; };
+		223FDF9323D0D1520029E547 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF9223D0D1520029E547 /* ProfileViewController.swift */; };
+		223FDF9523D0D2700029E547 /* PaymentsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF9423D0D2700029E547 /* PaymentsTVController.swift */; };
 		2253EE2F23CF3335009FD4B5 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2E23CF3335009FD4B5 /* AuthModel.swift */; };
 		2253EE3123CF351C009FD4B5 /* AuthResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE3023CF351C009FD4B5 /* AuthResultModel.swift */; };
 		226AA7C723CE24BF003F006A /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7C623CE24BF003F006A /* ApiService.swift */; };
@@ -51,11 +56,16 @@
 		22042A0D235F5DA20054D4DD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		22042A12235F60730054D4DD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		223FDF7F23D0303E0029E547 /* Contracts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contracts.storyboard; sourceTree = "<group>"; };
-		223FDF8223D031230029E547 /* Profiles.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profiles.storyboard; sourceTree = "<group>"; };
+		223FDF8223D031230029E547 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		223FDF8423D08A600029E547 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		223FDF8623D0928C0029E547 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		223FDF8823D092BD0029E547 /* ContractModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractModel.swift; sourceTree = "<group>"; };
 		223FDF8A23D093180029E547 /* InvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceModel.swift; sourceTree = "<group>"; };
+		223FDF8C23D0C56C0029E547 /* CalculationsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationsTVController.swift; sourceTree = "<group>"; };
+		223FDF8E23D0CD5F0029E547 /* DevicesTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesTVController.swift; sourceTree = "<group>"; };
+		223FDF9023D0CFFC0029E547 /* ContractsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractsTVController.swift; sourceTree = "<group>"; };
+		223FDF9223D0D1520029E547 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		223FDF9423D0D2700029E547 /* PaymentsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsTVController.swift; sourceTree = "<group>"; };
 		2253EE2E23CF3335009FD4B5 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		2253EE3023CF351C009FD4B5 /* AuthResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResultModel.swift; sourceTree = "<group>"; };
 		226AA7C623CE24BF003F006A /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -146,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				223FDF7F23D0303E0029E547 /* Contracts.storyboard */,
+				223FDF9023D0CFFC0029E547 /* ContractsTVController.swift */,
 			);
 			path = Contracts;
 			sourceTree = "<group>";
@@ -153,7 +164,8 @@
 		223FDF8123D030FC0029E547 /* Profiles */ = {
 			isa = PBXGroup;
 			children = (
-				223FDF8223D031230029E547 /* Profiles.storyboard */,
+				223FDF8223D031230029E547 /* Profile.storyboard */,
+				223FDF9223D0D1520029E547 /* ProfileViewController.swift */,
 			);
 			path = Profiles;
 			sourceTree = "<group>";
@@ -193,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				2278511323CF9713007F1063 /* Payments.storyboard */,
+				223FDF9423D0D2700029E547 /* PaymentsTVController.swift */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -201,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				2278511623CF9799007F1063 /* Calculations.storyboard */,
+				223FDF8C23D0C56C0029E547 /* CalculationsTVController.swift */,
 			);
 			path = Calculations;
 			sourceTree = "<group>";
@@ -209,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				2278511923CF9B6E007F1063 /* Devices.storyboard */,
+				223FDF8E23D0CD5F0029E547 /* DevicesTVController.swift */,
 			);
 			path = Devices;
 			sourceTree = "<group>";
@@ -313,7 +328,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223FDF8323D031230029E547 /* Profiles.storyboard in Resources */,
+				223FDF8323D031230029E547 /* Profile.storyboard in Resources */,
 				22A08CB423CD8832008A33BD /* Main.storyboard in Resources */,
 				22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */,
 				2278511723CF979A007F1063 /* Calculations.storyboard in Resources */,
@@ -375,17 +390,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				226AA7CB23CE30DC003F006A /* ApiServiceProtocol.swift in Sources */,
+				223FDF9123D0CFFC0029E547 /* ContractsTVController.swift in Sources */,
 				220429FB235E22460054D4DD /* SingInViewController.swift in Sources */,
 				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
 				223FDF8B23D093180029E547 /* InvoiceModel.swift in Sources */,
 				2253EE2F23CF3335009FD4B5 /* AuthModel.swift in Sources */,
+				223FDF8D23D0C56C0029E547 /* CalculationsTVController.swift in Sources */,
 				226AA7D123CE34BF003F006A /* Options.swift in Sources */,
 				226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */,
 				220429F9235E22460054D4DD /* SceneDelegate.swift in Sources */,
 				22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */,
 				226AA7CF23CE310E003F006A /* UserDataProtocol.swift in Sources */,
+				223FDF9523D0D2700029E547 /* PaymentsTVController.swift in Sources */,
 				22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */,
+				223FDF8F23D0CD5F0029E547 /* DevicesTVController.swift in Sources */,
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
+				223FDF9323D0D1520029E547 /* ProfileViewController.swift in Sources */,
 				223FDF8923D092BD0029E547 /* ContractModel.swift in Sources */,
 				2278511123CF949F007F1063 /* Shake.swift in Sources */,
 				226AA7D323CE3C44003F006A /* SingUpViewController.swift in Sources */,

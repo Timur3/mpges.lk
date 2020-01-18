@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Xm-Tn-q58">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hSR-70-xwd">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Мои договора-->
+        <!--Мои договоры-->
         <scene sceneID="o6k-6Z-B48">
             <objects>
-                <tableViewController id="2Xm-Tn-q58" sceneMemberID="viewController">
+                <tableViewController id="2Xm-Tn-q58" customClass="ContractsTVController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6hX-dv-csQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,12 +29,31 @@
                             <outlet property="delegate" destination="2Xm-Tn-q58" id="lcu-z5-qlQ"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Мои договора" image="tray.full" catalog="system" id="VyI-d8-ZPr"/>
+                    <navigationItem key="navigationItem" title="Мои договоры" id="4CT-Ft-s0m"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zgb-pU-3kU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="87" y="101"/>
+            <point key="canvasLocation" x="1024.8" y="100.29985007496252"/>
+        </scene>
+        <!--Мои договора-->
+        <scene sceneID="d2v-5H-6Jo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hSR-70-xwd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Мои договора" image="tray.full" catalog="system" id="VyI-d8-ZPr"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5nf-oG-JBY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2Xm-Tn-q58" kind="relationship" relationship="rootViewController" id="9lo-68-rjz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6YJ-FF-0fj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85.599999999999994" y="100.29985007496252"/>
         </scene>
     </scenes>
     <resources>

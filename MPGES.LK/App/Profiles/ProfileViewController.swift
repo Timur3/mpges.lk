@@ -1,14 +1,14 @@
 //
-//  MainViewController.swift
+//  ProfileViewController.swift
 //  mpges.lk
 //
-//  Created by Timur on 22.10.2019.
-//  Copyright © 2019 ChalimovTimur. All rights reserved.
+//  Created by Timur on 16.01.2020.
+//  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
 import UIKit
 
-class MainViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
