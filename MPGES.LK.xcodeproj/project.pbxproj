@@ -28,6 +28,11 @@
 		223FDF9523D0D2700029E547 /* PaymentsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF9423D0D2700029E547 /* PaymentsTVController.swift */; };
 		2253EE2F23CF3335009FD4B5 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2E23CF3335009FD4B5 /* AuthModel.swift */; };
 		2253EE3123CF351C009FD4B5 /* AuthResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE3023CF351C009FD4B5 /* AuthResultModel.swift */; };
+		226A8B3623D421D9009B3B67 /* PaymentTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A8B3523D421D9009B3B67 /* PaymentTVCell.swift */; };
+		226A8B3823D42313009B3B67 /* PaymentsTVControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A8B3723D42313009B3B67 /* PaymentsTVControllerDelegate.swift */; };
+		226A8B3A23D42DEB009B3B67 /* PaymentInfoTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A8B3923D42DEB009B3B67 /* PaymentInfoTVController.swift */; };
+		226A8B3C23D43901009B3B67 /* ApiServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A8B3B23D43901009B3B67 /* ApiServiceAdapter.swift */; };
+		226A8B3E23D49ED7009B3B67 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A8B3D23D49ED7009B3B67 /* DateHelper.swift */; };
 		226AA7C723CE24BF003F006A /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7C623CE24BF003F006A /* ApiService.swift */; };
 		226AA7CB23CE30DC003F006A /* ApiServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7CA23CE30DC003F006A /* ApiServiceProtocol.swift */; };
 		226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7CC23CE30F7003F006A /* UserDataService.swift */; };
@@ -68,6 +73,11 @@
 		223FDF9423D0D2700029E547 /* PaymentsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsTVController.swift; sourceTree = "<group>"; };
 		2253EE2E23CF3335009FD4B5 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		2253EE3023CF351C009FD4B5 /* AuthResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResultModel.swift; sourceTree = "<group>"; };
+		226A8B3523D421D9009B3B67 /* PaymentTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTVCell.swift; sourceTree = "<group>"; };
+		226A8B3723D42313009B3B67 /* PaymentsTVControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsTVControllerDelegate.swift; sourceTree = "<group>"; };
+		226A8B3923D42DEB009B3B67 /* PaymentInfoTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfoTVController.swift; sourceTree = "<group>"; };
+		226A8B3B23D43901009B3B67 /* ApiServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceAdapter.swift; sourceTree = "<group>"; };
+		226A8B3D23D49ED7009B3B67 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		226AA7C623CE24BF003F006A /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		226AA7CA23CE30DC003F006A /* ApiServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceProtocol.swift; sourceTree = "<group>"; };
 		226AA7CC23CE30F7003F006A /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
@@ -148,6 +158,7 @@
 			children = (
 				2278511023CF949F007F1063 /* Shake.swift */,
 				226AA7D023CE34BF003F006A /* Options.swift */,
+				226A8B3D23D49ED7009B3B67 /* DateHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -175,6 +186,7 @@
 			children = (
 				226AA7C623CE24BF003F006A /* ApiService.swift */,
 				226AA7CC23CE30F7003F006A /* UserDataService.swift */,
+				226A8B3B23D43901009B3B67 /* ApiServiceAdapter.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -184,6 +196,7 @@
 			children = (
 				226AA7CA23CE30DC003F006A /* ApiServiceProtocol.swift */,
 				226AA7CE23CE310E003F006A /* UserDataProtocol.swift */,
+				226A8B3723D42313009B3B67 /* PaymentsTVControllerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -206,6 +219,8 @@
 			children = (
 				2278511323CF9713007F1063 /* Payments.storyboard */,
 				223FDF9423D0D2700029E547 /* PaymentsTVController.swift */,
+				226A8B3523D421D9009B3B67 /* PaymentTVCell.swift */,
+				226A8B3923D42DEB009B3B67 /* PaymentInfoTVController.swift */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -392,12 +407,15 @@
 				226AA7CB23CE30DC003F006A /* ApiServiceProtocol.swift in Sources */,
 				223FDF9123D0CFFC0029E547 /* ContractsTVController.swift in Sources */,
 				220429FB235E22460054D4DD /* SingInViewController.swift in Sources */,
+				226A8B3E23D49ED7009B3B67 /* DateHelper.swift in Sources */,
 				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
 				223FDF8B23D093180029E547 /* InvoiceModel.swift in Sources */,
 				2253EE2F23CF3335009FD4B5 /* AuthModel.swift in Sources */,
 				223FDF8D23D0C56C0029E547 /* CalculationsTVController.swift in Sources */,
+				226A8B3A23D42DEB009B3B67 /* PaymentInfoTVController.swift in Sources */,
 				226AA7D123CE34BF003F006A /* Options.swift in Sources */,
 				226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */,
+				226A8B3C23D43901009B3B67 /* ApiServiceAdapter.swift in Sources */,
 				220429F9235E22460054D4DD /* SceneDelegate.swift in Sources */,
 				22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */,
 				226AA7CF23CE310E003F006A /* UserDataProtocol.swift in Sources */,
@@ -407,10 +425,12 @@
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
 				223FDF9323D0D1520029E547 /* ProfileViewController.swift in Sources */,
 				223FDF8923D092BD0029E547 /* ContractModel.swift in Sources */,
+				226A8B3623D421D9009B3B67 /* PaymentTVCell.swift in Sources */,
 				2278511123CF949F007F1063 /* Shake.swift in Sources */,
 				226AA7D323CE3C44003F006A /* SingUpViewController.swift in Sources */,
 				223FDF8523D08A600029E547 /* DeviceModel.swift in Sources */,
 				223FDF8723D0928C0029E547 /* PaymentModel.swift in Sources */,
+				226A8B3823D42313009B3B67 /* PaymentsTVControllerDelegate.swift in Sources */,
 				2253EE3123CF351C009FD4B5 /* AuthResultModel.swift in Sources */,
 				22042A0E235F5DA20054D4DD /* MainViewController.swift in Sources */,
 			);

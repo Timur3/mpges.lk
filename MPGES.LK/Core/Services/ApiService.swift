@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 class ApiService {
-    
+    static let shared = ApiService()
     let baseURL: String
     let vershionApi: String
     
@@ -28,7 +28,7 @@ class ApiService {
         DispatchQueue.global().async {
         AF.request(self.baseURL+method,
                method: .post,
-               parameters: model, // or `userDictionary` because both conform to `Encodable`
+               parameters: model,
                encoder: JSONParameterEncoder.default)
             
             .responseData { response in
@@ -39,6 +39,63 @@ class ApiService {
                     let myResponse = try! JSONDecoder().decode(AuthResultModel.self, from: result)
                     DispatchQueue.main.async {
                         completion(myResponse)
+                    }
+                    debugPrint(myResponse)
+                } else
+                {
+                    print(Error.self)
+                }
+            }
+        }
+    }
+    
+    func getPaymnetById(paymentId: Int, completion: @escaping(PaymentModel) -> Void) {
+        let method = "payment"
+        
+        DispatchQueue.global().async {
+        AF.request(self.baseURL+method,
+               method: .post,
+               parameters: paymentId,
+               encoder: JSONParameterEncoder.default)
+            
+            .responseData { response in
+                debugPrint("print reponse")
+                debugPrint(response)
+                
+                if let result = response.value {
+                    let myResponse = try! JSONDecoder().decode(PaymentModel.self, from: result)
+                    DispatchQueue.main.async {
+                        completion(myResponse)
+                    }
+                    debugPrint(myResponse)
+                } else
+                {
+                    print(Error.self)
+                }
+            }
+        }
+    }
+    
+    func getPaymnetsByContractId(contractId: Int, completion: @escaping([PaymentModel]) -> Void) {
+        let method = "payment/getbypackid/4" //"payment/getbypackid/"+String(contractId)
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (_userData.getToken() ?? "")
+        ]
+        DispatchQueue.global().async {
+        AF.request(self.baseURL+method,
+               method: .get,
+               //parameters: "",
+               //encoder: JSONParameterEncoder.default,
+               headers: headers)
+            
+            .responseData { response in
+                debugPrint("print reponse")
+                debugPrint(response)
+                
+                if let result = response.value {
+                    let myResponse = try! JSONDecoder().decode(PaymentsModelRoot.self, from: result)
+                    DispatchQueue.main.async {
+                        completion(myResponse.data)
                     }
                     debugPrint(myResponse)
                 } else
