@@ -45,6 +45,8 @@
 		2278511A23CF9B6E007F1063 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2278511923CF9B6E007F1063 /* Devices.storyboard */; };
 		22A08CB423CD8832008A33BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A08CB323CD8832008A33BD /* Main.storyboard */; };
 		22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */; };
+		22F6C27723D4DE440042E740 /* AddressUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6C27623D4DE440042E740 /* AddressUnitModel.swift */; };
+		22F6C27923D4E1870042E740 /* DeviceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6C27823D4E1870042E740 /* DeviceTVCell.swift */; };
 		55C0B670DA5D35AE2F8E1084 /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,8 @@
 		2278511923CF9B6E007F1063 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		22A08CB323CD8832008A33BD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordViewController.swift; sourceTree = "<group>"; };
+		22F6C27623D4DE440042E740 /* AddressUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressUnitModel.swift; sourceTree = "<group>"; };
+		22F6C27823D4E1870042E740 /* DeviceTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTVCell.swift; sourceTree = "<group>"; };
 		70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.debug.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,6 +214,7 @@
 				223FDF8623D0928C0029E547 /* PaymentModel.swift */,
 				223FDF8823D092BD0029E547 /* ContractModel.swift */,
 				223FDF8A23D093180029E547 /* InvoiceModel.swift */,
+				22F6C27623D4DE440042E740 /* AddressUnitModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			children = (
 				2278511923CF9B6E007F1063 /* Devices.storyboard */,
 				223FDF8E23D0CD5F0029E547 /* DevicesTVController.swift */,
+				22F6C27823D4E1870042E740 /* DeviceTVCell.swift */,
 			);
 			path = Devices;
 			sourceTree = "<group>";
@@ -423,9 +429,11 @@
 				22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */,
 				223FDF8F23D0CD5F0029E547 /* DevicesTVController.swift in Sources */,
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
+				22F6C27923D4E1870042E740 /* DeviceTVCell.swift in Sources */,
 				223FDF9323D0D1520029E547 /* ProfileViewController.swift in Sources */,
 				223FDF8923D092BD0029E547 /* ContractModel.swift in Sources */,
 				226A8B3623D421D9009B3B67 /* PaymentTVCell.swift in Sources */,
+				22F6C27723D4DE440042E740 /* AddressUnitModel.swift in Sources */,
 				2278511123CF949F007F1063 /* Shake.swift in Sources */,
 				226AA7D323CE3C44003F006A /* SingUpViewController.swift in Sources */,
 				223FDF8523D08A600029E547 /* DeviceModel.swift in Sources */,

@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
         let tmpDirectory = FileManager.default.temporaryDirectory
         
-        print(documentsDirectory)
-        print(cacheDirectory)
+        print(documentsDirectory!)
+        print(cacheDirectory!)
         print(tmpDirectory)
         return true
     }

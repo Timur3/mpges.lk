@@ -37,7 +37,7 @@ class SingInViewController: UIViewController {
             self.navigationController?.isNavigationBarHidden = true
         } else {
             passwordTF.shake(times: 5, delta: 5)
-            debugPrint(m.errorMessage)
+            debugPrint(m.errorMessage ?? "")
         }
     }
 

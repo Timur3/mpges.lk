@@ -10,6 +10,12 @@ import UIKit
 
 class SingUpViewController: UIViewController {
 
+    @IBOutlet weak var emailTF: UITextField!
+    @IBOutlet weak var fullNameTF: UITextField!
+    @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var contractNumberTF: UITextField!
+    @IBOutlet weak var codeContractTF: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

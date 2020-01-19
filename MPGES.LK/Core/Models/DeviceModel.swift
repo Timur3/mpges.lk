@@ -8,6 +8,31 @@
 
 import Foundation
 
-public struct DeviceModel {
-    var id : Int
+public struct DeivecesModelRoot: Decodable {
+    var count: Int
+    var data: [DeviceModel]
+}
+
+public struct DeviceModel: Decodable{
+    var id: Int
+    var deviceNumber: String
+    var deviceTypeName: String
+    var dateSet: String?
+    var dateRemove: String?
+    var dateOut: String?
+    var dateStateCalibration: String?
+    var dateNextCalibration: String
+    var addressSet: String?
+    var deviceAiiscueId: Int?
+    
+   
+}
+
+public struct DeviceType: Decodable {
+    var id: Int
+    var marka: String
+    var typeName: String
+    var razryad: Int
+    var faza: Int
+    var calibrationPeriod: Int
 }
