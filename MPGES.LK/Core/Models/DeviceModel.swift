@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct DeivecesModelRoot: Decodable {
+public struct DevicesModelRoot: Decodable {
     var count: Int
     var data: [DeviceModel]
 }

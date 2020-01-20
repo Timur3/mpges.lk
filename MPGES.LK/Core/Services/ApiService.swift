@@ -62,15 +62,17 @@ class ApiService {
                 debugPrint("print reponse")
                 debugPrint(response)
                 
-                if let result = response.value {
-                    let myResponse = try! JSONDecoder().decode(PaymentModel.self, from: result)
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(PaymentModel.self, from: value)
+                    
                     DispatchQueue.main.async {
                         completion(myResponse)
                     }
                     debugPrint(myResponse)
-                } else
-                {
-                    print(Error.self)
+                
+                case let .failure(error):
+                    print(error)
                 }
             }
         }
@@ -92,15 +94,69 @@ class ApiService {
                 debugPrint("print reponse")
                 debugPrint(response)
                 
-                if let result = response.value {
-                    let myResponse = try! JSONDecoder().decode(PaymentsModelRoot.self, from: result)
-                    DispatchQueue.main.async {
-                        completion(myResponse.data)
-                    }
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(PaymentsModelRoot.self, from: value)
+                        DispatchQueue.main.async {
+                            completion(myResponse.data)
+                        }
                     debugPrint(myResponse)
-                } else
-                {
-                    print(Error.self)
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func getDevicesByContractId(contractId: Int, completion: @escaping([DeviceModel]) -> Void) {
+        let method = "device/getbypackid/"+String(contractId)
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (_userData.getToken() ?? "")
+        ]
+        DispatchQueue.global().async {
+        AF.request(self.baseURL+method,
+               method: .get,
+               headers: headers)
+            
+            .responseData { response in
+                debugPrint("print reponse")
+                debugPrint(response)
+                
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(DevicesModelRoot.self, from: value)
+                        DispatchQueue.main.async {
+                            completion(myResponse.data)
+                        }
+                    debugPrint(myResponse)
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func CreateOrUpdateAccount(account: AccountModel, completion: @escaping([DeviceModel]) -> Void) {
+        let method = "user/createorupdate"
+        DispatchQueue.global().async {
+        AF.request(self.baseURL+method,
+               method: .get,
+               parameters: account,
+               encoding: JSONParameterEncoder.default)
+            
+            .responseData { response in
+                debugPrint("print reponse")
+                debugPrint(response)
+                
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(DevicesModelRoot.self, from: value)
+                        DispatchQueue.main.async {
+                            completion(myResponse.data)
+                        }
+                    debugPrint(myResponse)
+                case let .failure(error):
+                    print(error)
                 }
             }
         }

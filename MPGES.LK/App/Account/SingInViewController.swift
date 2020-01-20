@@ -29,15 +29,14 @@ class SingInViewController: UIViewController {
     }
     
     func save(modelResult: AuthResultModel) {
-       
-        let m = modelResult
-        if m.isError == false {
-            _ud.saveData(token: m.data!, userId: 1)
+        
+        if modelResult.isError {
+            _ud.saveData(token: modelResult.data!, userId: 1)
             performSegue(withIdentifier: "ToMainTabBar", sender: self)
-            self.navigationController?.isNavigationBarHidden = true
+            navigationController?.isNavigationBarHidden = true
         } else {
-            passwordTF.shake(times: 5, delta: 5)
-            debugPrint(m.errorMessage ?? "")
+            passwordTF.shake(times: 3, delta: 5)
+            debugPrint(modelResult.errorMessage ?? "")
         }
     }
 
