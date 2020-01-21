@@ -34,16 +34,14 @@ class ApiService {
             .responseData { response in
                 debugPrint("print reponse")
                 debugPrint(response)
-                
-                if let result = response.value {
-                    let myResponse = try! JSONDecoder().decode(AuthResultModel.self, from: result)
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(AuthResultModel.self, from: value)
                     DispatchQueue.main.async {
                         completion(myResponse)
                     }
-                    debugPrint(myResponse)
-                } else
-                {
-                    print(Error.self)
+                case let .failure(error):
+                    print(error)
                 }
             }
         }
@@ -108,7 +106,7 @@ class ApiService {
         }
     }
     
-    func getDevicesByContractId(contractId: Int, completion: @escaping([DeviceModel]) -> Void) {
+    func getDevicesByContractId(contractId: Int, completion: @escaping(DevicesModelRoot) -> Void) {
         let method = "device/getbypackid/"+String(contractId)
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (_userData.getToken() ?? "")
@@ -126,7 +124,7 @@ class ApiService {
                 case let .success(value):
                     let myResponse = try! JSONDecoder().decode(DevicesModelRoot.self, from: value)
                         DispatchQueue.main.async {
-                            completion(myResponse.data)
+                            completion(myResponse)
                         }
                     debugPrint(myResponse)
                 case let .failure(error):
@@ -136,13 +134,14 @@ class ApiService {
         }
     }
     
-    func CreateOrUpdateAccount(account: AccountModel, completion: @escaping([DeviceModel]) -> Void) {
+    func CreateOrUpdateAccount(account: AccountModel) {
         let method = "user/createorupdate"
+        
         DispatchQueue.global().async {
         AF.request(self.baseURL+method,
-               method: .get,
+               method: .post,
                parameters: account,
-               encoding: JSONParameterEncoder.default)
+               encoder: JSONParameterEncoder.default)
             
             .responseData { response in
                 debugPrint("print reponse")
@@ -152,7 +151,7 @@ class ApiService {
                 case let .success(value):
                     let myResponse = try! JSONDecoder().decode(DevicesModelRoot.self, from: value)
                         DispatchQueue.main.async {
-                            completion(myResponse.data)
+                           // completion(myResponse.data)
                         }
                     debugPrint(myResponse)
                 case let .failure(error):

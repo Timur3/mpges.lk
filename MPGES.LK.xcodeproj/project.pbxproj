@@ -45,6 +45,7 @@
 		2278511A23CF9B6E007F1063 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2278511923CF9B6E007F1063 /* Devices.storyboard */; };
 		22A08CB423CD8832008A33BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A08CB323CD8832008A33BD /* Main.storyboard */; };
 		22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */; };
+		22F1736723D77DF90065751E /* ReceivedDataTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736623D77DF90065751E /* ReceivedDataTVController.swift */; };
 		22F6C27723D4DE440042E740 /* AddressUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6C27623D4DE440042E740 /* AddressUnitModel.swift */; };
 		22F6C27923D4E1870042E740 /* DeviceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6C27823D4E1870042E740 /* DeviceTVCell.swift */; };
 		55C0B670DA5D35AE2F8E1084 /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */; };
@@ -92,6 +93,7 @@
 		2278511923CF9B6E007F1063 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		22A08CB323CD8832008A33BD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordViewController.swift; sourceTree = "<group>"; };
+		22F1736623D77DF90065751E /* ReceivedDataTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataTVController.swift; sourceTree = "<group>"; };
 		22F6C27623D4DE440042E740 /* AddressUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressUnitModel.swift; sourceTree = "<group>"; };
 		22F6C27823D4E1870042E740 /* DeviceTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTVCell.swift; sourceTree = "<group>"; };
 		70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +247,7 @@
 				2278511923CF9B6E007F1063 /* Devices.storyboard */,
 				223FDF8E23D0CD5F0029E547 /* DevicesTVController.swift */,
 				22F6C27823D4E1870042E740 /* DeviceTVCell.swift */,
+				22F1736623D77DF90065751E /* ReceivedDataTVController.swift */,
 			);
 			path = Devices;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				223FDF8B23D093180029E547 /* InvoiceModel.swift in Sources */,
 				2253EE2F23CF3335009FD4B5 /* AuthModel.swift in Sources */,
 				223FDF8D23D0C56C0029E547 /* CalculationsTVController.swift in Sources */,
+				22F1736723D77DF90065751E /* ReceivedDataTVController.swift in Sources */,
 				226A8B3A23D42DEB009B3B67 /* PaymentInfoTVController.swift in Sources */,
 				226AA7D123CE34BF003F006A /* Options.swift in Sources */,
 				226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */,

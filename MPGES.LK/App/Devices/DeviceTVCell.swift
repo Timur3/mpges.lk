@@ -10,6 +10,9 @@ import UIKit
 
 class DeviceTVCell: UITableViewCell {
 
+    @IBOutlet weak var deviceNumber: UILabel!
+    @IBOutlet weak var modelNameDevice: UILabel!
+    @IBOutlet weak var addressSetDevice: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

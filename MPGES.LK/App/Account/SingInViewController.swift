@@ -30,7 +30,7 @@ class SingInViewController: UIViewController {
     
     func save(modelResult: AuthResultModel) {
         
-        if modelResult.isError {
+        if !modelResult.isError {
             _ud.saveData(token: modelResult.data!, userId: 1)
             performSegue(withIdentifier: "ToMainTabBar", sender: self)
             navigationController?.isNavigationBarHidden = true

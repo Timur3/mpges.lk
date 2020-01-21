@@ -73,7 +73,7 @@ class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Последние платежи"
+        return "Текущий год"
     }
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "ИТОГО: " + String(paymentsList.count) + "  СУММА: 0.00"
