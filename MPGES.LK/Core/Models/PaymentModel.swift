@@ -38,6 +38,5 @@ public struct PaymentModel: Decodable {
         case summa = "summa"
         case workerId = "workerId"
         case note = "note"
-        
     }
 }

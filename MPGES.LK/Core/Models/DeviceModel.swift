@@ -11,6 +11,16 @@ import Foundation
 public struct DevicesModelRoot: Decodable {
     var count: Int
     var data: [DeviceModel]
+    
+    enum CodingKeys: String, CodingKey {
+        case count = "count"
+        case data = "data"
+    }
+    
+    init(count: Int, data: [DeviceModel]) {
+        self.count = count
+        self.data = data
+    }
 }
 
 public struct DeviceModel: Decodable{
@@ -25,7 +35,18 @@ public struct DeviceModel: Decodable{
     var addressSet: String?
     var deviceAiiscueId: Int?
     
-   
+   enum CodingKeys: String, CodingKey {
+       case id = "id"
+       case deviceNumber = "deviceNumber"
+       case deviceTypeName = "deviceTypeName"
+       case dateSet = "dateSet"
+       case dateRemove = "dateRemove"
+       case dateOut = "dateOut"
+       case dateStateCalibration = "dateStateCalibration"
+       case dateNextCalibration = "dateNextCalibration"
+       case addressSet = "addressSet"
+       case deviceAiiscueId = "deviceAiiscueId"
+   }
 }
 
 public struct DeviceType: Decodable {

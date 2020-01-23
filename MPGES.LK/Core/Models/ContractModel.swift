@@ -8,6 +8,11 @@
 
 import Foundation
 
-public struct ContractModel {
+public struct ContractModelRoot: Decodable {
+    var count: Int
+    var data: [ContractModel]
+}
+
+public struct ContractModel: Decodable {
     var id : Int
 }

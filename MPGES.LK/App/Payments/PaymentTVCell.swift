@@ -9,9 +9,11 @@
 import UIKit
 
 class PaymentTVCell: UITableViewCell {
+    
    @IBOutlet weak var dataPay: UILabel!
    @IBOutlet weak var sumPay: UILabel!
    @IBOutlet weak var cashBox: UILabel!
+    
     var payment: PaymentModel? {
         didSet {
             let sum: Double = (payment?.summa ?? 0.00)

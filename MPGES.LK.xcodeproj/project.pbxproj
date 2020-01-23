@@ -46,6 +46,9 @@
 		22A08CB423CD8832008A33BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A08CB323CD8832008A33BD /* Main.storyboard */; };
 		22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */; };
 		22F1736723D77DF90065751E /* ReceivedDataTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736623D77DF90065751E /* ReceivedDataTVController.swift */; };
+		22F1736B23DA124F0065751E /* ReceivedDataTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736A23DA124F0065751E /* ReceivedDataTVCell.swift */; };
+		22F1736D23DA15400065751E /* ReceivedDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736C23DA15400065751E /* ReceivedDataModel.swift */; };
+		22F1736F23DA1DEB0065751E /* CalculationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736E23DA1DEB0065751E /* CalculationModel.swift */; };
 		22F6C27723D4DE440042E740 /* AddressUnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6C27623D4DE440042E740 /* AddressUnitModel.swift */; };
 		22F6C27923D4E1870042E740 /* DeviceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6C27823D4E1870042E740 /* DeviceTVCell.swift */; };
 		55C0B670DA5D35AE2F8E1084 /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */; };
@@ -94,6 +97,9 @@
 		22A08CB323CD8832008A33BD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordViewController.swift; sourceTree = "<group>"; };
 		22F1736623D77DF90065751E /* ReceivedDataTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataTVController.swift; sourceTree = "<group>"; };
+		22F1736A23DA124F0065751E /* ReceivedDataTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataTVCell.swift; sourceTree = "<group>"; };
+		22F1736C23DA15400065751E /* ReceivedDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataModel.swift; sourceTree = "<group>"; };
+		22F1736E23DA1DEB0065751E /* CalculationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationModel.swift; sourceTree = "<group>"; };
 		22F6C27623D4DE440042E740 /* AddressUnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressUnitModel.swift; sourceTree = "<group>"; };
 		22F6C27823D4E1870042E740 /* DeviceTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTVCell.swift; sourceTree = "<group>"; };
 		70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +223,8 @@
 				223FDF8823D092BD0029E547 /* ContractModel.swift */,
 				223FDF8A23D093180029E547 /* InvoiceModel.swift */,
 				22F6C27623D4DE440042E740 /* AddressUnitModel.swift */,
+				22F1736C23DA15400065751E /* ReceivedDataModel.swift */,
+				22F1736E23DA1DEB0065751E /* CalculationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -248,6 +256,7 @@
 				223FDF8E23D0CD5F0029E547 /* DevicesTVController.swift */,
 				22F6C27823D4E1870042E740 /* DeviceTVCell.swift */,
 				22F1736623D77DF90065751E /* ReceivedDataTVController.swift */,
+				22F1736A23DA124F0065751E /* ReceivedDataTVCell.swift */,
 			);
 			path = Devices;
 			sourceTree = "<group>";
@@ -415,6 +424,7 @@
 			files = (
 				226AA7CB23CE30DC003F006A /* ApiServiceProtocol.swift in Sources */,
 				223FDF9123D0CFFC0029E547 /* ContractsTVController.swift in Sources */,
+				22F1736D23DA15400065751E /* ReceivedDataModel.swift in Sources */,
 				220429FB235E22460054D4DD /* SingInViewController.swift in Sources */,
 				226A8B3E23D49ED7009B3B67 /* DateHelper.swift in Sources */,
 				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
@@ -431,6 +441,7 @@
 				226AA7CF23CE310E003F006A /* UserDataProtocol.swift in Sources */,
 				223FDF9523D0D2700029E547 /* PaymentsTVController.swift in Sources */,
 				22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */,
+				22F1736B23DA124F0065751E /* ReceivedDataTVCell.swift in Sources */,
 				223FDF8F23D0CD5F0029E547 /* DevicesTVController.swift in Sources */,
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
 				22F6C27923D4E1870042E740 /* DeviceTVCell.swift in Sources */,
@@ -441,6 +452,7 @@
 				2278511123CF949F007F1063 /* Shake.swift in Sources */,
 				226AA7D323CE3C44003F006A /* SingUpViewController.swift in Sources */,
 				223FDF8523D08A600029E547 /* DeviceModel.swift in Sources */,
+				22F1736F23DA1DEB0065751E /* CalculationModel.swift in Sources */,
 				223FDF8723D0928C0029E547 /* PaymentModel.swift in Sources */,
 				226A8B3823D42313009B3B67 /* PaymentsTVControllerDelegate.swift in Sources */,
 				2253EE3123CF351C009FD4B5 /* AuthResultModel.swift in Sources */,
