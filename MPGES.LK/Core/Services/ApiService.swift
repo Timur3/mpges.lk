@@ -160,4 +160,34 @@ class ApiService {
             }
         }
     }
+    
+    func getContractsByUserId(userId: Int, completion: @escaping([ContractModel]) -> Void) {
+        let method = "contract/getbyuserid/1" //"payment/getbypackid/"+String(contractId)
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (_userData.getToken() ?? "")
+        ]
+        DispatchQueue.global().async {
+        AF.request(self.baseURL+method,
+               method: .get,
+               //parameters: "",
+               //encoder: JSONParameterEncoder.default,
+               headers: headers)
+            
+            .responseData { response in
+                debugPrint("print reponse")
+                debugPrint(response)
+                
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(ContractModelRoot.self, from: value)
+                        DispatchQueue.main.async {
+                            completion(myResponse.data)
+                        }
+                    debugPrint(myResponse)
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    }
 }

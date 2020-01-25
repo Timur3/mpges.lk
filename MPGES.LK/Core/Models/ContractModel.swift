@@ -15,4 +15,22 @@ public struct ContractModelRoot: Decodable {
 
 public struct ContractModel: Decodable {
     var id : Int
+    var userProfileId: Int
+    var codeBinding: String?
+    var contractTypeId: Int
+    var number: String
+    var dateRegister: String
+    var providerId: Int
+    var contractorId: Int
+    var contractorNameSmall: String
+    var dateStart: String?
+    var dateEnd: String?
+    var allowSending: Bool
+    var note: String?
+    var statusId: Int
+    var createBy: String?
+    var createDate: String
+    var jkuId: String?
+    var numberEls: String?
+    var includedInEpd: Bool
 }

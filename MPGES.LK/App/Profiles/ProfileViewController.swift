@@ -9,7 +9,10 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    @IBAction func exitButton(_ sender: Any) {
+        debugPrint("exitB press")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
