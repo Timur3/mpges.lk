@@ -14,7 +14,8 @@ class ProfileViewController: UIViewController {
     
     @IBAction func exitButton(_ sender: Any) {
         debugPrint("exitB press")
-        performSegue(withIdentifier: "ToMainTabBar", sender: self)
+        performSegue(withIdentifier: "GoToMain", sender: self)
+        userData.delData()
         navigationController?.isNavigationBarHidden = false
     }
     

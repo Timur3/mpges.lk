@@ -33,7 +33,7 @@
                     <tabBarItem key="tabBarItem" title="Еще" image="command" catalog="system" id="ju1-sV-2nc"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="gfz-LH-v5S" kind="custom" identifier="ToMain" id="LxG-E4-ovg"/>
+                        <segue destination="gfz-LH-v5S" kind="custom" identifier="GoToMain" id="LxG-E4-ovg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNa-J3-3MM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -9,7 +9,8 @@
 import UIKit
 
 class DevicesTVController: UITableViewController {
-
+    let methodApi = MethodApi()
+    
     var deviceList = [DeviceModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -20,29 +21,20 @@ class DevicesTVController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.rowHeight = 190
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        self.refreshControl?.addTarget(self, action: #selector(refreshDataNewsFeed), for: UIControl.Event.valueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(refreshDataDevice), for: UIControl.Event.valueChanged)
         tableView.addSubview(self.refreshControl!)
         
         // todo получение из Realm, если нет то тянем с инета
-        refreshDataNewsFeed(sender: self)
+        refreshDataDevice(sender: self)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
     }
     
-    @objc func refreshDataNewsFeed(sender: AnyObject){
+    @objc func refreshDataDevice(sender: AnyObject){
     print("refresh")
-    ApiService.shared.getDevicesByContractId(contractId: 4, completion: { devices in
-        self.deviceList = devices.data
-    })
+        ApiService.shared.requestById(id: 85133, method: methodApi.getDevicesByContractId, completion: setDevices(devices:))
         // todo  сохраняем новые данные, предварительно удаляем старые данные
         self.refreshControl?.endRefreshing()
     }
@@ -89,33 +81,24 @@ class DevicesTVController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let receivedDataGet = deviceList[indexPath.row]
-        performSegue(withIdentifier: "receivedData", sender: receivedDataGet)
+        let deviceSend = deviceList[indexPath.row]
+        
+        performSegue(withIdentifier: "receivedData", sender: deviceSend)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "receivedData", let receivedData = segue.destination as? ReceivedDataTVController {
-            //receivedData.payment = sender as? PaymentModel
+            receivedData.device = sender as? DeviceModel
         }
     }
+}
+extension DevicesTVController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("search")
+    }
     
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    func setDevices(devices: DevicesModelRoot) {
+        // todo доделать получение данных из realm
+        deviceList = devices.data
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

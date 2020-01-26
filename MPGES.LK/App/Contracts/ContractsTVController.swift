@@ -10,22 +10,24 @@ import UIKit
 
 class ContractsTVController: UITableViewController {
     
-        // для поиска todo
-        @IBOutlet weak var searchBarPayments: UISearchBar! {
-            didSet {
+    let methodApi = MethodApi()
+    
+    // для поиска todo
+    @IBOutlet weak var searchBarPayments: UISearchBar! {
+        didSet {
                 //searchBar.delegate = self
             }
         }
         
-        var contractList = [ContractModel]() {
-            didSet {
-                DispatchQueue.main.async {
+    var contractList = [ContractModel]() {
+        didSet {
+            DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
         }
         
-        override func viewDidLoad() {
+    override func viewDidLoad() {
             super.viewDidLoad()
             
             self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
@@ -38,7 +40,7 @@ class ContractsTVController: UITableViewController {
         
         @objc func refreshDataContract(sender: AnyObject){
             print("refresh")
-            ApiService.shared.getContractsByUserId(userId: 1, completion:setContracts(contracts:))
+            ApiService.shared.requestById(id: 1, method: methodApi.getContracts, completion:setContracts(contracts:))
             self.refreshControl?.endRefreshing()
         }
         
@@ -71,7 +73,7 @@ class ContractsTVController: UITableViewController {
             return ""
         }
         override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-            return ""
+            return "_"
         }
         
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -123,8 +125,8 @@ class ContractsTVController: UITableViewController {
             
         }
         
-        func setContracts(contracts: [ContractModel]) {
+        func setContracts(contracts: ContractModelRoot) {
             // todo доделать получение данных из realm
-            contractList = contracts
+            contractList = contracts.data
         }
 }

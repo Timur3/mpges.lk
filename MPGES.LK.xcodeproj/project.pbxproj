@@ -43,6 +43,7 @@
 		2278511423CF9713007F1063 /* Payments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2278511323CF9713007F1063 /* Payments.storyboard */; };
 		2278511723CF979A007F1063 /* Calculations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2278511623CF9799007F1063 /* Calculations.storyboard */; };
 		2278511A23CF9B6E007F1063 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2278511923CF9B6E007F1063 /* Devices.storyboard */; };
+		2291CD3023DE190E0029FCD1 /* MethodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291CD2F23DE190E0029FCD1 /* MethodApi.swift */; };
 		22A08CB423CD8832008A33BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A08CB323CD8832008A33BD /* Main.storyboard */; };
 		22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */; };
 		22F1736723D77DF90065751E /* ReceivedDataTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736623D77DF90065751E /* ReceivedDataTVController.swift */; };
@@ -96,6 +97,7 @@
 		2278511323CF9713007F1063 /* Payments.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Payments.storyboard; sourceTree = "<group>"; };
 		2278511623CF9799007F1063 /* Calculations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calculations.storyboard; sourceTree = "<group>"; };
 		2278511923CF9B6E007F1063 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
+		2291CD2F23DE190E0029FCD1 /* MethodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodApi.swift; sourceTree = "<group>"; };
 		22A08CB323CD8832008A33BD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordViewController.swift; sourceTree = "<group>"; };
 		22F1736623D77DF90065751E /* ReceivedDataTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataTVController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				2278511023CF949F007F1063 /* Shake.swift */,
 				226AA7D023CE34BF003F006A /* Options.swift */,
 				226A8B3D23D49ED7009B3B67 /* DateHelper.swift */,
+				2291CD2F23DE190E0029FCD1 /* MethodApi.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				223FDF9523D0D2700029E547 /* PaymentsTVController.swift in Sources */,
 				22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */,
 				22F1736B23DA124F0065751E /* ReceivedDataTVCell.swift in Sources */,
+				2291CD3023DE190E0029FCD1 /* MethodApi.swift in Sources */,
 				223FDF8F23D0CD5F0029E547 /* DevicesTVController.swift in Sources */,
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
 				22F6C27923D4E1870042E740 /* DeviceTVCell.swift in Sources */,

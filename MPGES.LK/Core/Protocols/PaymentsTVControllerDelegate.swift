@@ -8,5 +8,5 @@
 
 import Foundation
 protocol PaymentsTVControllerDelegate {
-    func setPayments(payments:[PaymentModel])
+    func setPayments(payments:PaymentsModelRoot)
 }

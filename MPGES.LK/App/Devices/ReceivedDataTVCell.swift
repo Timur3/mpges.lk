@@ -9,7 +9,19 @@
 import UIKit
 
 class ReceivedDataTVCell: UITableViewCell {
-
+    
+    @IBOutlet weak var tariffZoneName: UILabel!
+    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var receivedDataType: UILabel!
+    
+    var receivedData: ReceivedDataModel? {
+        didSet {
+            tariffZoneName.text = receivedData?.tariffZone
+            valueLabel.text = "\(receivedData?.value) кВт/час"
+            receivedDataType.text = receivedData?.typeOfReceivedData
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

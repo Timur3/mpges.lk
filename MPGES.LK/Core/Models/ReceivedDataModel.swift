@@ -10,15 +10,24 @@ import Foundation
 
 public struct ReceivedDataModelRoot: Decodable {
     var count: Int
-    var data: [ReceivedDataModel]?
+    var data: [ReceivedDataModel]
 }
 
 public struct ReceivedDataModel: Decodable {
     var id: Int
+    var inspectionId: Int?
+    var meteringId: Int?
+    var tariffZoneId: Int?
+    var tariffZone: String
     var date: String
-    var value: Decimal
+    var value: Int
     var volume: Int?
-    var volumeAvgMonth: Int?
-    var createBy: String?
-    var createDate: String?
+    var monthAverage: Int?
+    var sredneSut: Decimal?
+    var sredneYear: Decimal?
+    var meterCircle: Bool
+    var koffTrans: Int
+    var typeOfReceivedDataId: Int?
+    var typeOfReceivedData: String?
+    var passedContractor: Bool
 }

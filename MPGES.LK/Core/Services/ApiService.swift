@@ -46,144 +46,24 @@ class ApiService {
             }
         }
     }
-    
-    func getPaymnetById(paymentId: Int, completion: @escaping(PaymentModel) -> Void) {
-        let method = "payment"
+
+    func requestById<T: Decodable>(id: Int, method: String, completion: @escaping(T) -> Void) {
         
-        DispatchQueue.global().async {
-        AF.request(self.baseURL+method,
-               method: .post,
-               parameters: paymentId,
-               encoder: JSONParameterEncoder.default)
-            
-            .responseData { response in
-                debugPrint("print reponse")
-                debugPrint(response)
-                
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(PaymentModel.self, from: value)
-                    
-                    DispatchQueue.main.async {
-                        completion(myResponse)
-                    }
-                    debugPrint(myResponse)
-                
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    func getPaymnetsByContractId(contractId: Int, completion: @escaping([PaymentModel]) -> Void) {
-        let method = "payment/getbypackid/4" //"payment/getbypackid/"+String(contractId)
+        let fullMethod = method + String(id)
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (_userData.getToken() ?? "")
         ]
         DispatchQueue.global().async {
-        AF.request(self.baseURL+method,
-               method: .get,
-               //parameters: "",
-               //encoder: JSONParameterEncoder.default,
-               headers: headers)
-            
-            .responseData { response in
-                debugPrint("print reponse")
-                debugPrint(response)
-                
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(PaymentsModelRoot.self, from: value)
-                        DispatchQueue.main.async {
-                            completion(myResponse.data)
-                        }
-                    debugPrint(myResponse)
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    func getDevicesByContractId(contractId: Int, completion: @escaping(DevicesModelRoot) -> Void) {
-        let method = "device/getbypackid/"+String(contractId)
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + (_userData.getToken() ?? "")
-        ]
-        DispatchQueue.global().async {
-        AF.request(self.baseURL+method,
+        AF.request(self.baseURL+fullMethod,
                method: .get,
                headers: headers)
-            
             .responseData { response in
-                debugPrint("print reponse")
-                debugPrint(response)
-                
                 switch response.result {
                 case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(DevicesModelRoot.self, from: value)
+                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
                         DispatchQueue.main.async {
                             completion(myResponse)
                         }
-                    debugPrint(myResponse)
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    func CreateOrUpdateAccount(account: AccountModel) {
-        let method = "user/createorupdate"
-        
-        DispatchQueue.global().async {
-        AF.request(self.baseURL+method,
-               method: .post,
-               parameters: account,
-               encoder: JSONParameterEncoder.default)
-            
-            .responseData { response in
-                debugPrint("print reponse")
-                debugPrint(response)
-                
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(DevicesModelRoot.self, from: value)
-                        DispatchQueue.main.async {
-                           // completion(myResponse.data)
-                        }
-                    debugPrint(myResponse)
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    func getContractsByUserId(userId: Int, completion: @escaping([ContractModel]) -> Void) {
-        let method = "contract/getbyuserid/1" //"payment/getbypackid/"+String(contractId)
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + (_userData.getToken() ?? "")
-        ]
-        DispatchQueue.global().async {
-        AF.request(self.baseURL+method,
-               method: .get,
-               //parameters: "",
-               //encoder: JSONParameterEncoder.default,
-               headers: headers)
-            
-            .responseData { response in
-                debugPrint("print reponse")
-                debugPrint(response)
-                
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(ContractModelRoot.self, from: value)
-                        DispatchQueue.main.async {
-                            completion(myResponse.data)
-                        }
-                    debugPrint(myResponse)
                 case let .failure(error):
                     print(error)
                 }

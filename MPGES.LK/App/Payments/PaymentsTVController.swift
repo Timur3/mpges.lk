@@ -10,6 +10,8 @@ import UIKit
 
 class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate {
     
+    let methodApi = MethodApi()
+    
     // для поиска todo
     @IBOutlet weak var searchBarPayments: UISearchBar! {
         didSet {
@@ -43,7 +45,7 @@ class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate 
     
     @objc func refreshDataPayments(sender: AnyObject){
         print("refresh")
-        ApiService.shared.getPaymnetsByContractId(contractId: 4, completion:setPayments(payments:))
+        ApiService.shared.requestById(id: 4, method: methodApi.getPaymentsByContractId, completion: setPayments(payments:))
         self.refreshControl?.endRefreshing()
     }
     
@@ -73,7 +75,7 @@ class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Текущий год"
+        return ""
     }
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "ИТОГО: " + String(paymentsList.count) + "  СУММА: 0.00"
@@ -124,12 +126,9 @@ extension PaymentsTVController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("search")
     }
-    func getPaymentById(payment: [PaymentModel]) {
-        
-    }
     
-    func setPayments(payments: [PaymentModel]) {
+    func setPayments(payments: PaymentsModelRoot) {
         // todo доделать получение данных из realm
-        paymentsList = payments
+        paymentsList = payments.data
     }
 }
