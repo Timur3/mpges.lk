@@ -32,11 +32,22 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Еще" image="command" catalog="system" id="ju1-sV-2nc"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="gfz-LH-v5S" kind="custom" identifier="ToMain" id="LxG-E4-ovg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNa-J3-3MM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="y5a-PN-VrB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="58" y="63"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="OtE-Yg-CS9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="gfz-LH-v5S" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y2D-LX-leU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="602" y="1"/>
         </scene>
     </scenes>
     <resources>

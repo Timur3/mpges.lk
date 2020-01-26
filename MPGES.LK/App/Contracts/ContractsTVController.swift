@@ -68,10 +68,10 @@ class ContractsTVController: UITableViewController {
         }
         
         override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return "Текущий год"
+            return ""
         }
         override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-            return "ИТОГО: " + String(contractList.count) + "  СУММА: 0.00"
+            return ""
         }
         
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -12,10 +12,12 @@ class ContractsTVCell: UITableViewCell {
     @IBOutlet weak var numberContract: UILabel!
     @IBOutlet weak var dateContract: UILabel!
     @IBOutlet weak var saldoContract: UILabel!
+    @IBOutlet weak var contractorName: UILabel!
     
     var contract: ContractModel? {
         didSet {
             numberContract.text = contract?.number
+            contractorName.text = contract?.contractorNameSmall
             dateContract.text = (contract?.dateRegister ?? "01-01-1970").replacingOccurrences(of: "T00:00:00", with: "")
             saldoContract.text = "100 руб"
         }
