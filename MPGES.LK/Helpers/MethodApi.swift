@@ -10,15 +10,19 @@ import Foundation
 class MethodApi {
     
     let getContracts: String
+    let getContract: String
     let getPaymentById: String
     let getPaymentsByContractId: String
     let getDevicesByContractId: String
     let getReceivedData: String
+    let getInvoicesByContractId: String
        
     init() {
-        getContracts = "contract/getByUserid/"
+        getContracts = "contract/getByUser/"
+        getContract = "contract/"
         getPaymentById = "payment"
         getPaymentsByContractId = "payment/getbypackid/"
+        getInvoicesByContractId = "invoice/getbycontractid/"
         getDevicesByContractId = "device/getbypackid/"
         getReceivedData = "receivedData/getbydeviceid/"
     }

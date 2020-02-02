@@ -34,7 +34,7 @@ class DevicesTVController: UITableViewController {
     
     @objc func refreshDataDevice(sender: AnyObject){
     print("refresh")
-        ApiService.shared.requestById(id: 85133, method: methodApi.getDevicesByContractId, completion: setDevices(devices:))
+        ApiServiceAdapter.shared.getDevicesByContractId(delegate: self)
         // todo  сохраняем новые данные, предварительно удаляем старые данные
         self.refreshControl?.endRefreshing()
     }
@@ -49,7 +49,14 @@ class DevicesTVController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return deviceList.count
     }
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Установленные приборы учета"
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return "ИТОГО: " + String(deviceList.count)
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell", for: indexPath) as! DeviceTVCell
@@ -92,7 +99,7 @@ class DevicesTVController: UITableViewController {
         }
     }
 }
-extension DevicesTVController: UISearchBarDelegate {
+extension DevicesTVController: UISearchBarDelegate, DevicesTVControllerDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("search")
     }

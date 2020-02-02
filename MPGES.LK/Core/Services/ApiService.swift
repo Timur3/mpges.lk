@@ -14,14 +14,14 @@ class ApiService {
     let baseURL: String
     let vershionApi: String
     
-    var _userData = UserDataService()
+    var userData = UserDataService()
     let options = Options()
+    
     init() {
         baseURL = options.baseUrl
         vershionApi = options.versionApi
     }
     
-    //func authApi(model: AuthModel, completion: @escaping (AuthResultModel) -> Bool) {
     func authApi(model: AuthModel, completion: @escaping (AuthResultModel) -> Void) {
         let method = "auth"
         
@@ -51,7 +51,31 @@ class ApiService {
         
         let fullMethod = method + String(id)
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + (_userData.getToken() ?? "")
+            "Authorization": "Bearer " + (userData.getToken() ?? "")
+        ]
+        DispatchQueue.global().async {
+        AF.request(self.baseURL+fullMethod,
+               method: .get,
+               headers: headers)
+            .responseData { response in
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
+                        DispatchQueue.main.async {
+                            completion(myResponse)
+                        }
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func requestByToken<T: Decodable>(method: String, completion: @escaping(T) -> Void) {
+        
+        let fullMethod = method
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (userData.getToken() ?? "")
         ]
         DispatchQueue.global().async {
         AF.request(self.baseURL+fullMethod,

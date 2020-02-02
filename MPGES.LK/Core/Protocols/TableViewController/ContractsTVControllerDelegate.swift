@@ -1,5 +1,5 @@
 //
-//  ApiServiceProtocol.swift
+//  ContractsTVCDelegate.swift
 //  mpges.lk
 //
 //  Created by Timur on 27.01.2020.
@@ -8,6 +8,8 @@
 
 import Foundation
 
-protocol ApiServiceProtocol {
+protocol ContractsTVControllerDelegate {
+    
+    func setContracts(contracts:ContractModelRoot)
     
 }

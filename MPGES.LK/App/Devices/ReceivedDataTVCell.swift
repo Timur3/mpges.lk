@@ -17,7 +17,7 @@ class ReceivedDataTVCell: UITableViewCell {
     var receivedData: ReceivedDataModel? {
         didSet {
             tariffZoneName.text = receivedData?.tariffZone
-            valueLabel.text = "\(receivedData?.value) кВт/час"
+            valueLabel.text = "\(String(describing: receivedData?.value)) кВт/час"
             receivedDataType.text = receivedData?.typeOfReceivedData
         }
     }

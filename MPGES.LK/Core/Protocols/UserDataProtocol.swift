@@ -10,15 +10,15 @@ import Foundation
 
 protocol UserDataProtocol {
     
-    func saveData(token: String, userId: Int)
-    func setCurrentContractor(contractorId: Int)
-    func getCurrentContractor() -> Int?
-    
-    func setCurrentInvoice(invoiceId: Int)
-    func getCurrentInvoice() -> Int?
-    
+    func setToken(token: String)
     func getToken() -> String?
-    func getCurrentUserId() -> Int?
+    
+    func setCurrentContract(contract: ContractModel)
+    func getCurrentContract() -> Int?
+    
+    func setCurrentInvoice(invoice: InvoiceModel)
+    func getCurrentInvoice() -> InvoiceModel?
+    
     func delData()
     
 }

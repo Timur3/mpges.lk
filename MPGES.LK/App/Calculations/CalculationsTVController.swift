@@ -2,7 +2,7 @@
 //  CalculationsTVController.swift
 //  mpges.lk
 //
-//  Created by Timur on 16.01.2020.
+//  Created by Timur on 29.01.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
@@ -24,12 +24,12 @@ class CalculationsTVController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
 
     /*

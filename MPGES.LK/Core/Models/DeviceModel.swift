@@ -30,9 +30,9 @@ public struct DeviceModel: Decodable{
     var dateSet: String?
     var dateRemove: String?
     var dateOut: String?
-    var dateStateCalibration: String?
-    var dateNextCalibration: String
-    var addressSet: String?
+    var dateStateCalibration: String
+    var dateNextCalibration: String?
+    var addressSet: String
     var deviceAiiscueId: Int?
     
    enum CodingKeys: String, CodingKey {

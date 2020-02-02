@@ -8,17 +8,15 @@
 
 import UIKit
 
-class ContractsTVController: UITableViewController {
-    
-    let methodApi = MethodApi()
-    
+class ContractsTVController: UITableViewController, ContractsTVControllerDelegate {
+    var userDataService = UserDataService()
     // для поиска todo
     @IBOutlet weak var searchBarPayments: UISearchBar! {
         didSet {
                 //searchBar.delegate = self
             }
         }
-        
+    
     var contractList = [ContractModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -28,35 +26,21 @@ class ContractsTVController: UITableViewController {
         }
         
     override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
+        super.viewDidLoad()
+        self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
 
-            refreshDataContract(sender: self)
+        refreshDataContract(sender: self)
             
-            tableView.delegate = self
-            tableView.dataSource = self
-        }
-        
-        @objc func refreshDataContract(sender: AnyObject){
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    @objc func refreshDataContract(sender: AnyObject){
             print("refresh")
-            ApiService.shared.requestById(id: 1, method: methodApi.getContracts, completion:setContracts(contracts:))
+            ApiServiceAdapter.shared.getContracts(delegate: self)
             self.refreshControl?.endRefreshing()
-        }
-        
-        
-        override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-            print("did End Displaying Header View")
-        }
-        
-        override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-            print("scroll")
-        }
-        
-        override func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-            print("did End Displaying Footer View")
-        }
-        
+    }
+
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
             // Dispose of any resources that can be recreated.
@@ -70,10 +54,10 @@ class ContractsTVController: UITableViewController {
         }
         
         override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return ""
+            return "Список услуг"
         }
         override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-            return "_"
+            return "Всего записей: " + String(contractList.count)
         }
         
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,13 +77,13 @@ class ContractsTVController: UITableViewController {
         
         override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
-            let friendSend = contractList[indexPath.row]
-            performSegue(withIdentifier: "contractInfo", sender: friendSend)
+            let dataSend = contractList[indexPath.row]
+            performSegue(withIdentifier: "contractInfo", sender: dataSend)
         }
         
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "contractInfo", let contractInfo = segue.destination as? ContractInfoTVController {
-                //contractInfo.contract = sender as? ContractModel
+            if segue.identifier == "contractInfo", let contractInfo = sender as! ContractModel? {
+                userDataService.setCurrentContract(contract: contractInfo)
             }
         }
         
@@ -117,15 +101,15 @@ class ContractsTVController: UITableViewController {
         }
     }
 
-    extension ContractsTVController: UISearchBarDelegate {
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+extension ContractsTVController: UISearchBarDelegate {
+        
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             print("search")
         }
-        func getContractById(contract: [ContractModel]) {
+    func getContractById(contract: [ContractModel]) {
             
         }
-        
-        func setContracts(contracts: ContractModelRoot) {
+    func setContracts(contracts: ContractModelRoot) {
             // todo доделать получение данных из realm
             contractList = contracts.data
         }

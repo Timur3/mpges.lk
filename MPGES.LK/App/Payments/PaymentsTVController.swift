@@ -8,14 +8,12 @@
 
 import UIKit
 
-class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate {
-    
-    let methodApi = MethodApi()
+class PaymentsTVController: UITableViewController {
     
     // для поиска todo
     @IBOutlet weak var searchBarPayments: UISearchBar! {
         didSet {
-            //searchBarMyFriends.delegate = self
+            //search.delegate = self
         }
     }
     
@@ -28,13 +26,12 @@ class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate 
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
         self.refreshControl?.addTarget(self, action: #selector(refreshDataPayments), for: UIControl.Event.valueChanged)
        
-        //let friendsRM = dp.getObjects() as [User]
-        //if (friendsRM.count) > 0 {
-        //    self.myListFriends = friendsRM
+        //let paymentsRM = dp.getObjects() as [PaymentsModelRoot]
+        //if (paymentsRM.count) > 0 {
+        //    self.paymentsList = paymentsRM
         //} else {
             refreshDataPayments(sender: self)
         //}
@@ -45,7 +42,7 @@ class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate 
     
     @objc func refreshDataPayments(sender: AnyObject){
         print("refresh")
-        ApiService.shared.requestById(id: 4, method: methodApi.getPaymentsByContractId, completion: setPayments(payments:))
+        ApiServiceAdapter.shared.getPaymentsByContractId(delegate: self)
         self.refreshControl?.endRefreshing()
     }
     
@@ -71,11 +68,19 @@ class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate 
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ""
+      
+        switch section {
+        case 0:
+            return "Текущий год"
+        case 1:
+            return "Архив"
+        default:
+            fatalError()
+        }
     }
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "ИТОГО: " + String(paymentsList.count) + "  СУММА: 0.00"
@@ -84,10 +89,6 @@ class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return paymentsList.count
-    }
-    
-    @IBAction func newFriendPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "searchPayment", sender: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,7 +123,8 @@ class PaymentsTVController: UITableViewController, PaymentsTVControllerDelegate 
     }
 }
 
-extension PaymentsTVController: UISearchBarDelegate {
+extension PaymentsTVController: UISearchBarDelegate, PaymentsTVControllerDelegate {
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("search")
     }
@@ -130,5 +132,5 @@ extension PaymentsTVController: UISearchBarDelegate {
     func setPayments(payments: PaymentsModelRoot) {
         // todo доделать получение данных из realm
         paymentsList = payments.data
-    }
+    }   
 }
