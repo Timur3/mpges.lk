@@ -25,10 +25,22 @@ func DateNormal(dateS: String) -> String {
     let dateFmt = DateFormatter()
     dateFmt.timeZone = NSTimeZone.default
     dateFmt.dateFormat =  "yyyy-MM-dd"
-    let date = dateFmt.date(from: dateS)
+    let date = dateFmt.date(from: dateS.replacingOccurrences(of: "T00:00:00", with: ""))
     
     let dayTimePeriodFormatter = DateFormatter()
     dayTimePeriodFormatter.dateFormat = "dd.MM.yyyy"
     let dateString = dayTimePeriodFormatter.string(from: date!)
     return dateString
+}
+
+func getYear(dateStr: String)->Int {
+    let dateFmt = DateFormatter()
+    dateFmt.timeZone = NSTimeZone.default
+    dateFmt.dateFormat =  "yyyy-MM-dd"
+    let date = dateFmt.date(from: dateStr.replacingOccurrences(of: "T00:00:00", with: ""))
+    return Calendar.current.component(.year, from: date!)
+}
+
+func getCurrentYear()->Int {
+    return Calendar.current.component(.year, from: Date())
 }

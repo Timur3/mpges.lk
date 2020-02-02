@@ -1,18 +1,22 @@
 PODS:
   - Alamofire (5.0.0-rc.3)
-  - Realm (4.3.0):
-    - Realm/Headers (= 4.3.0)
-  - Realm/Headers (4.3.0)
-  - RealmSwift (4.3.0):
-    - Realm (= 4.3.0)
+  - Realm (4.3.1):
+    - Realm/Headers (= 4.3.1)
+  - Realm/Headers (4.3.1)
+  - RealmSwift (4.3.1):
+    - Realm (= 4.3.1)
   - SwiftKeychainWrapper (3.4.0)
   - SwiftyJSON (5.0.0)
+  - YandexMapKit (3.4):
+    - YandexRuntime (= 3.4)
+  - YandexRuntime (3.4)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-rc.3)
   - RealmSwift
   - SwiftKeychainWrapper
   - SwiftyJSON
+  - YandexMapKit
 
 SPEC REPOS:
   trunk:
@@ -21,14 +25,18 @@ SPEC REPOS:
     - RealmSwift
     - SwiftKeychainWrapper
     - SwiftyJSON
+    - YandexMapKit
+    - YandexRuntime
 
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
-  Realm: 9357c3589555793e1860a7104a7412bca4a48d99
-  RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
+  Realm: 31dc40934081ef740f60feedc46d88473cbfeb40
+  RealmSwift: b5199e9a41f67b99f51acf6874a6166f5fbe93d1
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  YandexMapKit: f222923561fe159dd8480d927f61950fc5ff3b8d
+  YandexRuntime: 2547d72a3ce4757f16ad188cfbe8a124ae13d806
 
-PODFILE CHECKSUM: 452715cea8cb636eb6a4afa268813768150397b1
+PODFILE CHECKSUM: 462c8421659369aadbb81e2adff2f1242fd595c5
 
 COCOAPODS: 1.8.4

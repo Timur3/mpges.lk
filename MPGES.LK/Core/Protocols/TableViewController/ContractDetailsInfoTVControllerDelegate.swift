@@ -10,7 +10,5 @@ import Foundation
 import UIKit
 
 protocol ContractDetailsInfoTVControllerDelagate {
-    
-    func getCustomCell(textLabel: String, textAlign: NSTextAlignment, accessoryType: UITableViewCell.AccessoryType) -> UITableViewCell
     func setContractById(contract: ContractModel)
 }

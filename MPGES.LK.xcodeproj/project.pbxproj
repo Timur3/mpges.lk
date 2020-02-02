@@ -24,7 +24,6 @@
 		223FDF8D23D0C56C0029E547 /* InvoicesTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF8C23D0C56C0029E547 /* InvoicesTVController.swift */; };
 		223FDF8F23D0CD5F0029E547 /* DevicesTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF8E23D0CD5F0029E547 /* DevicesTVController.swift */; };
 		223FDF9123D0CFFC0029E547 /* ContractsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF9023D0CFFC0029E547 /* ContractsTVController.swift */; };
-		223FDF9323D0D1520029E547 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF9223D0D1520029E547 /* ProfileViewController.swift */; };
 		223FDF9523D0D2700029E547 /* PaymentsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223FDF9423D0D2700029E547 /* PaymentsTVController.swift */; };
 		2253EE2F23CF3335009FD4B5 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2E23CF3335009FD4B5 /* AuthModel.swift */; };
 		2253EE3123CF351C009FD4B5 /* AuthResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE3023CF351C009FD4B5 /* AuthResultModel.swift */; };
@@ -63,6 +62,8 @@
 		22E2871C23E4A9F900453CF3 /* ActivityIndicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2871B23E4A9F900453CF3 /* ActivityIndicationDelegate.swift */; };
 		22F07F0B23DF0E26007BF4A4 /* RouteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F07F0A23DF0E26007BF4A4 /* RouteDelegate.swift */; };
 		22F07F0D23DF4E50007BF4A4 /* DataProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F07F0C23DF4E50007BF4A4 /* DataProviderService.swift */; };
+		22F1682423E6B08E003FA1EE /* ProfileTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1682323E6B08E003FA1EE /* ProfileTVController.swift */; };
+		22F1682623E6B2F3003FA1EE /* TableViewCellHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1682523E6B2F3003FA1EE /* TableViewCellHelper.swift */; };
 		22F1736723D77DF90065751E /* ReceivedDataTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736623D77DF90065751E /* ReceivedDataTVController.swift */; };
 		22F1736B23DA124F0065751E /* ReceivedDataTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736A23DA124F0065751E /* ReceivedDataTVCell.swift */; };
 		22F1736D23DA15400065751E /* ReceivedDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736C23DA15400065751E /* ReceivedDataModel.swift */; };
@@ -94,7 +95,6 @@
 		223FDF8C23D0C56C0029E547 /* InvoicesTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesTVController.swift; sourceTree = "<group>"; };
 		223FDF8E23D0CD5F0029E547 /* DevicesTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesTVController.swift; sourceTree = "<group>"; };
 		223FDF9023D0CFFC0029E547 /* ContractsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractsTVController.swift; sourceTree = "<group>"; };
-		223FDF9223D0D1520029E547 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		223FDF9423D0D2700029E547 /* PaymentsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsTVController.swift; sourceTree = "<group>"; };
 		2253EE2E23CF3335009FD4B5 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		2253EE3023CF351C009FD4B5 /* AuthResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResultModel.swift; sourceTree = "<group>"; };
@@ -133,6 +133,8 @@
 		22E2871B23E4A9F900453CF3 /* ActivityIndicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicationDelegate.swift; sourceTree = "<group>"; };
 		22F07F0A23DF0E26007BF4A4 /* RouteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDelegate.swift; sourceTree = "<group>"; };
 		22F07F0C23DF4E50007BF4A4 /* DataProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderService.swift; sourceTree = "<group>"; };
+		22F1682323E6B08E003FA1EE /* ProfileTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVController.swift; sourceTree = "<group>"; };
+		22F1682523E6B2F3003FA1EE /* TableViewCellHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellHelper.swift; sourceTree = "<group>"; };
 		22F1736623D77DF90065751E /* ReceivedDataTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataTVController.swift; sourceTree = "<group>"; };
 		22F1736A23DA124F0065751E /* ReceivedDataTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataTVCell.swift; sourceTree = "<group>"; };
 		22F1736C23DA15400065751E /* ReceivedDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataModel.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				2291CD2F23DE190E0029FCD1 /* MethodApi.swift */,
 				22E2870323E0598A00453CF3 /* ButtonHelper.swift */,
 				22E2871B23E4A9F900453CF3 /* ActivityIndicationDelegate.swift */,
+				22F1682523E6B2F3003FA1EE /* TableViewCellHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -232,7 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				223FDF8223D031230029E547 /* Profile.storyboard */,
-				223FDF9223D0D1520029E547 /* ProfileViewController.swift */,
+				22F1682323E6B08E003FA1EE /* ProfileTVController.swift */,
 			);
 			path = Profiles;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				220429F0235E22460054D4DD /* Frameworks */,
 				220429F1235E22460054D4DD /* Resources */,
 				3525EC9DFF41762D27B35893 /* [CP] Embed Pods Frameworks */,
+				2CFBF504D8304EB27B109F79 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -450,6 +454,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2CFBF504D8304EB27B109F79 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3525EC9DFF41762D27B35893 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -528,7 +549,6 @@
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
 				22F6C27923D4E1870042E740 /* DeviceTVCell.swift in Sources */,
 				22E286FE23DF58FC00453CF3 /* ApiServiceProtocol.swift in Sources */,
-				223FDF9323D0D1520029E547 /* ProfileViewController.swift in Sources */,
 				22E2871823E344BE00453CF3 /* DevicesTVControllerDelegate.swift in Sources */,
 				223FDF8923D092BD0029E547 /* ContractModel.swift in Sources */,
 				226A8B3623D421D9009B3B67 /* PaymentTVCell.swift in Sources */,
@@ -540,7 +560,9 @@
 				22E2870223E0133D00453CF3 /* LoginViewController.swift in Sources */,
 				22F1736F23DA1DEB0065751E /* CalculationModel.swift in Sources */,
 				22F1737123DC9D020065751E /* ContractsTVCell.swift in Sources */,
+				22F1682423E6B08E003FA1EE /* ProfileTVController.swift in Sources */,
 				22E286FC23DF50A900453CF3 /* ContractsTVControllerDelegate.swift in Sources */,
+				22F1682623E6B2F3003FA1EE /* TableViewCellHelper.swift in Sources */,
 				22E2871323E0C63F00453CF3 /* CalculationsTVController.swift in Sources */,
 				22E2871A23E3598600453CF3 /* SingInViewControllerDelegate.swift in Sources */,
 				2291CD3223DEC0070029FCD1 /* DataProviderProtocol.swift in Sources */,

@@ -1,53 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ba3-hK-ndE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dab-mH-PAj">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Мой профиль-->
-        <scene sceneID="JnQ-eP-6ek">
+        <!--Еще-->
+        <scene sceneID="nz7-dx-vSr">
             <objects>
-                <viewController title="Мой профиль" id="Ba3-hK-ndE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HfC-of-sMB">
+                <tableViewController id="O9G-9Z-4xN" customClass="ProfileTVController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="y8q-se-Hyw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qh-89-jSY">
-                                <rect key="frame" x="164.5" y="318.5" width="46" height="30"/>
-                                <state key="normal" title="Выйти"/>
-                                <connections>
-                                    <action selector="exitButton:" destination="y5a-PN-VrB" eventType="touchUpInside" id="77f-w9-wF2"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="1qh-89-jSY" firstAttribute="centerY" secondItem="HfC-of-sMB" secondAttribute="centerY" id="R6C-Ac-Boj"/>
-                            <constraint firstItem="1qh-89-jSY" firstAttribute="centerX" secondItem="HfC-of-sMB" secondAttribute="centerX" id="bYi-tl-D2W"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="d81-1t-0EY"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Еще" image="command" catalog="system" id="ju1-sV-2nc"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0rI-tz-Ve3">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0rI-tz-Ve3" id="z4l-J3-Qab">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="O9G-9Z-4xN" id="dCN-W8-449"/>
+                            <outlet property="delegate" destination="O9G-9Z-4xN" id="OSc-1L-64J"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Еще" id="3Mk-Z7-Rzg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="gfz-LH-v5S" kind="custom" identifier="GoToMain" id="LxG-E4-ovg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rNa-J3-3MM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="y5a-PN-VrB" userLabel="Exit" sceneMemberID="exit"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Oa-2F-7JQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="58" y="63"/>
+            <point key="canvasLocation" x="940" y="-45.42728635682159"/>
         </scene>
         <!--Main-->
         <scene sceneID="OtE-Yg-CS9">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="gfz-LH-v5S" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Main" id="gfz-LH-v5S" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="TqQ-tU-ISf"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y2D-LX-leU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="602" y="1"/>
+            <point key="canvasLocation" x="1524.8" y="-117.84107946026987"/>
+        </scene>
+        <!--Еще-->
+        <scene sceneID="cL5-fV-PWO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dab-mH-PAj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Еще" image="command" catalog="system" id="v0s-5g-tIR"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="q0S-P9-TTm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="O9G-9Z-4xN" kind="relationship" relationship="rootViewController" id="07I-Cb-tHP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v7A-hh-vtD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.80000000000000004" y="-45.42728635682159"/>
         </scene>
     </scenes>
     <resources>

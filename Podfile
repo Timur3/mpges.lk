@@ -9,6 +9,7 @@ target 'mpges.lk' do
    pod 'SwiftyJSON'
    pod 'RealmSwift'
    pod 'SwiftKeychainWrapper'
+   pod 'YandexMapKit'
 	
 
 end

@@ -9,7 +9,7 @@
 import UIKit
 
 class PaymentsTVController: UITableViewController {
-    
+   let sections = ["Текущий год","Архив"]
     // для поиска todo
     @IBOutlet weak var searchBarPayments: UISearchBar! {
         didSet {
@@ -68,19 +68,11 @@ class PaymentsTVController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return sections.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-      
-        switch section {
-        case 0:
-            return "Текущий год"
-        case 1:
-            return "Архив"
-        default:
-            fatalError()
-        }
+        return sections[section]
     }
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "ИТОГО: " + String(paymentsList.count) + "  СУММА: 0.00"
