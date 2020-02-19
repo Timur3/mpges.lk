@@ -10,7 +10,8 @@ import Foundation
 
 
 public class UserDataService: UserDataProtocol {
-
+    static let shared = UserDataService()
+    
     func setToken(token: String) {
         UserDefaults.standard.set(token, forKey: "accessToken")
     }
@@ -28,11 +29,11 @@ public class UserDataService: UserDataProtocol {
     }
     
     func setCurrentInvoice(invoice: InvoiceModel) {
-        UserDefaults.standard.set(invoice, forKey: "currentInvoice")
+        UserDefaults.standard.set(invoice.id, forKey: "currentInvoice")
     }
     
-    func getCurrentInvoice() -> InvoiceModel? {
-        return UserDefaults.standard.object(forKey: "currentInvoice") as? InvoiceModel
+    func getCurrentInvoice() -> Int? {
+        return UserDefaults.standard.integer(forKey: "currentInvoice")
     }
     
     func delData() {

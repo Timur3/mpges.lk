@@ -8,17 +8,30 @@
 
 import UIKit
 import CoreData
+import YandexMapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var receivedData: [ReceivedDataModel] = []
-
+    var window: UIWindow?
+    var loginCoordinator: LoginCoordinator?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UINavigationController()
+        // Initialise the first coordinator with the main navigation controller
+        loginCoordinator = LoginCoordinator(navigationController: window?.rootViewController as! UINavigationController)
+        // The start method will actually display the main view
+        loginCoordinator?.start()
+        window?.makeKeyAndVisible()
+        
         // Override point for customization after application launch.
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
         let tmpDirectory = FileManager.default.temporaryDirectory
+        YMKMapKit.setApiKey("e5c12d20-2c1e-4a5c-bea2-8974e8a981aa")
+        // TODO: Проверку версии схемы и запуск миграции 
+        
         
         print(documentsDirectory!)
         print(cacheDirectory!)

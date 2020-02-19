@@ -15,13 +15,11 @@ class InvoiceTVCell: UITableViewCell {
     @IBOutlet weak var debetLabel: UILabel!
     @IBOutlet weak var creditLabel: UILabel!
     
-    var invoices: InvoiceModel? {
-        didSet {
-            monthAndYearLabel.text = "\(invoices?.month)" + "\(invoices?.year)"
-            saldoLabel.text = "\(String(describing: invoices?.saldo))"
-            debetLabel.text = "\(invoices?.debet)"
-            creditLabel.text = "\(invoices?.credit)"
-        }
+    func update(for invoice: InvoiceModel) {
+        monthAndYearLabel.text = "\(invoice.month)-" + "\(invoice.year)"
+        saldoLabel.text = "\(String(format: "%.2f", invoice.saldo)) руб."
+        debetLabel.text = "\(String(format: "%.2f", invoice.debet)) руб."
+        creditLabel.text = "\(String(format: "%.2f", invoice.credit)) руб."
     }
     
     override func awakeFromNib() {

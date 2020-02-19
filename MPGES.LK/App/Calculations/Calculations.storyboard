@@ -130,7 +130,7 @@
             </objects>
             <point key="canvasLocation" x="3156" y="-80.50974512743629"/>
         </scene>
-        <!--Начисления-->
+        <!--CalculationsTV Controller-->
         <scene sceneID="bUR-yO-Eqr">
             <objects>
                 <tableViewController id="Otd-qL-eeQ" customClass="CalculationsTVController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
@@ -139,12 +139,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="vnR-Ua-TCp">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="calculationCell" id="vnR-Ua-TCp" customClass="CalculationTVCell" customModule="mpges_lk" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vnR-Ua-TCp" id="mh5-l0-YD2">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Алгоритм" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="435-b3-WX6">
+                                            <rect key="frame" x="33" y="11" width="42" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -153,11 +162,11 @@
                             <outlet property="delegate" destination="Otd-qL-eeQ" id="RrZ-jI-AZ7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Начисления" id="OW4-z2-5OX"/>
+                    <navigationItem key="navigationItem" id="OW4-z2-5OX"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e55-Xy-WYM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3945" y="-78"/>
+            <point key="canvasLocation" x="3944.8000000000002" y="-78.710644677661179"/>
         </scene>
     </scenes>
     <resources>

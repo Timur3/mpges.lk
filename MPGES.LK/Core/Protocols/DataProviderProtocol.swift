@@ -6,12 +6,12 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 
 protocol DataProviderProtocol {
     
     func getObjects<T: Object>() -> [T]
+    func getObjects<T: Object>(predicate: NSPredicate) -> [T]
     func saveObjects<T: Object>(_ items: [T])
-    
+    func deleteObjects<T: Object>(_ item: T)
 }

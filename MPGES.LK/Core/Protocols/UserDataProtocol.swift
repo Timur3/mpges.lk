@@ -17,7 +17,7 @@ protocol UserDataProtocol {
     func getCurrentContract() -> Int?
     
     func setCurrentInvoice(invoice: InvoiceModel)
-    func getCurrentInvoice() -> InvoiceModel?
+    func getCurrentInvoice() -> Int?
     
     func delData()
     

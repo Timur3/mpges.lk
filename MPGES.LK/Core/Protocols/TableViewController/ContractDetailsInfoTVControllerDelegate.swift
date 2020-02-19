@@ -10,5 +10,6 @@ import Foundation
 import UIKit
 
 protocol ContractDetailsInfoTVControllerDelagate {
+    var sections: [String] { get }
     func setContractById(contract: ContractModel)
 }

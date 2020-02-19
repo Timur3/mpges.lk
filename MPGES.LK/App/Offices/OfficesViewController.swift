@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import YandexMapKit
 
 class OfficesViewController: UIViewController {
-
+    @IBOutlet weak var mapView: YMKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        mapView.mapWindow.map.move(
+        with: YMKCameraPosition.init(target: YMKPoint(latitude: 61.008456, longitude: 69.020479), zoom: 14, azimuth: 0, tilt: 0),
+        animationType: YMKAnimation(type: YMKAnimationType.smooth, duration: 5),
+        cameraCallback: nil)
     }
     
 

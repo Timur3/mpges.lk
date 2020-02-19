@@ -11,7 +11,7 @@
         <scene sceneID="BZD-P0-1J1">
             <objects>
                 <viewController id="Vaq-QC-Aq9" customClass="OfficesViewController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="biS-GZ-Gbb">
+                    <view key="view" contentMode="scaleToFill" id="biS-GZ-Gbb" customClass="YMKMapView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -19,10 +19,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Офисы" image="mappin.and.ellipse" catalog="system" id="8Zv-po-A9k"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="biS-GZ-Gbb" id="Vtw-92-yYz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YrB-TC-fXf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="87" y="93"/>
+            <point key="canvasLocation" x="85.599999999999994" y="92.203898050974516"/>
         </scene>
     </scenes>
     <resources>

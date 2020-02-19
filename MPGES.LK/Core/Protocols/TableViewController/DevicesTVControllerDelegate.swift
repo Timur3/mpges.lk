@@ -9,7 +9,6 @@
 import Foundation
 
 protocol DevicesTVControllerDelegate {
-    
+    var sections: [String] { get }
     func setDevices(devices:DevicesModelRoot)
-
 }

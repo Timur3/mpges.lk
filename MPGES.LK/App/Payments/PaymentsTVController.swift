@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PaymentsTVController: UITableViewController {
-   let sections = ["Текущий год","Архив"]
+    var contractId: Int = 0
+    
     // для поиска todo
     @IBOutlet weak var searchBarPayments: UISearchBar! {
         didSet {
@@ -26,27 +28,15 @@ class PaymentsTVController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        navigationItem.title = "История платежей"
         super.viewDidLoad()        
-        self.refreshControl?.addTarget(self, action: #selector(refreshDataPayments), for: UIControl.Event.valueChanged)
-       
-        //let paymentsRM = dp.getObjects() as [PaymentsModelRoot]
-        //if (paymentsRM.count) > 0 {
-        //    self.paymentsList = paymentsRM
-        //} else {
-            refreshDataPayments(sender: self)
-        //}
-        
+        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
+        ActivityIndicatorViewService.shared.showViewWinthoutBackground(form: self.tableView)
+        getDataForRealm()
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-    @objc func refreshDataPayments(sender: AnyObject){
-        print("refresh")
-        ApiServiceAdapter.shared.getPaymentsByContractId(delegate: self)
-        self.refreshControl?.endRefreshing()
-    }
-    
-    
+
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         print("did End Displaying Header View")
     }
@@ -91,8 +81,8 @@ class PaymentsTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let friendSend = paymentsList[indexPath.row]
-        performSegue(withIdentifier: "paymentInfo", sender: friendSend)
+        let paymentSend = paymentsList[indexPath.row]
+        performSegue(withIdentifier: "paymentInfo", sender: paymentSend)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,6 +106,28 @@ class PaymentsTVController: UITableViewController {
 }
 
 extension PaymentsTVController: UISearchBarDelegate, PaymentsTVControllerDelegate {
+    
+    // получение данных из Realm, лишний раз не отправлять запрос на сервер
+    func getDataForRealm(){
+        let predicate = NSPredicate(format: "packId == " + "\(contractId)")
+        
+        let paymentsRM = (DataProviderService.shared.getObjects(predicate: predicate) as [PaymentModel])
+        if (paymentsRM.count) > 0 {
+            self.paymentsList = paymentsRM
+            ActivityIndicatorViewService.shared.hideView()
+        } else {
+            ApiServiceAdapter.shared.getPaymentsByContractId(delegate: self)
+        }
+    }
+    
+    @objc func refreshData() {
+        print("refresh")
+        ApiServiceAdapter.shared.getPaymentsByContractId(delegate: self)
+        self.refreshControl?.endRefreshing()
+    }
+    
+    
+    var sections: [String] { ["Текущий год", "Архив"] }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("search")
@@ -123,6 +135,8 @@ extension PaymentsTVController: UISearchBarDelegate, PaymentsTVControllerDelegat
     
     func setPayments(payments: PaymentsModelRoot) {
         // todo доделать получение данных из realm
+        DataProviderService.shared.saveObjects(payments.data)
         paymentsList = payments.data
+        ActivityIndicatorViewService.shared.hideView()
     }   
 }

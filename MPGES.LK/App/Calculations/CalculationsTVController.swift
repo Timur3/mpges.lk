@@ -11,6 +11,7 @@ import UIKit
 class CalculationsTVController: UITableViewController {
 
     override func viewDidLoad() {
+        navigationItem.title = "Детали"
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -18,8 +19,17 @@ class CalculationsTVController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.delegate = self
+        tableView.dataSource = self
     }
-
+    
+    var calculations = [CalculationModel]() {
+    didSet {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            }
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,15 +42,11 @@ class CalculationsTVController: UITableViewController {
         return 1
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calculationCell", for: indexPath)
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,5 +92,14 @@ class CalculationsTVController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+extension CalculationsTVController: CalculationsTVControllerDelegate {
+    
+    var sections: [String] { ["Начисления"] }
+    
+    func setCalculations(payments: CalculationModelRoot) {
+    }
+    
+    
 }

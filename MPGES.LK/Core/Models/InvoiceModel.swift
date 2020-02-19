@@ -21,8 +21,8 @@ public struct InvoiceModel: Decodable {
     var year: Int
     var statusSaldoId: Int?
     var statusSaldoName: String
-    var saldo: Decimal?
-    var debet: Decimal?
-    var credit: Decimal?
+    var saldo: Double
+    var debet: Double
+    var credit: Double
     var isClose: Bool
 }

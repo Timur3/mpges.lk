@@ -9,9 +9,10 @@
 import UIKit
 
 class InvoicesTVController: UITableViewController {
-
+    var userDataService = UserDataService()
+    
     // для поиска todo
-    @IBOutlet weak var searchBarPayments: UISearchBar! {
+    @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
                     //searchBar.delegate = self
                 }
@@ -26,6 +27,7 @@ class InvoicesTVController: UITableViewController {
     }
             
     override func viewDidLoad() {
+        navigationItem.title = "История начислений"
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
 
@@ -49,11 +51,11 @@ override func didReceiveMemoryWarning() {
     // MARK: - Table view data source
 override func numberOfSections(in tableView: UITableView) -> Int {
     // #warning Incomplete implementation, return the number of sections
-    return 1
+    return sections.count
 }
 
 override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Список услуг"
+    return sections[section]
 }
     
 override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -67,7 +69,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 
 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceTVCell
-        //cell.contract = invoiceList[indexPath.row]
+    cell.update(for: invoiceList[indexPath.row])
     return cell
     }
             
@@ -78,8 +80,8 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
 }
 
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToCalculations", let calculationInfo = sender as! InvoiceModel? {
-                    //userDataService.setCurrentContract(contract: contractInfo)
+    if segue.identifier == "goToCalculations", let invoice = sender as! InvoiceModel? {
+            userDataService.setCurrentInvoice(invoice: invoice)
         }
 }
 
@@ -96,6 +98,9 @@ override func tableView(_ tableView: UITableView, commit editingStyle: UITableVi
 }
 
 extension InvoicesTVController: UISearchBarDelegate, InvoicesTVControllerDelegate {
+    
+    var sections: [String] { ["Реестр квитанций"] }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
                 print("search")
         }

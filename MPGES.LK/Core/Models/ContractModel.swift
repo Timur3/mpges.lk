@@ -48,3 +48,9 @@ public struct ContractModel: Decodable {
         case note = "note"
     }*/
 }
+
+public struct ContractBindingModel: Encodable {
+    let number: String
+    let code: String
+}
+

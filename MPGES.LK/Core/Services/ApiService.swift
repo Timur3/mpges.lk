@@ -94,4 +94,26 @@ class ApiService {
             }
         }
     }
+    
+    // MARK: - load saldo by contract id
+    
+    func loadTextInLabel(method: String, id: Int, label: UILabel) {
+          
+          let fullMethod = method + String(id)
+          let headers: HTTPHeaders = [
+              "Authorization": "Bearer " + (userData.getToken() ?? "")
+          ]
+           DispatchQueue.main.async {
+            
+               AF.request(self.baseURL+fullMethod,
+                             method: .get,
+                             headers: headers)
+                .responseString {
+                   response in
+                    guard let strData = response.data,
+                        let text = String(data: strData, encoding: .utf8) else { return }
+                    label.text = text
+               }
+           }
+       }
 }

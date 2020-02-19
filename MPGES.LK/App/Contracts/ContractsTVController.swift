@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ContractsTVController: UITableViewController, ContractsTVControllerDelegate {
+class ContractsTVController: UITableViewController {
+    
     var userDataService = UserDataService()
     // для поиска todo
-    @IBOutlet weak var searchBarPayments: UISearchBar! {
+    @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
-                //searchBar.delegate = self
+                searchBar.delegate = self
             }
         }
     
@@ -26,13 +27,15 @@ class ContractsTVController: UITableViewController, ContractsTVControllerDelegat
         }
         
     override func viewDidLoad() {
+        navigationItem.title = "Мои услуги"
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
 
         refreshDataContract(sender: self)
-            
+        ActivityIndicatorViewService.shared.showViewWinthoutBackground(form: self.tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        //searchBar.becomeFirstResponder()
     }
     
     @objc func refreshDataContract(sender: AnyObject){
@@ -50,11 +53,11 @@ class ContractsTVController: UITableViewController, ContractsTVControllerDelegat
         
         override func numberOfSections(in tableView: UITableView) -> Int {
             // #warning Incomplete implementation, return the number of sections
-            return 1
+            return sections.count
         }
         
         override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return "Список услуг"
+            return sections[section]
         }
         override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
             return "Всего записей: " + String(contractList.count)
@@ -101,16 +104,25 @@ class ContractsTVController: UITableViewController, ContractsTVControllerDelegat
         }
     }
 
-extension ContractsTVController: UISearchBarDelegate {
+extension ContractsTVController: UISearchBarDelegate, ContractsTVControllerDelegate {
+    var sections: [String] { ["Список услуг"] }    
         
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             print("search")
         }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        debugPrint("cancel")
+        searchBar.text = ""
+        tableView.reloadData()
+    }
     func getContractById(contract: [ContractModel]) {
             
         }
+    
     func setContracts(contracts: ContractModelRoot) {
+        
             // todo доделать получение данных из realm
             contractList = contracts.data
+        ActivityIndicatorViewService.shared.hideView()
         }
 }

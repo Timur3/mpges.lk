@@ -6,8 +6,7 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
-import Foundation
-
+import UIKit
 
 class ApiServiceAdapter {
     var methodApi = MethodApi()
@@ -41,4 +40,13 @@ class ApiServiceAdapter {
         ApiService.shared.requestById(id: uds.getCurrentContract()!, method: methodApi.getContract, completion: delegate.setContractById(contract:))
     }
     
+    // получение профиля
+    func getProfileById(delegate: ProfileTVControllerDelegate) {
+        ApiService.shared.requestByToken(method: methodApi.getContract, completion: delegate.setProfile(profile:))
+    }
+    
+    
+    func loadSaldoContract(id: Int, label: UILabel) {
+        ApiService.shared.loadTextInLabel(method: methodApi.getContractSaldoById, id: id, label: label)
+    }
 }

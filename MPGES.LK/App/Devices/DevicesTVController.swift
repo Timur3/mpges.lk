@@ -20,6 +20,7 @@ class DevicesTVController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        navigationItem.title = "Приборы учета"
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(refreshDataDevice), for: UIControl.Event.valueChanged)
         tableView.addSubview(self.refreshControl!)
@@ -42,7 +43,7 @@ class DevicesTVController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,11 +52,11 @@ class DevicesTVController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Установленные приборы учета"
+        return sections[section]
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "ИТОГО: " + String(deviceList.count)
+        return "Всего записей: " + String(deviceList.count)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,6 +101,9 @@ class DevicesTVController: UITableViewController {
     }
 }
 extension DevicesTVController: UISearchBarDelegate, DevicesTVControllerDelegate {
+    
+    var sections: [String] { ["Установленные приборы учета"] }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("search")
     }

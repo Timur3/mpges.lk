@@ -9,7 +9,9 @@
 import Foundation
 import RealmSwift
 
-class DataProvaderService: DataProviderProtocol {
+class DataProviderService: DataProviderProtocol {
+    
+    static let shared = DataProviderService()
     
     func getObjects<T: Object>() -> [T]{
         var items = [T]()
@@ -24,17 +26,45 @@ class DataProvaderService: DataProviderProtocol {
         }
     }
     
+    func getObjects<T: Object>(predicate: NSPredicate) -> [T]{
+        var items = [T]()
+        do {
+            let realm = try Realm()
+            print("Realm path:", realm.configuration.fileURL ?? "no url")
+            items = Array(realm.objects(T.self).filter(predicate))
+            return items
+        } catch {
+            print(error)
+            return items
+        }
+    }
+    
     func saveObjects<T: Object>(_ items: [T]){
         do {
             let realm = try Realm()
-            let oldItems = realm.objects(T.self)
             print("Realm path:", realm.configuration.fileURL ?? "no url")
-            try realm.write {
-                realm.delete(oldItems)
-                realm.add(items)
+            for item in items {
+                realm.beginWrite()
+                realm.add(item, update: .all)
+                try realm.commitWrite()
             }
         } catch {
             print(error)
         }
     }
+    
+    func deleteObjects<T: Object>(_ item: T) {
+        do {
+            let realm = try Realm()
+            print("Realm path:", realm.configuration.fileURL ?? "no url")
+            let oldItem = realm.objects(T.self)
+            
+            realm.beginWrite()
+            realm.delete(oldItem)
+            try realm.commitWrite()
+            
+        } catch {
+                print(error)
+            }
+        }
 }

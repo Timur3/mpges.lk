@@ -6,8 +6,11 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
 protocol PaymentsTVControllerDelegate {
-    func setPayments(payments:PaymentsModelRoot)    
+    var sections: [String] { get }
+    func setPayments(payments:PaymentsModelRoot)
+    func refreshData()
+    func getDataForRealm()
 }

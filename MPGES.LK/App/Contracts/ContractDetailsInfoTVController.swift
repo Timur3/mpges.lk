@@ -9,7 +9,6 @@
 import UIKit
 
 class ContractDetailsInfoTVController: UITableViewController {
-    //var model: ContractModel
     var contractInfo: UITableViewCell { getCustomCell(textLabel: "Лицевой счет №", textAlign: .center, accessoryType: .none) }
     var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Пополнить счет", textAlign: .center, accessoryType: .none) }
     var paymentsOfContract: UITableViewCell { getCustomCell(textLabel: "История платежей", textAlign: .left, accessoryType: .disclosureIndicator) }
@@ -18,6 +17,7 @@ class ContractDetailsInfoTVController: UITableViewController {
     var mailOfContract: UITableViewCell { getCustomCell(textLabel: "Доставка квитанций", textAlign: .left, accessoryType: .disclosureIndicator)}
     
     override func viewDidLoad() {
+        navigationItem.title = "Лицевой счет"
         super.viewDidLoad()
     }
 
@@ -25,7 +25,7 @@ class ContractDetailsInfoTVController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -85,27 +85,21 @@ class ContractDetailsInfoTVController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Основная информация"
-        case 1:
-            return "История платежей, начислений и приборы учета"
-        case 2:
-            return "Доставка квитанций"
-        default:
-            fatalError()
-        }
+        return sections[section]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 && indexPath.row == 1 {
+            AlertControllerHelper.shared.show(title: "Внимание!", mesg: "Фукнционал оплаты временно приостановлен.", form: self)
+        }
         if indexPath.section == 1 && indexPath.row == 0 {
             let dataSend = 1 //contractList[indexPath.row]
             performSegue(withIdentifier: "goToCalculations", sender: dataSend)
         }
         
         if indexPath.section == 1 && indexPath.row == 1 {
-            let dataSend = 1 //contractList[indexPath.row]
+            let dataSend = UserDataService.shared.getCurrentContract()
             performSegue(withIdentifier: "goToPayments", sender: dataSend)
         }
         
@@ -120,13 +114,15 @@ class ContractDetailsInfoTVController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToPayments", let paymentData = segue.destination as? PaymentsTVController {
-            //paymentData. = sender as? DeviceModel
+            paymentData.contractId = sender as! Int
         }
     }
 
 }
 
 extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerDelagate {
+    var sections: [String] { ["Основная информация", "История платежей, начислений и приборы учета", "Доставка квитанций"] }
+    
     func setContractById(contract: ContractModel) {
        
     }

@@ -17,6 +17,7 @@ class PaymentInfoTVController: UITableViewController {
            }
     
     override func viewDidLoad() {
+        navigationItem.title = "Детали платежа"
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations

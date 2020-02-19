@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Еще-->
+        <!--ProfileTV Controller-->
         <scene sceneID="nz7-dx-vSr">
             <objects>
                 <tableViewController id="O9G-9Z-4xN" customClass="ProfileTVController" customModule="mpges_lk" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,22 +30,12 @@
                             <outlet property="delegate" destination="O9G-9Z-4xN" id="OSc-1L-64J"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Еще" id="3Mk-Z7-Rzg"/>
+                    <navigationItem key="navigationItem" id="3Mk-Z7-Rzg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Oa-2F-7JQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="940" y="-45.42728635682159"/>
-        </scene>
-        <!--Main-->
-        <scene sceneID="OtE-Yg-CS9">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="gfz-LH-v5S" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="TqQ-tU-ISf"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y2D-LX-leU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1524.8" y="-117.84107946026987"/>
         </scene>
         <!--Еще-->
         <scene sceneID="cL5-fV-PWO">

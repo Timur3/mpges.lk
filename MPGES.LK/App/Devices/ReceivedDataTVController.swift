@@ -28,21 +28,22 @@ class ReceivedDataTVController: UITableViewController {
     }
     
      override func viewDidLoad() {
-               super.viewDidLoad()
+        navigationItem.title = "Показания"
+        super.viewDidLoad()
                
-               self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
 
-               refreshDataContract(sender: self)
+        refreshDataContract(sender: self)
                
-               tableView.delegate = self
-               tableView.dataSource = self
-           }
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
            
-           @objc func refreshDataContract(sender: AnyObject){
-            print("refresh")
-            ApiService.shared.requestById(id: device?.id ?? -1, method: methodApi.getReceivedData, completion: setReceivedData(data:))
-            self.refreshControl?.endRefreshing()
-           }
+    @objc func refreshDataContract(sender: AnyObject){
+    print("refresh")
+    ApiService.shared.requestById(id: device?.id ?? -1, method: methodApi.getReceivedData, completion: setReceivedData(data:))
+    self.refreshControl?.endRefreshing()
+}
            
     // MARK: - Table view data source
 

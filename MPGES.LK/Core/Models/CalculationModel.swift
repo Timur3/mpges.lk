@@ -15,5 +15,7 @@ public struct CalculationModelRoot: Decodable {
 
 public struct CalculationModel: Decodable {
     var id: Int
-    
+    var date: String
+    var volume: Int
+    var Sum: Double    
 }

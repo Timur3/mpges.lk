@@ -8,7 +8,7 @@
 
 import Foundation
 protocol InvoicesTVControllerDelegate {
-    
+    var sections: [String] { get }
     func setInvoices(invoices:InvoiceModelRoot)
     
 }

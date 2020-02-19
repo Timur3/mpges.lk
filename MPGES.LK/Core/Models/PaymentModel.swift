@@ -6,25 +6,25 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
-public struct PaymentsModelRoot: Decodable {
+public class PaymentsModelRoot: Object, Decodable {
     var count: Int
     var data: [PaymentModel]
 }
 
-public struct PaymentModel: Decodable {
-    var id : Int
-    var serviceId: Int?
-    var invoiceId: Int?
-    var meteringId: Int?
-    var registerPaytsId: Int?
-    var cash: String?
-    var packId: Int
-    var datePay: String?
-    var summa: Double
-    var workerId: Int?
-    var note: String?
+public class PaymentModel: Object, Decodable {
+    @objc dynamic var id: Int
+    @objc dynamic var serviceId: Int
+    @objc dynamic var invoiceId: Int
+    @objc dynamic var meteringId: Int
+    @objc dynamic var registerPaytsId: Int
+    @objc dynamic var cash: String
+    @objc dynamic var packId: Int = 0
+    @objc dynamic var datePay: String
+    @objc dynamic var summa: Double = 0.0
+    @objc dynamic var workerId: Int
+    @objc dynamic var note: String
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -38,5 +38,9 @@ public struct PaymentModel: Decodable {
         case summa = "summa"
         case workerId = "workerId"
         case note = "note"
+    }
+       
+    @objc open override class func primaryKey() -> String? {
+        return "id"
     }
 }

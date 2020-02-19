@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ContractsTVControllerDelegate {
-    
+    var sections: [String] { get }
     func setContracts(contracts:ContractModelRoot)
     
 }

@@ -11,15 +11,18 @@ class MethodApi {
     
     let getContracts: String
     let getContract: String
+    let getContractSaldoById: String
     let getPaymentById: String
     let getPaymentsByContractId: String
     let getDevicesByContractId: String
     let getReceivedData: String
     let getInvoicesByContractId: String
+
        
     init() {
         getContracts = "contract/getByUser/"
         getContract = "contract/"
+        getContractSaldoById = "contract/getsaldobyid/"
         getPaymentById = "payment"
         getPaymentsByContractId = "payment/getbypackid/"
         getInvoicesByContractId = "invoice/getbycontractid/"
