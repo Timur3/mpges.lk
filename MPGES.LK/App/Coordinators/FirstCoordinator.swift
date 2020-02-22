@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginCoordinator: Coordinator {
+class FirstCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     unowned let navigationController: UINavigationController
@@ -18,13 +18,20 @@ class LoginCoordinator: Coordinator {
     }
     
     func start() {
-        let loginViewController : LoginViewController = LoginViewController()
-        loginViewController.delegate = self
-        self.navigationController.viewControllers = [loginViewController]
+        let firstViewController : FirstViewController = FirstViewController()
+        firstViewController.delegate = self
+        self.navigationController.viewControllers = [firstViewController]
     }
 }
 
-extension LoginCoordinator: LoginViewControllerDelegate {
+extension FirstCoordinator: FirstViewControllerDelegate {
+    func navigateToSingUpPage() {
+        let singUpCoordinator = SingUpCoordinator(navigationController: navigationController)
+        singUpCoordinator.delegate = self
+        childCoordinators.append(singUpCoordinator)
+        singUpCoordinator.start()
+    }
+    
     // Navigate to next page
     func navigateToSingInPage() {
        let singInCoordinator = SingInCoordinator(navigationController: navigationController)
@@ -34,11 +41,11 @@ extension LoginCoordinator: LoginViewControllerDelegate {
     }
 }
 
-extension LoginCoordinator: BackToLoginViewControllerDelegate {
-    
-    // Back from third page
-    func navigateBackToLoginPage(newOrderCoordinator: SingInCoordinator) {
+extension FirstCoordinator: BackToFirstViewControllerDelegate {
+    // Back from
+    func navigateBackToFirstPage(newOrderCoordinator: Coordinator) {
         navigationController.popToRootViewController(animated: true)
         childCoordinators.removeLast()
     }
+    
 }

@@ -50,12 +50,15 @@ class ProfileTVController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        //let viewController = (initWithNibName:@"FirstViewController" bundle:nil]
+        //self.navigationController.pushViewController(viewController, animated:true)
     }
 
 }
 
 extension ProfileTVController: ProfileTVControllerDelegate {
-    func setProfile(profile: ProfileModel) {
+    func setProfile(profile: UserModel) {
         
     }
     

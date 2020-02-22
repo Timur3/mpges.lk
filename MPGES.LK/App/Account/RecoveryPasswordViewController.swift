@@ -7,15 +7,22 @@
 //
 
 import UIKit
+public protocol RecoveryPasswordViewControllerDelegate: class {
+    func navigateToSingInPage()
+    func goToRecoveryPassword()
+}
 
 class RecoveryPasswordViewController: UIViewController {
     
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var sendPassword: UIButton!
     
+    public weak var delegate: RecoveryPasswordViewControllerDelegate?
+    
     @IBAction func cancelBtn(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        self.delegate?.navigateToSingInPage()
     }
+    
     @IBAction func changeEmail(_ sender: UITextField) {
         emailTF.textColor = .red
     }

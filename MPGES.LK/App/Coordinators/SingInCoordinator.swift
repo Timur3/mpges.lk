@@ -6,15 +6,15 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 import UIKit
-protocol BackToLoginViewControllerDelegate: class {
-    func navigateBackToLoginPage(newOrderCoordinator: SingInCoordinator)
+protocol BackToFirstViewControllerDelegate: class {
+    func navigateBackToFirstPage(newOrderCoordinator: Coordinator)
 }
 
 class SingInCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     unowned let navigationController: UINavigationController
-    weak var delegate: BackToLoginViewControllerDelegate?
+    weak var delegate: BackToFirstViewControllerDelegate?
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -23,19 +23,32 @@ class SingInCoordinator: Coordinator {
     func start() {
         let singInViewController : SingInViewController = SingInViewController()
         singInViewController.delegate = self
-        self.navigationController.viewControllers = [singInViewController]
+        self.navigationController.pushViewController(singInViewController, animated: true)
     }
 }
 
 extension SingInCoordinator: SingInViewControllerDelegate {
-    // Navigate to next page
-    func navigateToLoginPage() {
-       let loginCoordinator = LoginCoordinator(navigationController: navigationController)
-        //loginCoordinator.delegate = self
-       childCoordinators.append(loginCoordinator)
-       loginCoordinator.start()
+    func goToNextSceneApp() {
+        debugPrint("to app")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "mainApp") as! UITabBarController
+        
+        self.navigationController.pushViewController(vc, animated: true)
     }
-    func navigateToRecoveryPasswordPage() {
+    
+    func goToDemo() {
         
     }
+    // Navigate to next page
+    func navigateToFirstPage() {
+        self.delegate?.navigateBackToFirstPage(newOrderCoordinator: self)
+    }
+    
+    func navigateToRecoveryPasswordPage() {
+        let recoveryPasswordCoordinator = RecoveryPasswordCoordinator(navigationController: navigationController)
+        //recoveryPasswordCoordinator.delegate = self
+        childCoordinators.append(recoveryPasswordCoordinator)
+        recoveryPasswordCoordinator.start()
+    }
+    
 }

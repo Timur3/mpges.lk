@@ -9,8 +9,10 @@
 import UIKit
 
 public protocol SingInViewControllerDelegate: class {
-    func navigateToLoginPage()
+    func navigateToFirstPage()
     func navigateToRecoveryPasswordPage()
+    func goToNextSceneApp()
+    func goToDemo()
 }
 
 class SingInViewController: UIViewController {
@@ -25,6 +27,10 @@ class SingInViewController: UIViewController {
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
     
+    @IBAction func recoveryPassBtn(_ sender: Any) {
+        self.delegate?.navigateToRecoveryPasswordPage()
+    }
+    
     @IBAction func authButton(_ sender: Any) {
         debugPrint("authButton press")
         ActivityIndicatorViewService.shared.showView(form: self.view)
@@ -32,20 +38,10 @@ class SingInViewController: UIViewController {
         apiService.authApi(model: modelAuth, completion: save(modelResult:))
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        let image = UIImage (named: "Card")
-        imageView.image = image
-        emailTF.leftView = imageView
-        emailTF.leftViewMode = .always
-    }
-
     override func viewDidLoad() {
         navigationItem.title = "Вход"
         super.viewDidLoad()
-        //submitBtn.Circle()
-        // Do any additional setup after loading the view.
-        
+        submitBtn.Circle()
     }
     
     func save(modelResult: AuthResultModel) {
@@ -53,7 +49,7 @@ class SingInViewController: UIViewController {
 
         if !modelResult.isError {
             userDataService.setToken(token: modelResult.data!)
-            performSegue(withIdentifier: "ToMainTabBar", sender: self)
+            self.delegate?.goToNextSceneApp()
             navigationController?.isNavigationBarHidden = true
         } else {
             passwordTF.shake(times: 3, delta: 5)

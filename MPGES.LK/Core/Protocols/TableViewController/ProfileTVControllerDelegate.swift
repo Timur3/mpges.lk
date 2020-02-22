@@ -9,5 +9,5 @@
 import Foundation
 protocol ProfileTVControllerDelegate {
     var sections: [String] { get }
-    func setProfile(profile:ProfileModel)
+    func setProfile(profile:UserModel)
 }

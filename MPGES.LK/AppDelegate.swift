@@ -12,19 +12,10 @@ import YandexMapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
     var window: UIWindow?
-    var loginCoordinator: LoginCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController()
-        // Initialise the first coordinator with the main navigation controller
-        loginCoordinator = LoginCoordinator(navigationController: window?.rootViewController as! UINavigationController)
-        // The start method will actually display the main view
-        loginCoordinator?.start()
-        window?.makeKeyAndVisible()
-        
         // Override point for customization after application launch.
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first

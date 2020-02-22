@@ -8,24 +8,28 @@
 
 import UIKit
 
-public protocol LoginViewControllerDelegate: class {
+public protocol FirstViewControllerDelegate: class {
     func navigateToSingInPage()
+    func navigateToSingUpPage()
 }
 
-class LoginViewController: UIViewController {
+class FirstViewController: UIViewController {
     
-    public weak var delegate: LoginViewControllerDelegate?
+    public weak var delegate: FirstViewControllerDelegate?
 
     @IBOutlet weak var loginBtn: UIButton!
     
     override func viewDidLoad() {
-        navigationItem.title = ""
+        navigationItem.title = "Главное"
         super.viewDidLoad()
-        //loginBtn.Circle()
+        loginBtn.Circle()
         
         // Do any additional setup after loading the view.
     }
-    @IBAction func AuthBtn(_ sender: Any) {
+    @IBAction func authBtn(_ sender: Any) {
         self.delegate?.navigateToSingInPage()
+    }
+    @IBAction func registrBtn(_ sender: Any) {
+        self.delegate?.navigateToSingUpPage()
     }
 }

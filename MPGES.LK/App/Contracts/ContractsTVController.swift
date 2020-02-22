@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol ContractsTVControllerDelegate {
+    var sections: [String] { get }
+    func setContracts(contracts:ContractModelRoot)
+    
+}
+
 class ContractsTVController: UITableViewController {
     
     var userDataService = UserDataService()
@@ -35,7 +41,6 @@ class ContractsTVController: UITableViewController {
         ActivityIndicatorViewService.shared.showViewWinthoutBackground(form: self.tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        //searchBar.becomeFirstResponder()
     }
     
     @objc func refreshDataContract(sender: AnyObject){

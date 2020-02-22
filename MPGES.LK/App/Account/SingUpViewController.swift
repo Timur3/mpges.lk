@@ -8,8 +8,14 @@
 
 import UIKit
 
+public protocol SingUpViewControllerDelegate: class {
+    func navigateToFirstPage()
+}
+
 class SingUpViewController: UIViewController {
 
+    public weak var delegate: SingUpViewControllerDelegate?
+    
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
@@ -18,7 +24,7 @@ class SingUpViewController: UIViewController {
         
     }
     @IBAction func cancelBtn(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        self.delegate?.navigateToFirstPage()
     }
     
     
