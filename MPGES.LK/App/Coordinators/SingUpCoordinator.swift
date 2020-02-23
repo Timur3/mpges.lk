@@ -13,6 +13,7 @@ class SingUpCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
     weak var delegate: BackToFirstViewControllerDelegate?
+    weak var delegateUser: SingUpViewControllerDelegate?
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -24,7 +25,7 @@ class SingUpCoordinator: Coordinator {
         self.navigationController.pushViewController(singUpViewController, animated: true)
     }
 }
-extension SingUpCoordinator: SingUpViewControllerDelegate {
+extension SingUpCoordinator: SingUpViewControllerDelegate {   
     // Navigate to next page
     func navigateToFirstPage() {
         self.delegate?.navigateBackToFirstPage(newOrderCoordinator: self)

@@ -8,13 +8,15 @@
 
 import Foundation
 
-public struct AuthResultModel: Decodable {
-    var isError : Bool
-    var errorMessage : String?
-    var data : String?
+public struct ResultModel: Decodable {
+    var isError: Bool
+    var errorCode: Int
+    var errorMessage: String?
+    var data: String?
     
     enum CodingKeys: String, CodingKey {
         case isError = "isError"
+        case errorCode = "errorCode"
         case errorMessage = "errorMessage"
         case data = "data"
      }

@@ -8,6 +8,10 @@
 
 import Foundation
 
+public struct UserModelRoot: Decodable {
+    var count: Int
+    var data: [UserModel]
+}
 public struct UserModel: Decodable, Encodable {
     
     let Id: Int
@@ -18,7 +22,7 @@ public struct UserModel: Decodable, Encodable {
     let Mobile: String
     let IsOnline: Bool
     let Confirmed: Bool
-    let CreateDate: Date
+    let CreateDate: String
     let RoleId: Int
     
 }

@@ -44,7 +44,7 @@ class SingInViewController: UIViewController {
         submitBtn.Circle()
     }
     
-    func save(modelResult: AuthResultModel) {
+    func save(modelResult: ResultModel) {
         ActivityIndicatorViewService.shared.hideView()
 
         if !modelResult.isError {
@@ -52,8 +52,19 @@ class SingInViewController: UIViewController {
             self.delegate?.goToNextSceneApp()
             navigationController?.isNavigationBarHidden = true
         } else {
-            passwordTF.shake(times: 3, delta: 5)
-            errorLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
+            switch modelResult.errorCode {
+            case 0:
+                emailTF.shake(times: 3, delta: 5)
+                errorLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
+            case 1:
+                passwordTF.shake(times: 3, delta: 5)
+                errorLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
+            default:
+                emailTF.shake(times: 3, delta: 5)
+                passwordTF.shake(times: 3, delta: 5)
+                errorLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
+            }
+            
         }
     }
 

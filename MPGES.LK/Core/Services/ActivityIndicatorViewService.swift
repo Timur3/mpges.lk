@@ -13,7 +13,7 @@ class ActivityIndicatorViewService {
     
     var containerView = UIView()
     var loadingView = UIView()
-    var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+    var activityIndicator = UIActivityIndicatorView(style: .large)
     
     func showView(form: UIView) {
         

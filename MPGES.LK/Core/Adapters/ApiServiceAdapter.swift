@@ -45,6 +45,11 @@ class ApiServiceAdapter {
         ApiService.shared.requestByToken(method: methodApi.getContract, completion: delegate.setProfile(profile:))
     }
     
+    // получение профиля
+    func createUser(model: UserModel, delegate: SingUpViewControllerUserDelegate) {
+        ApiService.shared.createUser(model: model, method: methodApi.createUser, completion: delegate.resultOfCreateUser(result:))
+    }
+    
     
     func loadSaldoContract(id: Int, label: UILabel) {
         ApiService.shared.loadTextInLabel(method: methodApi.getContractSaldoById, id: id, label: label)

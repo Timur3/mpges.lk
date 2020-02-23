@@ -22,7 +22,7 @@ class ApiService {
         vershionApi = options.versionApi
     }
     
-    func authApi(model: AuthModel, completion: @escaping (AuthResultModel) -> Void) {
+    func authApi(model: AuthModel, completion: @escaping (ResultModel) -> Void) {
         let method = "auth"
         
         DispatchQueue.global().async {
@@ -36,7 +36,7 @@ class ApiService {
                 debugPrint(response)
                 switch response.result {
                 case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(AuthResultModel.self, from: value)
+                    let myResponse = try! JSONDecoder().decode(ResultModel.self, from: value)
                     DispatchQueue.main.async {
                         completion(myResponse)
                     }
@@ -47,6 +47,30 @@ class ApiService {
         }
     }
 
+    func createUser(model: UserModel,  method: String, completion: @escaping (ServerResponseModel) -> Void) {
+        
+        DispatchQueue.global().async {
+        AF.request(self.baseURL+method,
+               method: .post,
+               parameters: model,
+               encoder: JSONParameterEncoder.default)
+            
+            .responseData { response in
+                debugPrint("print reponse")
+                debugPrint(response)
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(ServerResponseModel.self, from: value)
+                    DispatchQueue.main.async {
+                        completion(myResponse)
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
     func requestById<T: Decodable>(id: Int, method: String, completion: @escaping(T) -> Void) {
         
         let fullMethod = method + String(id)

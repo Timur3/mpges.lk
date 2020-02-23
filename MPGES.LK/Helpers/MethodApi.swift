@@ -17,7 +17,8 @@ class MethodApi {
     let getDevicesByContractId: String
     let getReceivedData: String
     let getInvoicesByContractId: String
-
+    let createUser: String
+    let updateUser: String
        
     init() {
         getContracts = "contract/getByUser/"
@@ -28,5 +29,7 @@ class MethodApi {
         getInvoicesByContractId = "invoice/getbycontractid/"
         getDevicesByContractId = "device/getbypackid/"
         getReceivedData = "receivedData/getbydeviceid/"
+        createUser = "user/create"
+        updateUser = "user/update"
     }
 }

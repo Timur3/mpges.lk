@@ -25,7 +25,7 @@ class ProfileTVController: UITableViewController {
     override func viewDidLoad() {
         navigationItem.title = "Еще"
         super.viewDidLoad()
-        ApiServiceAdapter.shared
+        //ApiServiceAdapter.shared
         
     }
 

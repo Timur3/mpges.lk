@@ -20,7 +20,7 @@ class ContractsTVCell: UITableViewCell {
             contractorName.text = contract?.contractorNameSmall
             dateContract.text = (contract?.dateRegister ?? "01-01-1970").replacingOccurrences(of: "T00:00:00", with: "")
             DispatchQueue.main.async { [weak self] in
-                guard let s = self else { return }
+                guard self != nil else { return }
                 ApiServiceAdapter.shared.loadSaldoContract(id: self!.contract!.id, label: self!.saldoContract)
             }
         }
