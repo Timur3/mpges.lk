@@ -28,10 +28,17 @@ class SingUpViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     
     @IBAction func submitBtn(_ sender: Any) {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
-        let user = UserModel(Id: 0, Name: fullNameTF.text!, Password: passwordTF.text!, PasswordHash: "", Email: emailTF.text!, Mobile: "", IsOnline: false, Confirmed: false, CreateDate: "\(NSDate.now)", RoleId: 3)
-        self.delegateUser?.createUser(user: user)
-        
+        if (fullNameTF.text!.isEmpty){
+            errorLabel.text = "Введите Ваше имя"
+            fullNameTF.shake(times: 3, delta: 5)
+        } else
+            if (!isValidEmail(emailTF.text!) || emailTF.text!.isEmpty) {
+                errorLabel.text = "Не верный формат электронной почты"
+                emailTF.shake(times: 3, delta: 5)
+            } else {
+                let user = UserModel(Id: 0, Name: fullNameTF.text!, Password: passwordTF.text!, PasswordHash: "", Email: emailTF.text!, Mobile: "", IsOnline: false, Confirmed: false, CreateDate: "\(NSDate.now)", RoleId: 3)
+                self.delegateUser?.createUser(user: user)
+        }
     }
     @IBAction func cancelBtn(_ sender: Any) {
         self.delegate?.navigateToFirstPage()
@@ -40,6 +47,7 @@ class SingUpViewController: UIViewController {
     
     override func viewDidLoad() {
         navigationItem.title = "Регистрация"
+        passwordTF.isSecureTextEntry = true
         super.viewDidLoad()
         submitSingUP.Circle()
         delegateUser = self
@@ -47,14 +55,16 @@ class SingUpViewController: UIViewController {
 }
 
 extension SingUpViewController: SingUpViewControllerUserDelegate {
+    
     func resultOfCreateUser(result: ServerResponseModel) {
         ActivityIndicatorViewService.shared.hideView()
         if result.isError {
             errorLabel.text = result.message
+            passwordTF.shake(times: 3, delta: 5)
         } else {
             AlertControllerHelper.shared.show(
                 title: "Успех!",
-                mesg: "Регистрация прошла успешно! На указанный Вами Email адрес направлено письмо для завершения регистрации!",
+                mesg: result.message,
                 form: self) { (UIAlertAction) in
                     self.delegate?.navigateToFirstPage()
             }
@@ -62,6 +72,7 @@ extension SingUpViewController: SingUpViewControllerUserDelegate {
     }
 
     func createUser(user: UserModel) {
+        ActivityIndicatorViewService.shared.showView(form: self.view)
         ApiServiceAdapter.shared.createUser(model: user, delegate: self)
     }
 }

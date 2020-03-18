@@ -13,7 +13,7 @@ class ActivityIndicatorViewService {
     
     var containerView = UIView()
     var loadingView = UIView()
-    var activityIndicator = UIActivityIndicatorView(style: .large)
+    var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     func showView(form: UIView) {
         
@@ -58,6 +58,7 @@ class ActivityIndicatorViewService {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.containerView.removeFromSuperview()
+            self.containerView = UIView()
         }
     }
 }

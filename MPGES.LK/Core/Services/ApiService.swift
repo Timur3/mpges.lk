@@ -21,46 +21,24 @@ class ApiService {
         baseURL = options.baseUrl
         vershionApi = options.versionApi
     }
-    
-    func authApi(model: AuthModel, completion: @escaping (ResultModel) -> Void) {
-        let method = "auth"
-        
-        DispatchQueue.global().async {
-        AF.request(self.baseURL+method,
-               method: .post,
-               parameters: model,
-               encoder: JSONParameterEncoder.default)
-            
-            .responseData { response in
-                debugPrint("print reponse")
-                debugPrint(response)
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(ResultModel.self, from: value)
-                    DispatchQueue.main.async {
-                        completion(myResponse)
-                    }
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
-    }
 
-    func createUser(model: UserModel,  method: String, completion: @escaping (ServerResponseModel) -> Void) {
+    func requestByModel<T: Decodable, M: Encodable>(model: M, requestMethod: HTTPMethod = .post, method: String, completion: @escaping (T) -> Void) {
         
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (userData.getToken() ?? "")
+        ]
         DispatchQueue.global().async {
         AF.request(self.baseURL+method,
-               method: .post,
+               method: requestMethod,
                parameters: model,
-               encoder: JSONParameterEncoder.default)
+               encoder: JSONParameterEncoder.default, headers: headers)
             
             .responseData { response in
                 debugPrint("print reponse")
                 debugPrint(response)
                 switch response.result {
                 case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(ServerResponseModel.self, from: value)
+                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
                     DispatchQueue.main.async {
                         completion(myResponse)
                     }

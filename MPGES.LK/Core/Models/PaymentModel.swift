@@ -13,11 +13,22 @@ public class PaymentsModelRoot: Object, Decodable {
     var data: [PaymentModel]
 }
 
+public class PaymentsModelVeiw  {
+    var year: Int = 0
+    var payments: [PaymentModel] = []
+    
+    init(year: Int, payments: [PaymentModel])
+    {
+        self.year = year
+        self.payments = payments
+    }
+}
+
 public class PaymentModel: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var serviceId: Int
     @objc dynamic var invoiceId: Int
-    @objc dynamic var meteringId: Int
+    @objc dynamic var meteringId: Int = 0
     @objc dynamic var registerPaytsId: Int
     @objc dynamic var cash: String
     @objc dynamic var packId: Int = 0
@@ -42,5 +53,8 @@ public class PaymentModel: Object, Decodable {
        
     @objc open override class func primaryKey() -> String? {
         return "id"
+    }
+    func payYear() -> Int {
+        return getYear(dateStr: datePay)
     }
 }

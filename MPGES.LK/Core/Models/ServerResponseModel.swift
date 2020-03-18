@@ -10,10 +10,12 @@ import Foundation
 
 public struct ServerResponseModel: Decodable {
     var isError: Bool
-    var message: String?
+    var responseCode: Int
+    var message: String
     
     enum CodingKeys: String, CodingKey {
-       case isError = "isError"
-       case message = "Message"
+        case isError = "isError"
+        case responseCode = "responseCode"
+        case message = "message"
     }
 }

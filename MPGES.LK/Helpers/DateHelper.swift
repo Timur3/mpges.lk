@@ -21,11 +21,11 @@ func UnixTimeToDateTime(unixtime: Int, fullFormat: Bool = false) -> String {
     return dateString
 }
 
-func DateNormal(dateS: String) -> String {
+func DateNormal(dateStr: String) -> String {
     let dateFmt = DateFormatter()
     dateFmt.timeZone = NSTimeZone.default
     dateFmt.dateFormat =  "yyyy-MM-dd"
-    let date = dateFmt.date(from: dateS.replacingOccurrences(of: "T00:00:00", with: ""))
+    let date = dateFmt.date(from: dateStr.replacingOccurrences(of: "T00:00:00", with: ""))
     
     let dayTimePeriodFormatter = DateFormatter()
     dayTimePeriodFormatter.dateFormat = "dd.MM.yyyy"
@@ -43,4 +43,10 @@ func getYear(dateStr: String)->Int {
 
 func getCurrentYear()->Int {
     return Calendar.current.component(.year, from: Date())
+}
+
+extension String {
+    func normalDate() {
+        self.replacingOccurrences(of: "T00:00:00", with: "")
+    }
 }

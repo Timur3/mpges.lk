@@ -13,6 +13,10 @@ public struct ContractModelRoot: Decodable {
     var data: [ContractModel]
 }
 
+public struct ContractNumberModel: Encodable {
+    var number: String
+}
+
 public struct ContractModel: Decodable {
     var id : Int
     var userProfileId: Int

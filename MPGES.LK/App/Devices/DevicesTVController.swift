@@ -8,9 +8,19 @@
 
 import UIKit
 
+protocol DevicesTVControllerDelegate: class {
+    func navigationReceivedDataPage()
+}
+
+protocol DevicesTVControllerUserDelegate: class {
+    var sections: [String] { get }
+    func setDevices(devices:DevicesModelRoot)
+}
+
 class DevicesTVController: UITableViewController {
     let methodApi = MethodApi()
-    
+    private var searchController = UISearchController(searchResultsController: nil)
+    public weak var delegate: DevicesTVControllerDelegate?
     var deviceList = [DeviceModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -21,10 +31,14 @@ class DevicesTVController: UITableViewController {
     
     override func viewDidLoad() {
         navigationItem.title = "Приборы учета"
+        navigationItem.searchController = searchController
         super.viewDidLoad()
+        self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshDataDevice), for: UIControl.Event.valueChanged)
-        tableView.addSubview(self.refreshControl!)
         
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        let nib = UINib(nibName: "DeviceTVCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "deviceCell")
         // todo получение из Realm, если нет то тянем с инета
         refreshDataDevice(sender: self)
         
@@ -62,7 +76,6 @@ class DevicesTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell", for: indexPath) as! DeviceTVCell
         cell.device = deviceList[indexPath.row]
-
         return cell
     }
 
@@ -80,7 +93,7 @@ class DevicesTVController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
 
     // Override to support rearranging the table view.
@@ -90,24 +103,20 @@ class DevicesTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let deviceSend = deviceList[indexPath.row]
-        
-        performSegue(withIdentifier: "receivedData", sender: deviceSend)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "receivedData", let receivedData = segue.destination as? ReceivedDataTVController {
-            receivedData.device = sender as? DeviceModel
-        }
+        self.delegate?.navigationReceivedDataPage()
     }
 }
-extension DevicesTVController: UISearchBarDelegate, DevicesTVControllerDelegate {
+//MARK: - SEARCH
+extension DevicesTVController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+}
+//MARK: - USER DELEGATE
+extension DevicesTVController: DevicesTVControllerUserDelegate {
     
     var sections: [String] { ["Установленные приборы учета"] }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("search")
-    }
-    
+
     func setDevices(devices: DevicesModelRoot) {
         // todo доделать получение данных из realm
         deviceList = devices.data

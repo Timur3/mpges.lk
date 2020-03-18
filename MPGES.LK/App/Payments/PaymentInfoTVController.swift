@@ -2,22 +2,15 @@
 //  PaymentInfoTVController.swift
 //  mpges.lk
 //
-//  Created by Timur on 19.01.2020.
+//  Created by Timur on 14.03.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
 import UIKit
 
 class PaymentInfoTVController: UITableViewController {
-    
-    var payment: PaymentModel? {
-           didSet {
-            debugPrint("payment Info")
-               }
-           }
-    
+        
     override func viewDidLoad() {
-        navigationItem.title = "Детали платежа"
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -93,5 +86,5 @@ class PaymentInfoTVController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

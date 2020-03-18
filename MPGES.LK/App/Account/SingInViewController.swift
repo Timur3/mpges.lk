@@ -15,59 +15,85 @@ public protocol SingInViewControllerDelegate: class {
     func goToDemo()
 }
 
+public protocol SingInViewControllerUserDelegate: class {
+    func authApi(model: AuthModel)
+    func resultAuthApi(modelResult: ResultModel)
+}
+
 class SingInViewController: UIViewController {
 
     public weak var delegate: SingInViewControllerDelegate?
+    public weak var delegateUser: SingInViewControllerUserDelegate?
     
     let userDataService = UserDataService()
     let apiService = ApiService()
     
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorEmailLabel: UILabel!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var errorPasswordLabel: UILabel!
     
     @IBAction func recoveryPassBtn(_ sender: Any) {
         self.delegate?.navigateToRecoveryPasswordPage()
     }
+    @IBAction func demoBtn(_ sender: Any) {
+        let model = AuthModel(email: "demo@mp-ges.ru", password: "Qwerty123!")
+        self.delegateUser?.authApi(model: model)
+    }
     
     @IBAction func authButton(_ sender: Any) {
         debugPrint("authButton press")
-        ActivityIndicatorViewService.shared.showView(form: self.view)
-        let modelAuth = AuthModel(email: emailTF.text!, password: passwordTF.text!)
-        apiService.authApi(model: modelAuth, completion: save(modelResult:))
+        if isValidEmail(emailTF.text!) {
+            let model = AuthModel(email: emailTF.text!, password: passwordTF.text!)
+            self.delegateUser?.authApi(model: model)
+        } else
+        {
+            //emailTF.layer.borderColor = UIColor.red.cgColor
+            //emailTF.layer.borderWidth = 1.0
+            errorEmailLabel.text = "Не верный email"
+            emailTF.shake(times: 3, delta: 5)
+        }
     }
     
     override func viewDidLoad() {
         navigationItem.title = "Вход"
+        passwordTF.isSecureTextEntry = true
+        errorEmailLabel.text = ""
         super.viewDidLoad()
         submitBtn.Circle()
+        delegateUser = self
     }
-    
-    func save(modelResult: ResultModel) {
-        ActivityIndicatorViewService.shared.hideView()
-
-        if !modelResult.isError {
-            userDataService.setToken(token: modelResult.data!)
-            self.delegate?.goToNextSceneApp()
-            navigationController?.isNavigationBarHidden = true
-        } else {
-            switch modelResult.errorCode {
-            case 0:
-                emailTF.shake(times: 3, delta: 5)
-                errorLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
-            case 1:
-                passwordTF.shake(times: 3, delta: 5)
-                errorLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
-            default:
-                emailTF.shake(times: 3, delta: 5)
-                passwordTF.shake(times: 3, delta: 5)
-                errorLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
-            }
-            
-        }
-    }
-
-
 }
 
+extension SingInViewController: SingInViewControllerUserDelegate {
+    func authApi(model: AuthModel) {
+        errorEmailLabel.text = ""
+        errorPasswordLabel.text = ""
+        ActivityIndicatorViewService.shared.showView(form: self.view)
+        ApiServiceAdapter.shared.authApi(model: model, delegate: self)
+    }
+    
+func resultAuthApi(modelResult: ResultModel) {
+    ActivityIndicatorViewService.shared.hideView()
+    if !modelResult.isError {
+        userDataService.setToken(token: modelResult.data!)
+        self.delegate?.goToNextSceneApp()
+        navigationController?.isNavigationBarHidden = true
+    } else {
+        switch modelResult.errorCode {
+        case 0:
+            emailTF.shake(times: 3, delta: 5)
+            errorEmailLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
+        case 1:
+            passwordTF.shake(times: 3, delta: 5)
+            errorPasswordLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
+        default:
+            emailTF.shake(times: 3, delta: 5)
+            passwordTF.shake(times: 3, delta: 5)
+            errorEmailLabel.text = modelResult.errorMessage ?? "Неизвестная ошибка"
+        }
+    }
+}
+
+}

@@ -12,7 +12,7 @@ public protocol Coordinator: class {
     
     var childCoordinators: [Coordinator] { get set }
 
-    // All coordinators will be initilised with a navigation controller
+    // Все координаторы будут инициализированы с помощью навигационного контроллера
     init(navigationController:UINavigationController)
 
     func start()
