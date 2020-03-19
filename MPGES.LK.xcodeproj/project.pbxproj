@@ -80,7 +80,6 @@
 		22E2870423E0598A00453CF3 /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2870323E0598A00453CF3 /* ButtonHelper.swift */; };
 		22E2870F23E0C5DB00453CF3 /* InvoiceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2870E23E0C5DB00453CF3 /* InvoiceTVCell.swift */; };
 		22E2871123E0C61700453CF3 /* CalculationTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2871023E0C61700453CF3 /* CalculationTVCell.swift */; };
-		22E2871323E0C63F00453CF3 /* CalculationsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2871223E0C63F00453CF3 /* CalculationsTVController.swift */; };
 		22E2871523E2E82B00453CF3 /* InvoicesTVControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2871423E2E82B00453CF3 /* InvoicesTVControllerDelegate.swift */; };
 		22E2871C23E4A9F900453CF3 /* ActivityIndicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2871B23E4A9F900453CF3 /* ActivityIndicationDelegate.swift */; };
 		22E8CF02241D3BB500CA0F52 /* ContractDetailsInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E8CF01241D3BB500CA0F52 /* ContractDetailsInfoCoordinator.swift */; };
@@ -181,7 +180,6 @@
 		22E2870323E0598A00453CF3 /* ButtonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
 		22E2870E23E0C5DB00453CF3 /* InvoiceTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTVCell.swift; sourceTree = "<group>"; };
 		22E2871023E0C61700453CF3 /* CalculationTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationTVCell.swift; sourceTree = "<group>"; };
-		22E2871223E0C63F00453CF3 /* CalculationsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationsTVController.swift; sourceTree = "<group>"; };
 		22E2871423E2E82B00453CF3 /* InvoicesTVControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesTVControllerDelegate.swift; sourceTree = "<group>"; };
 		22E2871B23E4A9F900453CF3 /* ActivityIndicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicationDelegate.swift; sourceTree = "<group>"; };
 		22E8CF01241D3BB500CA0F52 /* ContractDetailsInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractDetailsInfoCoordinator.swift; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 				2278511623CF9799007F1063 /* Calculations.storyboard */,
 				223FDF8C23D0C56C0029E547 /* InvoicesTVController.swift */,
 				22E2870E23E0C5DB00453CF3 /* InvoiceTVCell.swift */,
-				22E2871223E0C63F00453CF3 /* CalculationsTVController.swift */,
 				22E2871023E0C61700453CF3 /* CalculationTVCell.swift */,
 			);
 			path = Calculations;
@@ -746,7 +743,6 @@
 				223F8FB4241A4A7C00CDCF01 /* ContractsTableViewCell.swift in Sources */,
 				229B245C23FC637C005AEC0F /* FirstCoordinator.swift in Sources */,
 				22F1682623E6B2F3003FA1EE /* TableViewCellHelper.swift in Sources */,
-				22E2871323E0C63F00453CF3 /* CalculationsTVController.swift in Sources */,
 				2291CD3223DEC0070029FCD1 /* DataProviderProtocol.swift in Sources */,
 				22E8CF09241D59E500CA0F52 /* PaymentTVCell.swift in Sources */,
 				227771CC240B84C10035FC43 /* EmailPredicate.swift in Sources */,

@@ -16,15 +16,15 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
 class ContractDetailsInfoTVController: UITableViewController {
     public weak var delegate: ContractDetailsInfoTVControllerDelegate?
     
-    var contractNumber: UITableViewCell { getCustomCell(textLabel: "Лицевой счет №: 86000300003", textAlign: .left, accessoryType: .none) }
-    var contractDate: UITableViewCell { getCustomCell(textLabel: "Дата договора: 12.02.2020", textAlign: .left, accessoryType: .none) }
-    var contractor: UITableViewCell { getCustomCell(textLabel: "Контрагент: Чалимов Т.Т.", textAlign: .left, accessoryType: .none) }
-    var contractSaldo: UITableViewCell { getCustomCell(textLabel: "Баланс: 800,00 руб.", textAlign: .left, accessoryType: .none) }
+    var contractNumber: UITableViewCell { getCustomCell(textLabel: "Лицевой счет №: 86000300003", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }
+    var contractDate: UITableViewCell { getCustomCell(textLabel: "Дата договора: 12.02.2020", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }
+    var contractor: UITableViewCell { getCustomCell(textLabel: "Контрагент: Чалимов Т.Т.", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }
+    var contractSaldo: UITableViewCell { getCustomCell(textLabel: "Баланс: 800,00 руб.", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }
     var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Пополнить счет", textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
-    var paymentsOfContract: UITableViewCell { getCustomCell(textLabel: "История платежей", textAlign: .left, accessoryType: .disclosureIndicator) }
-    var calculationsOfContract: UITableViewCell { getCustomCell(textLabel: "История начислений", textAlign: .left, accessoryType: .disclosureIndicator) }
-    var devicesOfContract: UITableViewCell { getCustomCell(textLabel: "Приборы учета", textAlign: .left, accessoryType: .disclosureIndicator) }
-    var mailOfContract: UITableViewCell { getCustomCell(textLabel: "Доставка квитанций", textAlign: .left, accessoryType: .disclosureIndicator)}
+    var paymentsOfContract: UITableViewCell { getCustomCell(textLabel: "История платежей", imageCell: myImage.rub, textAlign: .left, accessoryType: .disclosureIndicator) }
+    var calculationsOfContract: UITableViewCell { getCustomCell(textLabel: "История начислений", imageCell: myImage.calc, textAlign: .left, accessoryType: .disclosureIndicator) }
+    var devicesOfContract: UITableViewCell { getCustomCell(textLabel: "Приборы учета", imageCell: myImage.link, textAlign: .left, accessoryType: .disclosureIndicator) }
+    var mailOfContract: UITableViewCell { getCustomCell(textLabel: "Доставка квитанций", imageCell: myImage.mail, textAlign: .left, accessoryType: .disclosureIndicator)}
     
     override func viewDidLoad() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)

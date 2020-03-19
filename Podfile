@@ -5,11 +5,11 @@ target 'mpges.lk' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
+  # Pods for mpges.lk
    pod 'Alamofire'
    pod 'SwiftyJSON'
    pod 'RealmSwift'
    pod 'SwiftKeychainWrapper'
    pod 'YandexMapKit'
-	
 
 end

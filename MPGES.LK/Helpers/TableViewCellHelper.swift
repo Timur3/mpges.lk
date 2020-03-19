@@ -8,10 +8,12 @@
 
 import UIKit
 
-func getCustomCell(textLabel: String, textAlign: NSTextAlignment, textColor: UIColor = .black, accessoryType: UITableViewCell.AccessoryType) -> UITableViewCell {
+func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NSTextAlignment, textColor: UIColor = .black, accessoryType: UITableViewCell.AccessoryType) -> UITableViewCell {
     
     let cell = UITableViewCell()
-    cell.imageView?.image = UIImage(systemName: myImage.Rub.rawValue)
+    if (imageCell != .none) {
+        cell.imageView?.image =  UIImage(systemName: imageCell.rawValue)
+    }
     cell.textLabel?.text = textLabel
     cell.textLabel?.textColor = textColor
     cell.textLabel?.textAlignment = textAlign
@@ -21,6 +23,13 @@ func getCustomCell(textLabel: String, textAlign: NSTextAlignment, textColor: UIC
 }
 
 enum myImage: String {
-    case Rub = "rublesign.circle"
+    case none = "none"
+    case tag = "tag"
+    case link = "link"
+    case mail = "envelope"
+    case rub = "rublesign.circle"
+    case calc = "text.justify"
+    case person = "person"
+    case calendar = "calendar"
     
 }
