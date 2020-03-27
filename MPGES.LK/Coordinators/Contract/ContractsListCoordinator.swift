@@ -28,7 +28,6 @@ class ContractsListCoordinator: Coordinator {
 
 extension ContractsListCoordinator: ContractsListTVControllerDelegate {
     func navigationDetailsInfoPage(model: ContractModel) {
-        print("go to DetailsInfo")
         userDataService.setCurrentContract(contract: model)
         
         let contractDetailsInfoCoordinator = ContractDetailsInfoCoordinator(navigationController: navigationController)
@@ -38,7 +37,6 @@ extension ContractsListCoordinator: ContractsListTVControllerDelegate {
     }
     
     func navigationAddPage() {
-        print("go to ContractAdd")
         let contractAddCoordinator = ContractAddCoordinator(navigationController: navigationController)
         //contractAddCoordinator.delegate = self
         childCoordinators.append(contractAddCoordinator)

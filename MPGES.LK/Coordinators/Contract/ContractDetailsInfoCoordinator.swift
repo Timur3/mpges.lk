@@ -11,9 +11,7 @@ import UIKit
 class ContractDetailsInfoCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
-    
     unowned let navigationController: UINavigationController
-
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -26,6 +24,17 @@ class ContractDetailsInfoCoordinator: Coordinator {
 }
 
 extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegate {
+    func navigationDevileryOfInvoicePage() {
+        
+    }
+    
+    func navigationToInvoicePage() {
+        let dataSend = UserDataService.shared.getCurrentContract()
+        let invoiceCoordinator = InvoiceCoordinator(navigationController: navigationController)
+        childCoordinators.append(invoiceCoordinator)
+        invoiceCoordinator.start()
+    }
+    
     func navigationDevicesPage() {
         let dataSend = UserDataService.shared.getCurrentContract()
         let deviceCoordinator = DeviceCoordinator(navigationController: navigationController)

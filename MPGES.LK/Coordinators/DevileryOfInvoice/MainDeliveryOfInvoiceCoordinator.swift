@@ -1,31 +1,29 @@
 //
-//  DeviceCoordinator.swift
+//  MainDevileryCoordinator.swift
 //  mpges.lk
 //
-//  Created by Timur on 15.03.2020.
+//  Created by Timur on 24.03.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 import UIKit
 
-class DeviceCoordinator: Coordinator {
+class MainDeliveryOfInvoiceCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    weak var delegate: BackToFirstViewControllerDelegate?
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let deviceTV: DevicesTVController = DevicesTVController(nibName: "DevicesTVController", bundle: nil)
-        deviceTV.delegate = self
-        self.navigationController.pushViewController(deviceTV, animated: true)
+        let devileryOfInvoiceTV: DeliveryOfInvoiceTVController = DeliveryOfInvoiceTVController(nibName: "DevileryOfInvoiceTVController", bundle: nil)
+        //devileryOfInvoiceTV.delegate = self
+        self.navigationController.pushViewController(devileryOfInvoiceTV, animated: true)
     }
     
-
 }
-extension DeviceCoordinator: DevicesTVControllerDelegate {
+extension MainDeliveryOfInvoiceCoordinator: DevicesTVControllerDelegate {
     func navigationReceivedDataPage() {
         let receivedDataCoordinator = ReceivedDataCoordinator(navigationController: navigationController)
         childCoordinators.append(receivedDataCoordinator)

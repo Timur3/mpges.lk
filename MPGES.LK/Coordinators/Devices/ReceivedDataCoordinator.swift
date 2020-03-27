@@ -27,5 +27,4 @@ class ReceivedDataCoordinator: Coordinator {
 
 }
 extension ReceivedDataCoordinator: ReceivedDataTVControllerDelegate {
-
 }

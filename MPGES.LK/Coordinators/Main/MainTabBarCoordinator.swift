@@ -44,7 +44,7 @@ class MainTabBarCoordinator: Coordinator {
         profileNC.navigationBar.prefersLargeTitles = true
        
         let profileCoordinator = ProfileCoordinator(navigationController: profileNC)
-        
+        childCoordinators.append(profileCoordinator)
         profileCoordinator.start()
         
         let tabBarList = [contractsNC, officesVC, profileNC]

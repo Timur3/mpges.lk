@@ -28,6 +28,20 @@ class ProfileCoordinator: Coordinator {
 
 }
 extension ProfileCoordinator: ProfileTVControllerDelegate {
+    func navigationEmailToDeveloperPage() {
+        let emailToDevCoordinator = EmailToDeveloperCoordinator(navigationController: navigationController)
+        //navigationChangePasswordPage.delegate = self
+        childCoordinators.append(emailToDevCoordinator)
+        emailToDevCoordinator.start()
+    }
+    
+    func navigationChangePasswordPage() {
+        let changePasswordCoordinator = ChangePasswordCoordinator(navigationController: navigationController)
+        //navigationChangePasswordPage.delegate = self
+        childCoordinators.append(changePasswordCoordinator)
+        changePasswordCoordinator.start()
+    }
+    
     func navigateToFirstPage() {
         delegate?.navigateBackToFirstPage(newOrderCoordinator: self)
     }

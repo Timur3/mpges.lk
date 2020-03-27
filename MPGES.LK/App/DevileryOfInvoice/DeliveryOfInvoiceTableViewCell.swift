@@ -1,14 +1,14 @@
 //
-//  CalculationTableViewCell.swift
+//  DevileryOfInvoiceTableViewCell.swift
 //  mpges.lk
 //
-//  Created by Timur on 20.03.2020.
+//  Created by Timur on 24.03.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
 import UIKit
 
-class CalculationTVCell: UITableViewCell {
+class DeliveryOfInvoiceTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

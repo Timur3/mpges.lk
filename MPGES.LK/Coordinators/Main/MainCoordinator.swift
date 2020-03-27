@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstCoordinator: Coordinator {
+class MainCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     unowned let navigationController: UINavigationController
@@ -24,7 +24,7 @@ class FirstCoordinator: Coordinator {
     }
 }
 
-extension FirstCoordinator: FirstViewControllerDelegate {
+extension MainCoordinator: FirstViewControllerDelegate {
     func navigateToSingUpPage() {
         let singUpCoordinator = SingUpCoordinator(navigationController: navigationController)
         singUpCoordinator.delegate = self
@@ -41,7 +41,7 @@ extension FirstCoordinator: FirstViewControllerDelegate {
     }
 }
 
-extension FirstCoordinator: BackToFirstViewControllerDelegate {
+extension MainCoordinator: BackToFirstViewControllerDelegate {
     // Back from
     func navigateBackToFirstPage(newOrderCoordinator: Coordinator) {
         navigationController.popToRootViewController(animated: true)

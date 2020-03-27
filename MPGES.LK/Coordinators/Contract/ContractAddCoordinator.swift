@@ -22,13 +22,17 @@ class ContractAddCoordinator: Coordinator {
     func start() {
         let contractAddViewController : ContractAddViewController = ContractAddViewController(nibName: "ContractAddViewController", bundle: nil)
         contractAddViewController.delegate = self
-        self.navigationController.pushViewController(contractAddViewController, animated: true)
+        let navContractAddViewController: UINavigationController = UINavigationController(rootViewController: contractAddViewController)
+        self.navigationController.present(navContractAddViewController, animated: true, completion: nil)
+        //self.navigationController.pushViewController(contractAddViewController, animated: true)
     }
 }
 
 extension ContractAddCoordinator: ContractAddViewControllerDelegate {
     func navigateToBackPage() {
+        
         navigationController.popViewController(animated: true)
+        //self.dismissViewControllerAnimated(true, completion: nil)
         //ApiServiceAdapter.shared.getContracts(delegate: )
         //childCoordinators.removeLast()
     }
