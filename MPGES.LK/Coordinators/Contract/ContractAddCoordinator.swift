@@ -8,12 +8,16 @@
 
 import UIKit
 
+protocol ContractAddViewControllerDelegate: class {
+    func didFinishPage()
+}
+
 class ContractAddCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     
     unowned let navigationController: UINavigationController
-    //weak var delegate: BackToFirstViewControllerDelegate?
+    weak var parentCoordinator: MainContractsCoordinator?
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -24,16 +28,13 @@ class ContractAddCoordinator: Coordinator {
         contractAddViewController.delegate = self
         let navContractAddViewController: UINavigationController = UINavigationController(rootViewController: contractAddViewController)
         self.navigationController.present(navContractAddViewController, animated: true, completion: nil)
-        //self.navigationController.pushViewController(contractAddViewController, animated: true)
     }
-}
+    
 
+}
 extension ContractAddCoordinator: ContractAddViewControllerDelegate {
-    func navigateToBackPage() {
-        
-        navigationController.popViewController(animated: true)
-        //self.dismissViewControllerAnimated(true, completion: nil)
-        //ApiServiceAdapter.shared.getContracts(delegate: )
-        //childCoordinators.removeLast()
+    func didFinishPage(){
+        //todo обновить список договоров
+        parentCoordinator?.childDidFinish(self)
     }
 }

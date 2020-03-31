@@ -10,15 +10,15 @@ import UIKit
 
 class ContractsTableViewCell: UITableViewCell {
     @IBOutlet weak var numberContract: UILabel!
-       @IBOutlet weak var dateContract: UILabel!
+       @IBOutlet weak var contractName: UILabel!
        @IBOutlet weak var saldoContract: UILabel!
-       @IBOutlet weak var contractorName: UILabel!
+
        
        var contract: ContractModel? {
            didSet {
-               numberContract.text = contract?.number
-               contractorName.text = contract?.contractorNameSmall
-               dateContract.text = (contract?.dateRegister ?? "01-01-1970").replacingOccurrences(of: "T00:00:00", with: "")
+            let conNum = "\(contract?.id ?? 0)"
+            numberContract.text =  "#"+conNum
+               contractName.text = contract?.contractName
                DispatchQueue.main.async { [weak self] in
                    guard self != nil else { return }
                    ApiServiceAdapter.shared.loadSaldoContract(id: self!.contract!.id, label: self!.saldoContract)

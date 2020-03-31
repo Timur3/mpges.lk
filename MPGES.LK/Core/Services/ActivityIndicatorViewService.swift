@@ -34,7 +34,7 @@ class ActivityIndicatorViewService {
         
         loadingView.addSubview(activityIndicator)
         containerView.addSubview(loadingView)
-        UIApplication.shared.keyWindow?.addSubview(containerView)
+        UIApplication.shared.windows[0].addSubview(containerView)
         
         activityIndicator.startAnimating()
     }

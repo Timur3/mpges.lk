@@ -25,9 +25,9 @@ class InvoiceCoordinator: Coordinator {
 
 }
 extension InvoiceCoordinator: InvoicesTableViewControllerDelegate {
-    func navigantionInvoiceDetailsInfoPage() {
+    func navigantionInvoiceDetailsInfoPage(model: InvoiceModel) {
             let invoiceDetailsInfoCoordinator = InvoiceDetailsInfoCoordinator(navigationController: navigationController)
-            //contractAddCoordinator.delegate = self
+            //invoiceDetailsInfoCoordinator = self
             childCoordinators.append(invoiceDetailsInfoCoordinator)
             invoiceDetailsInfoCoordinator.start()
     }

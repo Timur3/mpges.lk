@@ -20,7 +20,7 @@ class ApiServiceAdapter {
     }
     
     // получение списка договора пользователя
-    func getContracts(delegate: ContractsListTVControllerUserDelegate) {
+    func getContracts(delegate: ContractsTVControllerUserDelegate) {
         ApiService.shared.requestByToken(method: methodApi.getContracts, completion: delegate.setContracts(contracts:))
     }
     
@@ -35,7 +35,7 @@ class ApiServiceAdapter {
     }
     
     // удаление привязки договора
-    func removeContractBinding(model: ContractNumberModel, delegate: ContractsListTVControllerUserDelegate) {
+    func removeContractBinding(model: ContractNumberModel, delegate: ContractsTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.removeContractBinding, completion: delegate.resultRemoveContractBinding(result:))
     }
     
@@ -45,7 +45,7 @@ class ApiServiceAdapter {
     }
     
     // получение платежей по договору
-    func getInvoiceByContractId(delegate: InvoicesTVControllerDelegate) {
+    func getInvoiceByContractId(delegate: InvoicesTableViewControllerUserDelegate) {
         ApiService.shared.requestById(id: uds.getCurrentContract()!, method: methodApi.getInvoicesByContractId, completion: delegate.setInvoices(invoices:))
     }
     
@@ -54,7 +54,16 @@ class ApiServiceAdapter {
         ApiService.shared.requestById(id: uds.getCurrentContract()!, method: methodApi.getDevicesByContractId, completion: delegate.setDevices(devices:))
     }
     
-    // получение приборов учета по договору
+    // получение показаний по прибору учета
+    func getReceivedDataByDeviceId(id: Int, delegate: ReceivedDataTVControllerDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.getReceivedData, completion: delegate.startWithData(model:))
+    }
+    
+    // получение деталей по договору
+    func getContractById(id: Int, delegate: ContractDetailsInfoTVControllerUserDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.getContract, completion: delegate.setContractById(contract:))
+    }
+    
     func getContractById(delegate: ContractDetailsInfoTVControllerUserDelegate) {
         ApiService.shared.requestById(id: uds.getCurrentContract()!, method: methodApi.getContract, completion: delegate.setContractById(contract:))
     }
@@ -82,6 +91,11 @@ class ApiServiceAdapter {
     // восстановление пароля
     func passwordRecovery(model: UserEmailModel, delegate: RecoveryPasswordViewControllerUserDelegate){
         ApiService.shared.requestByModel(model: model, requestMethod: .post, method: methodApi.passwordRecovery, completion: delegate.resultOfPassordRecovery(result:))
+    }
+    
+    // получение способов доставки
+    func getDeliveryOfInvoices(delegate: DeliveryOfInvoiceTVControllerDelegate) {
+        ApiService.shared.requestByToken(method: methodApi.getDeliveryOfInvoice, completion: delegate.startWithData(model:))
     }
     
     func loadSaldoContract(id: Int, label: UILabel) {

@@ -15,23 +15,14 @@ protocol ContractAddViewControllerUserDelegate: class {
     func resultToBinding(result: ServerResponseModel)
 }
 
-protocol ContractAddViewControllerDelegate: class {
-    func navigateToBackPage()
-}
-
-
 class ContractAddViewController: UIViewController {
-    
     public weak var delegate: ContractAddViewControllerDelegate?
     
     @IBOutlet weak var numberContract: UITextField!
     @IBOutlet weak var codeBinding: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var errorNumberLabel: UILabel!
-    
-    @IBAction func cancelBtn(_ sender: Any) {
-        self.delegate?.navigateToBackPage()
-    }
+
     @IBAction func numberInput(_ sender: Any) {
         if (numberContract.text!.count == 11) {
             let model = ContractNumberModel(number: numberContract.text!)
@@ -39,13 +30,15 @@ class ContractAddViewController: UIViewController {
         }
     }
     
-    //public weak var delegate: ContractsTVControllerDelegate?
-    
     override func viewDidLoad() {
+        self.title = "Новый договор"
         super.viewDidLoad()
-        submitBtn.addTarget(self, action: #selector(submitAction), for: .touchUpInside)
-        submitBtn.Circle()
-        // Do any additional setup after loading the view.
+        configuration()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.didFinishPage()
     }
     
     @objc func submitAction(sender:UIButton!) {
@@ -74,13 +67,26 @@ extension ContractAddViewController: ContractAddViewControllerUserDelegate {
     
     func resultToBinding(result: ServerResponseModel) {
         ActivityIndicatorViewService.shared.hideView()
-        AlertControllerHelper.shared.show(
+        AlertControllerAdapter.shared.show(
             title: result.isError ? "Ошибка" : "Успешно",
             mesg: result.message,
             form: self) { (UIAlertAction) in
-                if !result.isError { self.delegate?.navigateToBackPage() }
+                if !result.isError {
+                    self.cancelButton()
+                }
         }
     }
-    
-    
+    @objc func cancelButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+//MARK: CONFiGURE
+extension ContractAddViewController {
+    private func configuration() {
+        submitBtn.addTarget(self, action: #selector(submitAction), for: .touchUpInside)
+        submitBtn.Circle()
+        self.numberContract.keyboardType = UIKeyboardType.numberPad
+        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        self.navigationItem.rightBarButtonItems = [cancelBtn]
+    }
 }

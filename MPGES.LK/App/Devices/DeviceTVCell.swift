@@ -13,13 +13,11 @@ class DeviceTVCell: UITableViewCell {
     @IBOutlet weak var deviceNumber: UILabel!
     @IBOutlet weak var modelNameDevice: UILabel!
     @IBOutlet weak var addressSetDevice: UILabel!
-    
-    var device: DeviceModel? {
-        didSet {
-            deviceNumber.text = device?.deviceNumber
-            modelNameDevice.text = device?.deviceTypeName
-            addressSetDevice.text = device?.addressSet
-        }
+
+    func update(for device: DeviceModel) {
+        deviceNumber.text = device.deviceNumber
+        modelNameDevice.text = device.deviceTypeName
+        addressSetDevice.text = device.addressSet
     }
     
     override func awakeFromNib() {

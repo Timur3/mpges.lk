@@ -17,15 +17,18 @@ class MethodApi {
     let removeContractBinding: String
     let checkContractByNumber: String
     let getPaymentById: String
+    let getPaymentsByInvoiceId: String
     let getPaymentsByContractId: String
     let getDevicesByContractId: String
     let getReceivedData: String
     let getInvoicesByContractId: String
+    let getCalculationsByInvoiceId: String
     let createUser: String
     let updateUser: String
     let getUser: String
     let checkEmail: String
     let passwordRecovery: String
+    let getDeliveryOfInvoice: String
        
     init() {
         authApi = "auth/"
@@ -36,8 +39,10 @@ class MethodApi {
         removeContractBinding = "contract/removeBinding/"
         checkContractByNumber = "contract/checkByNumber/"
         getPaymentById = "payment/"
+        getPaymentsByInvoiceId = "payment/getbyinvoiceid/"
         getPaymentsByContractId = "payment/getbypackid/"
         getInvoicesByContractId = "invoice/getbycontractid/"
+        getCalculationsByInvoiceId = "calculation/getbyinvoiceid/"
         getDevicesByContractId = "device/getbypackid/"
         getReceivedData = "receivedData/getbydeviceid/"
         createUser = "user/create/"
@@ -45,5 +50,6 @@ class MethodApi {
         getUser = "user/"
         checkEmail = "user/checkbyemail/"
         passwordRecovery = "user/passwordrecovery/"
+        getDeliveryOfInvoice = "deliveryOfInvoice/getall/"
     }
 }

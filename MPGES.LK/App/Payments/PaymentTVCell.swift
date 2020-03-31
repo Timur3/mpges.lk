@@ -12,15 +12,12 @@ class PaymentTVCell: UITableViewCell {
     @IBOutlet weak var dataPay: UILabel!
     @IBOutlet weak var sumPay: UILabel!
     @IBOutlet weak var cashBox: UILabel!
-        
-    var payment: PaymentModel? {
-        didSet {
-            let sum: Double = (payment?.summa ?? 0.00)
-                
-                dataPay.text = (payment?.datePay ?? "01-01-1970").replacingOccurrences(of: "T00:00:00", with: "")
-                sumPay.text = "\(sum)"
-                cashBox.text = payment?.cash
-            }
+
+    func update(for pay: PaymentModel) {
+        let sum: Double = (pay.summa)
+        dataPay.text = (pay.datePay).replacingOccurrences(of: "T00:00:00", with: "")
+        sumPay.text = "\(sum)" + " руб."
+        cashBox.text = pay.cash
     }
     override func awakeFromNib() {
             super.awakeFromNib()

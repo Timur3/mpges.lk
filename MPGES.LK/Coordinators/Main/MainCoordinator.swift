@@ -18,9 +18,18 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let firstViewController : FirstViewController = FirstViewController(nibName: "FirstViewController", bundle: nil)
-        firstViewController.delegate = self
-        self.navigationController.viewControllers = [firstViewController]
+        if (true) {
+            let firstViewController : FirstViewController = FirstViewController(nibName: "FirstViewController", bundle: nil)
+            firstViewController.delegate = self
+            self.navigationController.viewControllers = [firstViewController]
+        } else
+        {
+            debugPrint("to app")
+            let mainTabBarCoordinator = MainTabBarCoordinator(navigationController: navigationController)
+            mainTabBarCoordinator.delegate = self
+            childCoordinators.append(mainTabBarCoordinator)
+            mainTabBarCoordinator.start()
+        }
     }
 }
 
@@ -42,7 +51,6 @@ extension MainCoordinator: FirstViewControllerDelegate {
 }
 
 extension MainCoordinator: BackToFirstViewControllerDelegate {
-    // Back from
     func navigateBackToFirstPage(newOrderCoordinator: Coordinator) {
         navigationController.popToRootViewController(animated: true)
         childCoordinators.removeLast()

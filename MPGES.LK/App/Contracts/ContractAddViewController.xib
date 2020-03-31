@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,82 +22,57 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPf-xQ-hZX">
-                    <rect key="frame" x="121.5" y="318.5" width="132" height="30"/>
+                    <rect key="frame" x="121.5" y="269" width="132" height="30"/>
                     <state key="normal" title="Добавить договор"/>
                     <connections>
                         <action selector="numberInput:" destination="-1" eventType="touchUpInside" id="TrG-0q-rnk"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Номер лицевого счета" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gq-Dp-95m">
-                    <rect key="frame" x="87.5" y="137.5" width="200" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="URg-Nb-SV7"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Код подтверждения" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Paz-Ij-wCu">
-                    <rect key="frame" x="87.5" y="225.5" width="200" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="3T1-ex-JV9"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="86000300004" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3Q-nl-M5U">
-                    <rect key="frame" x="87.5" y="166.5" width="200" height="34"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="bGU-vE-Yqh"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="86000300004" borderStyle="roundedRect" placeholder="Лицевой счет" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3Q-nl-M5U">
+                    <rect key="frame" x="30" y="130" width="315" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Код подтверждения" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u09-Lb-JEQ">
+                    <rect key="frame" x="30" y="185" width="315" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u09-Lb-JEQ">
-                    <rect key="frame" x="87.5" y="254.5" width="200" height="34"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="bUn-QF-qka"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSQ-z2-IhT">
-                    <rect key="frame" x="159.5" y="364.5" width="56" height="30"/>
-                    <state key="normal" title="Отмена"/>
-                    <connections>
-                        <action selector="cancelBtn:" destination="-1" eventType="touchUpInside" id="yqa-VI-OQF"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAH-oE-8eN">
-                    <rect key="frame" x="87.5" y="201.5" width="200" height="0.0"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="eX4-e0-4x6"/>
-                    </constraints>
+                    <rect key="frame" x="35" y="165" width="305" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down.doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6aa-Om-s2d">
+                    <rect key="frame" x="162.5" y="50" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="3Kx-6h-EM7"/>
+                        <constraint firstAttribute="height" constant="50" id="Opi-9f-prc"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="kAH-oE-8eN" firstAttribute="centerX" secondItem="gDM-5P-0qw" secondAttribute="centerX" id="0aH-Z5-hsT"/>
-                <constraint firstItem="nPf-xQ-hZX" firstAttribute="centerY" secondItem="gDM-5P-0qw" secondAttribute="centerY" id="23H-9l-asN"/>
-                <constraint firstItem="Paz-Ij-wCu" firstAttribute="top" secondItem="i3Q-nl-M5U" secondAttribute="bottom" constant="25" id="3Yh-0A-1qD"/>
-                <constraint firstItem="tSQ-z2-IhT" firstAttribute="top" secondItem="nPf-xQ-hZX" secondAttribute="bottom" constant="16" id="CAe-Cv-V7D"/>
-                <constraint firstItem="i3Q-nl-M5U" firstAttribute="centerX" secondItem="gDM-5P-0qw" secondAttribute="centerX" id="DXU-2t-4nH"/>
-                <constraint firstItem="8gq-Dp-95m" firstAttribute="centerX" secondItem="gDM-5P-0qw" secondAttribute="centerX" id="Fz6-y1-yzf"/>
-                <constraint firstItem="tSQ-z2-IhT" firstAttribute="centerX" secondItem="gDM-5P-0qw" secondAttribute="centerX" id="H6E-Nx-vi4"/>
+                <constraint firstItem="i3Q-nl-M5U" firstAttribute="leading" secondItem="w92-5N-NIM" secondAttribute="leading" constant="30" id="3BE-kx-nhe"/>
+                <constraint firstItem="u09-Lb-JEQ" firstAttribute="top" secondItem="kAH-oE-8eN" secondAttribute="bottom" constant="20" id="CPr-q0-2wa"/>
+                <constraint firstItem="w92-5N-NIM" firstAttribute="trailing" secondItem="u09-Lb-JEQ" secondAttribute="trailing" constant="30" id="JFu-3L-jTd"/>
+                <constraint firstItem="6aa-Om-s2d" firstAttribute="top" secondItem="w92-5N-NIM" secondAttribute="top" constant="50" id="MeW-Up-Pit"/>
+                <constraint firstItem="kAH-oE-8eN" firstAttribute="leading" secondItem="gDM-5P-0qw" secondAttribute="leading" constant="35" id="NGl-Jr-bcA"/>
                 <constraint firstItem="kAH-oE-8eN" firstAttribute="top" secondItem="i3Q-nl-M5U" secondAttribute="bottom" constant="1" id="P1a-gD-8Lm"/>
-                <constraint firstItem="u09-Lb-JEQ" firstAttribute="centerX" secondItem="gDM-5P-0qw" secondAttribute="centerX" id="dtH-Ka-QF4"/>
-                <constraint firstItem="Paz-Ij-wCu" firstAttribute="centerX" secondItem="gDM-5P-0qw" secondAttribute="centerX" id="iEb-ix-9Hd"/>
-                <constraint firstItem="i3Q-nl-M5U" firstAttribute="top" secondItem="8gq-Dp-95m" secondAttribute="bottom" constant="8" id="mWA-AO-L0l"/>
+                <constraint firstAttribute="trailing" secondItem="kAH-oE-8eN" secondAttribute="trailing" constant="35" id="cLt-Dp-kwX"/>
+                <constraint firstItem="w92-5N-NIM" firstAttribute="trailing" secondItem="i3Q-nl-M5U" secondAttribute="trailing" constant="30" id="dNj-WD-1tX"/>
+                <constraint firstItem="i3Q-nl-M5U" firstAttribute="top" secondItem="6aa-Om-s2d" secondAttribute="bottom" constant="30" id="dSQ-nt-TlP"/>
+                <constraint firstItem="u09-Lb-JEQ" firstAttribute="leading" secondItem="w92-5N-NIM" secondAttribute="leading" constant="30" id="lBF-qd-oeg"/>
                 <constraint firstItem="nPf-xQ-hZX" firstAttribute="centerX" secondItem="gDM-5P-0qw" secondAttribute="centerX" id="mhR-XV-WjF"/>
-                <constraint firstItem="u09-Lb-JEQ" firstAttribute="top" secondItem="Paz-Ij-wCu" secondAttribute="bottom" constant="8" id="rpc-Aw-Nbc"/>
-                <constraint firstItem="nPf-xQ-hZX" firstAttribute="top" secondItem="u09-Lb-JEQ" secondAttribute="bottom" constant="30" id="tva-Uf-28b"/>
+                <constraint firstItem="6aa-Om-s2d" firstAttribute="centerX" secondItem="gDM-5P-0qw" secondAttribute="centerX" id="sFx-3K-p4O"/>
+                <constraint firstItem="nPf-xQ-hZX" firstAttribute="top" secondItem="u09-Lb-JEQ" secondAttribute="bottom" constant="50" id="yQg-FT-Ufz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="w92-5N-NIM"/>
             <point key="canvasLocation" x="79" y="156"/>
         </view>
     </objects>
+    <resources>
+        <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
+    </resources>
 </document>

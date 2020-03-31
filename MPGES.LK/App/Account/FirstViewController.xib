@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FirstViewController" customModule="mpges_lk" customModuleProvider="target">
             <connections>
-                <outlet property="loginBtn" destination="ADv-sH-Ygn" id="YRd-J3-1Fh"/>
+                <outlet property="loginBtn" destination="ADv-sH-Ygn" id="P5y-W3-UB2"/>
                 <outlet property="view" destination="VxH-KS-OmQ" id="VPP-T8-6IZ"/>
             </connections>
         </placeholder>
@@ -30,19 +30,21 @@
                         <constraint firstAttribute="height" constant="25" id="S52-2s-rxi"/>
                         <constraint firstAttribute="width" constant="150" id="a2y-Ud-yJZ"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="Регистрация"/>
                     <connections>
                         <action selector="registrBtn:" destination="-1" eventType="touchUpInside" id="Mn0-1o-39p"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-sH-Ygn">
-                    <rect key="frame" x="165.5" y="447" width="44" height="30"/>
+                    <rect key="frame" x="164" y="447" width="47" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Kix-Lr-JV0"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="Войти"/>
                     <connections>
-                        <action selector="authBtn:" destination="-1" eventType="touchUpInside" id="25V-ra-g9j"/>
+                        <action selector="authBtn:" destination="-1" eventType="touchUpInside" id="CpN-a1-2B7"/>
                     </connections>
                 </button>
             </subviews>

@@ -7,9 +7,6 @@
 //
 
 import UIKit
-public protocol RecoveryPasswordViewControllerDelegate: class {
-    func navigateToSingInPage()
-}
 
 public protocol RecoveryPasswordViewControllerUserDelegate: class {
     func goToRecoveryPassword()
@@ -22,14 +19,9 @@ class RecoveryPasswordViewController: UIViewController {
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var sendPassword: UIButton!
     @IBOutlet weak var errorTextLabel: UILabel!
-    
-    public weak var delegate: RecoveryPasswordViewControllerDelegate?
-    public weak var delegateUser: RecoveryPasswordViewControllerUserDelegate?
+
     private var model: UserEmailModel?
-    
-    @IBAction func cancelBtn(_ sender: Any) {
-        self.delegate?.navigateToSingInPage()
-    }
+
     @IBAction func emailChange(_ sender: UITextField) {
         if (isValidEmail(emailTF.text!)) {
             ActivityIndicatorViewService.shared.showView(form: self.view)
@@ -42,12 +34,8 @@ class RecoveryPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         navigationItem.title = "Восстановление пароля"
-        sendPassword.isEnabled = false
         super.viewDidLoad()
-        sendPassword.addTarget(self, action: #selector(goToRecoveryPassword), for: .touchUpInside)
-        sendPassword.Circle()
-        delegateUser = self
-        // Do any additional setup after loading the view.
+        configuration()
     }
 }
 extension RecoveryPasswordViewController: RecoveryPasswordViewControllerUserDelegate {
@@ -72,12 +60,26 @@ extension RecoveryPasswordViewController: RecoveryPasswordViewControllerUserDele
             errorTextLabel.text = result.message
             emailTF.shake(times: 3, delta: 5)
         } else {
-            AlertControllerHelper.shared.show(
+            AlertControllerAdapter.shared.show(
                 title: "Успех!",
                 mesg: result.message,
                 form: self) { (UIAlertAction) in
-                    self.delegate?.navigateToSingInPage()
+                    self.dismiss(animated: true, completion: nil)
             }
         }
+    }
+}
+
+extension RecoveryPasswordViewController {
+    private func configuration() {
+        self.sendPassword.addTarget(self, action: #selector(goToRecoveryPassword), for: .touchUpInside)
+        //self.sendPassword.Circle()
+        self.sendPassword.isEnabled = false
+        
+        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        self.navigationItem.rightBarButtonItems = [cancelBtn]
+    }
+    @objc func cancelButton() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

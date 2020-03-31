@@ -11,7 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-     var loginCoordinator: FirstCoordinator?
+     var mainCoordinator: MainCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -24,10 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //rootNavigationController.navigationBar.prefersLargeTitles = true
         // Initialise the first coordinator with the main navigation controller
         
-        loginCoordinator = FirstCoordinator(navigationController: rootNavigationController)
+        mainCoordinator = MainCoordinator(navigationController: rootNavigationController)
         
         // The start method will actually display the main view
-        loginCoordinator?.start()
+        mainCoordinator?.start()
         
         if let windowScene = scene as? UIWindowScene {
         let window = UIWindow(windowScene: windowScene)

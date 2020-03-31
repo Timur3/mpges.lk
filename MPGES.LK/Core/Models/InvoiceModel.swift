@@ -26,3 +26,23 @@ public struct InvoiceModel: Decodable {
     var credit: Double
     var isClose: Bool
 }
+
+public class InvoiceModelVeiw  {
+    var year: Int = 0
+    var invoices: [InvoiceModel] = []
+    
+    init(year: Int, invoices: [InvoiceModel])
+    {
+        self.year = year
+        self.invoices = invoices
+    }
+}
+
+public class InvoiceDetailsModelView {
+    var calc: [CalculationModel]
+    var pay: [PaymentModel]
+    init(calc: [CalculationModel], pay: [PaymentModel]) {
+        self.calc = calc
+        self.pay = pay
+    }
+}

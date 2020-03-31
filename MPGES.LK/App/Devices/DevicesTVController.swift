@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DevicesTVControllerDelegate: class {
-    func navigationReceivedDataPage()
+    func navigationReceivedDataPage(model: DeviceModel)
 }
 
 protocol DevicesTVControllerUserDelegate: class {
@@ -31,20 +31,8 @@ class DevicesTVController: UITableViewController {
     
     override func viewDidLoad() {
         navigationItem.title = "Приборы учета"
-        navigationItem.searchController = searchController
         super.viewDidLoad()
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshDataDevice), for: UIControl.Event.valueChanged)
-        
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
-        let nib = UINib(nibName: "DeviceTVCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "deviceCell")
-        // todo получение из Realm, если нет то тянем с инета
-        refreshDataDevice(sender: self)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
+        configuration()
     }
     
     @objc func refreshDataDevice(sender: AnyObject){
@@ -54,7 +42,10 @@ class DevicesTVController: UITableViewController {
         self.refreshControl?.endRefreshing()
     }
     // MARK: - Table view data source
-
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 170
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return sections.count
@@ -75,35 +66,29 @@ class DevicesTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell", for: indexPath) as! DeviceTVCell
-        cell.device = deviceList[indexPath.row]
+        let cellImg : UIImageView = UIImageView(frame: CGRect(x: 5, y: (cell.bounds.height/2)-20, width: 40, height: 40))
+        cellImg.image = UIImage(named:myImage.device.rawValue)
+        cell.addSubview(cellImg)
+        //cell.imageView?.image = imageWithImage(UIImage(named: myImage.device.rawValue), scaledToSize: CGSize(width: 20, height: 20))
+        cell.update(for: deviceList[indexPath.row])
         return cell
     }
 
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
-
     
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
-
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let deviceSend = deviceList[indexPath.row]
-        self.delegate?.navigationReceivedDataPage()
+        ActivityIndicatorViewService.shared.showView(form: self.view)
+        self.delegate?.navigationReceivedDataPage(model: deviceList[indexPath.row])
     }
 }
 //MARK: - SEARCH
@@ -120,5 +105,23 @@ extension DevicesTVController: DevicesTVControllerUserDelegate {
     func setDevices(devices: DevicesModelRoot) {
         // todo доделать получение данных из realm
         deviceList = devices.data
+    }
+}
+//MARK: - CONFIGURATION
+extension DevicesTVController {
+    private func configuration() {
+        navigationItem.searchController = searchController
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(refreshDataDevice), for: UIControl.Event.valueChanged)
+        
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        let nib = UINib(nibName: "DeviceTVCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "deviceCell")
+        // todo получение из Realm, если нет то тянем с инета
+        refreshDataDevice(sender: self)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
     }
 }

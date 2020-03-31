@@ -12,7 +12,7 @@ class MainTabBarCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-
+    weak var delegate: MainCoordinator?
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -25,10 +25,10 @@ class MainTabBarCoordinator: Coordinator {
         contractsNC.navigationBar.isTranslucent = true
         contractsNC.navigationBar.prefersLargeTitles = true
         
-        //let contractsVC = ContractsListTVController(nibName: "ContractsListTVController", bundle: nil)
+        //let contractsVC = ContractsTVController(nibName: "ContractsTVController", bundle: nil)
         //contractsVC.delegate = ContractsListCoordinator(navigationController: contractsNC)
         //contractsVC.tabBarItem = UITabBarItem(title: "Мои услуги", image: UIImage(systemName: "text.badge.checkmark"), tag: 0)
-        let contractsListCoordinator = ContractsListCoordinator(navigationController: contractsNC)
+        let contractsListCoordinator = MainContractsCoordinator(navigationController: contractsNC)
         childCoordinators.append(contractsListCoordinator)
         contractsListCoordinator.start()
         //contractsNC.viewControllers = [contractsVC]
@@ -44,6 +44,7 @@ class MainTabBarCoordinator: Coordinator {
         profileNC.navigationBar.prefersLargeTitles = true
        
         let profileCoordinator = ProfileCoordinator(navigationController: profileNC)
+        profileCoordinator.delegate = delegate
         childCoordinators.append(profileCoordinator)
         profileCoordinator.start()
         

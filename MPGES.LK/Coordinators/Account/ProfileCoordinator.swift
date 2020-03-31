@@ -12,7 +12,7 @@ class ProfileCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    weak var delegate: BackToFirstViewControllerDelegate?
+    weak var delegate: MainCoordinator?
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController

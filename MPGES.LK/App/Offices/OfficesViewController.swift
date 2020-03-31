@@ -21,5 +21,9 @@ class OfficesViewController: UIViewController {
         animationType: YMKAnimation(type: YMKAnimationType.smooth, duration: 5),
         cameraCallback: nil)
     }
+    
+    func of(){
+     
+    }
 
 }

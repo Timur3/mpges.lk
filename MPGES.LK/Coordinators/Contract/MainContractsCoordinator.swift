@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContractsListCoordinator: Coordinator {
+class MainContractsCoordinator: Coordinator {
     private var userDataService = UserDataService()
     var childCoordinators: [Coordinator] = []
     
@@ -19,16 +19,33 @@ class ContractsListCoordinator: Coordinator {
     }
     
     func start() {
-        let contractsVC : ContractsListTVController = ContractsListTVController(nibName: "ContractsListTVController", bundle: nil)
+        let contractsVC : ContractsTVController = ContractsTVController(nibName: "ContractsTVController", bundle: nil)
         contractsVC.tabBarItem = UITabBarItem(title: "Мои услуги", image: UIImage(systemName: "text.badge.checkmark"), tag: 0)
         contractsVC.delegate = self
         self.navigationController.viewControllers = [contractsVC]
     }
+    
+    func childDidFinish(_ child: Coordinator){
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
+    }
 }
 
-extension ContractsListCoordinator: ContractsListTVControllerDelegate {
-    func navigationDetailsInfoPage(model: ContractModel) {
-        userDataService.setCurrentContract(contract: model)
+extension MainContractsCoordinator: ContractsTVControllerDelegate {
+    
+    func navigationDetailsInfoPage(to contract: ContractModel) {
+        
+        //let contractDetailsInfo: ContractDetailsInfoTVController = ContractDetailsInfoTVController(nibName: "ContractDetailsInfoTVController", bundle: nil)
+        //contractDetailsInfo.contractModel = contract
+        //ApiServiceAdapter.shared.getContractById(delegate: contractDetailsInfo)
+        //contractDetailsInfo.delegate = self
+        //self.navigationController.pushViewController(contractDetailsInfo, animated: true)
+        
+        userDataService.setCurrentContract(contract: contract)
         
         let contractDetailsInfoCoordinator = ContractDetailsInfoCoordinator(navigationController: navigationController)
         //contractDetailsInfoCoordinator.delegate = self

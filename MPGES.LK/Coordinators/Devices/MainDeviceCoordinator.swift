@@ -11,8 +11,7 @@ class MainDeviceCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    weak var delegate: BackToFirstViewControllerDelegate?
-    
+
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -22,10 +21,13 @@ class MainDeviceCoordinator: Coordinator {
         deviceTV.delegate = self
         self.navigationController.pushViewController(deviceTV, animated: true)
     }
+    
 }
 extension MainDeviceCoordinator: DevicesTVControllerDelegate {
-    func navigationReceivedDataPage() {
+    func navigationReceivedDataPage(model: DeviceModel) {
         let receivedDataCoordinator = ReceivedDataCoordinator(navigationController: navigationController)
+        receivedDataCoordinator.parentCoordinator = self
+        receivedDataCoordinator.device = model
         childCoordinators.append(receivedDataCoordinator)
         receivedDataCoordinator.start()
     }

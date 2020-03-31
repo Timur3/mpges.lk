@@ -18,12 +18,8 @@ class RecoveryPasswordCoordinator: Coordinator {
     
     func start() {
         let recoveryPasswordViewController : RecoveryPasswordViewController = RecoveryPasswordViewController()
-        recoveryPasswordViewController.delegate = self
-        self.navigationController.pushViewController(recoveryPasswordViewController, animated: true)
-    }
-}
-extension RecoveryPasswordCoordinator: RecoveryPasswordViewControllerDelegate {
-    func navigateToSingInPage() {
-        self.navigationController.popViewController(animated: true)
+        //recoveryPasswordViewController.delegate = self
+        let navRecoveryPasswordViewController: UINavigationController = UINavigationController(rootViewController: recoveryPasswordViewController)
+        self.navigationController.present(navRecoveryPasswordViewController, animated: true, completion: nil)
     }
 }

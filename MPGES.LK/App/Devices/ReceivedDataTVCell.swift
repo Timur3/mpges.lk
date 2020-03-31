@@ -10,18 +10,14 @@ import UIKit
 
 class ReceivedDataTVCell: UITableViewCell {
     
-    @IBOutlet weak var tariffZoneName: UILabel!
-    @IBOutlet weak var receivedDataDate: UILabel!
+    @IBOutlet weak var receivedDataDateLabel: UILabel!
+    @IBOutlet weak var tariffZoneLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var receivedDataType: UILabel!
-    
-    var receivedData: ReceivedDataModel? {
-        didSet {
-            tariffZoneName.text = receivedData?.tariffZone
-            valueLabel.text = "\(receivedData?.value ?? 0) кВт/час"
-            receivedDataType.text = receivedData?.typeOfReceivedData
-            receivedDataDate.text = receivedData?.date.replacingOccurrences(of: "T00:00:00", with: "")
-        }
+
+    func update(for receivedData: ReceivedDataModel) {
+        receivedDataDateLabel.text = receivedData.date.replacingOccurrences(of: "T00:00:00", with: "")
+        valueLabel.text = "\(receivedData.value) кВт/час"
+        tariffZoneLabel.text = receivedData.tariffZone
     }
     
     override func awakeFromNib() {

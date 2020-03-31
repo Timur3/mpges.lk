@@ -1,21 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CalculationTVCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="calculationCell" rowHeight="45" id="KGk-i7-Jjw" customClass="CalculationTVCell" customModule="mpges_lk" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="280" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYe-7O-PgD">
+                        <rect key="frame" x="50" y="3" width="55" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="IZT-fP-g1B"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сумма:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ics-n1-aL0">
+                        <rect key="frame" x="50" y="25" width="55" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="08n-Su-8Ae"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="28.05.2020" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omz-Iw-Ji1">
+                        <rect key="frame" x="110" y="3" width="162" height="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="200000,00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIQ-j8-n6i">
+                        <rect key="frame" x="110" y="25" width="162" height="18"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ics-n1-aL0" firstAttribute="top" secondItem="cYe-7O-PgD" secondAttribute="bottom" constant="5" id="8aG-hB-Rvu"/>
+                    <constraint firstItem="cYe-7O-PgD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="HDM-Yv-GF3"/>
+                    <constraint firstItem="OIQ-j8-n6i" firstAttribute="leading" secondItem="ics-n1-aL0" secondAttribute="trailing" constant="5" id="VGz-Ud-KGD"/>
+                    <constraint firstAttribute="trailing" secondItem="OIQ-j8-n6i" secondAttribute="trailing" constant="8" id="WQP-RT-AAE"/>
+                    <constraint firstAttribute="trailing" secondItem="Omz-Iw-Ji1" secondAttribute="trailing" constant="8" id="bdY-eS-DbK"/>
+                    <constraint firstItem="ics-n1-aL0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="eUm-Kc-59p"/>
+                    <constraint firstItem="Omz-Iw-Ji1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="hjs-9B-BnO"/>
+                    <constraint firstItem="OIQ-j8-n6i" firstAttribute="top" secondItem="Omz-Iw-Ji1" secondAttribute="bottom" constant="5" id="kri-Fo-njU"/>
+                    <constraint firstItem="Omz-Iw-Ji1" firstAttribute="leading" secondItem="cYe-7O-PgD" secondAttribute="trailing" constant="5" id="mG9-V2-Ua5"/>
+                    <constraint firstItem="cYe-7O-PgD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="teY-5S-WcZ"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="calcDateLabel" destination="Omz-Iw-Ji1" id="HVR-gp-CEy"/>
+                <outlet property="calcSumLabel" destination="OIQ-j8-n6i" id="9nG-1O-7ny"/>
+            </connections>
+            <point key="canvasLocation" x="208.69565217391306" y="-67.96875"/>
         </tableViewCell>
     </objects>
 </document>

@@ -35,6 +35,7 @@ extension SingInCoordinator: SingInViewControllerDelegate {
         //let vc = storyboard.instantiateViewController(withIdentifier: "mainApp") as! UITabBarController
         //self.navigationController.pushViewController(vc, animated: true)
         let mainTabBarCoordinator = MainTabBarCoordinator(navigationController: navigationController)
+        //mainTabBarCoordinator.delegate = delegate
         childCoordinators.append(mainTabBarCoordinator)
         mainTabBarCoordinator.start()
     }

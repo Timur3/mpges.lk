@@ -7,26 +7,38 @@
 //
 import UIKit
 
-class MainDeliveryOfInvoiceCoordinator: Coordinator {
+protocol DeliveryOfInvoiceTVControllerDelegate: class {
+    func start()
+    func startWithData(model: DeliveryOfInvoiceModelRoot)
+    func didFinishPage()
+}
 
+class MainDeliveryOfInvoiceCoordinator: Coordinator {
+    weak var parentCoordinator: ContractDetailsInfoCoordinator?
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+}
+extension MainDeliveryOfInvoiceCoordinator: DeliveryOfInvoiceTVControllerDelegate {
+    func didFinishPage() {
+        // todo отправить на сервер выбранный способ доставки
+        parentCoordinator?.childDidFinish(self)
+    }    
     
-    func start() {
-        let devileryOfInvoiceTV: DeliveryOfInvoiceTVController = DeliveryOfInvoiceTVController(nibName: "DevileryOfInvoiceTVController", bundle: nil)
-        //devileryOfInvoiceTV.delegate = self
+    func startWithData(model: DeliveryOfInvoiceModelRoot) {
+        let devileryOfInvoiceTV: DeliveryOfInvoiceTVController = DeliveryOfInvoiceTVController(nibName: "DeliveryOfInvoiceTVController", bundle: nil)
+        devileryOfInvoiceTV.delegate = self
+        devileryOfInvoiceTV.deliveryOfTypeList = model.data
         self.navigationController.pushViewController(devileryOfInvoiceTV, animated: true)
     }
     
-}
-extension MainDeliveryOfInvoiceCoordinator: DevicesTVControllerDelegate {
-    func navigationReceivedDataPage() {
-        let receivedDataCoordinator = ReceivedDataCoordinator(navigationController: navigationController)
-        childCoordinators.append(receivedDataCoordinator)
-        receivedDataCoordinator.start()
+    func start() {
+        //let devileryOfInvoiceTV: DeliveryOfInvoiceTVController = DeliveryOfInvoiceTVController(nibName: "DeliveryOfInvoiceTVController", bundle: nil)
+        //devileryOfInvoiceTV.delegate = self
+        //self.navigationController.pushViewController(devileryOfInvoiceTV, animated: true)
+        ApiServiceAdapter.shared.getDeliveryOfInvoices(delegate: self)
     }
 }

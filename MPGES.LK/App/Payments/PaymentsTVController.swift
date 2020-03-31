@@ -26,7 +26,7 @@ class PaymentsTVController: UITableViewController {
     private var searchController = UISearchController(searchResultsController: nil)
     
     @IBAction func payAction(_ sender: Any) {
-        AlertControllerHelper.shared.show(title: "Внимание!", mesg: "Фукнционал оплаты временно приостановлен.", form: self)
+        AlertControllerAdapter.shared.show(title: "Внимание!", mesg: "Фукнционал оплаты временно приостановлен.", form: self)
     }
     private var tempPayments = [PaymentModel]()
     private var searchBarIsEmpty: Bool {
@@ -43,23 +43,8 @@ class PaymentsTVController: UITableViewController {
     
     override func viewDidLoad() {
         navigationItem.title = "История платежей"
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Введите сумму для поиска"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
-        let nib = UINib(nibName: "PaymentTVCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "paymentCell")
-        self.tableView.dataSource = self        
-        
         super.viewDidLoad()
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
-        //self.navigationController?.navigationItem.rightBarButtonItem
-        ActivityIndicatorViewService.shared.showView(form: self.view)
-        getDataForRealm()
-        tableView.delegate = self
+        configuration()
     }
 
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
@@ -80,7 +65,11 @@ class PaymentsTVController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return false
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return paymentsList.count
@@ -92,7 +81,9 @@ class PaymentsTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "Количество записей: " + "\(paymentsList[section].payments.count)" + " на сумму: " + "\(paymentsList[section].payments.map({ $0.summa }).reduce(0, +))"
     }
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 67
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return paymentsList[section].payments.count
@@ -101,7 +92,8 @@ class PaymentsTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath) as! PaymentTVCell
         
-        cell.payment = paymentsList[indexPath.section].payments[indexPath.row]
+        cell.update(for: paymentsList[indexPath.section].payments[indexPath.row])
+        cell.imageView?.image = UIImage(systemName: myImage.rubSquare.rawValue)
         
         return cell
     }
@@ -110,19 +102,6 @@ class PaymentsTVController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let paymentSend = paymentsList[indexPath.section].payments[indexPath.row]
         self.delegate?.navigationPaymentInfoPage(payment: paymentSend)
-    }
-    
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-            paymentsList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
     }
 }
 
@@ -182,5 +161,25 @@ extension PaymentsTVController: PaymentsTVControllerUserDelegate {
         
         DataProviderService.shared.saveObjects(payments.data)
         ActivityIndicatorViewService.shared.hideView()
+    }
+}
+
+//MARK: - CONFIGURATION
+extension PaymentsTVController {
+    private func configuration() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Введите сумму для поиска"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        let nib = UINib(nibName: "PaymentTVCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "paymentCell")
+        self.tableView.dataSource = self
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
+        //self.navigationController?.navigationItem.rightBarButtonItem
+         getDataForRealm()
+        tableView.delegate = self
     }
 }

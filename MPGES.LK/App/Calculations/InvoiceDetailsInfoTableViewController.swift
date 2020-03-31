@@ -8,83 +8,79 @@
 
 import UIKit
 
+protocol InvoiceDetailsInfoTableViewControllerDelegate: class {
+    func navigantionInvoicePage()
+}
+
+protocol InvoiceDetailsInfoTableViewControllerUserDelegate: class {
+    var sections: [String] { get }
+}
+
 class InvoiceDetailsInfoTableViewController: UITableViewController {
-        
+    public weak var delegate: InvoiceDetailsInfoTableViewControllerDelegate?
+    
     override func viewDidLoad() {
+        self.navigationItem.title = "Детали";
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        configuration()
     }
-
+    weak var invoiveDetails: InvoiceDetailsModelView? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return sections.count
     }
-
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if section == 0 {
+            return invoiveDetails?.calc.count ?? 0
+        }
+        return invoiveDetails?.pay.count ?? 0
+        
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "calculationCell", for: indexPath) as! CalculationTVCell
+            cell.update(for: (invoiveDetails?.calc[indexPath.row])!)
+            return cell
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentTVCell", for: indexPath) as! PaymentTVCell
+        cell.update(for: (invoiveDetails?.pay[indexPath.row])!)
         return cell
     }
-    */
-
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
-    */
+}
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewControllerUserDelegate {
+    var sections: [String] {
+        ["Начислено", "Оплачено"]
     }
-    */
+}
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+//MARK: - CONFIGURATION
+extension InvoiceDetailsInfoTableViewController {
+    func configuration() {
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        let nibCalc = UINib(nibName: "CalculationTVCell", bundle: nil)
+        self.tableView.register(nibCalc, forCellReuseIdentifier: "calculationCell")
+        let nibPay = UINib(nibName: "PaymentTVCell", bundle: nil)
+        self.tableView.register(nibPay, forCellReuseIdentifier: "paymentTVCell")
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
 }

@@ -57,12 +57,9 @@ class SingInViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        navigationItem.title = "Вход"
-        passwordTF.isSecureTextEntry = true
-        errorEmailLabel.text = ""
+        self.title = "Войти"
         super.viewDidLoad()
-        submitBtn.Circle()
-        delegateUser = self
+        configuration()
     }
 }
 
@@ -96,4 +93,26 @@ func resultAuthApi(modelResult: ResultModel) {
     }
 }
 
+}
+extension SingInViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+//MARK: - CONFIGURE
+extension SingInViewController {
+    private func configuration() {
+        passwordTF.isSecureTextEntry = true
+        errorEmailLabel.text = ""
+        submitBtn.Circle()
+        delegateUser = self
+        self.hideKeyboardWhenTappedAround()
+    }
 }

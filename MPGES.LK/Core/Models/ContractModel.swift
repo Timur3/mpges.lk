@@ -22,6 +22,7 @@ public struct ContractModel: Decodable {
     var userProfileId: Int
     var codeBinding: String?
     var contractTypeId: Int
+    var contractName: String
     var number: String
     var dateRegister: String
     var providerId: Int
@@ -37,7 +38,7 @@ public struct ContractModel: Decodable {
     var jkuId: String?
     var numberEls: String?
     var includedInEpd: Bool
-    
+    var deliveryMethodId: Int
     /*enum CodingKeys: String, CodingKey {
         case id = "id"
         case userProfileId = "userProfileId"

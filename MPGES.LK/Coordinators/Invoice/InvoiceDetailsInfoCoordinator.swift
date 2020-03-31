@@ -21,7 +21,11 @@ class InvoiceDetailsInfoCoordinator: Coordinator {
         invoiceDetailsInfoTV.delegate = self
         self.navigationController.pushViewController(invoiceDetailsInfoTV, animated: true)
     }
-    
+    func startWithData(model: InvoiceModel){
+       let invoiceDetailsInfoTV: InvoiceDetailsInfoTableViewController = InvoiceDetailsInfoTableViewController(nibName: "InvoiceDetailsInfoTableViewController", bundle: nil)
+        invoiceDetailsInfoTV.delegate = self
+        self.navigationController.pushViewController(invoiceDetailsInfoTV, animated: true)
+    }
 
 }
 extension InvoiceDetailsInfoCoordinator: InvoiceDetailsInfoTableViewControllerDelegate {

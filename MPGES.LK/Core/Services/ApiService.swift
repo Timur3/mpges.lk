@@ -21,7 +21,11 @@ class ApiService {
         baseURL = options.baseUrl
         vershionApi = options.versionApi
     }
-
+    class Connectivity {
+        class var isConnectedToInternet:Bool {
+            return NetworkReachabilityManager()?.isReachable ?? false
+        }
+    }
     func requestByModel<T: Decodable, M: Encodable>(model: M, requestMethod: HTTPMethod = .post, method: String, completion: @escaping (T) -> Void) {
         
         let headers: HTTPHeaders = [

@@ -8,9 +8,6 @@
 
 import UIKit
 
-public protocol SingUpViewControllerDelegate: class {
-    func navigateToFirstPage()
-}
 public protocol SingUpViewControllerUserDelegate: class {
     func createUser(user: UserModel)
     func resultOfCreateUser(result: ServerResponseModel)
@@ -18,7 +15,6 @@ public protocol SingUpViewControllerUserDelegate: class {
 
 class SingUpViewController: UIViewController {
 
-    public weak var delegate: SingUpViewControllerDelegate?
     public weak var delegateUser: SingUpViewControllerUserDelegate?
     
     @IBOutlet weak var emailTF: UITextField!
@@ -39,18 +35,12 @@ class SingUpViewController: UIViewController {
                 let user = UserModel(Id: 0, Name: fullNameTF.text!, Password: passwordTF.text!, PasswordHash: "", Email: emailTF.text!, Mobile: "", IsOnline: false, Confirmed: false, CreateDate: "\(NSDate.now)", RoleId: 3)
                 self.delegateUser?.createUser(user: user)
         }
-    }
-    @IBAction func cancelBtn(_ sender: Any) {
-        self.delegate?.navigateToFirstPage()
-    }
-    
+    }   
     
     override func viewDidLoad() {
         navigationItem.title = "Регистрация"
-        passwordTF.isSecureTextEntry = true
         super.viewDidLoad()
-        submitSingUP.Circle()
-        delegateUser = self
+        configuration()
     }
 }
 
@@ -62,11 +52,11 @@ extension SingUpViewController: SingUpViewControllerUserDelegate {
             errorLabel.text = result.message
             passwordTF.shake(times: 3, delta: 5)
         } else {
-            AlertControllerHelper.shared.show(
+            AlertControllerAdapter.shared.show(
                 title: "Успех!",
                 mesg: result.message,
                 form: self) { (UIAlertAction) in
-                    self.delegate?.navigateToFirstPage()
+                    self.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -74,5 +64,19 @@ extension SingUpViewController: SingUpViewControllerUserDelegate {
     func createUser(user: UserModel) {
         ActivityIndicatorViewService.shared.showView(form: self.view)
         ApiServiceAdapter.shared.createUser(model: user, delegate: self)
+    }
+}
+
+extension SingUpViewController {
+    private func configuration(){
+        self.passwordTF.isSecureTextEntry = true
+        self.submitSingUP.Circle()
+        self.delegateUser = self
+        
+        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        self.navigationItem.rightBarButtonItems = [cancelBtn]
+    }
+    @objc func cancelButton() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -7,25 +7,19 @@
 //
 
 import UIKit
-public protocol ReceivedDataTVControllerDelegate: class {
-    
-}
 
 class ReceivedDataTVController: UITableViewController {
-    let methodApi = MethodApi()
     let searchController = UISearchController(searchResultsController: nil)
     public weak var delegate: ReceivedDataTVControllerDelegate?
     
     var device: DeviceModel? {
     didSet {
-        debugPrint("device Info")
-        refreshDataContract(sender: self)
+        refreshReceivedData(sender: self)
         }
     }
     
     var receivedDataList: [ReceivedDataModelVeiw] = [] {
         didSet {
-            debugPrint("received data device")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -33,24 +27,16 @@ class ReceivedDataTVController: UITableViewController {
     }
     
      override func viewDidLoad() {
-        navigationItem.title = "Показания"
+        navigationItem.title = "История показаний"
         super.viewDidLoad()
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
-        let nib = UINib(nibName: "ReceivedDataTVCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "receivedDataCell")
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
-
-        refreshDataContract(sender: self)
-               
-        tableView.delegate = self
-        tableView.dataSource = self
+        configuration()
+        ActivityIndicatorViewService.shared.hideView()
     }
            
-    @objc func refreshDataContract(sender: AnyObject){
-    print("refresh")
-    ApiService.shared.requestById(id: device?.id ?? -1, method: methodApi.getReceivedData, completion: setReceivedData(dataRoot:))
-    self.refreshControl?.endRefreshing()
+    @objc func refreshReceivedData(sender: AnyObject){
+        print("refresh")
+        //ApiServiceAdapter.shared.getReceivedDataByDeviceId(id: device?.id ?? -1, delegate: self.delegate)
+        self.refreshControl?.endRefreshing()
 }
            
     // MARK: - Table view data source
@@ -66,7 +52,7 @@ class ReceivedDataTVController: UITableViewController {
         return "Количество записей: " + "\(receivedDataList[section].receivedData.count)"
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 60
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -88,8 +74,8 @@ class ReceivedDataTVController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "receivedDataCell", for: indexPath) as! ReceivedDataTVCell
-        cell.receivedData = receivedDataList[indexPath.section].receivedData[indexPath.row]
-
+        cell.imageView?.image = UIImage.init(systemName: myImage.receivedData.rawValue)
+        cell.update(for: receivedDataList[indexPath.section].receivedData[indexPath.row])
         return cell
     }
 }
@@ -99,22 +85,17 @@ extension ReceivedDataTVController: UISearchResultsUpdating {
         
     }
 }
+extension ReceivedDataTVController {
+    private func configuration() {
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        let nib = UINib(nibName: "ReceivedDataTVCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "receivedDataCell")
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(refreshReceivedData), for: UIControl.Event.valueChanged)
 
-extension ReceivedDataTVController: ReceivedDataTVControllerDelegate {
-
-    func mapToReceivedDataModelView(receivedData: [ReceivedDataModel]) -> [ReceivedDataModelVeiw] {
-        var res = [ReceivedDataModelVeiw]()
-        let models = receivedData.groupBy { $0.receivedDataYear() }
-        for mod in models{
-            let receivedDataVM = ReceivedDataModelVeiw(year: mod.key, receivedData: mod.value as [ReceivedDataModel])
-            res.append(receivedDataVM)
-        }
-        return res.sorted(by: { $0.year > $1.year })
+        refreshReceivedData(sender: self)
+               
+        tableView.delegate = self
+        tableView.dataSource = self
     }
-    
-    func setReceivedData(dataRoot: ReceivedDataModelRoot) {
-            // todo доделать получение данных из realm
-        receivedDataList = mapToReceivedDataModelView(receivedData: dataRoot.data)
-    }
-    
 }

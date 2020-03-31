@@ -7,24 +7,38 @@
 //
 
 import UIKit
+protocol ChangePasswordViewControllerDelegate: class {
+    func navigateToBackPage()
+}
 
 class ChangePasswordViewController: UIViewController {
-
+    @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var passwordConfirmTF: UITextField!
+    
+    public weak var delegate: ChangePasswordViewControllerDelegate?
+    
     override func viewDidLoad() {
+        self.title = "Новый пароль"
         super.viewDidLoad()
-
+        configuration()
         // Do any additional setup after loading the view.
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func cancelButton() {
+        self.dismiss(animated: true, completion: nil)
     }
-    */
-
+    @objc func submitAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
+//MARK: CONFiGURE
+extension ChangePasswordViewController {
+        private func configuration() {
+            submitBtn.addTarget(self, action: #selector(submitAction), for: .touchUpInside)
+            submitBtn.Circle()
+            let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+            self.navigationItem.rightBarButtonItems = [cancelBtn]
+        }
+    }
