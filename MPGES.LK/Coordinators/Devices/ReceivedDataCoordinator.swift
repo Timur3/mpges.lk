@@ -9,10 +9,12 @@
 import UIKit
 public protocol ReceivedDataTVControllerDelegate: class {
     func startWithData(model: ReceivedDataModelRoot)
+    func showReceivedDataPage()
+    func getReceivedDataTemplate()
 }
 
 class ReceivedDataCoordinator: Coordinator {
-    var parentCoordinator: MainDeviceCoordinator?
+    var parentCoordinator: DeviceCoordinatorMain?
     var device: DeviceModel?
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
@@ -22,10 +24,15 @@ class ReceivedDataCoordinator: Coordinator {
     }
 }
 extension ReceivedDataCoordinator: ReceivedDataTVControllerDelegate {
+    func getReceivedDataTemplate() {
+    
+    }
+    
+    func showReceivedDataPage() {
+        
+    }
+   
     func start() {
-        //let receivedDataTV: ReceivedDataTVController = ReceivedDataTVController(nibName: "ReceivedDataTVController", bundle: nil)
-        //receivedDataTV.delegate = self
-        //self.navigationController.pushViewController(receivedDataTV, animated: true)
         ApiServiceAdapter.shared.getReceivedDataByDeviceId(id: device!.id, delegate: self)
     }
     

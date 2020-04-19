@@ -12,6 +12,7 @@ class MethodApi {
     let authApi: String
     let getContracts: String
     let getContract: String
+    let getListOfContractNumbers: String
     let getContractSaldoById: String
     let contractBinding: String
     let removeContractBinding: String
@@ -33,6 +34,7 @@ class MethodApi {
     init() {
         authApi = "auth/"
         getContracts = "contract/getByUser/"
+        getListOfContractNumbers = "contract/getListOfContractNumbers/"
         getContract = "contract/"
         getContractSaldoById = "contract/getsaldobyid/"
         contractBinding = "contract/binding/"

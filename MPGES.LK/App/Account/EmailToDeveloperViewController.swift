@@ -7,15 +7,12 @@
 //
 
 import UIKit
-protocol EmailToDeveloperViewControllerDelegate: class {
-    func navigateToBackPage()
-}
 
 class EmailToDeveloperViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var emailSentBtn: UIButton!
     
-    public weak var delegate: EmailToDeveloperViewControllerDelegate?
+    public weak var delegate: ProfileCoordinator?
     
     override func viewDidLoad() {
         self.title = "Новое письмо"

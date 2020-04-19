@@ -20,6 +20,14 @@ func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NST
     }
     cell.textLabel?.textAlignment = textAlign
     cell.accessoryType = accessoryType
+    //cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+    //cell.layer.masksToBounds = true
+    //cell.layer.cornerRadius = 5
+    //cell.layer.borderWidth = 1
+    //cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+    //let borderColor: UIColor = .green //(stock[indexPath.row] == "inStock") ? .red : .green
+    //cell.layer.borderColor = borderColor.cgColor
+    
     return cell
     
 }

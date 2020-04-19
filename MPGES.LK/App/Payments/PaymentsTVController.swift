@@ -22,9 +22,8 @@ protocol PaymentsTVControllerUserDelegate {
 
 class PaymentsTVController: UITableViewController {
     public weak var delegate: PaymentsTVControllerDelegate?
-    var contractId: Int = 0
     private var searchController = UISearchController(searchResultsController: nil)
-    
+    var contractId: Int = 0
     @IBAction func payAction(_ sender: Any) {
         AlertControllerAdapter.shared.show(title: "Внимание!", mesg: "Фукнционал оплаты временно приостановлен.", form: self)
     }
@@ -78,12 +77,11 @@ class PaymentsTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "\(paymentsList[section].year)" + " год"
     }
+ 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "Количество записей: " + "\(paymentsList[section].payments.count)" + " на сумму: " + "\(paymentsList[section].payments.map({ $0.summa }).reduce(0, +))"
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 67
-    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return paymentsList[section].payments.count
@@ -93,7 +91,7 @@ class PaymentsTVController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath) as! PaymentTVCell
         
         cell.update(for: paymentsList[indexPath.section].payments[indexPath.row])
-        cell.imageView?.image = UIImage(systemName: myImage.rubSquare.rawValue)
+        cell.imageView?.image = UIImage(systemName: myImage.rub.rawValue)
         
         return cell
     }
@@ -122,7 +120,6 @@ extension PaymentsTVController: UISearchResultsUpdating {
 }
 // MARK: - USER DELEGATE
 extension PaymentsTVController: PaymentsTVControllerUserDelegate {
-
     func mapToPaymentsModelView(payments: [PaymentModel]) -> [PaymentsModelVeiw] {
         var res = [PaymentsModelVeiw]()
         let models = payments.groupBy { $0.payYear() }
@@ -142,13 +139,13 @@ extension PaymentsTVController: PaymentsTVControllerUserDelegate {
             self.paymentsList = mapToPaymentsModelView(payments: paymentsRM)
             ActivityIndicatorViewService.shared.hideView()
         } else {
-            ApiServiceAdapter.shared.getPaymentsByContractId(delegate: self)
+            ApiServiceAdapter.shared.getPaymentsByContractId(id: contractId, delegate: self)
         }
     }
     
     @objc func refreshData() {
         print("refresh")
-        ApiServiceAdapter.shared.getPaymentsByContractId(delegate: self)
+        ApiServiceAdapter.shared.getPaymentsByContractId(id: contractId, delegate: self)
         self.refreshControl?.endRefreshing()
     }
 
@@ -178,8 +175,7 @@ extension PaymentsTVController {
         self.tableView.dataSource = self
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
-        //self.navigationController?.navigationItem.rightBarButtonItem
-         getDataForRealm()
+        getDataForRealm()
         tableView.delegate = self
     }
 }

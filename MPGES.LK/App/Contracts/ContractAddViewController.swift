@@ -16,33 +16,30 @@ protocol ContractAddViewControllerUserDelegate: class {
 }
 
 class ContractAddViewController: UIViewController {
-    public weak var delegate: ContractAddViewControllerDelegate?
-    
+    public weak var delegate: ContractsTVControllerUserDelegate?
+
     @IBOutlet weak var numberContract: UITextField!
     @IBOutlet weak var codeBinding: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var errorNumberLabel: UILabel!
-
+   
     @IBAction func numberInput(_ sender: Any) {
-        if (numberContract.text!.count == 11) {
-            let model = ContractNumberModel(number: numberContract.text!)
-            self.checkContractByNumber(model: model)
-        }
+        let model = ContractNumberModel(number: numberContract.text!)
+        self.checkContractByNumber(model: model)
     }
     
     override func viewDidLoad() {
-        self.title = "Новый договор"
+        self.title = "Добавить договор"
         super.viewDidLoad()
         configuration()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        delegate?.didFinishPage()
+        delegate?.getContracts()
     }
     
     @objc func submitAction(sender:UIButton!) {
-        errorNumberLabel.text = ""
         let model = ContractBindingModel(number: numberContract.text!, code: codeBinding.text!)
         self.goToBinding(model: model)
      }
@@ -57,12 +54,12 @@ extension ContractAddViewController: ContractAddViewControllerUserDelegate {
     }
     
     func checkContractByNumber(model: ContractNumberModel) {
-        ApiServiceAdapter.shared.checkByNumberContract(model: model, delegate: self)
+        //ApiServiceAdapter.shared.checkByNumberContract(model: model, delegate: self)
     }
 
     func goToBinding(model: ContractBindingModel) {
         ActivityIndicatorViewService.shared.showView(form: self.view)
-        ApiServiceAdapter.shared.contractBinding(model: model, delegate: self)
+        //ApiServiceAdapter.shared.contractBinding(model: model, delegate: self)
     }
     
     func resultToBinding(result: ServerResponseModel) {
@@ -80,11 +77,13 @@ extension ContractAddViewController: ContractAddViewControllerUserDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 }
-//MARK: CONFiGURE
+
+//MARK: - CONFiGURE
 extension ContractAddViewController {
     private func configuration() {
         submitBtn.addTarget(self, action: #selector(submitAction), for: .touchUpInside)
         submitBtn.Circle()
+
         self.numberContract.keyboardType = UIKeyboardType.numberPad
         let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]

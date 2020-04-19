@@ -44,9 +44,3 @@ func getYear(dateStr: String)->Int {
 func getCurrentYear()->Int {
     return Calendar.current.component(.year, from: Date())
 }
-
-extension String {
-    func normalDate() {
-        self.replacingOccurrences(of: "T00:00:00", with: "")
-    }
-}

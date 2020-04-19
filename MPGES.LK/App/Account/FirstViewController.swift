@@ -8,14 +8,9 @@
 
 import UIKit
 
-public protocol FirstViewControllerDelegate: class {
-    func navigateToSingInPage()
-    func navigateToSingUpPage()
-}
-
 class FirstViewController: UIViewController {
     
-    public weak var delegate: FirstViewControllerDelegate?
+    public weak var delegate: MainCoordinatorDelegate?
 
     @IBOutlet weak var loginBtn: UIButton!
     
@@ -26,10 +21,14 @@ class FirstViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        //delegate?.childDidFinish(self)
+    }
     @IBAction func authBtn(_ sender: Any) {
-        self.delegate?.navigateToSingInPage()
+        delegate?.navigateToSingInPage()
     }
     @IBAction func registrBtn(_ sender: Any) {
-        self.delegate?.navigateToSingUpPage()
+        delegate?.navigateToSingUpPage()
     }
 }

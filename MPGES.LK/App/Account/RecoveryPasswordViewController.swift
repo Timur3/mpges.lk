@@ -14,8 +14,8 @@ public protocol RecoveryPasswordViewControllerUserDelegate: class {
     func resultOfPassordRecovery(result: ServerResponseModel)
 }
 
-class RecoveryPasswordViewController: UIViewController {
-    
+class RecoveryPasswordViewController1: UIViewController {
+    public weak var delegate: MainCoordinatorDelegate?
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var sendPassword: UIButton!
     @IBOutlet weak var errorTextLabel: UILabel!
@@ -38,7 +38,7 @@ class RecoveryPasswordViewController: UIViewController {
         configuration()
     }
 }
-extension RecoveryPasswordViewController: RecoveryPasswordViewControllerUserDelegate {
+extension RecoveryPasswordViewController1: RecoveryPasswordViewControllerUserDelegate {
     func resultOfCheckEmail(result: ServerResponseModel) {
         ActivityIndicatorViewService.shared.hideView()
         sendPassword.isEnabled = !result.isError
@@ -51,7 +51,7 @@ extension RecoveryPasswordViewController: RecoveryPasswordViewControllerUserDele
     @objc func goToRecoveryPassword() {
         ActivityIndicatorViewService.shared.showView(form: self.view)
         model = UserEmailModel(email: emailTF.text!)
-        ApiServiceAdapter.shared.passwordRecovery(model: model!, delegate: self)
+        //ApiServiceAdapter.shared.passwordRecovery(model: model!, delegate: self)
     }
     
     func resultOfPassordRecovery(result: ServerResponseModel) {
@@ -70,10 +70,10 @@ extension RecoveryPasswordViewController: RecoveryPasswordViewControllerUserDele
     }
 }
 
-extension RecoveryPasswordViewController {
+extension RecoveryPasswordViewController1 {
     private func configuration() {
         self.sendPassword.addTarget(self, action: #selector(goToRecoveryPassword), for: .touchUpInside)
-        //self.sendPassword.Circle()
+        self.sendPassword.Circle()
         self.sendPassword.isEnabled = false
         
         let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))

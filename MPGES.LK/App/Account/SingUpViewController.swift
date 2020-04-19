@@ -13,9 +13,10 @@ public protocol SingUpViewControllerUserDelegate: class {
     func resultOfCreateUser(result: ServerResponseModel)
 }
 
-class SingUpViewController: UIViewController {
+class SingUpViewController1: UIViewController {
 
     public weak var delegateUser: SingUpViewControllerUserDelegate?
+    public weak var delegate: MainCoordinatorDelegate?
     
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
@@ -44,7 +45,7 @@ class SingUpViewController: UIViewController {
     }
 }
 
-extension SingUpViewController: SingUpViewControllerUserDelegate {
+extension SingUpViewController1: SingUpViewControllerUserDelegate {
     
     func resultOfCreateUser(result: ServerResponseModel) {
         ActivityIndicatorViewService.shared.hideView()
@@ -67,7 +68,7 @@ extension SingUpViewController: SingUpViewControllerUserDelegate {
     }
 }
 
-extension SingUpViewController {
+extension SingUpViewController1 {
     private func configuration(){
         self.passwordTF.isSecureTextEntry = true
         self.submitSingUP.Circle()

@@ -18,7 +18,7 @@ protocol InvoicesTableViewControllerUserDelegate: class {
     }
 
 class InvoicesTableViewController: UITableViewController {
-    var userDataService = UserDataService()
+    public var contractId: Int = 0
     public weak var delegate: InvoicesTableViewControllerDelegate?
     var invoiceList = [InvoiceModelVeiw]() {
     didSet {
@@ -36,7 +36,7 @@ class InvoicesTableViewController: UITableViewController {
     
 @objc func refreshInvoicesData(sender: AnyObject){
     print("refresh")
-    ApiServiceAdapter.shared.getInvoiceByContractId(delegate: self)
+    ApiServiceAdapter.shared.getInvoiceByContractId(id: contractId, delegate: self)
     self.refreshControl?.endRefreshing()
     }
 

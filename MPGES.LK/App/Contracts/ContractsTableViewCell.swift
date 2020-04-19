@@ -10,30 +10,26 @@ import UIKit
 
 class ContractsTableViewCell: UITableViewCell {
     @IBOutlet weak var numberContract: UILabel!
-       @IBOutlet weak var contractName: UILabel!
-       @IBOutlet weak var saldoContract: UILabel!
-
-       
-       var contract: ContractModel? {
-           didSet {
-            let conNum = "\(contract?.id ?? 0)"
-            numberContract.text =  "#"+conNum
-               contractName.text = contract?.contractName
-               DispatchQueue.main.async { [weak self] in
-                   guard self != nil else { return }
-                   ApiServiceAdapter.shared.loadSaldoContract(id: self!.contract!.id, label: self!.saldoContract)
-               }
+    @IBOutlet weak var contractTypeName: UILabel!
+    @IBOutlet weak var saldoContract: UILabel!
+    
+    func update(for contract: ContractModel) {
+        let conNum = "\(contract.id)"
+        numberContract.text =  "#"+conNum
+        contractTypeName.text = contract.typeContract.name
+           DispatchQueue.main.async { [weak self] in
+               guard self != nil else { return }
+            ApiServiceAdapter.shared.loadSaldoContract(id: contract.id, label: self!.saldoContract)
            }
-       }
-       
-       override func awakeFromNib() {
+    }
+    
+    override func awakeFromNib() {
            super.awakeFromNib()
            // Initialization code
-       }
-
-       override func setSelected(_ selected: Bool, animated: Bool) {
-           super.setSelected(selected, animated: animated)
-
-           // Configure the view for the selected state
-       }
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
+    }
 }

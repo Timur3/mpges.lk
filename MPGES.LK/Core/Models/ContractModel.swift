@@ -22,12 +22,12 @@ public struct ContractModel: Decodable {
     var userProfileId: Int
     var codeBinding: String?
     var contractTypeId: Int
-    var contractName: String
+    var typeContract: TypeContractModel
     var number: String
     var dateRegister: String
     var providerId: Int
     var contractorId: Int
-    var contractorNameSmall: String
+    var contractor: ContractorModel
     var dateStart: String?
     var dateEnd: String?
     var allowSending: Bool
@@ -38,7 +38,8 @@ public struct ContractModel: Decodable {
     var jkuId: String?
     var numberEls: String?
     var includedInEpd: Bool
-    var deliveryMethodId: Int
+    var invoiceDeliveryMethodId: Int
+    var invoiceDeliveryMethod: InvoiceDeliveryMethodModel
     /*enum CodingKeys: String, CodingKey {
         case id = "id"
         case userProfileId = "userProfileId"
@@ -59,3 +60,11 @@ public struct ContractBindingModel: Encodable {
     let code: String
 }
 
+public struct ListOfContractNumbersRoot: Decodable {
+    let count: Int    
+    let data: [String]
+    enum CodingKeys: String, CodingKey {
+        case count = "count"
+        case data = "data"
+    }
+}

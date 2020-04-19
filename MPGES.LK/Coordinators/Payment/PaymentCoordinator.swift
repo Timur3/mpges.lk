@@ -11,15 +11,16 @@ class PaymentCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    weak var delegate: BackToFirstViewControllerDelegate?
+    public var contract: ContractModel?
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let paymentTV: PaymentsTVController = PaymentsTVController(nibName: "PaymentsTVController", bundle: nil)
+        let paymentTV: PaymentsTVController = PaymentsTVController()
         paymentTV.delegate = self
+        paymentTV.contractId = contract!.id
         self.navigationController.pushViewController(paymentTV, animated: true)
     }
     

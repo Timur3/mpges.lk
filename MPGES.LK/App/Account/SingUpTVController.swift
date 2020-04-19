@@ -1,0 +1,256 @@
+//
+//  SingUpTVController.swift
+//  mpges.lk
+//
+//  Created by Timur on 19.04.2020.
+//  Copyright © 2020 ChalimovTimur. All rights reserved.
+//
+
+import UIKit
+public protocol SingUpTVControllerUserDelegate: class {
+    func createUser(user: UserModel)
+    func resultOfCreateUser(result: ServerResponseModel)
+}
+
+class SingUpTVController: UITableViewController {
+    var sections: [String] {["ФИО", "Контакты", "Пароль", ""]}
+    
+    public weak var delegateUser: SingUpTVControllerUserDelegate?
+    public weak var delegate: MainCoordinatorDelegate?
+    // ФИО
+    let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
+    // Контакты
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
+    var mobileCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.phone, textAlign: .left, accessoryType: .none) }()
+    // Пароль
+    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
+    var confirmPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
+    // Кнопка
+    var saveCell: UITableViewCell { getCustomCell(textLabel: "Зарегистрировать", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
+    
+    var nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Введите ваше имя"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    var emailTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "example@email.com"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    var mobileTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "+7(909)-012-34-56"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    var passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Придумайте пароль"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    var confirmPasswordTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Повторите пароль"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    var user: UserModel? {
+        didSet {
+            DispatchQueue.main.async {
+                self.emailTextField.text = self.user?.Email
+                self.nameTextField.text = self.user?.Name
+                self.mobileTextField.text = self.user?.Mobile
+            }
+        }
+    }
+    override func viewDidLoad() {
+        self.navigationItem.title = "Новый пользователь"
+        super.viewDidLoad()
+        configuration()
+        setUpLayout()
+    }
+    @objc func refreshData()
+    {
+        //self.getProfile()
+    }
+    
+    func setUpLayout(){
+        nameCell.addSubview(nameTextField)
+        nameTextField.leadingAnchor.constraint(equalTo: nameCell.leadingAnchor, constant: 50).isActive = true
+        nameTextField.centerYAnchor.constraint(equalTo: nameCell.centerYAnchor).isActive = true
+        emailCell.addSubview(emailTextField)
+        emailTextField.leadingAnchor.constraint(equalTo: emailCell.leadingAnchor, constant: 50).isActive = true
+        emailTextField.centerYAnchor.constraint(equalTo: emailCell.centerYAnchor).isActive = true
+        mobileCell.addSubview(mobileTextField)
+        mobileTextField.leadingAnchor.constraint(equalTo: mobileCell.leadingAnchor, constant: 50).isActive = true
+        mobileTextField.centerYAnchor.constraint(equalTo: mobileCell.centerYAnchor).isActive = true
+        
+        passwordCell.addSubview(passwordTextField)
+        passwordTextField.leadingAnchor.constraint(equalTo: passwordCell.leadingAnchor, constant: 50).isActive = true
+        passwordTextField.centerYAnchor.constraint(equalTo: passwordCell.centerYAnchor).isActive = true
+        confirmPasswordCell.addSubview(confirmPasswordTextField)
+        confirmPasswordTextField.leadingAnchor.constraint(equalTo: confirmPasswordCell.leadingAnchor, constant: 50).isActive = true
+        confirmPasswordTextField.centerYAnchor.constraint(equalTo: confirmPasswordCell.centerYAnchor).isActive = true
+    }
+    // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 2
+        case 2:
+            return 2
+        case 3:
+            return 1
+        default:
+            fatalError()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                return nameCell
+            default:
+                fatalError()
+            }
+        case 1:
+            switch indexPath.row {
+            case 0:
+                return emailCell
+            case 1:
+                return mobileCell
+            default:
+                fatalError()
+            }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                return passwordCell
+            case 1:
+                return confirmPasswordCell
+            default:
+                fatalError()
+            }
+        case 3:
+            switch indexPath.row {
+            case 0:
+                return saveCell
+            default:
+                fatalError()
+            }
+        default:
+            fatalError()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        sections[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 && indexPath.row == 3 {
+            saveAlertSheetShow()
+        }
+        if indexPath.section == 1 && indexPath.row == 1 {
+            //self.delegate?.navigationEmailToDeveloperPage()
+        }
+        if indexPath.section == 2 && indexPath.row == 0 {
+            alertSheetChangePasswordShow()
+        }
+        if indexPath.section == 2 && indexPath.row == 1 {
+            alertSheetExitShow()
+        }
+        
+        //let viewController = (initWithNibName:@"FirstViewController" bundle:nil]
+        //self.navigationController.pushViewController(viewController, animated:true)
+    }
+}
+
+extension SingUpTVController: SingUpTVControllerUserDelegate {
+    func createUser(user: UserModel) {
+        ActivityIndicatorViewService.shared.showView(form: self.view)
+        //ApiServiceAdapter.shared.createUser(model: user, delegate: self)
+    }
+    
+    func resultOfCreateUser(result: ServerResponseModel) {
+        ActivityIndicatorViewService.shared.hideView()
+        if result.isError {
+            //errorLabel.text = result.message
+            //passwordTF.shake(times: 3, delta: 5)
+        } else {
+            AlertControllerAdapter.shared.show(
+                title: "Успех!",
+                mesg: result.message,
+                form: self) { (UIAlertAction) in
+                    self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+}
+
+extension SingUpTVController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+//MARK: - CONFIGURE
+extension SingUpTVController {
+    private func configuration() {
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.hideKeyboardWhenTappedAround()
+        self.delegateUser = self
+        
+        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        self.navigationItem.rightBarButtonItems = [cancelBtn]
+    }
+    @objc func cancelButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func saveAlertSheetShow() {
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self) { (UIAlertAction) in
+            self.user?.Name = self.nameTextField.text!
+            self.user?.Email = self.emailTextField.text!
+            self.user?.Mobile = self.mobileTextField.text!
+            // save
+            // self.saveProfile(profile: self.user!)
+        }
+    }
+    
+    func alertSheetChangePasswordShow() {
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self) { (UIAlertAction) in
+            print("change pass")
+            //self.delegate?.navigationChangePasswordPage()
+        }
+    }
+    func alertSheetExitShow(){
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self) { (UIAlertAction) in
+            self.delegate?.navigateToFirstPage()
+        }
+    }
+}

@@ -16,11 +16,12 @@ class ContractDetailsInfoCoordinator: Coordinator {
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+    public var contract: ContractModel?
     
     func start() {
-        let contractDetailsInfo: ContractDetailsInfoTVController = ContractDetailsInfoTVController(nibName: "ContractDetailsInfoTVController", bundle: nil)
-        ApiServiceAdapter.shared.getContractById(delegate: contractDetailsInfo)
+        let contractDetailsInfo: ContractDetailsInfoTVController = ContractDetailsInfoTVController()
         contractDetailsInfo.delegate = self
+        contractDetailsInfo.contractModel = contract
         self.navigationController.pushViewController(contractDetailsInfo, animated: true)
     }
     
@@ -35,30 +36,35 @@ class ContractDetailsInfoCoordinator: Coordinator {
 }
 
 extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegate {
-    func navigationDevileryOfInvoicePage() {
-        let devileryOfInvoiceCoordinator = MainDeliveryOfInvoiceCoordinator(navigationController: navigationController)
-        devileryOfInvoiceCoordinator.parentCoordinator = self
-        childCoordinators.append(devileryOfInvoiceCoordinator)
-        devileryOfInvoiceCoordinator.start()
+    // Ппереход на страницу способы доставки квитанций
+    func navigationInvoiceDevileryMethodPage(for invoiceDeliveryMehtodId: Int) {
+        let devileryOfInvoiceTV: DeliveryMethodTVController = DeliveryMethodTVController()
+        devileryOfInvoiceTV.invoiceDeliveryMethodId = invoiceDeliveryMehtodId
+        devileryOfInvoiceTV.delegate = self
+        self.navigationController.pushViewController(devileryOfInvoiceTV, animated: true)
+    }
+    
+    func didFinishDeliveryMethodPage(for invoiceDeliveryMethod: InvoiceDeliveryMethodModel){
+        
     }
     
     func navigationToInvoicePage() {
-        let dataSend = UserDataService.shared.getCurrentContract()
         let invoiceCoordinator = InvoiceCoordinator(navigationController: navigationController)
+        invoiceCoordinator.contract = contract
         childCoordinators.append(invoiceCoordinator)
         invoiceCoordinator.start()
     }
     
     func navigationDevicesPage() {
-        let dataSend = UserDataService.shared.getCurrentContract()
-        let deviceCoordinator = MainDeviceCoordinator(navigationController: navigationController)
+        let deviceCoordinator = DeviceCoordinatorMain(navigationController: navigationController)
+        deviceCoordinator.contract = contract
         childCoordinators.append(deviceCoordinator)
         deviceCoordinator.start()
     }
     
     func navigateToPaymentsPage() {
-        let dataSend = UserDataService.shared.getCurrentContract()
         let paymentCoordinator = PaymentCoordinator(navigationController: navigationController)
+        paymentCoordinator.contract = contract
         childCoordinators.append(paymentCoordinator)
         paymentCoordinator.start()
     }

@@ -13,14 +13,13 @@ protocol DevicesTVControllerDelegate: class {
 }
 
 protocol DevicesTVControllerUserDelegate: class {
-    var sections: [String] { get }
     func setDevices(devices:DevicesModelRoot)
 }
 
 class DevicesTVController: UITableViewController {
-    let methodApi = MethodApi()
     private var searchController = UISearchController(searchResultsController: nil)
     public weak var delegate: DevicesTVControllerDelegate?
+    public var contractId: Int = 0
     var deviceList = [DeviceModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -37,7 +36,7 @@ class DevicesTVController: UITableViewController {
     
     @objc func refreshDataDevice(sender: AnyObject){
     print("refresh")
-        ApiServiceAdapter.shared.getDevicesByContractId(delegate: self)
+        ApiServiceAdapter.shared.getDevicesByContractId(id: contractId, delegate: self)
         // todo  сохраняем новые данные, предварительно удаляем старые данные
         self.refreshControl?.endRefreshing()
     }

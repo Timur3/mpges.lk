@@ -13,12 +13,13 @@
 		22042A03235E224D0054D4DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22042A02235E224D0054D4DD /* Assets.xcassets */; };
 		22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A04235E224D0054D4DD /* LaunchScreen.storyboard */; };
 		2217F5022403D117006654F9 /* TextFieldHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217F5012403D117006654F9 /* TextFieldHelper.swift */; };
-		2219EE082426A9F4009C6F0C /* DeliveryOfInvoiceTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2219EE062426A9F4009C6F0C /* DeliveryOfInvoiceTVController.swift */; };
-		2219EE092426A9F4009C6F0C /* DeliveryOfInvoiceTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2219EE072426A9F4009C6F0C /* DeliveryOfInvoiceTVController.xib */; };
+		2219EE082426A9F4009C6F0C /* DeliveryMethodTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2219EE062426A9F4009C6F0C /* DeliveryMethodTVController.swift */; };
+		2219EE092426A9F4009C6F0C /* DeliveryMethodTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2219EE072426A9F4009C6F0C /* DeliveryMethodTVController.xib */; };
 		2235D7B6241E5DF2007A90DD /* DevicesTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235D7B4241E5DF2007A90DD /* DevicesTVController.swift */; };
 		2235D7B7241E5DF3007A90DD /* DevicesTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2235D7B5241E5DF2007A90DD /* DevicesTVController.xib */; };
 		2235D7BA241E5F3D007A90DD /* DeviceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235D7B8241E5F3D007A90DD /* DeviceTVCell.swift */; };
 		2235D7BB241E5F3D007A90DD /* DeviceTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2235D7B9241E5F3D007A90DD /* DeviceTVCell.xib */; };
+		223875202435119500D3B56D /* TypeContractModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238751F2435119500D3B56D /* TypeContractModel.swift */; };
 		223936492423DB13004079ED /* InvoiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223936482423DB13004079ED /* InvoiceCoordinator.swift */; };
 		223F8FAC241A0A8A00CDCF01 /* OfficesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F8FAA241A0A8A00CDCF01 /* OfficesViewController.swift */; };
 		223F8FAD241A0A8A00CDCF01 /* OfficesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223F8FAB241A0A8A00CDCF01 /* OfficesViewController.xib */; };
@@ -52,27 +53,22 @@
 		226F34E42429166D00B6261E /* MyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F34E32429166D00B6261E /* MyImage.swift */; };
 		227435072427CBCF00F39AEB /* EmailToDeveloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227435052427CBCF00F39AEB /* EmailToDeveloperViewController.swift */; };
 		227435082427CBCF00F39AEB /* EmailToDeveloperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227435062427CBCF00F39AEB /* EmailToDeveloperViewController.xib */; };
-		2274350A2427CC5D00F39AEB /* EmailToDeveloperCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227435092427CC5D00F39AEB /* EmailToDeveloperCoordinator.swift */; };
 		227771CC240B84C10035FC43 /* EmailPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227771CB240B84C10035FC43 /* EmailPredicate.swift */; };
 		2278511123CF949F007F1063 /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278511023CF949F007F1063 /* Shake.swift */; };
 		227C7B6F241696E400232BC9 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C7B6E241696E400232BC9 /* MainTabBarCoordinator.swift */; };
-		227F3511241AAD8C001C0500 /* ContractAddCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F3510241AAD8C001C0500 /* ContractAddCoordinator.swift */; };
 		227F3513241AB51E001C0500 /* MainContractsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F3512241AB51E001C0500 /* MainContractsCoordinator.swift */; };
 		22826AA02425163700CB5CF7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22826A9E2425163700CB5CF7 /* ChangePasswordViewController.swift */; };
 		22826AA12425163700CB5CF7 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22826A9F2425163700CB5CF7 /* ChangePasswordViewController.xib */; };
-		22826AA32425188B00CB5CF7 /* ChangePasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22826AA22425188B00CB5CF7 /* ChangePasswordCoordinator.swift */; };
-		2284AE6D2429E62E0097E4C2 /* MainDeliveryOfInvoiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284AE6C2429E62E0097E4C2 /* MainDeliveryOfInvoiceCoordinator.swift */; };
 		2284AE70242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284AE6E242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift */; };
 		2284AE71242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2284AE6F242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib */; };
-		2284AE73242A56650097E4C2 /* DeliveryOfInvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284AE72242A56650097E4C2 /* DeliveryOfInvoiceModel.swift */; };
+		2284AE73242A56650097E4C2 /* InvoiceDeliveryMethodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284AE72242A56650097E4C2 /* InvoiceDeliveryMethodModel.swift */; };
+		228C492B243513EF00FDFF21 /* ContractorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C492A243513EF00FDFF21 /* ContractorModel.swift */; };
 		228E3CB323E5F3A9001E06C4 /* ContractDetailsInfoTVControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E3CB223E5F3A9001E06C4 /* ContractDetailsInfoTVControllerDelegate.swift */; };
 		228E3E8D2421397400402EF6 /* PrototypeTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E3E8B2421397400402EF6 /* PrototypeTVCell.swift */; };
 		228E3E8E2421397400402EF6 /* PrototypeTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228E3E8C2421397400402EF6 /* PrototypeTVCell.xib */; };
 		2290CBC72423D72F003B154A /* InvoicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290CBC52423D72F003B154A /* InvoicesTableViewController.swift */; };
 		2290CBC82423D72F003B154A /* InvoicesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2290CBC62423D72F003B154A /* InvoicesTableViewController.xib */; };
 		22913B1523FDB7EE000F9677 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22913B1423FDB7EE000F9677 /* SceneDelegate.swift */; };
-		22913B1723FEA89A000F9677 /* SingUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22913B1623FEA89A000F9677 /* SingUpCoordinator.swift */; };
-		22913B1923FEF67A000F9677 /* RecoveryPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22913B1823FEF67A000F9677 /* RecoveryPasswordCoordinator.swift */; };
 		22913B1D23FF0152000F9677 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22913B1B23FF0152000F9677 /* MainTabBarViewController.swift */; };
 		22913B1E23FF0152000F9677 /* MainTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22913B1C23FF0152000F9677 /* MainTabBarViewController.xib */; };
 		22913B2024012BAA000F9677 /* ServerResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22913B1F24012BAA000F9677 /* ServerResponseModel.swift */; };
@@ -84,12 +80,21 @@
 		229A807C24195CF4009933D2 /* ProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229A807A24195CF4009933D2 /* ProfileTableViewController.xib */; };
 		229A807E24195ECE009933D2 /* ProfileTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A807D24195ECE009933D2 /* ProfileTVController.swift */; };
 		229B245C23FC637C005AEC0F /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B245B23FC637C005AEC0F /* MainCoordinator.swift */; };
-		229B245E23FC6A71005AEC0F /* SingInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B245D23FC6A71005AEC0F /* SingInCoordinator.swift */; };
 		22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */; };
+		22A3806E24461BF5008CCFAC /* ContractAddFirstPageTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A3806C24461BF5008CCFAC /* ContractAddFirstPageTVController.swift */; };
+		22A3806F24461BF5008CCFAC /* ContractAddFirstPageTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A3806D24461BF5008CCFAC /* ContractAddFirstPageTVController.xib */; };
+		22A3807124478B1B008CCFAC /* TypeOfCalculationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A3807024478B1B008CCFAC /* TypeOfCalculationModel.swift */; };
+		22A380732448C87F008CCFAC /* TariffZoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A380722448C87F008CCFAC /* TariffZoneModel.swift */; };
+		22A38076244B4093008CCFAC /* ContractAddTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A38074244B4093008CCFAC /* ContractAddTVController.swift */; };
+		22A38077244B4093008CCFAC /* ContractAddTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A38075244B4093008CCFAC /* ContractAddTVController.xib */; };
 		22A8FE3D23FD7F2700B07D0D /* SingInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A8FE3C23FD7F2700B07D0D /* SingInViewController.xib */; };
 		22A8FE3F23FD933D00B07D0D /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A8FE3E23FD933D00B07D0D /* FirstViewController.xib */; };
 		22A8FE4123FD939400B07D0D /* SingUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A8FE4023FD939400B07D0D /* SingUpViewController.xib */; };
 		22A8FE4323FD93E800B07D0D /* RecoveryPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A8FE4223FD93E800B07D0D /* RecoveryPasswordViewController.xib */; };
+		22B7F474244CD12000E84EC5 /* SingUpTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7F472244CD12000E84EC5 /* SingUpTVController.swift */; };
+		22B7F475244CD12000E84EC5 /* SingUpTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B7F473244CD12000E84EC5 /* SingUpTVController.xib */; };
+		22CEA24D244B8D7100F83C8E /* RecoveryPasswordTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CEA24B244B8D7100F83C8E /* RecoveryPasswordTVController.swift */; };
+		22CEA24E244B8D7100F83C8E /* RecoveryPasswordTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22CEA24C244B8D7100F83C8E /* RecoveryPasswordTVController.xib */; };
 		22DA8977242E8820002D4D57 /* PayWithCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA8975242E8820002D4D57 /* PayWithCreditCardViewController.swift */; };
 		22DA8978242E8820002D4D57 /* PayWithCreditCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DA8976242E8820002D4D57 /* PayWithCreditCardViewController.xib */; };
 		22DA897B242E884A002D4D57 /* PayWithApplePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA8979242E884A002D4D57 /* PayWithApplePayViewController.swift */; };
@@ -97,7 +102,6 @@
 		22DE41E52423E2830069DABE /* InvoiceTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DE41E42423E2830069DABE /* InvoiceTVCell.xib */; };
 		22DE41E824249EE80069DABE /* InvoiceDetailsInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE41E624249EE80069DABE /* InvoiceDetailsInfoTableViewController.swift */; };
 		22DE41E924249EE80069DABE /* InvoiceDetailsInfoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DE41E724249EE80069DABE /* InvoiceDetailsInfoTableViewController.xib */; };
-		22DE41EB24249F660069DABE /* InvoiceDetailsInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE41EA24249F660069DABE /* InvoiceDetailsInfoCoordinator.swift */; };
 		22DE41EE2424E2700069DABE /* CalculationTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE41EC2424E2700069DABE /* CalculationTVCell.swift */; };
 		22DE41EF2424E2700069DABE /* CalculationTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DE41ED2424E2700069DABE /* CalculationTVCell.xib */; };
 		22E2870223E0133D00453CF3 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2870123E0133D00453CF3 /* FirstViewController.swift */; };
@@ -119,7 +123,10 @@
 		22F1736B23DA124F0065751E /* ReceivedDataTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736A23DA124F0065751E /* ReceivedDataTVCell.swift */; };
 		22F1736D23DA15400065751E /* ReceivedDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736C23DA15400065751E /* ReceivedDataModel.swift */; };
 		22F1736F23DA1DEB0065751E /* CalculationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1736E23DA1DEB0065751E /* CalculationModel.swift */; };
-		22F34F18241E936C00889A31 /* MainDeviceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F34F17241E936C00889A31 /* MainDeviceCoordinator.swift */; };
+		22F17C3E244C974600A41B44 /* ReceivedDataAddNewTemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F17C3D244C974600A41B44 /* ReceivedDataAddNewTemplateModel.swift */; };
+		22F17C41244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F17C3F244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.swift */; };
+		22F17C42244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F17C40244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.xib */; };
+		22F34F18241E936C00889A31 /* DeviceCoordinatorMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F34F17241E936C00889A31 /* DeviceCoordinatorMain.swift */; };
 		22F34F1A241EAE1100889A31 /* ReceivedDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F34F19241EAE1100889A31 /* ReceivedDataCoordinator.swift */; };
 		22F34F1C241EAF7800889A31 /* ReceivedDataTVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F34F1B241EAF7800889A31 /* ReceivedDataTVController.xib */; };
 		22F34F1E241EB07E00889A31 /* ReceivedDataTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F34F1D241EB07E00889A31 /* ReceivedDataTVCell.xib */; };
@@ -128,7 +135,7 @@
 
 /* Begin PBXFileReference section */
 		0B27E50C44215D2371686D40 /* Pods-mpges.lk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.release.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.release.xcconfig"; sourceTree = "<group>"; };
-		220429F3235E22460054D4DD /* mpges.lk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mpges.lk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		220429F3235E22460054D4DD /* МП ГЭС.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "МП ГЭС.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		220429F6235E22460054D4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		220429FA235E22460054D4DD /* SingInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInViewController.swift; sourceTree = "<group>"; };
 		22042A00235E22460054D4DD /* mpges_lk.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mpges_lk.xcdatamodel; sourceTree = "<group>"; };
@@ -136,12 +143,13 @@
 		22042A05235E224D0054D4DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22042A07235E224D0054D4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2217F5012403D117006654F9 /* TextFieldHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldHelper.swift; sourceTree = "<group>"; };
-		2219EE062426A9F4009C6F0C /* DeliveryOfInvoiceTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryOfInvoiceTVController.swift; sourceTree = "<group>"; };
-		2219EE072426A9F4009C6F0C /* DeliveryOfInvoiceTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeliveryOfInvoiceTVController.xib; sourceTree = "<group>"; };
+		2219EE062426A9F4009C6F0C /* DeliveryMethodTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMethodTVController.swift; sourceTree = "<group>"; };
+		2219EE072426A9F4009C6F0C /* DeliveryMethodTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeliveryMethodTVController.xib; sourceTree = "<group>"; };
 		2235D7B4241E5DF2007A90DD /* DevicesTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesTVController.swift; sourceTree = "<group>"; };
 		2235D7B5241E5DF2007A90DD /* DevicesTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevicesTVController.xib; sourceTree = "<group>"; };
 		2235D7B8241E5F3D007A90DD /* DeviceTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTVCell.swift; sourceTree = "<group>"; };
 		2235D7B9241E5F3D007A90DD /* DeviceTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceTVCell.xib; sourceTree = "<group>"; };
+		2238751F2435119500D3B56D /* TypeContractModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeContractModel.swift; sourceTree = "<group>"; };
 		223936482423DB13004079ED /* InvoiceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCoordinator.swift; sourceTree = "<group>"; };
 		223F8FAA241A0A8A00CDCF01 /* OfficesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficesViewController.swift; sourceTree = "<group>"; };
 		223F8FAB241A0A8A00CDCF01 /* OfficesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OfficesViewController.xib; sourceTree = "<group>"; };
@@ -174,27 +182,22 @@
 		226F34E32429166D00B6261E /* MyImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImage.swift; sourceTree = "<group>"; };
 		227435052427CBCF00F39AEB /* EmailToDeveloperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailToDeveloperViewController.swift; sourceTree = "<group>"; };
 		227435062427CBCF00F39AEB /* EmailToDeveloperViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailToDeveloperViewController.xib; sourceTree = "<group>"; };
-		227435092427CC5D00F39AEB /* EmailToDeveloperCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailToDeveloperCoordinator.swift; sourceTree = "<group>"; };
 		227771CB240B84C10035FC43 /* EmailPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPredicate.swift; sourceTree = "<group>"; };
 		2278511023CF949F007F1063 /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 		227C7B6E241696E400232BC9 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
-		227F3510241AAD8C001C0500 /* ContractAddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractAddCoordinator.swift; sourceTree = "<group>"; };
 		227F3512241AB51E001C0500 /* MainContractsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContractsCoordinator.swift; sourceTree = "<group>"; };
 		22826A9E2425163700CB5CF7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		22826A9F2425163700CB5CF7 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
-		22826AA22425188B00CB5CF7 /* ChangePasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordCoordinator.swift; sourceTree = "<group>"; };
-		2284AE6C2429E62E0097E4C2 /* MainDeliveryOfInvoiceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDeliveryOfInvoiceCoordinator.swift; sourceTree = "<group>"; };
 		2284AE6E242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryOfInvoiceTableViewCell.swift; sourceTree = "<group>"; };
 		2284AE6F242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeliveryOfInvoiceTableViewCell.xib; sourceTree = "<group>"; };
-		2284AE72242A56650097E4C2 /* DeliveryOfInvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryOfInvoiceModel.swift; sourceTree = "<group>"; };
+		2284AE72242A56650097E4C2 /* InvoiceDeliveryMethodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDeliveryMethodModel.swift; sourceTree = "<group>"; };
+		228C492A243513EF00FDFF21 /* ContractorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractorModel.swift; sourceTree = "<group>"; };
 		228E3CB223E5F3A9001E06C4 /* ContractDetailsInfoTVControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractDetailsInfoTVControllerDelegate.swift; sourceTree = "<group>"; };
 		228E3E8B2421397400402EF6 /* PrototypeTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeTVCell.swift; sourceTree = "<group>"; };
 		228E3E8C2421397400402EF6 /* PrototypeTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrototypeTVCell.xib; sourceTree = "<group>"; };
 		2290CBC52423D72F003B154A /* InvoicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesTableViewController.swift; sourceTree = "<group>"; };
 		2290CBC62423D72F003B154A /* InvoicesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoicesTableViewController.xib; sourceTree = "<group>"; };
 		22913B1423FDB7EE000F9677 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		22913B1623FEA89A000F9677 /* SingUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpCoordinator.swift; sourceTree = "<group>"; };
-		22913B1823FEF67A000F9677 /* RecoveryPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordCoordinator.swift; sourceTree = "<group>"; };
 		22913B1B23FF0152000F9677 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		22913B1C23FF0152000F9677 /* MainTabBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTabBarViewController.xib; sourceTree = "<group>"; };
 		22913B1F24012BAA000F9677 /* ServerResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponseModel.swift; sourceTree = "<group>"; };
@@ -206,12 +209,21 @@
 		229A807A24195CF4009933D2 /* ProfileTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewController.xib; sourceTree = "<group>"; };
 		229A807D24195ECE009933D2 /* ProfileTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTVController.swift; sourceTree = "<group>"; };
 		229B245B23FC637C005AEC0F /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		229B245D23FC6A71005AEC0F /* SingInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInCoordinator.swift; sourceTree = "<group>"; };
 		22A08CB523CD8908008A33BD /* RecoveryPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordViewController.swift; sourceTree = "<group>"; };
+		22A3806C24461BF5008CCFAC /* ContractAddFirstPageTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractAddFirstPageTVController.swift; sourceTree = "<group>"; };
+		22A3806D24461BF5008CCFAC /* ContractAddFirstPageTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractAddFirstPageTVController.xib; sourceTree = "<group>"; };
+		22A3807024478B1B008CCFAC /* TypeOfCalculationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeOfCalculationModel.swift; sourceTree = "<group>"; };
+		22A380722448C87F008CCFAC /* TariffZoneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffZoneModel.swift; sourceTree = "<group>"; };
+		22A38074244B4093008CCFAC /* ContractAddTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractAddTVController.swift; sourceTree = "<group>"; };
+		22A38075244B4093008CCFAC /* ContractAddTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractAddTVController.xib; sourceTree = "<group>"; };
 		22A8FE3C23FD7F2700B07D0D /* SingInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingInViewController.xib; sourceTree = "<group>"; };
 		22A8FE3E23FD933D00B07D0D /* FirstViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
 		22A8FE4023FD939400B07D0D /* SingUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingUpViewController.xib; sourceTree = "<group>"; };
 		22A8FE4223FD93E800B07D0D /* RecoveryPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecoveryPasswordViewController.xib; sourceTree = "<group>"; };
+		22B7F472244CD12000E84EC5 /* SingUpTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpTVController.swift; sourceTree = "<group>"; };
+		22B7F473244CD12000E84EC5 /* SingUpTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingUpTVController.xib; sourceTree = "<group>"; };
+		22CEA24B244B8D7100F83C8E /* RecoveryPasswordTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordTVController.swift; sourceTree = "<group>"; };
+		22CEA24C244B8D7100F83C8E /* RecoveryPasswordTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecoveryPasswordTVController.xib; sourceTree = "<group>"; };
 		22DA8975242E8820002D4D57 /* PayWithCreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithCreditCardViewController.swift; sourceTree = "<group>"; };
 		22DA8976242E8820002D4D57 /* PayWithCreditCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayWithCreditCardViewController.xib; sourceTree = "<group>"; };
 		22DA8979242E884A002D4D57 /* PayWithApplePayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithApplePayViewController.swift; sourceTree = "<group>"; };
@@ -219,7 +231,6 @@
 		22DE41E42423E2830069DABE /* InvoiceTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceTVCell.xib; sourceTree = "<group>"; };
 		22DE41E624249EE80069DABE /* InvoiceDetailsInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsInfoTableViewController.swift; sourceTree = "<group>"; };
 		22DE41E724249EE80069DABE /* InvoiceDetailsInfoTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceDetailsInfoTableViewController.xib; sourceTree = "<group>"; };
-		22DE41EA24249F660069DABE /* InvoiceDetailsInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsInfoCoordinator.swift; sourceTree = "<group>"; };
 		22DE41EC2424E2700069DABE /* CalculationTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationTVCell.swift; sourceTree = "<group>"; };
 		22DE41ED2424E2700069DABE /* CalculationTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalculationTVCell.xib; sourceTree = "<group>"; };
 		22E2870123E0133D00453CF3 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -241,7 +252,10 @@
 		22F1736A23DA124F0065751E /* ReceivedDataTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataTVCell.swift; sourceTree = "<group>"; };
 		22F1736C23DA15400065751E /* ReceivedDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataModel.swift; sourceTree = "<group>"; };
 		22F1736E23DA1DEB0065751E /* CalculationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationModel.swift; sourceTree = "<group>"; };
-		22F34F17241E936C00889A31 /* MainDeviceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDeviceCoordinator.swift; sourceTree = "<group>"; };
+		22F17C3D244C974600A41B44 /* ReceivedDataAddNewTemplateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataAddNewTemplateModel.swift; sourceTree = "<group>"; };
+		22F17C3F244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataAddNewTemplateTVController.swift; sourceTree = "<group>"; };
+		22F17C40244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceivedDataAddNewTemplateTVController.xib; sourceTree = "<group>"; };
+		22F34F17241E936C00889A31 /* DeviceCoordinatorMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCoordinatorMain.swift; sourceTree = "<group>"; };
 		22F34F19241EAE1100889A31 /* ReceivedDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataCoordinator.swift; sourceTree = "<group>"; };
 		22F34F1B241EAF7800889A31 /* ReceivedDataTVController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceivedDataTVController.xib; sourceTree = "<group>"; };
 		22F34F1D241EB07E00889A31 /* ReceivedDataTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceivedDataTVCell.xib; sourceTree = "<group>"; };
@@ -275,7 +289,7 @@
 		220429F4235E22460054D4DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				220429F3235E22460054D4DD /* mpges.lk.app */,
+				220429F3235E22460054D4DD /* МП ГЭС.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -315,6 +329,10 @@
 				22826A9F2425163700CB5CF7 /* ChangePasswordViewController.xib */,
 				227435052427CBCF00F39AEB /* EmailToDeveloperViewController.swift */,
 				227435062427CBCF00F39AEB /* EmailToDeveloperViewController.xib */,
+				22CEA24B244B8D7100F83C8E /* RecoveryPasswordTVController.swift */,
+				22CEA24C244B8D7100F83C8E /* RecoveryPasswordTVController.xib */,
+				22B7F472244CD12000E84EC5 /* SingUpTVController.swift */,
+				22B7F473244CD12000E84EC5 /* SingUpTVController.xib */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -322,8 +340,8 @@
 		2219EE052426A982009C6F0C /* DevileryOfInvoice */ = {
 			isa = PBXGroup;
 			children = (
-				2219EE062426A9F4009C6F0C /* DeliveryOfInvoiceTVController.swift */,
-				2219EE072426A9F4009C6F0C /* DeliveryOfInvoiceTVController.xib */,
+				2219EE062426A9F4009C6F0C /* DeliveryMethodTVController.swift */,
+				2219EE072426A9F4009C6F0C /* DeliveryMethodTVController.xib */,
 				2284AE6E242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift */,
 				2284AE6F242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib */,
 			);
@@ -334,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				223936482423DB13004079ED /* InvoiceCoordinator.swift */,
-				22DE41EA24249F660069DABE /* InvoiceDetailsInfoCoordinator.swift */,
 			);
 			path = Invoice;
 			sourceTree = "<group>";
@@ -367,6 +384,10 @@
 				223F8FB9241A91EB00CDCF01 /* ContractAddViewController.xib */,
 				223F8FC0241A939E00CDCF01 /* ContractDetailsInfoTVController.swift */,
 				223F8FC1241A939E00CDCF01 /* ContractDetailsInfoTVController.xib */,
+				22A3806C24461BF5008CCFAC /* ContractAddFirstPageTVController.swift */,
+				22A3806D24461BF5008CCFAC /* ContractAddFirstPageTVController.xib */,
+				22A38074244B4093008CCFAC /* ContractAddTVController.swift */,
+				22A38075244B4093008CCFAC /* ContractAddTVController.xib */,
 			);
 			path = Contracts;
 			sourceTree = "<group>";
@@ -408,7 +429,12 @@
 				22F1736E23DA1DEB0065751E /* CalculationModel.swift */,
 				226E5AF223F824B6008CFD37 /* UserModel.swift */,
 				22913B1F24012BAA000F9677 /* ServerResponseModel.swift */,
-				2284AE72242A56650097E4C2 /* DeliveryOfInvoiceModel.swift */,
+				2284AE72242A56650097E4C2 /* InvoiceDeliveryMethodModel.swift */,
+				2238751F2435119500D3B56D /* TypeContractModel.swift */,
+				228C492A243513EF00FDFF21 /* ContractorModel.swift */,
+				22A3807024478B1B008CCFAC /* TypeOfCalculationModel.swift */,
+				22A380722448C87F008CCFAC /* TariffZoneModel.swift */,
+				22F17C3D244C974600A41B44 /* ReceivedDataAddNewTemplateModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -417,7 +443,6 @@
 			isa = PBXGroup;
 			children = (
 				226E5AF523F9C020008CFD37 /* Coordinator.swift */,
-				2284AE6B2429E2800097E4C2 /* DevileryOfInvoice */,
 				22F34F16241E934900889A31 /* Devices */,
 				227F350F241AAD61001C0500 /* Contract */,
 				227C7B6D2416968900232BC9 /* Main */,
@@ -467,6 +492,8 @@
 				2235D7B5241E5DF2007A90DD /* DevicesTVController.xib */,
 				2235D7B8241E5F3D007A90DD /* DeviceTVCell.swift */,
 				2235D7B9241E5F3D007A90DD /* DeviceTVCell.xib */,
+				22F17C3F244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.swift */,
+				22F17C40244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.xib */,
 			);
 			path = Devices;
 			sourceTree = "<group>";
@@ -474,12 +501,7 @@
 		227C7B6C2416966D00232BC9 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				229B245D23FC6A71005AEC0F /* SingInCoordinator.swift */,
-				22913B1623FEA89A000F9677 /* SingUpCoordinator.swift */,
 				226572D6240BE601005DBFA6 /* ProfileCoordinator.swift */,
-				22913B1823FEF67A000F9677 /* RecoveryPasswordCoordinator.swift */,
-				22826AA22425188B00CB5CF7 /* ChangePasswordCoordinator.swift */,
-				227435092427CC5D00F39AEB /* EmailToDeveloperCoordinator.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -496,19 +518,10 @@
 		227F350F241AAD61001C0500 /* Contract */ = {
 			isa = PBXGroup;
 			children = (
-				227F3510241AAD8C001C0500 /* ContractAddCoordinator.swift */,
 				227F3512241AB51E001C0500 /* MainContractsCoordinator.swift */,
 				22E8CF01241D3BB500CA0F52 /* ContractDetailsInfoCoordinator.swift */,
 			);
 			path = Contract;
-			sourceTree = "<group>";
-		};
-		2284AE6B2429E2800097E4C2 /* DevileryOfInvoice */ = {
-			isa = PBXGroup;
-			children = (
-				2284AE6C2429E62E0097E4C2 /* MainDeliveryOfInvoiceCoordinator.swift */,
-			);
-			path = DevileryOfInvoice;
 			sourceTree = "<group>";
 		};
 		228E3E8A2421392D00402EF6 /* Common */ = {
@@ -579,7 +592,7 @@
 		22F34F16241E934900889A31 /* Devices */ = {
 			isa = PBXGroup;
 			children = (
-				22F34F17241E936C00889A31 /* MainDeviceCoordinator.swift */,
+				22F34F17241E936C00889A31 /* DeviceCoordinatorMain.swift */,
 				22F34F19241EAE1100889A31 /* ReceivedDataCoordinator.swift */,
 			);
 			path = Devices;
@@ -649,7 +662,7 @@
 			);
 			name = mpges.lk;
 			productName = mpges.lk;
-			productReference = 220429F3235E22460054D4DD /* mpges.lk.app */;
+			productReference = 220429F3235E22460054D4DD /* МП ГЭС.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -691,7 +704,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223F8FB1241A350700CDCF01 /* ContractsTVController.xib in Resources */,
-				2219EE092426A9F4009C6F0C /* DeliveryOfInvoiceTVController.xib in Resources */,
+				2219EE092426A9F4009C6F0C /* DeliveryMethodTVController.xib in Resources */,
 				223F8FB5241A4A7C00CDCF01 /* ContractsTableViewCell.xib in Resources */,
 				22A8FE3D23FD7F2700B07D0D /* SingInViewController.xib in Resources */,
 				223F8FBB241A91EB00CDCF01 /* ContractAddViewController.xib in Resources */,
@@ -699,6 +712,7 @@
 				22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */,
 				22DA897C242E884A002D4D57 /* PayWithApplePayViewController.xib in Resources */,
 				228E3E8E2421397400402EF6 /* PrototypeTVCell.xib in Resources */,
+				22F17C42244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.xib in Resources */,
 				22E8CF0E241D5AFF00CA0F52 /* PaymentInfoTVController.xib in Resources */,
 				22042A03235E224D0054D4DD /* Assets.xcassets in Resources */,
 				2284AE71242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib in Resources */,
@@ -720,7 +734,11 @@
 				229A807C24195CF4009933D2 /* ProfileTableViewController.xib in Resources */,
 				22E8CF06241D590700CA0F52 /* PaymentsTVController.xib in Resources */,
 				22913B1E23FF0152000F9677 /* MainTabBarViewController.xib in Resources */,
+				22CEA24E244B8D7100F83C8E /* RecoveryPasswordTVController.xib in Resources */,
 				2235D7BB241E5F3D007A90DD /* DeviceTVCell.xib in Resources */,
+				22A38077244B4093008CCFAC /* ContractAddTVController.xib in Resources */,
+				22A3806F24461BF5008CCFAC /* ContractAddFirstPageTVController.xib in Resources */,
+				22B7F475244CD12000E84EC5 /* SingUpTVController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,9 +816,9 @@
 				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
 				223FDF8B23D093180029E547 /* InvoiceModel.swift in Sources */,
 				2217F5022403D117006654F9 /* TextFieldHelper.swift in Sources */,
-				22913B1723FEA89A000F9677 /* SingUpCoordinator.swift in Sources */,
 				2269849E24115C5B00EF8ED7 /* ArrayHelper.swift in Sources */,
 				2235D7BA241E5F3D007A90DD /* DeviceTVCell.swift in Sources */,
+				22A3807124478B1B008CCFAC /* TypeOfCalculationModel.swift in Sources */,
 				2253EE2F23CF3335009FD4B5 /* AuthModel.swift in Sources */,
 				22F1736723D77DF90065751E /* ReceivedDataTVController.swift in Sources */,
 				223F8FBA241A91EB00CDCF01 /* ContractAddViewController.swift in Sources */,
@@ -812,23 +830,24 @@
 				22913B2024012BAA000F9677 /* ServerResponseModel.swift in Sources */,
 				22826AA02425163700CB5CF7 /* ChangePasswordViewController.swift in Sources */,
 				223F8FB0241A350700CDCF01 /* ContractsTVController.swift in Sources */,
-				22F34F18241E936C00889A31 /* MainDeviceCoordinator.swift in Sources */,
+				22F34F18241E936C00889A31 /* DeviceCoordinatorMain.swift in Sources */,
+				223875202435119500D3B56D /* TypeContractModel.swift in Sources */,
 				226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */,
 				22913B1D23FF0152000F9677 /* MainTabBarViewController.swift in Sources */,
 				226A8B3C23D43901009B3B67 /* ApiServiceAdapter.swift in Sources */,
-				22DE41EB24249F660069DABE /* InvoiceDetailsInfoCoordinator.swift in Sources */,
 				22F07F0D23DF4E50007BF4A4 /* DataProviderService.swift in Sources */,
 				22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */,
-				22826AA32425188B00CB5CF7 /* ChangePasswordCoordinator.swift in Sources */,
+				22F17C3E244C974600A41B44 /* ReceivedDataAddNewTemplateModel.swift in Sources */,
 				223F8FC2241A939E00CDCF01 /* ContractDetailsInfoTVController.swift in Sources */,
 				22F34F1A241EAE1100889A31 /* ReceivedDataCoordinator.swift in Sources */,
 				22E8CF0D241D5AFF00CA0F52 /* PaymentInfoTVController.swift in Sources */,
 				226572D7240BE601005DBFA6 /* ProfileCoordinator.swift in Sources */,
+				22CEA24D244B8D7100F83C8E /* RecoveryPasswordTVController.swift in Sources */,
+				22A380732448C87F008CCFAC /* TariffZoneModel.swift in Sources */,
 				22E8CF10241D5B3E00CA0F52 /* PaymentCoordinator.swift in Sources */,
 				22E8CF02241D3BB500CA0F52 /* ContractDetailsInfoCoordinator.swift in Sources */,
 				226AA7CF23CE310E003F006A /* UserDataProtocol.swift in Sources */,
-				229B245E23FC6A71005AEC0F /* SingInCoordinator.swift in Sources */,
-				2219EE082426A9F4009C6F0C /* DeliveryOfInvoiceTVController.swift in Sources */,
+				2219EE082426A9F4009C6F0C /* DeliveryMethodTVController.swift in Sources */,
 				223936492423DB13004079ED /* InvoiceCoordinator.swift in Sources */,
 				2298463C23EF3F9700DA93BF /* AlertControllerAdapter.swift in Sources */,
 				22A08CB623CD8908008A33BD /* RecoveryPasswordViewController.swift in Sources */,
@@ -839,27 +858,29 @@
 				2291CD3023DE190E0029FCD1 /* MethodApi.swift in Sources */,
 				227F3513241AB51E001C0500 /* MainContractsCoordinator.swift in Sources */,
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
-				22913B1923FEF67A000F9677 /* RecoveryPasswordCoordinator.swift in Sources */,
 				223FDF8923D092BD0029E547 /* ContractModel.swift in Sources */,
 				223F8FAC241A0A8A00CDCF01 /* OfficesViewController.swift in Sources */,
 				22F6C27723D4DE440042E740 /* AddressUnitModel.swift in Sources */,
 				2278511123CF949F007F1063 /* Shake.swift in Sources */,
-				2274350A2427CC5D00F39AEB /* EmailToDeveloperCoordinator.swift in Sources */,
 				226AA7D323CE3C44003F006A /* SingUpViewController.swift in Sources */,
 				22E2870423E0598A00453CF3 /* ButtonHelper.swift in Sources */,
 				223FDF8523D08A600029E547 /* DeviceModel.swift in Sources */,
 				22E2870223E0133D00453CF3 /* FirstViewController.swift in Sources */,
 				229A807E24195ECE009933D2 /* ProfileTVController.swift in Sources */,
+				22F17C41244C9E2B00A41B44 /* ReceivedDataAddNewTemplateTVController.swift in Sources */,
 				227C7B6F241696E400232BC9 /* MainTabBarCoordinator.swift in Sources */,
 				22913B2324016B31000F9677 /* DataProviderAdapter.swift in Sources */,
-				227F3511241AAD8C001C0500 /* ContractAddCoordinator.swift in Sources */,
+				228C492B243513EF00FDFF21 /* ContractorModel.swift in Sources */,
 				22F1736F23DA1DEB0065751E /* CalculationModel.swift in Sources */,
+				22A3806E24461BF5008CCFAC /* ContractAddFirstPageTVController.swift in Sources */,
 				223F8FB4241A4A7C00CDCF01 /* ContractsTableViewCell.swift in Sources */,
 				229B245C23FC637C005AEC0F /* MainCoordinator.swift in Sources */,
 				22F1682623E6B2F3003FA1EE /* TableViewCellHelper.swift in Sources */,
+				22B7F474244CD12000E84EC5 /* SingUpTVController.swift in Sources */,
 				2291CD3223DEC0070029FCD1 /* DataProviderProtocol.swift in Sources */,
 				22E8CF09241D59E500CA0F52 /* PaymentTVCell.swift in Sources */,
 				22DA897B242E884A002D4D57 /* PayWithApplePayViewController.swift in Sources */,
+				22A38076244B4093008CCFAC /* ContractAddTVController.swift in Sources */,
 				227771CC240B84C10035FC43 /* EmailPredicate.swift in Sources */,
 				223FDF8723D0928C0029E547 /* PaymentModel.swift in Sources */,
 				22913B1523FDB7EE000F9677 /* SceneDelegate.swift in Sources */,
@@ -867,11 +888,10 @@
 				2253EE3123CF351C009FD4B5 /* ResultModel.swift in Sources */,
 				227435072427CBCF00F39AEB /* EmailToDeveloperViewController.swift in Sources */,
 				2298463A23EF281100DA93BF /* CalculationsTVControllerDelegate.swift in Sources */,
-				2284AE73242A56650097E4C2 /* DeliveryOfInvoiceModel.swift in Sources */,
+				2284AE73242A56650097E4C2 /* InvoiceDeliveryMethodModel.swift in Sources */,
 				228E3E8D2421397400402EF6 /* PrototypeTVCell.swift in Sources */,
 				22DA8977242E8820002D4D57 /* PayWithCreditCardViewController.swift in Sources */,
 				22DE41E824249EE80069DABE /* InvoiceDetailsInfoTableViewController.swift in Sources */,
-				2284AE6D2429E62E0097E4C2 /* MainDeliveryOfInvoiceCoordinator.swift in Sources */,
 				226E5AF623F9C020008CFD37 /* Coordinator.swift in Sources */,
 				2235D7B6241E5DF2007A90DD /* DevicesTVController.swift in Sources */,
 				228E3CB323E5F3A9001E06C4 /* ContractDetailsInfoTVControllerDelegate.swift in Sources */,
@@ -1020,7 +1040,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chalimovtimur.mpges.lk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "МП ГЭС";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1041,7 +1061,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chalimovtimur.mpges.lk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "МП ГЭС";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

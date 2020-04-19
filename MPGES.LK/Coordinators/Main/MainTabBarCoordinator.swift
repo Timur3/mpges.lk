@@ -12,14 +12,14 @@ class MainTabBarCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    weak var delegate: MainCoordinator?
+    public weak var delegate: MainCoordinator?
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let mainTabBarVC = UITabBarController()
-
+        let mainTabBarVC: MainTabBarViewController = MainTabBarViewController()
+     
         // MARK: - Contracts
         let contractsNC = UINavigationController()
         contractsNC.navigationBar.isTranslucent = true
@@ -52,7 +52,7 @@ class MainTabBarCoordinator: Coordinator {
 
         mainTabBarVC.viewControllers = tabBarList
         //mainTabBarVC.delegate = self
-        //mainTabBarVC.delegateUser = self
+        //mainTabBarVC.delegateUser = self*/
         
         self.navigationController.pushViewController(mainTabBarVC, animated: true)
     }

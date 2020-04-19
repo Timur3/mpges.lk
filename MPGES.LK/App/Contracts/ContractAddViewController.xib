@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContractAddViewController" customModule="mpges_lk" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContractAddViewController" customModule="МП_ГЭС" customModuleProvider="target">
             <connections>
                 <outlet property="codeBinding" destination="u09-Lb-JEQ" id="ZxC-eT-Wsx"/>
                 <outlet property="errorNumberLabel" destination="kAH-oE-8eN" id="azs-jv-3Mz"/>
@@ -24,16 +24,16 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPf-xQ-hZX">
                     <rect key="frame" x="121.5" y="269" width="132" height="30"/>
                     <state key="normal" title="Добавить договор"/>
-                    <connections>
-                        <action selector="numberInput:" destination="-1" eventType="touchUpInside" id="TrG-0q-rnk"/>
-                    </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="86000300004" borderStyle="roundedRect" placeholder="Лицевой счет" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3Q-nl-M5U">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Лицевой счет" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3Q-nl-M5U">
                     <rect key="frame" x="30" y="130" width="315" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    <connections>
+                        <action selector="numberInput:" destination="-1" eventType="editingDidEnd" id="Pbb-uE-wxn"/>
+                    </connections>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Код подтверждения" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u09-Lb-JEQ">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Код подтверждения" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u09-Lb-JEQ">
                     <rect key="frame" x="30" y="185" width="315" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits"/>

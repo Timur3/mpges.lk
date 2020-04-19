@@ -19,7 +19,7 @@ class MainContractsCoordinator: Coordinator {
     }
     
     func start() {
-        let contractsVC : ContractsTVController = ContractsTVController(nibName: "ContractsTVController", bundle: nil)
+        let contractsVC : ContractsTVController = ContractsTVController()
         contractsVC.tabBarItem = UITabBarItem(title: "Мои услуги", image: UIImage(systemName: "text.badge.checkmark"), tag: 0)
         contractsVC.delegate = self
         self.navigationController.viewControllers = [contractsVC]
@@ -36,27 +36,41 @@ class MainContractsCoordinator: Coordinator {
 }
 
 extension MainContractsCoordinator: ContractsTVControllerDelegate {
+    func navigationContractAddPage(delegate: ContractsTVControllerUserDelegate) {
+        let contractAddFirstPageTVController : ContractAddViewController = ContractAddViewController()
+        contractAddFirstPageTVController.delegate = delegate
+        let navContractAddFirstPageTVController: UINavigationController = UINavigationController(rootViewController: contractAddFirstPageTVController)
+        self.navigationController.present(navContractAddFirstPageTVController, animated: true, completion: nil)
+    }
+    
+    func navigationContractAddTVPage(delegate: ContractsTVControllerUserDelegate) {
+        let contractAddFirstPageTVController : ContractAddTVController = ContractAddTVController()
+        contractAddFirstPageTVController.delegate = delegate
+        let navContractAddFirstPageTVController: UINavigationController = UINavigationController(rootViewController: contractAddFirstPageTVController)
+        self.navigationController.present(navContractAddFirstPageTVController, animated: true, completion: nil)
+    }
+    
     
     func navigationDetailsInfoPage(to contract: ContractModel) {
-        
-        //let contractDetailsInfo: ContractDetailsInfoTVController = ContractDetailsInfoTVController(nibName: "ContractDetailsInfoTVController", bundle: nil)
-        //contractDetailsInfo.contractModel = contract
-        //ApiServiceAdapter.shared.getContractById(delegate: contractDetailsInfo)
-        //contractDetailsInfo.delegate = self
-        //self.navigationController.pushViewController(contractDetailsInfo, animated: true)
-        
-        userDataService.setCurrentContract(contract: contract)
-        
         let contractDetailsInfoCoordinator = ContractDetailsInfoCoordinator(navigationController: navigationController)
-        //contractDetailsInfoCoordinator.delegate = self
+        contractDetailsInfoCoordinator.contract = contract
         childCoordinators.append(contractDetailsInfoCoordinator)
         contractDetailsInfoCoordinator.start()
     }
     
-    func navigationAddPage() {
-        let contractAddCoordinator = ContractAddCoordinator(navigationController: navigationController)
-        //contractAddCoordinator.delegate = self
-        childCoordinators.append(contractAddCoordinator)
-        contractAddCoordinator.start()
+    // переход на страницу Добавления договора
+    func navigationContractAddFisrtPage(delegate: ContractsTVControllerUserDelegate) {
+        let contractAddFirstPageTVController : ContractAddFirstPageTVController = ContractAddFirstPageTVController()
+        contractAddFirstPageTVController.delegate = delegate
+        let navContractAddFirstPageTVController: UINavigationController = UINavigationController(rootViewController: contractAddFirstPageTVController)
+        self.navigationController.present(navContractAddFirstPageTVController, animated: true, completion: nil)
+    }
+    
+    // переход на страницу Добавления договора
+    func navigationContractAddPage1(delegate: ContractsTVControllerUserDelegate) {
+        let contractAddViewController : ContractAddViewController = ContractAddViewController()
+        contractAddViewController.delegate = delegate
+        let navContractAddViewController: UINavigationController = UINavigationController(rootViewController: contractAddViewController)
+        self.navigationController.present(navContractAddViewController, animated: true, completion: nil)
     }
 }

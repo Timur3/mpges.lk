@@ -12,7 +12,8 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigateToPaymentsPage()
     func navigationToInvoicePage()
     func navigationDevicesPage()
-    func navigationDevileryOfInvoicePage()
+    func navigationInvoiceDevileryMethodPage(for invoiceDeliveryMethodId: Int)
+    func didFinishDeliveryMethodPage(for invoiceDeliveryMethod: InvoiceDeliveryMethodModel)
 }
 
 class ContractDetailsInfoTVController: UITableViewController {
@@ -20,23 +21,23 @@ class ContractDetailsInfoTVController: UITableViewController {
     
     var contractNumber: UITableViewCell { getCustomCell(textLabel: "Лицевой счет: " + (contractModel?.number ?? "..."), imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }
     var contractDate: UITableViewCell { getCustomCell(textLabel: "Дата договора: " + (contractModel?.dateRegister ?? "..."), imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }
-    var contractor: UITableViewCell { getCustomCell(textLabel: "Контрагент: " + (contractModel?.contractorNameSmall ?? "..."), imageCell: myImage.person, textAlign: .left, accessoryType: .none) }
+    var contractor: UITableViewCell { getCustomCell(textLabel: "Контрагент: " + (contractModel?.contractor.nameSmall ?? "..."), imageCell: myImage.person, textAlign: .left, accessoryType: .none) }
     var contractSaldo: UITableViewCell { getCustomCell(textLabel: "Баланс: " + ("загружаю..."), imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }
     var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Пополнить счет", imageCell: myImage.creditcard, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
     var paymentsOfContract: UITableViewCell { getCustomCell(textLabel: "История платежей", imageCell: myImage.rub, textAlign: .left, accessoryType: .disclosureIndicator) }
     var calculationsOfContract: UITableViewCell { getCustomCell(textLabel: "История начислений", imageCell: myImage.calc, textAlign: .left, accessoryType: .disclosureIndicator) }
     //var calculationsOfContract: UITableViewCell { getCustomCell(textLabel: "Реестр квитанций", imageCell: myImage.calc, textAlign: .left, accessoryType: .disclosureIndicator) }
     var devicesOfContract: UITableViewCell { getCustomCell(textLabel: "Приборы учета", imageCell: myImage.link, textAlign: .left, accessoryType: .disclosureIndicator) }
-    var mailOfContract: UITableViewCell { getCustomCell(textLabel: "Доставка квитанций", imageCell: myImage.mail, textAlign: .left, accessoryType: .disclosureIndicator)}
+    var mailOfContract: UITableViewCell { getCustomCell(textLabel: (contractModel?.invoiceDeliveryMethod.devileryMethodName ?? "..."), imageCell: myImage.mail, textAlign: .left, accessoryType: .disclosureIndicator)}
     
-    var contractModel: ContractModel? {
+    public var contractModel: ContractModel? {
              didSet {
                  DispatchQueue.main.async {
                     self.contractNumber.textLabel?.text = "Лицевой счет: " + self.contractModel!.number
                     self.contractDate.textLabel?.text = self.contractModel!.dateRegister
-                    self.contractor.textLabel?.text = self.contractModel!.contractorNameSmall
-                    //ApiServiceAdapter.shared.loadSaldoContract(id: (self.contractModel!.id), label: self.contractSaldo.textLabel!)
-                   self.tableView.reloadData()
+                    self.contractor.textLabel?.text = self.contractModel!.contractor.nameSmall
+                    ApiServiceAdapter.shared.loadSaldoContract(id: (self.contractModel!.id), label: self.contractSaldo.textLabel!)
+                    self.tableView.reloadData()
                  }
              }
          }
@@ -131,8 +132,12 @@ class ContractDetailsInfoTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 && indexPath.row == 1 {
-            
+        if indexPath.section == 0 && indexPath.row == 3 {
+            DispatchQueue.main.async {
+                debugPrint("saldo")
+                ApiServiceAdapter.shared.loadSaldoContract(id: (self.contractModel!.id), label: self.contractSaldo.textLabel!)
+                self.tableView.reloadData()
+            }
         }
         if indexPath.section == 1 && indexPath.row == 0 {
             alertSheetShow()
@@ -151,7 +156,7 @@ class ContractDetailsInfoTVController: UITableViewController {
         
         if indexPath.section == 3 && indexPath.row == 0 {
             ActivityIndicatorViewService.shared.showView(form: self.view)
-            self.delegate?.navigationDevileryOfInvoicePage()
+            self.delegate?.navigationInvoiceDevileryMethodPage(for: contractModel!.invoiceDeliveryMethodId)
         }
     }
 }

@@ -1,0 +1,189 @@
+//
+//  ContractAddTVController.swift
+//  mpges.lk
+//
+//  Created by Timur on 18.04.2020.
+//  Copyright © 2020 ChalimovTimur. All rights reserved.
+//
+
+import UIKit
+protocol ContractAddTVControllerUserDelegate: class {
+    func checkContractByNumber(model: ContractNumberModel)
+    func resultCheckContract(result: ServerResponseModel)
+    func goToBinding(model: ContractBindingModel)
+    func resultToBinding(result: ServerResponseModel)
+}
+
+class ContractAddTVController: UITableViewController, ContractAddViewControllerUserDelegate {
+    
+    public weak var delegate: ContractsTVControllerUserDelegate?
+    
+    var sections: [String] {["Лицевой счет", "Код подтверждения", ""]}
+    
+    var numberCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
+    var codeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.edit, textAlign: .left, accessoryType: .none) }()
+    var saveCell: UITableViewCell { getCustomCell(textLabel: "Сохранить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
+    
+    var numberTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Например: 860001000001"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    var codeTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "XXXXXX"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    var user: UserModel? {
+        didSet {
+            DispatchQueue.main.async {
+                self.codeTextField.text = self.user?.Email
+                self.numberTextField.text = self.user?.Name
+            }
+        }
+    }
+    override func viewDidLoad() {
+        self.navigationItem.title = "Добавить договор"
+        super.viewDidLoad()
+        configuration()
+        setUpLayout()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        // Получение списка договоров
+        delegate?.getContracts()
+    }
+    
+    func setUpLayout(){
+        numberCell.addSubview(numberTextField)
+        numberTextField.leadingAnchor.constraint(equalTo: numberCell.leadingAnchor, constant: 50).isActive = true
+        numberTextField.centerYAnchor.constraint(equalTo: numberCell.centerYAnchor).isActive = true
+        codeCell.addSubview(codeTextField)
+        codeTextField.leadingAnchor.constraint(equalTo: codeCell.leadingAnchor, constant: 50).isActive = true
+        codeTextField.centerYAnchor.constraint(equalTo: codeCell.centerYAnchor).isActive = true
+    }
+    
+    @objc func submitAction() {
+        let model = ContractBindingModel(number: numberTextField.text!, code: codeTextField.text!)
+        self.goToBinding(model: model)
+    }
+    // MARK: - Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return 1
+        default:
+            fatalError()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                return numberCell
+            default:
+                fatalError()
+            }
+        case 1:
+            switch indexPath.row {
+            case 0:
+                return codeCell
+            default:
+                fatalError()
+            }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                return saveCell
+            default:
+                fatalError()
+            }
+        default:
+            fatalError()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        sections[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 2 && indexPath.row == 0 {
+            submitAction()
+        }
+    }
+    @objc func cancelButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ContractAddTVController: ContractAddTVControllerUserDelegate {
+    
+    func resultCheckContract(result: ServerResponseModel) {
+        if (result.isError) {
+            numberTextField.shake(times: 3, delta: 5)
+        }
+        //errorNumberLabel.text = result.message
+    }
+    
+    func checkContractByNumber(model: ContractNumberModel) {
+        ApiServiceAdapter.shared.checkByNumberContract(model: model, delegate: self)
+    }
+    
+    func goToBinding(model: ContractBindingModel) {
+        ActivityIndicatorViewService.shared.showView(form: self.view)
+        ApiServiceAdapter.shared.contractBinding(model: model, delegate: self)
+    }
+    
+    func resultToBinding(result: ServerResponseModel) {
+        ActivityIndicatorViewService.shared.hideView()
+        AlertControllerAdapter.shared.show(
+            title: result.isError ? "Ошибка" : "Успешно",
+            mesg: result.message,
+            form: self) { (UIAlertAction) in
+                if !result.isError {
+                    self.cancelButton()
+                }
+        }
+    }
+}
+
+extension ContractAddTVController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+//MARK: - CONFIGURE
+extension ContractAddTVController {
+    private func configuration() {
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        
+        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        self.navigationItem.rightBarButtonItems = [cancelBtn]
+        
+        self.hideKeyboardWhenTappedAround()
+    }
+}

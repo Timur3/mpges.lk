@@ -7,16 +7,13 @@
 //
 
 import UIKit
-protocol ChangePasswordViewControllerDelegate: class {
-    func navigateToBackPage()
-}
 
 class ChangePasswordViewController: UIViewController {
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var passwordConfirmTF: UITextField!
     
-    public weak var delegate: ChangePasswordViewControllerDelegate?
+    public weak var delegate: ProfileCoordinator?
     
     override func viewDidLoad() {
         self.title = "Новый пароль"

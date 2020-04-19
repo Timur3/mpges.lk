@@ -9,21 +9,22 @@
 import UIKit
 
 public protocol ContractsTVControllerDelegate: class {
-    func navigationAddPage()
+    func navigationContractAddFisrtPage(delegate: ContractsTVControllerUserDelegate)
+    func navigationContractAddPage(delegate: ContractsTVControllerUserDelegate)
+    func navigationContractAddTVPage(delegate: ContractsTVControllerUserDelegate)
     func navigationDetailsInfoPage(to contract: ContractModel)
 }
 
 public protocol ContractsTVControllerUserDelegate: class {
-    var sections: [String] { get }
     func getContracts()
     func setContracts(contracts: ContractModelRoot)
     func resultRemoveContractBinding(result: ServerResponseModel)
 }
 
 class ContractsTVController: UITableViewController {
+    var sections: [String] { ["Список действующих услуг"] }
     
     public weak var delegate: ContractsTVControllerDelegate?
-    public weak var delegateUser: ContractsTVControllerUserDelegate?
     
     private var searchController = UISearchController(searchResultsController: nil)
     private var tempContractList = [ContractModel]()
@@ -31,35 +32,55 @@ class ContractsTVController: UITableViewController {
         guard let str = searchController.searchBar.text else { return false }
         return str.isEmpty
     }
-
+    
     private var contractList = [ContractModel]() {
         didSet {
             DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                self.tableView.reloadData()
             }
         }
+    }
     
     override func viewDidLoad() {
         self.navigationItem.title = "Мои услуги"
         super.viewDidLoad()
-        Configuration()
+        configuration()
+    }
+    @objc func alertSheetContractAddShow() {
+        let alert = UIAlertController(title: "Выберите действие", message: nil, preferredStyle: .actionSheet)
+        let actionAddExistContract = UIAlertAction(title: "Добавить существующий договор", style: .default) {
+            (UIAlertAction) in self.showContractAddTVPage()
+        }
+        //let actionNewContract = UIAlertAction(title: "Заключить новый договор", style: .default) {
+        //  (UIAlertAction) in self.showNewContractPage()
+        //}
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alert.addAction(actionAddExistContract)
+        //alert.addAction(actionNewContract)
+        alert.addAction(actionCancel)
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
+    func showNewContractPage()
+    {
+        self.delegate?.navigationContractAddPage(delegate: self)
     }
     
-    @objc func navigateACP()
+    func showContractAddTVPage()
     {
-        self.delegate?.navigationAddPage()
+        self.delegate?.navigationContractAddTVPage(delegate: self)
     }
     
     @objc func refreshDataContract(sender: AnyObject) {
         self.getContracts()
     }
     override func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
-            // Dispose of any resources that can be recreated.
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-        
-        // MARK: - Table view data source
+    
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return self.sections.count
@@ -73,7 +94,7 @@ class ContractsTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "Всего записей: " + String(contractList.count)
     }
-        
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return contractList.count
@@ -82,7 +103,7 @@ class ContractsTVController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "contractCell", for: indexPath) as! ContractsTableViewCell
         cell.imageView?.image = UIImage(systemName: myImage.docText.rawValue)
-        cell.contract = contractList[indexPath.row]
+        cell.update(for: contractList[indexPath.row])
         
         return cell
     }
@@ -91,21 +112,21 @@ class ContractsTVController: UITableViewController {
         let contractDI = contractList[indexPath.row]
         self.delegate?.navigationDetailsInfoPage(to: contractDI)
     }
- 
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                let model = ContractNumberModel(number: contractList[indexPath.row].number)
-                contractList.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                tableView.reloadData()
-                ApiServiceAdapter.shared.removeContractBinding(model: model, delegate: self)
-                
-            } else if editingStyle == .insert {
-                // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-            }
+        if editingStyle == .delete {
+            let model = ContractNumberModel(number: contractList[indexPath.row].number)
+            contractList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+            ApiServiceAdapter.shared.removeContractBinding(model: model, delegate: self)
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
+}
 // MARK: - SEARCH
 extension ContractsTVController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
@@ -134,10 +155,6 @@ extension ContractsTVController: ContractsTVControllerUserDelegate {
     func resultRemoveContractBinding(result: ServerResponseModel) {
         debugPrint("Success")
     }
-    var sections: [String] { ["Список действующих услуг"] }
-    func getContractById(contract: [ContractModel]) {
-        
-    }
     func setContracts(contracts: ContractModelRoot) {
         // todo доделать получение данных из realm
         contractList = contracts.data
@@ -149,23 +166,24 @@ extension ContractsTVController: ContractsTVControllerUserDelegate {
 // MARK: - CONFIGURE
 extension ContractsTVController {
     
-private func Configuration() {
-    self.refreshControl = UIRefreshControl()
-    let addContract = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateACP))
-    self.navigationItem.rightBarButtonItems = [addContract]
-    searchController.searchResultsUpdater = self
-    searchController.obscuresBackgroundDuringPresentation = false
-    searchController.searchBar.placeholder = "Введите номер договора"
-    navigationItem.searchController = searchController
-    definesPresentationContext = true
-    self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-    let nib = UINib(nibName: "ContractsTableViewCell", bundle: nil)
-    self.tableView.register(nib, forCellReuseIdentifier: "contractCell")
-    self.tableView.dataSource = self
-    self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
-    refreshDataContract(sender: self)
-    tableView.delegate = self
-    tableView.dataSource = self
-    delegateUser = self
+    private func configuration() {
+        self.refreshControl = UIRefreshControl()
+        let addContract = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(alertSheetContractAddShow))
+        self.navigationItem.rightBarButtonItems = [addContract]
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Введите номер договора"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        let nib = UINib(nibName: "ContractsTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "contractCell")
+        self.tableView.dataSource = self
+        self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
+        refreshDataContract(sender: self)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 }

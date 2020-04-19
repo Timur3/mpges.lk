@@ -25,33 +25,47 @@ class ApiServiceAdapter {
     }
     
     // проверка договора
-    func checkByNumberContract(model: ContractNumberModel,delegate: ContractAddViewControllerUserDelegate) {
+    func checkByNumberContract(model: ContractNumberModel,delegate: ContractAddTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.checkContractByNumber, completion: delegate.resultCheckContract(result:))
     }
     
     // привязка договора
-    func contractBinding(model: ContractBindingModel,delegate: ContractAddViewControllerUserDelegate) {
+    func contractBinding(model: ContractBindingModel,delegate: ContractAddTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.contractBinding, completion: delegate.resultToBinding(result:))
     }
+    
+    // привязка договора
+    func getListOfContractNumbers(delegate: ContractAddFirstPageTVControllerDelegate) {
+        ApiService.shared.requestByToken(method: methodApi.getListOfContractNumbers, completion: delegate.setData(for:))
+    }
+    
     
     // удаление привязки договора
     func removeContractBinding(model: ContractNumberModel, delegate: ContractsTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.removeContractBinding, completion: delegate.resultRemoveContractBinding(result:))
     }
-    
+    // получение начисление по квитанции
+    func getCalculationsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerUserDelegate){
+        ApiService.shared.requestById(id: id, method: methodApi.getCalculationsByInvoiceId, completion: delegate.setCalculations(calculations:))
+    }
     // получение платежей по договору
-    func getPaymentsByContractId(delegate: PaymentsTVControllerUserDelegate) {
-        ApiService.shared.requestById(id: uds.getCurrentContract()!, method: methodApi.getPaymentsByContractId, completion: delegate.setPayments(payments:))
+    func getPaymentsByContractId(id: Int, delegate: PaymentsTVControllerUserDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.getPaymentsByContractId, completion: delegate.setPayments(payments:))
+    }
+    
+    // получение платежей по квитанции
+    func getPaymentsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerUserDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.getPaymentsByInvoiceId, completion: delegate.setPayments(payments:))
     }
     
     // получение платежей по договору
-    func getInvoiceByContractId(delegate: InvoicesTableViewControllerUserDelegate) {
-        ApiService.shared.requestById(id: uds.getCurrentContract()!, method: methodApi.getInvoicesByContractId, completion: delegate.setInvoices(invoices:))
+    func getInvoiceByContractId(id: Int, delegate: InvoicesTableViewControllerUserDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.getInvoicesByContractId, completion: delegate.setInvoices(invoices:))
     }
     
     // получение приборов учета по договору
-    func getDevicesByContractId(delegate: DevicesTVControllerUserDelegate) {
-        ApiService.shared.requestById(id: uds.getCurrentContract()!, method: methodApi.getDevicesByContractId, completion: delegate.setDevices(devices:))
+    func getDevicesByContractId(id: Int, delegate: DevicesTVControllerUserDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.getDevicesByContractId, completion: delegate.setDevices(devices:))
     }
     
     // получение показаний по прибору учета
@@ -89,13 +103,13 @@ class ApiServiceAdapter {
     }
     
     // восстановление пароля
-    func passwordRecovery(model: UserEmailModel, delegate: RecoveryPasswordViewControllerUserDelegate){
+    func passwordRecovery(model: UserEmailModel, delegate: RecoveryPasswordTVControllerUserDelegate){
         ApiService.shared.requestByModel(model: model, requestMethod: .post, method: methodApi.passwordRecovery, completion: delegate.resultOfPassordRecovery(result:))
     }
     
     // получение способов доставки
-    func getDeliveryOfInvoices(delegate: DeliveryOfInvoiceTVControllerDelegate) {
-        ApiService.shared.requestByToken(method: methodApi.getDeliveryOfInvoice, completion: delegate.startWithData(model:))
+    func getDeliveryOfInvoices(delegate: DeliveryMethodTVControllerDelegate) {
+        ApiService.shared.requestByToken(method: methodApi.getDeliveryOfInvoice, completion: delegate.setData(for:))
     }
     
     func loadSaldoContract(id: Int, label: UILabel) {

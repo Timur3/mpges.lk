@@ -8,6 +8,16 @@
 
 import UIKit
 
+protocol MainCoordinatorDelegate: class {
+    func navigateToSingInPage()
+    func navigateToSingUpPage()
+    func navigateToFirstPage()
+    func navigateToRecoveryPasswordPage()
+    func goToNextSceneApp()
+    func goToDemo()
+    func childDidFinish(_ child: Coordinator)
+}
+
 class MainCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
@@ -19,12 +29,11 @@ class MainCoordinator: Coordinator {
     
     func start() {
         if (true) {
-            let firstViewController : FirstViewController = FirstViewController(nibName: "FirstViewController", bundle: nil)
+            let firstViewController : FirstViewController = FirstViewController()
             firstViewController.delegate = self
             self.navigationController.viewControllers = [firstViewController]
         } else
         {
-            debugPrint("to app")
             let mainTabBarCoordinator = MainTabBarCoordinator(navigationController: navigationController)
             mainTabBarCoordinator.delegate = self
             childCoordinators.append(mainTabBarCoordinator)
@@ -33,27 +42,53 @@ class MainCoordinator: Coordinator {
     }
 }
 
-extension MainCoordinator: FirstViewControllerDelegate {
-    func navigateToSingUpPage() {
-        let singUpCoordinator = SingUpCoordinator(navigationController: navigationController)
-        singUpCoordinator.delegate = self
-        childCoordinators.append(singUpCoordinator)
-        singUpCoordinator.start()
+extension MainCoordinator: MainCoordinatorDelegate {
+    func childDidFinish(_ child: Coordinator){
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
     }
     
-    // Navigate to next page
+    // Переход на страницу входа
     func navigateToSingInPage() {
-       let singInCoordinator = SingInCoordinator(navigationController: navigationController)
-       singInCoordinator.delegate = self
-       childCoordinators.append(singInCoordinator)
-       singInCoordinator.start()
-    }
-}
-
-extension MainCoordinator: BackToFirstViewControllerDelegate {
-    func navigateBackToFirstPage(newOrderCoordinator: Coordinator) {
-        navigationController.popToRootViewController(animated: true)
-        childCoordinators.removeLast()
+       let singInViewController : SingInViewController = SingInViewController()
+       singInViewController.delegate = self
+       self.navigationController.pushViewController(singInViewController, animated: true)
     }
     
+    func navigateToFirstPage() {
+        let firstViewController : FirstViewController = FirstViewController()
+        firstViewController.delegate = self
+        self.navigationController.setNavigationBarHidden(false, animated: true)
+        self.navigationController.viewControllers = [firstViewController]
+        //self.navigationController
+        self.childCoordinators.removeAll()
+    }
+    
+    func navigateToRecoveryPasswordPage() {
+        let recoveryPasswordViewController : RecoveryPasswordTVController = RecoveryPasswordTVController()
+        let navRecoveryPasswordViewController: UINavigationController = UINavigationController(rootViewController: recoveryPasswordViewController)
+        self.navigationController.present(navRecoveryPasswordViewController, animated: true, completion: nil)
+    }
+    
+    func goToNextSceneApp() {
+        let mainTabBarCoordinator = MainTabBarCoordinator(navigationController: navigationController)
+        mainTabBarCoordinator.delegate = self
+        childCoordinators.append(mainTabBarCoordinator)
+        mainTabBarCoordinator.start()
+    }
+    
+    func goToDemo() {
+        
+    }
+    
+    
+    func navigateToSingUpPage() {
+        let singUpTVController : SingUpTVController = SingUpTVController()
+        let navSingUpTVController: UINavigationController = UINavigationController(rootViewController: singUpTVController)
+        self.navigationController.present(navSingUpTVController, animated: true, completion: nil)
+    }
 }

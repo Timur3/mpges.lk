@@ -9,11 +9,10 @@
 import UIKit
 
 class ProfileCoordinator: Coordinator {
-
+    public weak var delegate: MainCoordinator?
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    weak var delegate: MainCoordinator?
-    
+   
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -29,20 +28,19 @@ class ProfileCoordinator: Coordinator {
 }
 extension ProfileCoordinator: ProfileTVControllerDelegate {
     func navigationEmailToDeveloperPage() {
-        let emailToDevCoordinator = EmailToDeveloperCoordinator(navigationController: navigationController)
-        //navigationChangePasswordPage.delegate = self
-        childCoordinators.append(emailToDevCoordinator)
-        emailToDevCoordinator.start()
+        let emailToDevVC : EmailToDeveloperViewController = EmailToDeveloperViewController()
+        emailToDevVC.delegate = self
+        let navEmailToDevVC: UINavigationController = UINavigationController(rootViewController: emailToDevVC)
+        self.navigationController.present(navEmailToDevVC, animated: true, completion: nil)
     }
     
     func navigationChangePasswordPage() {
-        let changePasswordCoordinator = ChangePasswordCoordinator(navigationController: navigationController)
-        //navigationChangePasswordPage.delegate = self
-        childCoordinators.append(changePasswordCoordinator)
-        changePasswordCoordinator.start()
-    }
+        let changePasswordVC : ChangePasswordViewController = ChangePasswordViewController()
+        changePasswordVC.delegate = self
+        let navChangePasswordVC: UINavigationController = UINavigationController(rootViewController: changePasswordVC)
+        self.navigationController.present(navChangePasswordVC, animated: true, completion: nil)    }
     
     func navigateToFirstPage() {
-        delegate?.navigateBackToFirstPage(newOrderCoordinator: self)
+        delegate?.navigateToFirstPage()
     }
 }

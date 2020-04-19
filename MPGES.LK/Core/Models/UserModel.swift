@@ -21,10 +21,8 @@ public struct UserModel: Decodable, Encodable {
     
     let Id: Int
     var Name: String
-//    let Password: String
-//    let PasswordHash: String
     var Email: String
-    var Mobile: String
+    var Mobile: String?
     let IsOnline: Bool
     let Confirmed: Bool
     let CreateDate: String
@@ -33,8 +31,6 @@ public struct UserModel: Decodable, Encodable {
     enum CodingKeys: String, CodingKey {
         case Id = "id"
         case Name = "name"
-//        case Password = "password"
-//        case PasswordHash = "passwordHash"
         case Email = "email"
         case Mobile = "mobile"
         case IsOnline = "isOnline"
@@ -43,16 +39,14 @@ public struct UserModel: Decodable, Encodable {
         case RoleId = "roleId"
     }
     
-    init(Id: Int, Name: String,Password: String,PasswordHash: String,Email: String,Mobile: String,IsOnline: Bool,Confirmed: Bool,CreateDate: String, RoleId: Int) {
-            self.Id = Id
-            self.Name = Name
-//            self.Password = Password
-//            self.PasswordHash = PasswordHash
-            self.Email = Email
-            self.Mobile = Mobile
-            self.IsOnline = IsOnline
-            self.Confirmed = Confirmed
-            self.CreateDate = CreateDate
-            self.RoleId = RoleId        
-       }
+    init(Id: Int, Name: String, Password: String, PasswordHash: String, Email: String, Mobile: String, IsOnline: Bool, Confirmed: Bool, CreateDate: String, RoleId: Int) {
+        self.Id = Id
+        self.Name = Name
+        self.Email = Email
+        self.Mobile = Mobile
+        self.IsOnline = IsOnline
+        self.Confirmed = Confirmed
+        self.CreateDate = CreateDate
+        self.RoleId = RoleId
+    }
 }

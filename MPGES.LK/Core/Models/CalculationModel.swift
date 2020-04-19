@@ -14,8 +14,27 @@ public struct CalculationModelRoot: Decodable {
 }
 
 public struct CalculationModel: Decodable {
-    var id: Int
-    var date: String
-    var volume: Int
-    var Sum: Double    
+    var id:                     Int
+    var meteringId:             Int
+    var objectId:               Int
+    var invoiceId:              Int
+    var zoneId:                 Int
+    var tariffZone:             TariffZoneModel
+    var shkId:                  Int
+    var typeOfCalculationId:    Int
+    var typeOfCalculation:      TypeOfCalculationModel
+    var date:                   String
+    var monthId:                Int
+    var year:                   Int
+    var tarifValueId:           Int
+    var receivedDataId:         Int
+    var testi:                  Int
+    var pTesti:                 Int
+    var volume:                 Int
+    var summa:                  Double
+    var powerObj:               Double
+    var factorUseValue:         Double
+    var createBy:               String
+    var createDate:             String
+    var note:                   String
 }

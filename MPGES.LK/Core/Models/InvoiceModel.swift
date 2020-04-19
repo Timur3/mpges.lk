@@ -19,11 +19,12 @@ public struct InvoiceModel: Decodable {
     var date: String
     var month: Int
     var year: Int
-    var statusSaldoId: Int?
+    var statusSaldoId: Int
     var statusSaldoName: String
     var saldo: Double
     var debet: Double
     var credit: Double
+    var balanceEndOfPeriod: Double?
     var isClose: Bool
 }
 
@@ -41,6 +42,7 @@ public class InvoiceModelVeiw  {
 public class InvoiceDetailsModelView {
     var calc: [CalculationModel]
     var pay: [PaymentModel]
+    
     init(calc: [CalculationModel], pay: [PaymentModel]) {
         self.calc = calc
         self.pay = pay

@@ -8,13 +8,6 @@
 
 import UIKit
 
-public protocol SingInViewControllerDelegate: class {
-    func navigateToFirstPage()
-    func navigateToRecoveryPasswordPage()
-    func goToNextSceneApp()
-    func goToDemo()
-}
-
 public protocol SingInViewControllerUserDelegate: class {
     func authApi(model: AuthModel)
     func resultAuthApi(modelResult: ResultModel)
@@ -22,7 +15,7 @@ public protocol SingInViewControllerUserDelegate: class {
 
 class SingInViewController: UIViewController {
 
-    public weak var delegate: SingInViewControllerDelegate?
+    public weak var delegate: MainCoordinatorDelegate?
     public weak var delegateUser: SingInViewControllerUserDelegate?
     
     let userDataService = UserDataService()

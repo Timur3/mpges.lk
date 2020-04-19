@@ -15,7 +15,6 @@ protocol ProfileTVControllerDelegate: class {
 }
 
 protocol ProfileTVControllerUserDelegate: class {
-    var sections: [String] { get }
     func getProfile()
     func setProfile(profile: UserModel)
     func saveProfile(profile: UserModel)
@@ -23,6 +22,7 @@ protocol ProfileTVControllerUserDelegate: class {
 }
 
 class ProfileTVController: UITableViewController {
+    var sections: [String] {["Мои данные", "О программе", "Прочее"]}
     
     public weak var delegate: ProfileTVControllerDelegate?
         
@@ -185,9 +185,6 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
     func setProfile(profile: UserModel) {
         user = profile
     }
-    
-    var sections: [String] {["Мои данные", "О программе", "Прочее"]}
-    
 }
 
 extension ProfileTVController {
@@ -212,7 +209,7 @@ extension ProfileTVController {
        self.hideKeyboardWhenTappedAround()
     }
     func saveAlertSheetShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Ва подтверждаете операцию?", form: self) { (UIAlertAction) in
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self) { (UIAlertAction) in
             self.user?.Name = self.nameTextField.text!
             self.user?.Email = self.emailTextField.text!
             self.user?.Mobile = self.mobileTextField.text!
@@ -230,12 +227,6 @@ extension ProfileTVController {
     func alertSheetExitShow(){
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self) { (UIAlertAction) in
             self.delegate?.navigateToFirstPage()
-            //let myViewController = SingInViewController(nibName: "SingInViewController", bundle: nil)
-            //self.present(myViewController, animated: true, completion: nil)
-            //self.navigationController!.pushViewController(FirstViewController(nibName: "FirstViewController", bundle: nil), animated: true)
-            debugPrint("exitB press")
-            //UserDataService.shared.delData()
-            //navigationController?.isNavigationBarHidden = false
         }
     }
 }

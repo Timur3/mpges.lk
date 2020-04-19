@@ -78,6 +78,24 @@ class ReceivedDataTVController: UITableViewController {
         cell.update(for: receivedDataList[indexPath.section].receivedData[indexPath.row])
         return cell
     }
+    
+    @objc func alertSheetMeterDataDeviceShow() {
+        let alert = UIAlertController(title: "Вы действительно хотите сообщить показания?", message: nil, preferredStyle: .actionSheet)
+        let actionYes = UIAlertAction(title: "Да", style: .default) {
+            (UIAlertAction) in self.showReceivedDataAddNewTemplateTVPage()
+        }
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alert.addAction(actionYes)
+        //alert.addAction(actionNewContract)
+        alert.addAction(actionCancel)
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
+    func showReceivedDataAddNewTemplateTVPage()
+    {
+        //self.delegate.
+    }
 }
 //MARK: - SEARCH
 extension ReceivedDataTVController: UISearchResultsUpdating {
@@ -87,6 +105,10 @@ extension ReceivedDataTVController: UISearchResultsUpdating {
 }
 extension ReceivedDataTVController {
     private func configuration() {
+        self.refreshControl = UIRefreshControl()
+        let sendMeterDataDevice = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(alertSheetMeterDataDeviceShow))
+        self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
+        
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         let nib = UINib(nibName: "ReceivedDataTVCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "receivedDataCell")

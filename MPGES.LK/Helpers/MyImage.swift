@@ -29,4 +29,7 @@ enum myImage: String {
     case textMinus = "text.badge.minus"
     case device = "device-icon"
     case receivedData = "doc.plaintext"
+    case sendDoc = "arrow.up.doc"
+    case printer = "printer"
+    case dollar = "dollarsign.circle"
 }
