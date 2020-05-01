@@ -50,7 +50,9 @@ class ContractAddTVController: UITableViewController, ContractAddViewControllerU
         configuration()
         setUpLayout()
     }
-    
+    override func viewWillLayoutSubviews() {
+        self.updateTableViewContentInset()
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // Получение списка договоров
@@ -153,11 +155,12 @@ extension ContractAddTVController: ContractAddTVControllerUserDelegate {
     
     func resultToBinding(result: ServerResponseModel) {
         ActivityIndicatorViewService.shared.hideView()
+        let isError = result.isError
         AlertControllerAdapter.shared.show(
-            title: result.isError ? "Ошибка" : "Успешно",
+            title: isError ? "Ошибка" : "Успешно",
             mesg: result.message,
             form: self) { (UIAlertAction) in
-                if !result.isError {
+                if !isError {
                     self.cancelButton()
                 }
         }
@@ -185,5 +188,12 @@ extension ContractAddTVController {
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    func updateTableViewContentInset() {
+        let viewHeight: CGFloat = view.frame.size.height
+        let tableViewContentHeight: CGFloat = tableView.contentSize.height
+        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
+        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  -marginHeight, right: 0)
     }
 }

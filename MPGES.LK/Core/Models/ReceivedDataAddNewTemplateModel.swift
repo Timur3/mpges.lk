@@ -5,10 +5,11 @@
 //  Created by Timur on 19.04.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
+import Foundation
 
 public class ReceivedDataAddNewTemplateModelRoot: Decodable {
     var count: Int
-    var data: [ReceivedDataModel]
+    var data: [ReceivedDataAddNewTemplateModel]
 }
 
 public struct ReceivedDataAddNewTemplateModel: Decodable {
@@ -35,3 +36,21 @@ public struct ReceivedDataAddNewTemplateModel: Decodable {
     }
 }
 
+public class ReceivedDataAddNewTemplateModelView  {
+    var date: String
+    var tariffZone: String
+    var receivedDataAddNewTemplates: [ReceivedDataAddNewTemplateModel] = []
+    
+    init(date: String, tariffZone: String, receivedDataAddNewTemplates: [ReceivedDataAddNewTemplateModel])
+    {
+        self.date = date
+        self.tariffZone = tariffZone
+        self.receivedDataAddNewTemplates = receivedDataAddNewTemplates
+    }
+}
+
+public struct ReceivedDataAddModel: Encodable {
+    let tariffZoneId: Int
+    let date: Date
+    let receivedDataValue: Int
+}

@@ -16,7 +16,7 @@ class ContractsTableViewCell: UITableViewCell {
     func update(for contract: ContractModel) {
         let conNum = "\(contract.id)"
         numberContract.text =  "#"+conNum
-        contractTypeName.text = contract.typeContract.name
+        contractTypeName.text = contract.typeOfContract.name
            DispatchQueue.main.async { [weak self] in
                guard self != nil else { return }
             ApiServiceAdapter.shared.loadSaldoContract(id: contract.id, label: self!.saldoContract)

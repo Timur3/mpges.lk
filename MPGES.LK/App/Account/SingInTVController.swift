@@ -1,30 +1,17 @@
 //
-//  ProfileTVController.swift
+//  SingInTVController.swift
 //  mpges.lk
 //
-//  Created by Timur on 02.02.2020.
+//  Created by Timur on 23.04.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
 import UIKit
 
-protocol ProfileTVControllerDelegate: class {
-    func navigateToFirstPage()
-    func navigationChangePasswordPage()
-    func navigationEmailToDeveloperPage()
-}
-
-protocol ProfileTVControllerUserDelegate: class {
-    func getProfile()
-    func setProfile(profile: UserModel)
-    func saveProfile(profile: UserModel)
-    func resultOfSaveProfile(result: ServerResponseModel)
-}
-
-class ProfileTVController: UITableViewController {
+class SingInTVController: UITableViewController {
     var sections: [String] {["Мои данные", "О программе", "Прочее"]}
     
-    public weak var delegate: ProfileTVControllerDelegate?
+    public weak var delegate: MainCoordinator?
     
     var exitCell: UITableViewCell { getCustomCell(textLabel: "Выйти", imageCell: myImage.power, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
     var passChange: UITableViewCell { getCustomCell(textLabel: "Изменить пароль", imageCell: myImage.edit, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
@@ -65,14 +52,10 @@ class ProfileTVController: UITableViewController {
         }
     }
     override func viewDidLoad() {
-        self.navigationItem.title = "Еще"
+        self.navigationItem.title = "Войти"
         super.viewDidLoad()
         configuration()
         setUpLayout()
-    }
-    @objc func refreshData()
-    {
-        self.getProfile()
     }
     
     func setUpLayout(){
@@ -151,49 +134,26 @@ class ProfileTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 && indexPath.row == 0 {
-            nameTextField.becomeFirstResponder()
-        }
-        if indexPath.section == 0 && indexPath.row == 2 {
-            mobileTextField.becomeFirstResponder()
-        }
         if indexPath.section == 0 && indexPath.row == 3 {
-            saveAlertSheetShow()
+            //saveAlertSheetShow()
         }
         if indexPath.section == 1 && indexPath.row == 1 {
-            self.delegate?.navigationEmailToDeveloperPage()
+            // self.delegate?.navigationEmailToDeveloperPage()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
-            alertSheetChangePasswordShow()
+            // alertSheetChangePasswordShow()
         }
         if indexPath.section == 2 && indexPath.row == 1 {
-            alertSheetExitShow()
+            // alertSheetExitShow()
         }
-        
-        //let viewController = (initWithNibName:@"FirstViewController" bundle:nil]
-        //self.navigationController.pushViewController(viewController, animated:true)
+    }
+    @objc func geToDemo() {
+        let model = AuthModel(email: "demo@mp-ges.ru", password: "Qwerty123!")
+        self.delegate?.authApi(model: model)
     }
 }
 
-extension ProfileTVController: ProfileTVControllerUserDelegate {
-    func getProfile() {
-        ApiServiceAdapter.shared.getProfileById(delegate: self)
-        self.refreshControl?.endRefreshing()
-    }
-    
-    func saveProfile(profile: UserModel) {
-        ApiServiceAdapter.shared.updateUser(model: profile, delegate: self)
-    }
-    func resultOfSaveProfile(result: ServerResponseModel) {
-        AlertControllerAdapter.shared.show(title: result.isError ? "Ошибка!" : "Успешно!", mesg: result.message, form: self)
-    }
-    
-    func setProfile(profile: UserModel) {
-        user = profile
-    }
-}
-
-extension ProfileTVController {
+extension SingInTVController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -206,33 +166,11 @@ extension ProfileTVController {
 }
 
 //MARK: - CONFIGURE
-extension ProfileTVController {
+extension SingInTVController {
     private func configuration() {
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
+        let demoBtn = UIBarButtonItem(title: "Demo", style: .plain, target: self, action: #selector(geToDemo))
+        self.navigationItem.rightBarButtonItems = [demoBtn]
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        self.getProfile()
         self.hideKeyboardWhenTappedAround()
-    }
-    func saveAlertSheetShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self) { (UIAlertAction) in
-            self.user?.Name = self.nameTextField.text!
-            self.user?.Email = self.emailTextField.text!
-            self.user?.Mobile = self.mobileTextField.text!
-            // save
-            self.saveProfile(profile: self.user!)
-        }
-    }
-    
-    func alertSheetChangePasswordShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self) { (UIAlertAction) in
-            print("change pass")
-            self.delegate?.navigationChangePasswordPage()
-        }
-    }
-    func alertSheetExitShow(){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self) { (UIAlertAction) in
-            self.delegate?.navigateToFirstPage()
-        }
     }
 }

@@ -36,7 +36,7 @@ class InvoicesTableViewController: UITableViewController {
     
 @objc func refreshInvoicesData(sender: AnyObject){
     print("refresh")
-    ApiServiceAdapter.shared.getInvoiceByContractId(id: contractId, delegate: self)
+    ApiServiceAdapter.shared.getInvoicesByContractId(id: contractId, delegate: self)
     self.refreshControl?.endRefreshing()
     }
 
@@ -75,8 +75,8 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
             
 override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    let dataSend = invoiceList[indexPath.section].invoices[indexPath.row]
-    self.delegate?.navigantionInvoiceDetailsInfoPage(model: dataSend)
+    let invoice = invoiceList[indexPath.section].invoices[indexPath.row]
+    self.delegate?.navigantionInvoiceDetailsInfoPage(model: invoice)
     
     }
     // Override to support conditional editing of the table view.

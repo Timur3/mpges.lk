@@ -9,21 +9,19 @@
 import UIKit
 
 protocol InvoiceDetailsInfoTableViewControllerDelegate: class {
-    func navigantionInvoicePage()
-}
-
-protocol InvoiceDetailsInfoTableViewControllerUserDelegate: class {
     var sections: [String] { get }
     func setPayments(payments: PaymentsModelRoot)
     func setCalculations(calculations: CalculationModelRoot)
+    func sendInvoice(model: InvoiceModel)
+    func resultOfSendInvoice(result: ServerResponseModel)
 }
 
 class InvoiceDetailsInfoTableViewController: UITableViewController {
-    var balanceBeginOfPeriod: UITableViewCell { getCustomCell(textLabel: (invoice?.statusSaldoName ?? "...") + " \(invoice?.saldo ?? 0) руб.", imageCell: myImage.dollar, textAlign: .left, accessoryType: .none) }
-    var balanceEndOfPeriod: UITableViewCell { getCustomCell(textLabel: (invoice?.statusSaldoName ?? "...") + " \(invoice?.saldo ?? 0) руб.", imageCell: myImage.dollar, textAlign: .left, accessoryType: .none) }
+    var balanceBeginOfPeriod: UITableViewCell { getCustomCell(textLabel: (invoice?.statusSaldo.name ?? "...") + " \(invoice?.saldo ?? 0) руб.", imageCell: myImage.dollar, textAlign: .left, accessoryType: .none) }
+    var balanceEndOfPeriod: UITableViewCell { getCustomCell(textLabel: (invoice?.statusSaldo.name ?? "...") + " \(invoice?.saldo ?? 0) руб.", imageCell: myImage.dollar, textAlign: .left, accessoryType: .none) }
     var notCalculations: UITableViewCell { getCustomCell(textLabel: "не производились", imageCell: myImage.textPlus, textAlign: .left, accessoryType: .none) }
     var notPays: UITableViewCell { getCustomCell(textLabel: "не совершались", imageCell: myImage.textPlus, textAlign: .left, accessoryType: .none) }
-    public weak var delegate: InvoiceDetailsInfoTableViewControllerDelegate?
+    
     public var invoice: InvoiceModel?
     
     override func viewDidLoad() {
@@ -35,7 +33,7 @@ class InvoiceDetailsInfoTableViewController: UITableViewController {
     var invoiceDetails: InvoiceDetailsModelView = InvoiceDetailsModelView(calc: [], pay: [])
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return sections.count
@@ -65,19 +63,19 @@ class InvoiceDetailsInfoTableViewController: UITableViewController {
             return balanceBeginOfPeriod
         case 1:
             if self.invoiceDetails.calc.count > 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "calculationCell", for: indexPath) as! CalculationTVCell
-            cell.update(for: self.invoiceDetails.calc[indexPath.row])
-            cell.imageView?.image = UIImage(systemName: myImage.textPlus.rawValue)
-            return cell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "calculationCell", for: indexPath) as! CalculationTVCell
+                cell.update(for: self.invoiceDetails.calc[indexPath.row])
+                cell.imageView?.image = UIImage(systemName: myImage.textPlus.rawValue)
+                return cell
             } else {
                 return notCalculations
             }
         case 2:
             if self.invoiceDetails.pay.count > 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath) as! PaymentTVCell
-            cell.update(for: self.invoiceDetails.pay[indexPath.row])
-            cell.imageView?.image = UIImage(systemName: myImage.rub.rawValue)
-            return cell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath) as! PaymentTVCell
+                cell.update(for: self.invoiceDetails.pay[indexPath.row])
+                cell.imageView?.image = UIImage(systemName: myImage.rub.rawValue)
+                return cell
             } else {
                 return notPays
             }
@@ -110,24 +108,38 @@ class InvoiceDetailsInfoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           tableView.deselectRow(at: indexPath, animated: true)
-
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     @objc func refreshData() {
-        print("refresh")
         ApiServiceAdapter.shared.getPaymentsByInvoiceId(id: invoice!.id, delegate: self)
         self.refreshControl?.endRefreshing()
     }
     @objc func alertSheetSendInvoiceShow(){
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите получить платежный документ на электронную почту?", form: self) { (UIAlertAction) in
-            //self.delegate?.navigateToFirstPage()
+            self.sendInvoice(model: self.invoice!)
         }
     }
-
+    
 }
 
-extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewControllerUserDelegate {
+extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewControllerDelegate {
+    func sendInvoice(model: InvoiceModel) {
+        ActivityIndicatorViewService.shared.showView(form: self.view)
+        ApiServiceAdapter.shared.sendInvoiceByEmail(id: model.id, delegate: self)
+    }
+    
+    func resultOfSendInvoice(result: ServerResponseModel) {
+        ActivityIndicatorViewService.shared.hideView()
+        
+        let isError = result.isError
+        AlertControllerAdapter.shared.show(
+            title: isError ? "Ошибка" : "Успешно",
+            mesg: result.message,
+            form: self)
+    }
+    
     func setPayments(payments: PaymentsModelRoot) {
         self.invoiceDetails.pay = payments.data
         ApiServiceAdapter.shared.getCalculationsByInvoiceId(id: invoice!.id, delegate: self)
@@ -146,7 +158,7 @@ extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewCont
 //MARK: - CONFIGURATION
 extension InvoiceDetailsInfoTableViewController {
     func configuration() {
-        let sendInvoice = UIBarButtonItem(image: UIImage(systemName: myImage.sendDoc.rawValue), style: .plain, target: self, action: #selector(alertSheetSendInvoiceShow))
+        let sendInvoice = UIBarButtonItem(image: UIImage(systemName: myImage.trayUp.rawValue), style: .plain, target: self, action: #selector(alertSheetSendInvoiceShow))
         self.navigationItem.rightBarButtonItems = [sendInvoice]
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         let nibCalc = UINib(nibName: "CalculationTVCell", bundle: nil)

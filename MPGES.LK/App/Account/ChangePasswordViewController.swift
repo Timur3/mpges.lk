@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChangePasswordViewController: UIViewController {
+class ChangePasswordViewController1: UIViewController {
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var passwordConfirmTF: UITextField!
@@ -31,7 +31,7 @@ class ChangePasswordViewController: UIViewController {
     
 }
 //MARK: CONFiGURE
-extension ChangePasswordViewController {
+extension ChangePasswordViewController1 {
         private func configuration() {
             submitBtn.addTarget(self, action: #selector(submitAction), for: .touchUpInside)
             submitBtn.Circle()

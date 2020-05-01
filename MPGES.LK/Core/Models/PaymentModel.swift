@@ -31,7 +31,7 @@ public class PaymentModel: Object, Decodable {
     @objc dynamic var meteringId: Int = 0
     @objc dynamic var registerPaytsId: Int
     @objc dynamic var cash: String
-    @objc dynamic var packId: Int = 0
+    @objc dynamic var contractId: Int = 0
     @objc dynamic var datePay: String
     @objc dynamic var summa: Double = 0.0
     @objc dynamic var workerId: Int
@@ -44,7 +44,7 @@ public class PaymentModel: Object, Decodable {
         case meteringId = "meteringId"
         case registerPaytsId = "registerPaytsId"
         case cash = "cash"
-        case packId = "packId"
+        case contractId = "contractId"
         case datePay = "datePay"
         case summa = "summa"
         case workerId = "workerId"

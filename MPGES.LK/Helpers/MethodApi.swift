@@ -22,7 +22,10 @@ class MethodApi {
     let getPaymentsByContractId: String
     let getDevicesByContractId: String
     let getReceivedData: String
+    let getTemplateAddNew: String
+    let ReceivedDataAddNew: String
     let getInvoicesByContractId: String
+    let sendInoicesByEmail: String
     let getCalculationsByInvoiceId: String
     let createUser: String
     let updateUser: String
@@ -42,11 +45,14 @@ class MethodApi {
         checkContractByNumber = "contract/checkByNumber/"
         getPaymentById = "payment/"
         getPaymentsByInvoiceId = "payment/getbyinvoiceid/"
-        getPaymentsByContractId = "payment/getbypackid/"
-        getInvoicesByContractId = "invoice/getbycontractid/"
+        getPaymentsByContractId = "payment/getbyContractid/"
+        getInvoicesByContractId = "invoice/getbyContractid/"
+        sendInoicesByEmail = "invoice/sendInvoice/"
         getCalculationsByInvoiceId = "calculation/getbyinvoiceid/"
-        getDevicesByContractId = "device/getbypackid/"
+        getDevicesByContractId = "device/getbyContractid/"
         getReceivedData = "receivedData/getbydeviceid/"
+        getTemplateAddNew = "receivedData/getTemplateAddNew/"
+        ReceivedDataAddNew = "receivedData/AddNew/"
         createUser = "user/create/"
         updateUser = "user/update/"
         getUser = "user/"

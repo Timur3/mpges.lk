@@ -132,7 +132,7 @@ extension PaymentsTVController: PaymentsTVControllerUserDelegate {
     
     // получение данных из Realm, лишний раз не отправлять запрос на сервер
     func getDataForRealm(){
-        let predicate = NSPredicate(format: "packId == " + "\(contractId)")
+        let predicate = NSPredicate(format: "contractId == " + "\(contractId)")
         
         let paymentsRM = (DataProviderService.shared.getObjects(predicate: predicate) as [PaymentModel])
         if (paymentsRM.count) > 0 {

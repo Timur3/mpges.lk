@@ -28,11 +28,26 @@ class DeviceCoordinatorMain: Coordinator {
 extension DeviceCoordinatorMain: DevicesTVControllerDelegate {
     
     func navigationReceivedDataPage(model: DeviceModel) {
-        let receivedDataCoordinator = ReceivedDataCoordinator(navigationController: navigationController)
-        receivedDataCoordinator.parentCoordinator = self
-        receivedDataCoordinator.device = model
-        childCoordinators.append(receivedDataCoordinator)
-        receivedDataCoordinator.start()
+        let receivedDataTVController: ReceivedDataTVController = ReceivedDataTVController()
+        // todo доделать получение данных из realm
+        receivedDataTVController.delegate = self
+        receivedDataTVController.device = model
+        self.navigationController.pushViewController(receivedDataTVController, animated: true)
+    }
+    
+    func showReceivedDataAddNewTemplatesOneStepPage(device: DeviceModel){
+        let receivedDataAddNewTemplateTVController : ReceivedDataAddNewTemplateTVControllerOneStep = ReceivedDataAddNewTemplateTVControllerOneStep()
+        receivedDataAddNewTemplateTVController.delegate = self
+        receivedDataAddNewTemplateTVController.device = device
+        let navReceivedDataAddNewTemplateTVController: UINavigationController = UINavigationController(rootViewController: receivedDataAddNewTemplateTVController)
+        self.navigationController.present(navReceivedDataAddNewTemplateTVController, animated: true, completion: nil)
+    }
+    
+    func showReceivedDataAddNewTemplatesTwoStepPage(device: DeviceModel, nav: UINavigationController){
+        let receivedDataAddNewTemplateTVController : ReceivedDataAddNewTemplateTVControllerTwoStep = ReceivedDataAddNewTemplateTVControllerTwoStep()
+        receivedDataAddNewTemplateTVController.delegate = self
+        receivedDataAddNewTemplateTVController.device = device
+        nav.pushViewController(receivedDataAddNewTemplateTVController, animated: true)
     }
     
 }

@@ -13,9 +13,15 @@ class DeviceTVCell: UITableViewCell {
     @IBOutlet weak var deviceNumber: UILabel!
     @IBOutlet weak var modelNameDevice: UILabel!
     @IBOutlet weak var addressSetDevice: UILabel!
-
+    @IBOutlet var deviceDateOut: UILabel!
+    @IBOutlet var deviceDateCalibration: UILabel!
+    @IBOutlet var deviceDateNextCalibration: UILabel!
+    
     func update(for device: DeviceModel) {
         deviceNumber.text = device.deviceNumber
+        deviceDateOut.text = device.dateOut
+        deviceDateCalibration.text = device.dateStateCalibration
+        deviceDateNextCalibration.text = device.dateNextCalibration
         modelNameDevice.text = device.deviceTypeName
         addressSetDevice.text = device.addressSet
     }

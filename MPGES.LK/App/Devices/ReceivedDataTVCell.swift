@@ -15,7 +15,7 @@ class ReceivedDataTVCell: UITableViewCell {
     @IBOutlet weak var valueLabel: UILabel!
 
     func update(for receivedData: ReceivedDataModel) {
-        receivedDataDateLabel.text = receivedData.date.replacingOccurrences(of: "T00:00:00", with: "")
+        receivedDataDateLabel.text = receivedData.date
         valueLabel.text = "\(receivedData.value) кВт/час"
         tariffZoneLabel.text = receivedData.tariffZone
     }

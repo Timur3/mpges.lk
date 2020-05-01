@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingInViewController" customModule="mpges_lk" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingInViewController" customModule="МП_ГЭС" customModuleProvider="target">
             <connections>
                 <outlet property="emailTF" destination="wbT-cG-WYM" id="rEb-FB-hYm"/>
                 <outlet property="errorEmailLabel" destination="jVo-pn-7rm" id="dvB-01-4az"/>
@@ -108,21 +108,11 @@
                         <constraint firstItem="C0D-ii-d9F" firstAttribute="centerX" secondItem="k7K-Xz-YIc" secondAttribute="centerX" id="wQN-3d-wx5"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWG-M5-7Q4">
-                    <rect key="frame" x="166" y="535" width="43" height="32"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" title="Demo"/>
-                    <connections>
-                        <action selector="demoBtn:" destination="-1" eventType="touchUpInside" id="GGr-hY-Dgg"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="t1j-8f-Qjd" firstAttribute="bottom" secondItem="gWG-M5-7Q4" secondAttribute="bottom" constant="100" id="000-3T-A4y"/>
                 <constraint firstItem="t1j-8f-Qjd" firstAttribute="trailing" secondItem="k7K-Xz-YIc" secondAttribute="trailing" constant="16" id="Gzy-Ef-E2H"/>
                 <constraint firstItem="k7K-Xz-YIc" firstAttribute="top" secondItem="t1j-8f-Qjd" secondAttribute="top" constant="20" id="Nx4-4q-Bb5"/>
-                <constraint firstItem="gWG-M5-7Q4" firstAttribute="centerX" secondItem="zYP-MZ-caR" secondAttribute="centerX" id="dgL-zr-G83"/>
                 <constraint firstItem="t1j-8f-Qjd" firstAttribute="bottom" secondItem="k7K-Xz-YIc" secondAttribute="bottom" constant="20" id="dzZ-yF-KDu"/>
                 <constraint firstItem="k7K-Xz-YIc" firstAttribute="centerX" secondItem="zYP-MZ-caR" secondAttribute="centerX" id="fXY-Lu-Igk"/>
                 <constraint firstItem="k7K-Xz-YIc" firstAttribute="leading" secondItem="t1j-8f-Qjd" secondAttribute="leading" constant="16" id="q4z-j8-UTJ"/>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="receivedDataTemplateCell" rowHeight="140" id="KGk-i7-Jjw" customClass="ReceivedDataAddNewTemplateTVCell" customModule="МП_ГЭС" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Предыдущие показания" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6f-dZ-IKV">
+                        <rect key="frame" x="50" y="5" width="262" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ввод показаний" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VQe-uT-GFF">
+                        <rect key="frame" x="50" y="74.5" width="143" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тариф" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5H1-Sd-Kh4">
+                        <rect key="frame" x="213" y="54.5" width="43" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Будет начислено:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8B-7i-Gtd">
+                        <rect key="frame" x="50" y="116.5" width="119" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текущие показания" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWs-fw-eLG">
+                        <rect key="frame" x="50" y="54.5" width="133" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~ 25488.56 руб." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jg2-h6-PKp">
+                        <rect key="frame" x="174" y="113.5" width="138" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50000 кВт/час" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjT-Mi-QdU">
+                        <rect key="frame" x="50" y="27" width="262" height="19.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2,04 руб" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XW4-Gw-pwX">
+                        <rect key="frame" x="208" y="81.5" width="80" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="GrF-sS-SKM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5H1-Sd-Kh4" firstAttribute="leading" secondItem="hWs-fw-eLG" secondAttribute="trailing" constant="30" id="85z-tc-zqQ"/>
+                    <constraint firstAttribute="trailing" secondItem="f6f-dZ-IKV" secondAttribute="trailing" constant="8" id="Cbr-Di-EQ0"/>
+                    <constraint firstItem="K8B-7i-Gtd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="DpN-N3-XoL"/>
+                    <constraint firstItem="Jg2-h6-PKp" firstAttribute="top" secondItem="VQe-uT-GFF" secondAttribute="bottom" constant="5" id="Dyu-HK-McJ"/>
+                    <constraint firstItem="XW4-Gw-pwX" firstAttribute="leading" secondItem="VQe-uT-GFF" secondAttribute="trailing" constant="15" id="JLK-pQ-psH"/>
+                    <constraint firstItem="Jg2-h6-PKp" firstAttribute="leading" secondItem="K8B-7i-Gtd" secondAttribute="trailing" constant="5" id="LIF-CY-kTs"/>
+                    <constraint firstItem="K8B-7i-Gtd" firstAttribute="top" secondItem="VQe-uT-GFF" secondAttribute="bottom" constant="8" id="M2D-ji-Ufx"/>
+                    <constraint firstItem="VQe-uT-GFF" firstAttribute="top" secondItem="hWs-fw-eLG" secondAttribute="bottom" constant="3" id="WSy-a5-eoi"/>
+                    <constraint firstItem="FjT-Mi-QdU" firstAttribute="top" secondItem="f6f-dZ-IKV" secondAttribute="bottom" constant="5" id="YfT-b6-cU5"/>
+                    <constraint firstItem="VQe-uT-GFF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="eCx-MU-3U6"/>
+                    <constraint firstAttribute="trailing" secondItem="FjT-Mi-QdU" secondAttribute="trailing" constant="8" id="fCH-g4-Qpx"/>
+                    <constraint firstItem="hWs-fw-eLG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="gfl-0c-Dlb"/>
+                    <constraint firstItem="hWs-fw-eLG" firstAttribute="top" secondItem="FjT-Mi-QdU" secondAttribute="bottom" constant="8" id="igX-ir-Qxy"/>
+                    <constraint firstItem="f6f-dZ-IKV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="sAA-mE-Yec"/>
+                    <constraint firstItem="XW4-Gw-pwX" firstAttribute="top" secondItem="5H1-Sd-Kh4" secondAttribute="bottom" constant="10" id="tBL-j4-vrk"/>
+                    <constraint firstItem="f6f-dZ-IKV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="v36-V3-ptC"/>
+                    <constraint firstItem="5H1-Sd-Kh4" firstAttribute="top" secondItem="FjT-Mi-QdU" secondAttribute="bottom" constant="8" id="wVh-MY-BJl"/>
+                    <constraint firstItem="FjT-Mi-QdU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="yxr-Z2-aFk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="currentData" destination="VQe-uT-GFF" id="noZ-bF-65N"/>
+                <outlet property="previousReceivedDataLabel" destination="FjT-Mi-QdU" id="fPH-LD-8Cv"/>
+                <outlet property="resultCalc" destination="Jg2-h6-PKp" id="3kr-GS-LQF"/>
+                <outlet property="tariffValue" destination="XW4-Gw-pwX" id="3mi-mI-Wjs"/>
+            </connections>
+            <point key="canvasLocation" x="-586.95652173913049" y="79.352678571428569"/>
+        </tableViewCell>
+    </objects>
+</document>

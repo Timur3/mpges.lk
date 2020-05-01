@@ -20,6 +20,7 @@ class DevicesTVController: UITableViewController {
     private var searchController = UISearchController(searchResultsController: nil)
     public weak var delegate: DevicesTVControllerDelegate?
     public var contractId: Int = 0
+    
     var deviceList = [DeviceModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -34,8 +35,7 @@ class DevicesTVController: UITableViewController {
         configuration()
     }
     
-    @objc func refreshDataDevice(sender: AnyObject){
-    print("refresh")
+    @objc func refreshDataDevice(){
         ApiServiceAdapter.shared.getDevicesByContractId(id: contractId, delegate: self)
         // todo  сохраняем новые данные, предварительно удаляем старые данные
         self.refreshControl?.endRefreshing()
@@ -86,7 +86,6 @@ class DevicesTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        ActivityIndicatorViewService.shared.showView(form: self.view)
         self.delegate?.navigationReceivedDataPage(model: deviceList[indexPath.row])
     }
 }
@@ -117,7 +116,7 @@ extension DevicesTVController {
         let nib = UINib(nibName: "DeviceTVCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "deviceCell")
         // todo получение из Realm, если нет то тянем с инета
-        refreshDataDevice(sender: self)
+        refreshDataDevice()
         
         tableView.delegate = self
         tableView.dataSource = self

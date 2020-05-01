@@ -32,4 +32,7 @@ enum myImage: String {
     case sendDoc = "arrow.up.doc"
     case printer = "printer"
     case dollar = "dollarsign.circle"
+    case lock = "lock"
+    case lockOpen = "lock.open"
+    case trayUp = "tray.and.arrow.up"
 }

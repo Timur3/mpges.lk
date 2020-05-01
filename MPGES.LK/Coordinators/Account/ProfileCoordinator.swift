@@ -35,7 +35,7 @@ extension ProfileCoordinator: ProfileTVControllerDelegate {
     }
     
     func navigationChangePasswordPage() {
-        let changePasswordVC : ChangePasswordViewController = ChangePasswordViewController()
+        let changePasswordVC : ChangePasswordTVController = ChangePasswordTVController()
         changePasswordVC.delegate = self
         let navChangePasswordVC: UINavigationController = UINavigationController(rootViewController: changePasswordVC)
         self.navigationController.present(navChangePasswordVC, animated: true, completion: nil)    }

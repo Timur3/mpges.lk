@@ -85,6 +85,9 @@ extension MainCoordinator: MainCoordinatorDelegate {
         
     }
     
+    func authApi(model: AuthModel){
+        
+    }
     
     func navigateToSingUpPage() {
         let singUpTVController : SingUpTVController = SingUpTVController()

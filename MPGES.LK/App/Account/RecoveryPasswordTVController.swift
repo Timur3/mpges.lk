@@ -29,7 +29,7 @@ class RecoveryPasswordTVController: UITableViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-
+    
     override func viewDidLoad() {
         self.navigationItem.title = "Забыли пароль"
         super.viewDidLoad()
@@ -113,31 +113,29 @@ class RecoveryPasswordTVController: UITableViewController {
 extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate {
     func resultOfCheckEmail(result: ServerResponseModel) {
         ActivityIndicatorViewService.shared.hideView()
-       // sendPassword.isEnabled = !result.isError
-      //  if result.isError {
-       //     errorTextLabel.text = result.message
-      //      emailTF.shake(times: 3, delta: 5)
-      //  } else {errorTextLabel.text = ""}
+        // sendPassword.isEnabled = !result.isError
+        //  if result.isError {
+        //     errorTextLabel.text = result.message
+        //      emailTF.shake(times: 3, delta: 5)
+        //  } else {errorTextLabel.text = ""}
     }
     
     @objc func goToRecoveryPassword() {
         ActivityIndicatorViewService.shared.showView(form: self.view)
-      //  model = UserEmailModel(email: emailTF.text!)
+        //  model = UserEmailModel(email: emailTF.text!)
         //ApiServiceAdapter.shared.passwordRecovery(model: model!, delegate: self)
     }
     
     func resultOfPassordRecovery(result: ServerResponseModel) {
         ActivityIndicatorViewService.shared.hideView()
-        if result.isError {
-            //errorTextLabel.text = result.message
-          //  emailTF.shake(times: 3, delta: 5)
-        } else {
-            AlertControllerAdapter.shared.show(
-                title: "Успех!",
-                mesg: result.message,
-                form: self) { (UIAlertAction) in
-                    self.dismiss(animated: true, completion: nil)
-            }
+        let isError = result.isError
+        AlertControllerAdapter.shared.show(
+            title: isError ? "Ошибка" : "Успех!",
+            mesg: result.message,
+            form: self) { (UIAlertAction) in
+                if (!isError) {
+                    self.cancelButton()
+                }
         }
     }
 }

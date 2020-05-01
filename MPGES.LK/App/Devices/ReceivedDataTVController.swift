@@ -7,14 +7,19 @@
 //
 
 import UIKit
+public protocol ReceivedDataTVControllerDelegate: class {
+    func setData(model: ReceivedDataModelRoot)
+    func getReceivedDataAddNewTemplatePage()
+}
 
 class ReceivedDataTVController: UITableViewController {
     let searchController = UISearchController(searchResultsController: nil)
-    public weak var delegate: ReceivedDataTVControllerDelegate?
     
-    var device: DeviceModel? {
+    public weak var delegate: DeviceCoordinatorMain?
+    
+    public var device: DeviceModel? {
     didSet {
-        refreshReceivedData(sender: self)
+        refreshReceivedData()
         }
     }
     
@@ -27,15 +32,13 @@ class ReceivedDataTVController: UITableViewController {
     }
     
      override func viewDidLoad() {
-        navigationItem.title = "История показаний"
+        navigationItem.title = "Реестр показаний"
         super.viewDidLoad()
         configuration()
-        ActivityIndicatorViewService.shared.hideView()
     }
            
-    @objc func refreshReceivedData(sender: AnyObject){
-        print("refresh")
-        //ApiServiceAdapter.shared.getReceivedDataByDeviceId(id: device?.id ?? -1, delegate: self.delegate)
+    @objc func refreshReceivedData(){
+        ApiServiceAdapter.shared.getReceivedDataByDeviceId(id: device!.id, delegate: self)
         self.refreshControl?.endRefreshing()
 }
            
@@ -79,23 +82,27 @@ class ReceivedDataTVController: UITableViewController {
         return cell
     }
     
-    @objc func alertSheetMeterDataDeviceShow() {
-        let alert = UIAlertController(title: "Вы действительно хотите сообщить показания?", message: nil, preferredStyle: .actionSheet)
-        let actionYes = UIAlertAction(title: "Да", style: .default) {
-            (UIAlertAction) in self.showReceivedDataAddNewTemplateTVPage()
+    @objc func showMeterDataDevicePage() {
+        self.showReceivedDataAddNewTemplateTVPage()
+    }
+    func showReceivedDataAddNewTemplateTVPage() {
+        self.delegate?.showReceivedDataAddNewTemplatesOneStepPage(device: device!)
+    }
+    
+    func mapToReceivedDataModelView(receivedData: [ReceivedDataModel]) -> [ReceivedDataModelVeiw] {
+        var res = [ReceivedDataModelVeiw]()
+        let models = receivedData.groupBy { $0.receivedDataYear() }
+        for mod in models{
+            let receivedDataVM = ReceivedDataModelVeiw(year: mod.key, receivedData: mod.value as [ReceivedDataModel])
+            res.append(receivedDataVM)
         }
-        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        alert.addAction(actionYes)
-        //alert.addAction(actionNewContract)
-        alert.addAction(actionCancel)
-        self.present(alert, animated: true, completion: {
-            print("completion block")
-        })
+        return res.sorted(by: { $0.year > $1.year })
     }
-    func showReceivedDataAddNewTemplateTVPage()
-    {
-        //self.delegate.
+    
+    @objc func segmentSwicht(){
+        
     }
+    
 }
 //MARK: - SEARCH
 extension ReceivedDataTVController: UISearchResultsUpdating {
@@ -103,10 +110,17 @@ extension ReceivedDataTVController: UISearchResultsUpdating {
         
     }
 }
+
 extension ReceivedDataTVController {
     private func configuration() {
         self.refreshControl = UIRefreshControl()
-        let sendMeterDataDevice = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(alertSheetMeterDataDeviceShow))
+        
+        let segment = UISegmentedControl(items: ["Реестр","График"])
+        segment.addTarget(self, action: #selector(segmentSwicht), for: UIControl.Event.valueChanged)
+        segment.selectedSegmentIndex = 0
+        self.navigationItem.titleView = segment
+        
+        let sendMeterDataDevice = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showMeterDataDevicePage))
         self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
         
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
@@ -115,9 +129,20 @@ extension ReceivedDataTVController {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshReceivedData), for: UIControl.Event.valueChanged)
 
-        refreshReceivedData(sender: self)
+        refreshReceivedData()
                
         tableView.delegate = self
         tableView.dataSource = self
+    }
+}
+
+extension ReceivedDataTVController: ReceivedDataTVControllerDelegate {
+    
+    func setData(model: ReceivedDataModelRoot) {
+        // todo доделать получение данных из realm
+        self.receivedDataList =  mapToReceivedDataModelView(receivedData: model.data)
+    }
+    func getReceivedDataAddNewTemplatePage() {
+        self.delegate?.showReceivedDataAddNewTemplatesOneStepPage(device: device!)
     }
 }

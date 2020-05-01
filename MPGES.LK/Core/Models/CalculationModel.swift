@@ -16,7 +16,7 @@ public struct CalculationModelRoot: Decodable {
 public struct CalculationModel: Decodable {
     var id:                     Int
     var meteringId:             Int
-    var objectId:               Int
+    var buildingId:             Int
     var invoiceId:              Int
     var zoneId:                 Int
     var tariffZone:             TariffZoneModel

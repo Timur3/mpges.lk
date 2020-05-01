@@ -22,7 +22,7 @@ public struct ContractModel: Decodable {
     var userProfileId: Int
     var codeBinding: String?
     var contractTypeId: Int
-    var typeContract: TypeContractModel
+    var typeOfContract: TypeOfContractModel
     var number: String
     var dateRegister: String
     var providerId: Int

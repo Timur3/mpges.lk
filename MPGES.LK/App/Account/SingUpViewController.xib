@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingUpViewController" customModule="mpges_lk" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingUpViewController" customModule="МП_ГЭС" customModuleProvider="target">
             <connections>
                 <outlet property="emailTF" destination="SPz-5s-Niu" id="w9e-I1-Sw3"/>
                 <outlet property="errorLabel" destination="GMx-tB-dtV" id="c12-It-Wwx"/>

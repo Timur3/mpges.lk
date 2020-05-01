@@ -20,7 +20,7 @@ public struct InvoiceModel: Decodable {
     var month: Int
     var year: Int
     var statusSaldoId: Int
-    var statusSaldoName: String
+    var statusSaldo: StatusSaldoModel
     var saldo: Double
     var debet: Double
     var credit: Double

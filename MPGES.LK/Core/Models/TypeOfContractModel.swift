@@ -6,7 +6,7 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
-public struct TypeContractModel: Decodable {
+public struct TypeOfContractModel: Decodable {
     var id: Int
     var name: String
 

@@ -30,7 +30,7 @@ class SingInViewController: UIViewController {
     @IBAction func recoveryPassBtn(_ sender: Any) {
         self.delegate?.navigateToRecoveryPasswordPage()
     }
-    @IBAction func demoBtn(_ sender: Any) {
+    @objc func demoButton() {
         let model = AuthModel(email: "demo@mp-ges.ru", password: "Qwerty123!")
         self.delegateUser?.authApi(model: model)
     }
@@ -102,6 +102,8 @@ extension SingInViewController {
 //MARK: - CONFIGURE
 extension SingInViewController {
     private func configuration() {
+        let demoBtn = UIBarButtonItem(title: "Demo", style: .plain, target: self, action: #selector(demoButton))
+        self.navigationItem.rightBarButtonItems = [demoBtn]
         passwordTF.isSecureTextEntry = true
         errorEmailLabel.text = ""
         submitBtn.Circle()

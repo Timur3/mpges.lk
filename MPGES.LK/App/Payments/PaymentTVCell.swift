@@ -15,7 +15,7 @@ class PaymentTVCell: UITableViewCell {
 
     func update(for pay: PaymentModel) {
         let sum: Double = (pay.summa)
-        dataPay.text = (pay.datePay).replacingOccurrences(of: "T00:00:00", with: "")
+        dataPay.text = pay.datePay
         sumPay.text = "\(sum)" + " руб."
         cashBox.text = pay.cash
     }

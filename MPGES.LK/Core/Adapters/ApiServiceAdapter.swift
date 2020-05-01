@@ -39,13 +39,12 @@ class ApiServiceAdapter {
         ApiService.shared.requestByToken(method: methodApi.getListOfContractNumbers, completion: delegate.setData(for:))
     }
     
-    
     // удаление привязки договора
     func removeContractBinding(model: ContractNumberModel, delegate: ContractsTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.removeContractBinding, completion: delegate.resultRemoveContractBinding(result:))
     }
     // получение начисление по квитанции
-    func getCalculationsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerUserDelegate){
+    func getCalculationsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerDelegate){
         ApiService.shared.requestById(id: id, method: methodApi.getCalculationsByInvoiceId, completion: delegate.setCalculations(calculations:))
     }
     // получение платежей по договору
@@ -54,13 +53,18 @@ class ApiServiceAdapter {
     }
     
     // получение платежей по квитанции
-    func getPaymentsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerUserDelegate) {
+    func getPaymentsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerDelegate) {
         ApiService.shared.requestById(id: id, method: methodApi.getPaymentsByInvoiceId, completion: delegate.setPayments(payments:))
     }
     
     // получение платежей по договору
-    func getInvoiceByContractId(id: Int, delegate: InvoicesTableViewControllerUserDelegate) {
+    func getInvoicesByContractId(id: Int, delegate: InvoicesTableViewControllerUserDelegate) {
         ApiService.shared.requestById(id: id, method: methodApi.getInvoicesByContractId, completion: delegate.setInvoices(invoices:))
+    }
+    
+    // отправка платежного документа
+    func sendInvoiceByEmail(id: Int, delegate: InvoiceDetailsInfoTableViewControllerDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.sendInoicesByEmail, completion: delegate.resultOfSendInvoice(result:))
     }
     
     // получение приборов учета по договору
@@ -68,9 +72,14 @@ class ApiServiceAdapter {
         ApiService.shared.requestById(id: id, method: methodApi.getDevicesByContractId, completion: delegate.setDevices(devices:))
     }
     
+    // получение шаблона для передачи показаний
+    func getReceivedDataAddNewTemplatesByDeviceId(id: Int, delegate: ReceivedDataAddNewTemplateTVControllerTwoStepDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.getTemplateAddNew, completion: delegate.setData(model:))
+    }
+    
     // получение показаний по прибору учета
     func getReceivedDataByDeviceId(id: Int, delegate: ReceivedDataTVControllerDelegate) {
-        ApiService.shared.requestById(id: id, method: methodApi.getReceivedData, completion: delegate.startWithData(model:))
+        ApiService.shared.requestById(id: id, method: methodApi.getReceivedData, completion: delegate.setData(model:))
     }
     
     // получение деталей по договору
@@ -88,7 +97,7 @@ class ApiServiceAdapter {
     }
     
     // проверка email
-    func checkByEmail(model: UserEmailModel, delegate: RecoveryPasswordViewControllerUserDelegate){
+    func checkByEmail(model: UserEmailModel, delegate: RecoveryPasswordTVControllerUserDelegate){
         ApiService.shared.requestByModel(model: model, requestMethod: .post, method: methodApi.checkEmail, completion: delegate.resultOfCheckEmail(result:))
     }
         
