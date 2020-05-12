@@ -1,14 +1,14 @@
 //
-//  ReceivedDataAddNewTemplateTVController.swift
+//  PayWithSberbankOnlineTVController.swift
 //  mpges.lk
 //
-//  Created by Timur on 03.05.2020.
+//  Created by Timur on 08.05.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
 import UIKit
 
-class ReceivedDataAddNewTemplateTVController: UITableViewController {
+class PayWithSberbankOnlineTVController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
