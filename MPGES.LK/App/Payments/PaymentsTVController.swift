@@ -24,9 +24,7 @@ class PaymentsTVController: UITableViewController {
     public weak var delegate: PaymentsTVControllerDelegate?
     private var searchController = UISearchController(searchResultsController: nil)
     var contractId: Int = 0
-    @IBAction func payAction(_ sender: Any) {
-        AlertControllerAdapter.shared.show(title: "Внимание!", mesg: "Фукнционал оплаты временно приостановлен.", form: self)
-    }
+
     private var tempPayments = [PaymentModel]()
     private var searchBarIsEmpty: Bool {
         guard let str = searchController.searchBar.text else { return false }
@@ -41,6 +39,7 @@ class PaymentsTVController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
         navigationItem.title = "История платежей"
         super.viewDidLoad()
         configuration()
@@ -132,15 +131,15 @@ extension PaymentsTVController: PaymentsTVControllerUserDelegate {
     
     // получение данных из Realm, лишний раз не отправлять запрос на сервер
     func getDataForRealm(){
-        let predicate = NSPredicate(format: "contractId == " + "\(contractId)")
+        //let predicate = NSPredicate(format: "contractId == " + "\(contractId)")
         
-        let paymentsRM = (DataProviderService.shared.getObjects(predicate: predicate) as [PaymentModel])
-        if (paymentsRM.count) > 0 {
-            self.paymentsList = mapToPaymentsModelView(payments: paymentsRM)
-            ActivityIndicatorViewService.shared.hideView()
-        } else {
+        //let paymentsRM = (DataProviderService.shared.getObjects(predicate: predicate) as [PaymentModel])
+        //if (paymentsRM.count) > 0 {
+        //    self.paymentsList = mapToPaymentsModelView(payments: paymentsRM)
+       //     ActivityIndicatorViewService.shared.hideView()
+      //  } else {
             ApiServiceAdapter.shared.getPaymentsByContractId(id: contractId, delegate: self)
-        }
+    //    }
     }
     
     @objc func refreshData() {
@@ -156,7 +155,7 @@ extension PaymentsTVController: PaymentsTVControllerUserDelegate {
         // для поиска
         tempPayments = payments.data
         
-        DataProviderService.shared.saveObjects(payments.data)
+        //DataProviderService.shared.saveObjects(payments.data)
         ActivityIndicatorViewService.shared.hideView()
     }
 }

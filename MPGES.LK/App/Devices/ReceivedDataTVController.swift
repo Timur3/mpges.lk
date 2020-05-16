@@ -32,6 +32,7 @@ class ReceivedDataTVController: UITableViewController {
     }
     
      override func viewDidLoad() {
+        ActivityIndicatorViewService.shared.showView(form: self.view)
         navigationItem.title = "Реестр показаний"
         super.viewDidLoad()
         configuration()
@@ -115,10 +116,10 @@ extension ReceivedDataTVController {
     private func configuration() {
         self.refreshControl = UIRefreshControl()
         
-        let segment = UISegmentedControl(items: ["Реестр","График"])
-        segment.addTarget(self, action: #selector(segmentSwicht), for: UIControl.Event.valueChanged)
-        segment.selectedSegmentIndex = 0
-        self.navigationItem.titleView = segment
+        //let segment = UISegmentedControl(items: ["Реестр","График"])
+        //segment.addTarget(self, action: #selector(segmentSwicht), for: UIControl.Event.valueChanged)
+        //segment.selectedSegmentIndex = 0
+        //self.navigationItem.titleView = segment
         
         let sendMeterDataDevice = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showMeterDataDevicePage))
         self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
@@ -141,7 +142,9 @@ extension ReceivedDataTVController: ReceivedDataTVControllerDelegate {
     func setData(model: ReceivedDataModelRoot) {
         // todo доделать получение данных из realm
         self.receivedDataList =  mapToReceivedDataModelView(receivedData: model.data)
+        ActivityIndicatorViewService.shared.hideView()
     }
+    
     func getReceivedDataAddNewTemplatePage() {
         self.delegate?.showReceivedDataAddNewTemplatesOneStepPage(device: device!)
     }

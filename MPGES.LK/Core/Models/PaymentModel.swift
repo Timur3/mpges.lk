@@ -27,15 +27,15 @@ public class PaymentsModelVeiw  {
 public class PaymentModel: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var serviceId: Int
-    @objc dynamic var invoiceId: Int
+    var invoiceId: Int?
     @objc dynamic var meteringId: Int = 0
-    @objc dynamic var registerPaytsId: Int
-    @objc dynamic var cash: String
+    @objc dynamic var registerPaytsId: Int = 0
+    var registerOfPayment: RegisterOfPayment?
     @objc dynamic var contractId: Int = 0
-    @objc dynamic var datePay: String
+    @objc dynamic var datePay: String = ""
     @objc dynamic var summa: Double = 0.0
-    @objc dynamic var workerId: Int
-    @objc dynamic var note: String
+    @objc dynamic var workerId: Int = 0
+    var note: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -43,7 +43,7 @@ public class PaymentModel: Object, Decodable {
         case invoiceId = "invoiceId"
         case meteringId = "meteringId"
         case registerPaytsId = "registerPaytsId"
-        case cash = "cash"
+        case registerOfPayment = "registerOfPayment"
         case contractId = "contractId"
         case datePay = "datePay"
         case summa = "summa"

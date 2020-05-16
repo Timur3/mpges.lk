@@ -17,9 +17,9 @@ class InvoiceTVCell: UITableViewCell {
     
     func update(for invoice: InvoiceModel) {
         monthAndYearLabel.text = "\(invoice.month)-" + "\(invoice.year)"
-        saldoLabel.text = "\(String(format: "%.2f", invoice.saldo)) руб."
-        debetLabel.text = "\(String(format: "%.2f", invoice.debet)) руб."
-        creditLabel.text = "\(String(format: "%.2f", invoice.credit)) руб."
+        saldoLabel.text = formatRusCurrency(for: "\(invoice.saldo)")
+        debetLabel.text = formatRusCurrency(for: "\(invoice.debet)")
+        creditLabel.text = formatRusCurrency(for: "\(invoice.credit)")
     }
     
     override func awakeFromNib() {

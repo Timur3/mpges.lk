@@ -32,23 +32,23 @@ class ApiService {
             "Authorization": "Bearer " + (userData.getToken() ?? "")
         ]
         DispatchQueue.global().async {
-        AF.request(self.baseURL+method,
-               method: requestMethod,
-               parameters: model,
-               encoder: JSONParameterEncoder.default, headers: headers)
-            
-            .responseData { response in
-                debugPrint("print reponse")
-                debugPrint(response)
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
-                    DispatchQueue.main.async {
-                        completion(myResponse)
+            AF.request(self.baseURL+method,
+                       method: requestMethod,
+                       parameters: model,
+                       encoder: JSONParameterEncoder.default, headers: headers)
+                
+                .responseData { response in
+                    debugPrint("print reponse")
+                    debugPrint(response)
+                    switch response.result {
+                    case let .success(value):
+                        let myResponse = try! JSONDecoder().decode(T.self, from: value)
+                        DispatchQueue.main.async {
+                            completion(myResponse)
+                        }
+                    case let .failure(error):
+                        print(error)
                     }
-                case let .failure(error):
-                    print(error)
-                }
             }
         }
     }
@@ -60,19 +60,19 @@ class ApiService {
             "Authorization": "Bearer " + (userData.getToken() ?? "")
         ]
         DispatchQueue.global().async {
-        AF.request(self.baseURL+fullMethod,
-               method: .get,
-               headers: headers)
-            .responseData { response in
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
+            AF.request(self.baseURL+fullMethod,
+                       method: .get,
+                       headers: headers)
+                .responseData { response in
+                    switch response.result {
+                    case let .success(value):
+                        let myResponse = try! JSONDecoder().decode(T.self, from: value)
                         DispatchQueue.main.async {
                             completion(myResponse)
                         }
-                case let .failure(error):
-                    print(error)
-                }
+                    case let .failure(error):
+                        print(error)
+                    }
             }
         }
     }
@@ -84,19 +84,19 @@ class ApiService {
             "Authorization": "Bearer " + (userData.getToken() ?? "")
         ]
         DispatchQueue.global().async {
-        AF.request(self.baseURL+fullMethod,
-               method: .get,
-               headers: headers)
-            .responseData { response in
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
+            AF.request(self.baseURL+fullMethod,
+                       method: .get,
+                       headers: headers)
+                .responseData { response in
+                    switch response.result {
+                    case let .success(value):
+                        let myResponse = try! JSONDecoder().decode(T.self, from: value)
                         DispatchQueue.main.async {
                             completion(myResponse)
                         }
-                case let .failure(error):
-                    print(error)
-                }
+                    case let .failure(error):
+                        print(error)
+                    }
             }
         }
     }
@@ -104,22 +104,21 @@ class ApiService {
     // MARK: - load saldo by contract id
     
     func loadTextInLabel(method: String, id: Int, label: UILabel) {
-          
-          let fullMethod = method + String(id)
-          let headers: HTTPHeaders = [
-              "Authorization": "Bearer " + (userData.getToken() ?? "")
-          ]
-           DispatchQueue.main.async {
-            
-               AF.request(self.baseURL+fullMethod,
-                             method: .get,
-                             headers: headers)
-                .responseString {
-                   response in
-                    guard let strData = response.data,
-                        let text = String(data: strData, encoding: .utf8) else { return }
-                    label.text = text
-               }
-           }
-       }
+        
+        let fullMethod = method + String(id)
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (userData.getToken() ?? "")
+        ]
+        
+        AF.request(self.baseURL+fullMethod,
+                   method: .get,
+                   headers: headers)
+            .responseString {
+                response in
+                guard let strData = response.data,
+                    let text = String(data: strData, encoding: .utf8) else { return }
+                label.text = formatRusCurrency(for: text)
+
+        }
+    }
 }

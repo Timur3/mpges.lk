@@ -36,6 +36,28 @@ class ContractDetailsInfoCoordinator: Coordinator {
 }
 
 extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegate {
+    func navigateToPayWithSberbankOnlinePage() {
+        let payWithSberbankOnlinePageTVController : PayWithSberbankOnlineTVController = PayWithSberbankOnlineTVController()
+        payWithSberbankOnlinePageTVController.delegate = self
+        let navPayWithSberbankOnlinePageTVController: UINavigationController = UINavigationController(rootViewController: payWithSberbankOnlinePageTVController)
+        self.navigationController.present(navPayWithSberbankOnlinePageTVController, animated: true, completion: nil)
+    }
+    
+    
+    func navigateToPayWithCreditCardPage() {
+        let payWithCreditCardPageTVController : PayWithCreditCardViewController = PayWithCreditCardViewController()
+        payWithCreditCardPageTVController.delegate = self
+        let navPayWithCreditCardPageTVController: UINavigationController = UINavigationController(rootViewController: payWithCreditCardPageTVController)
+        self.navigationController.present(navPayWithCreditCardPageTVController, animated: true, completion: nil)
+    }
+    
+    func navigationToContractorInfoPage() {
+        let contractorInfoPageTVController : ContractorInfoTVController = ContractorInfoTVController()
+        //contractorInfoPageTVController.delegate = delegate
+        let navContractorInfoPageTVController: UINavigationController = UINavigationController(rootViewController: contractorInfoPageTVController)
+        self.navigationController.present(navContractorInfoPageTVController, animated: true, completion: nil)
+    }
+    
     // Ппереход на страницу способы доставки квитанций
     func navigationInvoiceDevileryMethodPage(for invoiceDeliveryMehtodId: Int) {
         let devileryOfInvoiceTV: DeliveryMethodTVController = DeliveryMethodTVController()

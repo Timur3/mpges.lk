@@ -10,74 +10,75 @@ import UIKit
 
 protocol InvoicesTableViewControllerDelegate: class {
     func navigantionInvoiceDetailsInfoPage(model: InvoiceModel)
-    }
+}
 
 protocol InvoicesTableViewControllerUserDelegate: class {
     var sections: [String] { get }
     func setInvoices(invoices:InvoiceModelRoot)
-    }
+}
 
 class InvoicesTableViewController: UITableViewController {
     public var contractId: Int = 0
     public weak var delegate: InvoicesTableViewControllerDelegate?
     var invoiceList = [InvoiceModelVeiw]() {
-    didSet {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
     }
-            
+    
     override func viewDidLoad() {
+        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
         navigationItem.title = "История начислений"
         super.viewDidLoad()
         configuration()
     }
     
-@objc func refreshInvoicesData(sender: AnyObject){
-    print("refresh")
-    ApiServiceAdapter.shared.getInvoicesByContractId(id: contractId, delegate: self)
-    self.refreshControl?.endRefreshing()
-    }
-
-override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-override func numberOfSections(in tableView: UITableView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
-    return invoiceList.count
-    }
-
-override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "\(invoiceList[section].year)" + " год"
+    @objc func refreshInvoicesData(sender: AnyObject){
+        print("refresh")
+        ApiServiceAdapter.shared.getInvoicesByContractId(id: contractId, delegate: self)
+        self.refreshControl?.endRefreshing()
     }
     
-override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-    return "Всего записей: " + String(invoiceList[section].invoices.count)
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-            
-override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
-    return invoiceList[section].invoices.count
+    
+    // MARK: - Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return invoiceList.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "\(invoiceList[section].year)" + " год"
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return "Всего записей: " + String(invoiceList[section].invoices.count)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return invoiceList[section].invoices.count
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 85
     }
-override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceTVCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceTVCell
         cell.imageView?.image = UIImage(systemName: myImage.textPlus.rawValue)
         cell.update(for: invoiceList[indexPath.section].invoices[indexPath.row])
         return cell
     }
-            
-override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
-    let invoice = invoiceList[indexPath.section].invoices[indexPath.row]
-    self.delegate?.navigantionInvoiceDetailsInfoPage(model: invoice)
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let invoice = invoiceList[indexPath.section].invoices[indexPath.row]
+        self.delegate?.navigantionInvoiceDetailsInfoPage(model: invoice)
+        
     }
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -90,19 +91,22 @@ extension InvoicesTableViewController: InvoicesTableViewControllerUserDelegate {
     func mapToInvoicesModelView(invoices: [InvoiceModel]) -> [InvoiceModelVeiw] {
         var res = [InvoiceModelVeiw]()
         let models = invoices.groupBy { $0.year}
-         for mod in models{
-             let invVM = InvoiceModelVeiw(year: mod.key, invoices: mod.value as [InvoiceModel])
-             res.append(invVM)
-         }
-         return res.sorted(by: { $0.year > $1.year })
+        for mod in models{
+            let invVM = InvoiceModelVeiw(year: mod.key, invoices: mod.value as [InvoiceModel])
+            res.append(invVM)
+        }
+        return res.sorted(by: { $0.year > $1.year })
     }
+    
     var sections: [String] { ["Реестр квитанций"] }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-                print("search")
+        print("search")
     }
+    
     func setInvoices(invoices: InvoiceModelRoot) {
         // todo получение данных из realm
         invoiceList = mapToInvoicesModelView(invoices: invoices.data)
+        ActivityIndicatorViewService.shared.hideView()
     }
 }
 
@@ -116,7 +120,7 @@ extension InvoicesTableViewController {
         self.tableView.register(nib, forCellReuseIdentifier: "invoiceCell")
         self.tableView.dataSource = self
         refreshInvoicesData(sender: self)
-                
+        
         tableView.delegate = self
         tableView.dataSource = self
     }

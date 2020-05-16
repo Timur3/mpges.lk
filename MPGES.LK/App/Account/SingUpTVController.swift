@@ -8,13 +8,13 @@
 
 import UIKit
 public protocol SingUpTVControllerUserDelegate: class {
-    func createUser(user: UserModel)
+    func createUser(user: UserCreateModel)
     func resultOfCreateUser(result: ServerResponseModel)
 }
 
 class SingUpTVController: UITableViewController {
     var sections: [String] {["ФИО", "Контакты", "Пароль", ""]}
-    
+    private var indexPath: IndexPath?
     public weak var delegateUser: SingUpTVControllerUserDelegate?
     public weak var delegate: MainCoordinatorDelegate?
     // ФИО
@@ -28,46 +28,14 @@ class SingUpTVController: UITableViewController {
     // Кнопка
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Зарегистрировать", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
-    var nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Введите ваше имя"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "example@email.com"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var mobileTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "+7(909)-012-34-56"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Придумайте пароль"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var confirmPasswordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Повторите пароль"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
+    var nameTextField: UITextField = { getCustomTextField(placeholder: "Введите ваше имя") }()
+    var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com") }()
+    var mobileTextField: UITextField = { getCustomTextField(placeholder: "+7(909)-012-34-56") }()
+    var passwordTextField: UITextField = { getCustomTextField(placeholder: "Придумайте пароль") }()
+    var confirmPasswordTextField: UITextField = { getCustomTextField(placeholder: "Повторите пароль") }()
     
-    var user: UserModel? {
-        didSet {
-            DispatchQueue.main.async {
-                self.emailTextField.text = self.user?.Email
-                self.nameTextField.text = self.user?.Name
-                self.mobileTextField.text = self.user?.Mobile
-            }
-        }
-    }
+    var user: UserModel?
+    
     override func viewDidLoad() {
         self.navigationItem.title = "Новый пользователь"
         super.viewDidLoad()
@@ -162,42 +130,57 @@ class SingUpTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 && indexPath.row == 3 {
-            saveAlertSheetShow()
+        self.indexPath = indexPath
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            nameTextField.becomeFirstResponder()
+        }
+        if indexPath.section == 1 && indexPath.row == 0 {
+            emailTextField.becomeFirstResponder()
         }
         if indexPath.section == 1 && indexPath.row == 1 {
-            //self.delegate?.navigationEmailToDeveloperPage()
+            mobileTextField.becomeFirstResponder()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
-            alertSheetChangePasswordShow()
+            passwordTextField.becomeFirstResponder()
         }
         if indexPath.section == 2 && indexPath.row == 1 {
-            alertSheetExitShow()
+            confirmPasswordTextField.becomeFirstResponder()
         }
-        
-        //let viewController = (initWithNibName:@"FirstViewController" bundle:nil]
-        //self.navigationController.pushViewController(viewController, animated:true)
+        if indexPath.section == 3 && indexPath.row == 0 {
+            createUserAction()
+        }
+    }
+    func createUserAction() {
+        if (nameTextField.text!.isEmpty){
+            nameTextField.shake(times: 3, delta: 5)
+        } else
+            if (!isValidEmail(emailTextField.text!) || emailTextField.text!.isEmpty) {
+                emailTextField.shake(times: 3, delta: 5)
+            } else {
+                let user = UserCreateModel(name: nameTextField.text!, password: passwordTextField.text!, Email: emailTextField.text!, Mobile: "", RoleId: 3)
+                self.delegateUser?.createUser(user: user)
+        }
     }
 }
 
 extension SingUpTVController: SingUpTVControllerUserDelegate {
-    func createUser(user: UserModel) {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
-        //ApiServiceAdapter.shared.createUser(model: user, delegate: self)
+    
+    func createUser(user: UserCreateModel) {
+        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        ApiServiceAdapter.shared.createUser(model: user, delegate: self)
     }
     
     func resultOfCreateUser(result: ServerResponseModel) {
-        ActivityIndicatorViewService.shared.hideView()
-        if result.isError {
-            //errorLabel.text = result.message
-            //passwordTF.shake(times: 3, delta: 5)
-        } else {
-            AlertControllerAdapter.shared.show(
-                title: "Успех!",
-                mesg: result.message,
-                form: self) { (UIAlertAction) in
-                    self.dismiss(animated: true, completion: nil)
-            }
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        let isError = result.isError
+        AlertControllerAdapter.shared.show(
+            title: isError ? "Ошибка" : "Успешно",
+            mesg: result.message,
+            form: self) { (UIAlertAction) in
+                if !isError {
+                    self.cancelButton()
+                }
         }
     }
     
@@ -227,27 +210,5 @@ extension SingUpTVController {
     }
     @objc func cancelButton() {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    func saveAlertSheetShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self) { (UIAlertAction) in
-            self.user?.Name = self.nameTextField.text!
-            self.user?.Email = self.emailTextField.text!
-            self.user?.Mobile = self.mobileTextField.text!
-            // save
-            // self.saveProfile(profile: self.user!)
-        }
-    }
-    
-    func alertSheetChangePasswordShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self) { (UIAlertAction) in
-            print("change pass")
-            //self.delegate?.navigationChangePasswordPage()
-        }
-    }
-    func alertSheetExitShow(){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self) { (UIAlertAction) in
-            self.delegate?.navigateToFirstPage()
-        }
     }
 }

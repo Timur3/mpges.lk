@@ -126,7 +126,7 @@ class InvoiceDetailsInfoTableViewController: UITableViewController {
 
 extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewControllerDelegate {
     func sendInvoice(model: InvoiceModel) {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
+        ActivityIndicatorViewService.shared.showView(form: self.navigationController!.view)
         ApiServiceAdapter.shared.sendInvoiceByEmail(id: model.id, delegate: self)
     }
     
@@ -157,10 +157,11 @@ extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewCont
 
 //MARK: - CONFIGURATION
 extension InvoiceDetailsInfoTableViewController {
+    
     func configuration() {
         let sendInvoice = UIBarButtonItem(image: UIImage(systemName: myImage.trayUp.rawValue), style: .plain, target: self, action: #selector(alertSheetSendInvoiceShow))
         self.navigationItem.rightBarButtonItems = [sendInvoice]
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         let nibCalc = UINib(nibName: "CalculationTVCell", bundle: nil)
         self.tableView.register(nibCalc, forCellReuseIdentifier: "calculationCell")
         let nibPay = UINib(nibName: "PaymentTVCell", bundle: nil)
@@ -168,4 +169,5 @@ extension InvoiceDetailsInfoTableViewController {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
     }
+    
 }

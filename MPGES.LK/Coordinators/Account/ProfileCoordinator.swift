@@ -18,8 +18,8 @@ class ProfileCoordinator: Coordinator {
     }
     
     func start() {
-        let profileVC: ProfileTVController = ProfileTVController(nibName: "ProfileTableViewController", bundle: nil)
-        profileVC.tabBarItem = UITabBarItem(title: "Еще", image: UIImage(systemName: "ellipsis.circle"), tag: 2)
+        let profileVC: ProfileTVController = ProfileTVController()
+        profileVC.tabBarItem = UITabBarItem(title: "Больше", image: UIImage(systemName: "ellipsis.circle"), tag: 2)
         profileVC.delegate = self
         self.navigationController.pushViewController(profileVC, animated: true)
     }
@@ -28,9 +28,9 @@ class ProfileCoordinator: Coordinator {
 }
 extension ProfileCoordinator: ProfileTVControllerDelegate {
     func navigationEmailToDeveloperPage() {
-        let emailToDevVC : EmailToDeveloperViewController = EmailToDeveloperViewController()
-        emailToDevVC.delegate = self
-        let navEmailToDevVC: UINavigationController = UINavigationController(rootViewController: emailToDevVC)
+        let emailToDeveloperTV : EmailToDeveloperTVController = EmailToDeveloperTVController()
+        emailToDeveloperTV.delegate = self
+        let navEmailToDevVC: UINavigationController = UINavigationController(rootViewController: emailToDeveloperTV)
         self.navigationController.present(navEmailToDevVC, animated: true, completion: nil)
     }
     

@@ -35,4 +35,5 @@ enum myImage: String {
     case lock = "lock"
     case lockOpen = "lock.open"
     case trayUp = "tray.and.arrow.up"
+    case close = "multiply.circle"
 }

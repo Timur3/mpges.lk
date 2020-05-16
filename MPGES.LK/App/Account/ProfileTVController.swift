@@ -23,6 +23,7 @@ protocol ProfileTVControllerUserDelegate: class {
 
 class ProfileTVController: UITableViewController {
     var sections: [String] {["Мои данные", "О программе", "Прочее"]}
+    var indexPath: IndexPath?
     
     public weak var delegate: ProfileTVControllerDelegate?
     
@@ -58,14 +59,15 @@ class ProfileTVController: UITableViewController {
     var user: UserModel? {
         didSet {
             DispatchQueue.main.async {
-                self.emailTextField.text = self.user?.Email
-                self.nameTextField.text = self.user?.Name
-                self.mobileTextField.text = self.user?.Mobile
+                self.emailTextField.text = self.user?.email
+                self.nameTextField.text = self.user?.name
+                self.mobileTextField.text = self.user?.mobile
             }
         }
     }
     override func viewDidLoad() {
-        self.navigationItem.title = "Еще"
+        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+        self.navigationItem.title = "Больше"
         super.viewDidLoad()
         configuration()
         setUpLayout()
@@ -151,6 +153,8 @@ class ProfileTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.indexPath = indexPath
+        
         if indexPath.section == 0 && indexPath.row == 0 {
             nameTextField.becomeFirstResponder()
         }
@@ -158,20 +162,18 @@ class ProfileTVController: UITableViewController {
             mobileTextField.becomeFirstResponder()
         }
         if indexPath.section == 0 && indexPath.row == 3 {
+            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             saveAlertSheetShow()
         }
         if indexPath.section == 1 && indexPath.row == 1 {
             self.delegate?.navigationEmailToDeveloperPage()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
-            alertSheetChangePasswordShow()
+            self.delegate?.navigationChangePasswordPage()
         }
         if indexPath.section == 2 && indexPath.row == 1 {
             alertSheetExitShow()
         }
-        
-        //let viewController = (initWithNibName:@"FirstViewController" bundle:nil]
-        //self.navigationController.pushViewController(viewController, animated:true)
     }
 }
 
@@ -186,10 +188,12 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
     }
     func resultOfSaveProfile(result: ServerResponseModel) {
         AlertControllerAdapter.shared.show(title: result.isError ? "Ошибка!" : "Успешно!", mesg: result.message, form: self)
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
     }
     
     func setProfile(profile: UserModel) {
         user = profile
+        ActivityIndicatorViewService.shared.hideView()
     }
 }
 
@@ -210,26 +214,20 @@ extension ProfileTVController {
     private func configuration() {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         self.getProfile()
         self.hideKeyboardWhenTappedAround()
     }
     func saveAlertSheetShow() {
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self) { (UIAlertAction) in
-            self.user?.Name = self.nameTextField.text!
-            self.user?.Email = self.emailTextField.text!
-            self.user?.Mobile = self.mobileTextField.text!
+            self.user?.name = self.nameTextField.text!
+            self.user?.email = self.emailTextField.text!
+            self.user?.mobile = self.mobileTextField.text!
             // save
             self.saveProfile(profile: self.user!)
         }
     }
     
-    func alertSheetChangePasswordShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self) { (UIAlertAction) in
-            print("change pass")
-            self.delegate?.navigationChangePasswordPage()
-        }
-    }
     func alertSheetExitShow(){
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self) { (UIAlertAction) in
             self.delegate?.navigateToFirstPage()

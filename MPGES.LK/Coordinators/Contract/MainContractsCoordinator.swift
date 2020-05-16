@@ -37,11 +37,9 @@ class MainContractsCoordinator: Coordinator {
 
 extension MainContractsCoordinator: ContractsTVControllerDelegate {
     func navigationContractAddPage(delegate: ContractsTVControllerUserDelegate) {
-        let contractAddFirstPageTVController : ContractAddViewController = ContractAddViewController()
-        contractAddFirstPageTVController.delegate = delegate
-        let navContractAddFirstPageTVController: UINavigationController = UINavigationController(rootViewController: contractAddFirstPageTVController)
-        self.navigationController.present(navContractAddFirstPageTVController, animated: true, completion: nil)
+        
     }
+    
     
     func navigationContractAddTVPage(delegate: ContractsTVControllerUserDelegate) {
         let contractAddFirstPageTVController : ContractAddTVController = ContractAddTVController()
@@ -64,13 +62,5 @@ extension MainContractsCoordinator: ContractsTVControllerDelegate {
         contractAddFirstPageTVController.delegate = delegate
         let navContractAddFirstPageTVController: UINavigationController = UINavigationController(rootViewController: contractAddFirstPageTVController)
         self.navigationController.present(navContractAddFirstPageTVController, animated: true, completion: nil)
-    }
-    
-    // переход на страницу Добавления договора
-    func navigationContractAddPage1(delegate: ContractsTVControllerUserDelegate) {
-        let contractAddViewController : ContractAddViewController = ContractAddViewController()
-        contractAddViewController.delegate = delegate
-        let navContractAddViewController: UINavigationController = UINavigationController(rootViewController: contractAddViewController)
-        self.navigationController.present(navContractAddViewController, animated: true, completion: nil)
     }
 }

@@ -25,7 +25,7 @@ class DeviceCoordinatorMain: Coordinator {
     }
     
 }
-extension DeviceCoordinatorMain: DevicesTVControllerDelegate {
+extension DeviceCoordinatorMain {
     
     func navigationReceivedDataPage(model: DeviceModel) {
         let receivedDataTVController: ReceivedDataTVController = ReceivedDataTVController()
@@ -45,6 +45,13 @@ extension DeviceCoordinatorMain: DevicesTVControllerDelegate {
     
     func showReceivedDataAddNewTemplatesTwoStepPage(device: DeviceModel, nav: UINavigationController){
         let receivedDataAddNewTemplateTVController : ReceivedDataAddNewTemplateTVControllerTwoStep = ReceivedDataAddNewTemplateTVControllerTwoStep()
+        receivedDataAddNewTemplateTVController.delegate = self
+        receivedDataAddNewTemplateTVController.device = device
+        nav.pushViewController(receivedDataAddNewTemplateTVController, animated: true)
+    }
+    
+    func showReceivedDataAddNewTemplatesPage(device: DeviceModel, nav: UINavigationController){
+        let receivedDataAddNewTemplateTVController : ReceivedDataAddNewTemplateTVController = ReceivedDataAddNewTemplateTVController()
         receivedDataAddNewTemplateTVController.delegate = self
         receivedDataAddNewTemplateTVController.device = device
         nav.pushViewController(receivedDataAddNewTemplateTVController, animated: true)

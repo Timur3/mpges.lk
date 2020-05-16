@@ -16,8 +16,8 @@ class PaymentTVCell: UITableViewCell {
     func update(for pay: PaymentModel) {
         let sum: Double = (pay.summa)
         dataPay.text = pay.datePay
-        sumPay.text = "\(sum)" + " руб."
-        cashBox.text = pay.cash
+        sumPay.text = formatRusCurrency(for: "\(sum)")
+        cashBox.text = pay.registerOfPayment?.typeOfPayment?.name
     }
     override func awakeFromNib() {
             super.awakeFromNib()

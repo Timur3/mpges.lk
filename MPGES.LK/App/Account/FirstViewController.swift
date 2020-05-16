@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FirstViewController1: UIViewController {
     
     public weak var delegate: MainCoordinatorDelegate?
 

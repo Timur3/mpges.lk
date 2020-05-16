@@ -18,9 +18,9 @@ class CalculationTVCell: UITableViewCell {
         // Initialization code
     }
     func update(for calc: CalculationModel){
-        calcDateLabel.text = (calc.date).replacingOccurrences(of: "T00:00:00", with: "")
+        calcDateLabel.text = calc.date
         calcTypeOfCalculationLabel.text = calc.typeOfCalculation.name
-        calcSumLabel.text = "\(String(format: "%.2f", calc.summa)) руб."
+        calcSumLabel.text = formatRusCurrency(for: "\(calc.summa)")
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

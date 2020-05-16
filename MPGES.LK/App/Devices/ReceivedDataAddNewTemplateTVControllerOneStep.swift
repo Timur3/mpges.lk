@@ -12,8 +12,8 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: UITableViewController {
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
     let datePicker = UIDatePicker()
-    
     var sections: [String] {["Дата показаний", ""]}
+    var indexPath: IndexPath?
     
     var ReceivedDataDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Продолжить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
@@ -97,18 +97,23 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.indexPath = indexPath
+        
         if indexPath.section == 0 && indexPath.row == 0 {
             dateTextField.becomeFirstResponder()
         }
-        if indexPath.section == 1 && indexPath.row == 0 {            
+        if indexPath.section == 1 && indexPath.row == 0 {
+            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             if isValidDate(dateStr: dateTextField.text!) {
-                self.delegate?.showReceivedDataAddNewTemplatesTwoStepPage(device: device!, nav: self.navigationController!)
+                //self.delegate?.showReceivedDataAddNewTemplatesTwoStepPage(device: device!, nav: self.navigationController!)
+                self.delegate?.showReceivedDataAddNewTemplatesPage(device: device!, nav: self.navigationController!)
             } else {
                 AlertControllerAdapter.shared.show(
                     title: "Ошибка",
                     mesg: "Некорректная дата",
                     form: self)
             }
+            ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
     }
     @objc func cancelButton() {
@@ -131,7 +136,7 @@ extension ReceivedDataAddNewTemplateTVControllerOneStep {
 //MARK: - CONFIGURE
 extension ReceivedDataAddNewTemplateTVControllerOneStep {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         
         let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]

@@ -118,17 +118,17 @@ class ChangePasswordTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 && indexPath.row == 3 {
-            saveAlertSheetShow()
+        if indexPath.section == 0 && indexPath.row == 0 {
+            currentPasswordTextField.becomeFirstResponder()
+        }
+        if indexPath.section == 1 && indexPath.row == 0 {
+            passwordTextField.becomeFirstResponder()
         }
         if indexPath.section == 1 && indexPath.row == 1 {
-            //self.delegate?.navigationEmailToDeveloperPage()
+            confirmPasswordTextField.becomeFirstResponder()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
             alertSheetChangePasswordShow()
-        }
-        if indexPath.section == 2 && indexPath.row == 1 {
-            alertSheetExitShow()
         }
     }
 }
@@ -158,21 +158,10 @@ extension ChangePasswordTVController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func saveAlertSheetShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self) { (UIAlertAction) in
-
-        }
-    }
-    
     func alertSheetChangePasswordShow() {
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self) { (UIAlertAction) in
             print("change pass")
             //self.delegate?.navigationChangePasswordPage()
-        }
-    }
-    func alertSheetExitShow(){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self) { (UIAlertAction) in
-            self.delegate?.navigateToFirstPage()
         }
     }
 }

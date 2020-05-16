@@ -14,11 +14,12 @@ protocol ContractAddTVControllerUserDelegate: class {
     func resultToBinding(result: ServerResponseModel)
 }
 
-class ContractAddTVController: UITableViewController, ContractAddViewControllerUserDelegate {
+class ContractAddTVController: UITableViewController {
     
     public weak var delegate: ContractsTVControllerUserDelegate?
     
     var sections: [String] {["Лицевой счет", "Код подтверждения", ""]}
+    var indexPath: IndexPath?
     
     var numberCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
     var codeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.edit, textAlign: .left, accessoryType: .none) }()
@@ -39,8 +40,8 @@ class ContractAddTVController: UITableViewController, ContractAddViewControllerU
     var user: UserModel? {
         didSet {
             DispatchQueue.main.async {
-                self.codeTextField.text = self.user?.Email
-                self.numberTextField.text = self.user?.Name
+                self.codeTextField.text = self.user?.email
+                self.numberTextField.text = self.user?.name
             }
         }
     }
@@ -126,6 +127,13 @@ class ContractAddTVController: UITableViewController, ContractAddViewControllerU
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.indexPath = indexPath
+        if indexPath.section == 0 && indexPath.row == 0 {
+            numberTextField.becomeFirstResponder()
+        }
+        if indexPath.section == 1 && indexPath.row == 0 {
+            codeTextField.becomeFirstResponder()
+        }
         if indexPath.section == 2 && indexPath.row == 0 {
             submitAction()
         }
@@ -149,12 +157,12 @@ extension ContractAddTVController: ContractAddTVControllerUserDelegate {
     }
     
     func goToBinding(model: ContractBindingModel) {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
+        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         ApiServiceAdapter.shared.contractBinding(model: model, delegate: self)
     }
     
     func resultToBinding(result: ServerResponseModel) {
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка" : "Успешно",
@@ -184,6 +192,7 @@ extension ContractAddTVController {
     private func configuration() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
+        //let cancelBtn = UIBarButtonItem(image: UIImage(systemName: myImage.close.rawValue), style: .plain, target: self, action: #selector(cancelButton))
         let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import YandexMapKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,16 +23,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tmpDirectory = FileManager.default.temporaryDirectory
         YMKMapKit.setApiKey("e5c12d20-2c1e-4a5c-bea2-8974e8a981aa")
         // TODO: Проверку версии схемы и запуск миграции 
-        
-        
+
+            //Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
+        print("Realm path:", Realm.Configuration.defaultConfiguration.fileURL ?? "no url")
+       
         print(documentsDirectory!)
         print(cacheDirectory!)
         print(tmpDirectory)
+        
+        //Thread.sleep(forTimeInterval: 1.0)
         return true
     }
 
     // MARK: UISceneSession Lifecycle
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+           
+           print("Response From TargetApp=======>\(url.absoluteString)")
+           return true
+       }
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.

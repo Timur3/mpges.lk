@@ -18,35 +18,59 @@ public struct UserEmailModel: Encodable {
 }
 
 public struct UserModel: Decodable, Encodable {
-    
-    let Id: Int
-    var Name: String
-    var Email: String
-    var Mobile: String?
-    let IsOnline: Bool
-    let Confirmed: Bool
-    let CreateDate: String
-    let RoleId: Int
+    let id: Int
+    var name: String
+    var email: String
+    var mobile: String?
+    let isOnline: Bool
+    let confirmed: Bool
+    let createDate: String
+    let roleId: Int
     
     enum CodingKeys: String, CodingKey {
-        case Id = "id"
-        case Name = "name"
-        case Email = "email"
-        case Mobile = "mobile"
-        case IsOnline = "isOnline"
-        case Confirmed = "confirmed"
-        case CreateDate = "createDate"
-        case RoleId = "roleId"
+        case id = "id"
+        case name = "name"
+        case email = "email"
+        case mobile = "mobile"
+        case isOnline = "isOnline"
+        case confirmed = "confirmed"
+        case createDate = "createDate"
+        case roleId = "roleId"
     }
     
     init(Id: Int, Name: String, Password: String, PasswordHash: String, Email: String, Mobile: String, IsOnline: Bool, Confirmed: Bool, CreateDate: String, RoleId: Int) {
-        self.Id = Id
-        self.Name = Name
-        self.Email = Email
-        self.Mobile = Mobile
-        self.IsOnline = IsOnline
-        self.Confirmed = Confirmed
-        self.CreateDate = CreateDate
-        self.RoleId = RoleId
+        self.id = Id
+        self.name = Name
+        self.email = Email
+        self.mobile = Mobile
+        self.isOnline = IsOnline
+        self.confirmed = Confirmed
+        self.createDate = CreateDate
+        self.roleId = RoleId
     }
+}
+
+public struct UserCreateModel: Encodable {
+    let password: String
+    let name: String
+    let email: String
+    let mobile: String?
+    let roleId: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case password = "password"
+        case name = "name"
+        case email = "email"
+        case mobile = "mobile"
+        case roleId = "roleId"
+    }
+    
+    init(name: String, password: String, Email: String, Mobile: String, RoleId: Int) {
+        self.password = password
+        self.name = name
+        self.email = Email
+        self.mobile = Mobile
+        self.roleId = RoleId
+    }
+
 }

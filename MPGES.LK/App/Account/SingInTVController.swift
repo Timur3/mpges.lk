@@ -8,46 +8,44 @@
 
 import UIKit
 
+public protocol SingInTVControllerUserDelegate: class {
+    func authApi(model: AuthModel)
+    func resultAuthApi(result: ResultModel)
+}
+
 class SingInTVController: UITableViewController {
-    var sections: [String] {["Мои данные", "О программе", "Прочее"]}
-    
+    var sections: [String] {["Авторизация", "", ""]}
+    let userDataService = UserDataService()
+    var indexPath: IndexPath?
     public weak var delegate: MainCoordinator?
+    public weak var delegateUser: SingInTVControllerUserDelegate?
     
-    var exitCell: UITableViewCell { getCustomCell(textLabel: "Выйти", imageCell: myImage.power, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
-    var passChange: UITableViewCell { getCustomCell(textLabel: "Изменить пароль", imageCell: myImage.edit, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
-    var mobileCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.phone, textAlign: .left, accessoryType: .none) }()
-    var saveCell: UITableViewCell { getCustomCell(textLabel: "Сохранить изменения", imageCell: myImage.save, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    var aboutCell: UITableViewCell { getCustomCell(textLabel: "Разработчик", imageCell: myImage.person, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    var emailToDeveloperCell: UITableViewCell { getCustomCell(textLabel: "Обратная связь", imageCell: myImage.mail, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
+    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
+    var inputCell: UITableViewCell { getCustomCell(textLabel: "Войти", imageCell: myImage.none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
+    var passwordRecoveryCell: UITableViewCell { getCustomCell(textLabel: "Забыли пароль", imageCell: myImage.none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
     
-    var nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Введите ваше имя"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
     var emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Электронная почта"
+        textField.placeholder = "example@email.com"
+        textField.text = "timon2006tevriz@mail.ru"
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isUserInteractionEnabled = false
         return textField
     }()
-    var mobileTextField: UITextField = {
+    var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Ваш сотовый"
+        textField.placeholder = "Ваш пароль"
+        textField.text = "admin123"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isSecureTextEntry = true
         return textField
     }()
     
     var user: UserModel? {
         didSet {
             DispatchQueue.main.async {
-                self.emailTextField.text = self.user?.Email
-                self.nameTextField.text = self.user?.Name
-                self.mobileTextField.text = self.user?.Mobile
+                self.emailTextField.text = self.user?.email
+                self.passwordTextField.text = self.user?.name
             }
         }
     }
@@ -58,16 +56,18 @@ class SingInTVController: UITableViewController {
         setUpLayout()
     }
     
+    override func viewWillLayoutSubviews() {
+        self.updateTableViewContentInset()
+    }
+    
     func setUpLayout(){
-        nameCell.addSubview(nameTextField)
-        nameTextField.leadingAnchor.constraint(equalTo: nameCell.leadingAnchor, constant: 50).isActive = true
-        nameTextField.centerYAnchor.constraint(equalTo: nameCell.centerYAnchor).isActive = true
         emailCell.addSubview(emailTextField)
         emailTextField.leadingAnchor.constraint(equalTo: emailCell.leadingAnchor, constant: 50).isActive = true
         emailTextField.centerYAnchor.constraint(equalTo: emailCell.centerYAnchor).isActive = true
-        mobileCell.addSubview(mobileTextField)
-        mobileTextField.leadingAnchor.constraint(equalTo: mobileCell.leadingAnchor, constant: 50).isActive = true
-        mobileTextField.centerYAnchor.constraint(equalTo: mobileCell.centerYAnchor).isActive = true
+        passwordCell.addSubview(passwordTextField)
+        passwordTextField.leadingAnchor.constraint(equalTo: passwordCell.leadingAnchor, constant: 50).isActive = true
+        passwordTextField.centerYAnchor.constraint(equalTo: passwordCell.centerYAnchor).isActive = true
+        passwordTextField.rightAnchor.constraint(equalTo: passwordCell.rightAnchor, constant: 8).isActive = true
     }
     // MARK: - Table view data source
     
@@ -80,11 +80,11 @@ class SingInTVController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
-            return 4
+            return 2
         case 1:
-            return 2
+            return 1
         case 2:
-            return 2
+            return 1
         default:
             fatalError()
         }
@@ -95,31 +95,23 @@ class SingInTVController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                return nameCell
-            case 1:
                 return emailCell
-            case 2:
-                return mobileCell
-            case 3:
-                return saveCell
+            case 1:
+                return passwordCell
             default:
                 fatalError()
             }
         case 1:
             switch indexPath.row {
             case 0:
-                return aboutCell
-            case 1:
-                return emailToDeveloperCell
+                return inputCell
             default:
                 fatalError()
             }
         case 2:
             switch indexPath.row {
             case 0:
-                return passChange
-            case 1:
-                return exitCell
+                return passwordRecoveryCell
             default:
                 fatalError()
             }
@@ -131,22 +123,46 @@ class SingInTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         sections[section]
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 && indexPath.row == 3 {
-            //saveAlertSheetShow()
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 0 {
+            
+            return """
+            Нажимая  кнопку "Войти", Вы принимаете условия пользовательского соглашения и политики конфиденциальности
+            """
         }
-        if indexPath.section == 1 && indexPath.row == 1 {
-            // self.delegate?.navigationEmailToDeveloperPage()
+        return ""
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.indexPath = indexPath
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 && indexPath.row == 0 {
+            emailTextField.becomeFirstResponder()
+        }
+        if indexPath.section == 0 && indexPath.row == 1 {
+            passwordTextField.becomeFirstResponder()
+        }
+        if indexPath.section == 1 && indexPath.row == 0 {
+            debugPrint("authButton press")
+            if isValidEmail(emailTextField.text!) {
+                let model = AuthModel(email: emailTextField.text!, password: passwordTextField.text!)
+                self.delegateUser?.authApi(model: model)
+            } else
+            {
+                let msg = "Не корректный email адрес"
+                AlertControllerAdapter.shared.show(
+                    title: "Ошибка",
+                    mesg: msg,
+                    form: self) { (UIAlertAction) in
+                        print(msg as Any)
+                }
+                emailTextField.shake(times: 3, delta: 5)
+            }
         }
         if indexPath.section == 2 && indexPath.row == 0 {
-            // alertSheetChangePasswordShow()
-        }
-        if indexPath.section == 2 && indexPath.row == 1 {
-            // alertSheetExitShow()
+            self.delegate?.navigateToRecoveryPasswordPage()
         }
     }
+
     @objc func geToDemo() {
         let model = AuthModel(email: "demo@mp-ges.ru", password: "Qwerty123!")
         self.delegate?.authApi(model: model)
@@ -172,5 +188,37 @@ extension SingInTVController {
         self.navigationItem.rightBarButtonItems = [demoBtn]
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
+        delegateUser = self
+    }
+    
+    func updateTableViewContentInset() {
+        let viewHeight: CGFloat = view.frame.size.height
+        let tableViewContentHeight: CGFloat = tableView.contentSize.height
+        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
+        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
+    }
+}
+
+extension SingInTVController: SingInTVControllerUserDelegate {
+    
+    func authApi(model: AuthModel) {
+        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        ApiServiceAdapter.shared.authApi(model: model, delegate: self)
+    }
+    
+    func resultAuthApi(result: ResultModel) {
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        if !result.isError {
+            userDataService.setToken(token: result.data!)
+            self.delegate?.goToNextSceneApp()
+            navigationController?.isNavigationBarHidden = true
+        } else {
+            AlertControllerAdapter.shared.show(
+                title: "Ошибка",
+                mesg: result.errorMessage!,
+                form: self) { (UIAlertAction) in
+                    print(result.errorMessage as Any)
+            }
+        }
     }
 }

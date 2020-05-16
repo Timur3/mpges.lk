@@ -15,8 +15,8 @@ class ApiServiceAdapter {
     static let shared = ApiServiceAdapter()
     init(){ }
     
-    func authApi(model: AuthModel, delegate: SingInViewControllerUserDelegate) {
-        ApiService.shared.requestByModel(model: model, method: methodApi.authApi, completion: delegate.resultAuthApi(modelResult:))
+    func authApi(model: AuthModel, delegate: SingInTVControllerUserDelegate) {
+        ApiService.shared.requestByModel(model: model, method: methodApi.authApi, completion: delegate.resultAuthApi(result:))
     }
     
     // получение списка договора пользователя
@@ -102,7 +102,7 @@ class ApiServiceAdapter {
     }
         
     // регистрация профиля
-    func createUser(model: UserModel, delegate: SingUpViewControllerUserDelegate) {
+    func createUser(model: UserCreateModel, delegate: SingUpTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.createUser, completion: delegate.resultOfCreateUser(result:))
     }
     
@@ -122,6 +122,7 @@ class ApiServiceAdapter {
     }
     
     func loadSaldoContract(id: Int, label: UILabel) {
+        //Thread.sleep(forTimeInterval: 1.0)
         ApiService.shared.loadTextInLabel(method: methodApi.getContractSaldoById, id: id, label: label)
     }
 }

@@ -15,7 +15,9 @@ class DeliveryMethodTVController: UITableViewController {
     public weak var delegate: ContractDetailsInfoCoordinator?
     public var invoiceDeliveryMethodId: Int = 0
     public var selectedDeliveryMethod: InvoiceDeliveryMethodModel?
+    
     override func viewDidLoad() {
+        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
         self.title = "Доставка квитанций"
         super.viewDidLoad()
         configuration()
@@ -26,10 +28,12 @@ class DeliveryMethodTVController: UITableViewController {
         super.viewDidDisappear(animated)
         delegate?.didFinishDeliveryMethodPage(for: selectedDeliveryMethod!)
     }
+    
     func getData() {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
+        //ActivityIndicatorViewService.shared.showView(form: self.view)
         ApiServiceAdapter.shared.getDeliveryOfInvoices(delegate: self)
     }
+    
     // MARK: - Table view data source
     var deliveryMethodList = [InvoiceDeliveryMethodModel]() {
         didSet {
@@ -38,10 +42,12 @@ class DeliveryMethodTVController: UITableViewController {
             }
         }
     }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Способы доставки квитанций"
     }
@@ -57,12 +63,12 @@ class DeliveryMethodTVController: UITableViewController {
         }
         deliveryMethodList = temp
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return deliveryMethodList.count
     }
-
-    
+        
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deliveryOfInvoiceCell", for: indexPath)
         cell.textLabel?.text = deliveryMethodList[indexPath.row].devileryMethodName
@@ -81,6 +87,7 @@ class DeliveryMethodTVController: UITableViewController {
 }
 
 extension DeliveryMethodTVController: DeliveryMethodTVControllerDelegate {
+    
     func setData(for deliveryMethod: InvoiceDeliveryMethodModelRoot) {
         var temp = [InvoiceDeliveryMethodModel]()
         for var item in deliveryMethod.data {

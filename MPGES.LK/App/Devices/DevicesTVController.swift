@@ -8,17 +8,13 @@
 
 import UIKit
 
-protocol DevicesTVControllerDelegate: class {
-    func navigationReceivedDataPage(model: DeviceModel)
-}
-
 protocol DevicesTVControllerUserDelegate: class {
     func setDevices(devices:DevicesModelRoot)
 }
 
 class DevicesTVController: UITableViewController {
     private var searchController = UISearchController(searchResultsController: nil)
-    public weak var delegate: DevicesTVControllerDelegate?
+    public weak var delegate: DeviceCoordinatorMain?
     public var contractId: Int = 0
     
     var deviceList = [DeviceModel]() {
@@ -30,6 +26,7 @@ class DevicesTVController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
         navigationItem.title = "Приборы учета"
         super.viewDidLoad()
         configuration()
@@ -42,7 +39,7 @@ class DevicesTVController: UITableViewController {
     }
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 170
+        return 210
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,6 +67,8 @@ class DevicesTVController: UITableViewController {
         cell.addSubview(cellImg)
         //cell.imageView?.image = imageWithImage(UIImage(named: myImage.device.rawValue), scaledToSize: CGSize(width: 20, height: 20))
         cell.update(for: deviceList[indexPath.row])
+        cell.delegateCell = self
+        cell.index = indexPath
         return cell
     }
 
@@ -103,12 +102,24 @@ extension DevicesTVController: DevicesTVControllerUserDelegate {
     func setDevices(devices: DevicesModelRoot) {
         // todo доделать получение данных из realm
         deviceList = devices.data
+        ActivityIndicatorViewService.shared.hideView()
     }
+}
+//MARK: - RECEIVED DATA ADD NEW DELEGATE
+extension DevicesTVController: ReceivedDataAddNewDelegate {
+    func onClick(index: Int) {
+        delegate?.showReceivedDataAddNewTemplatesOneStepPage(device: deviceList[index])
+    }   
 }
 //MARK: - CONFIGURATION
 extension DevicesTVController {
     private func configuration() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Номер прибора учета"
         navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshDataDevice), for: UIControl.Event.valueChanged)
         

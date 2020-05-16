@@ -19,6 +19,7 @@ class RecoveryPasswordTVController: UITableViewController {
     public weak var delegate: ContractsTVControllerUserDelegate?
     
     var sections: [String] {["Email указанный при регистрации", ""]}
+    var indexPath: IndexPath?
     
     var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
     var submitCell: UITableViewCell { getCustomCell(textLabel: "Напомнить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
@@ -43,6 +44,10 @@ class RecoveryPasswordTVController: UITableViewController {
         delegate?.getContracts()
     }
     
+    override func viewWillLayoutSubviews() {
+        self.updateTableViewContentInset()
+    }
+    
     func setUpLayout(){
         emailCell.addSubview(emailTextField)
         emailTextField.leadingAnchor.constraint(equalTo: emailCell.leadingAnchor, constant: 50).isActive = true
@@ -50,7 +55,6 @@ class RecoveryPasswordTVController: UITableViewController {
     }
     
     @objc func submitAction() {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
         let model = UserEmailModel(email: emailTextField.text!)
         ApiServiceAdapter.shared.passwordRecovery(model: model, delegate: self)
     }
@@ -101,7 +105,12 @@ class RecoveryPasswordTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.indexPath = indexPath
+        if indexPath.section == 0 && indexPath.row == 0 {
+            emailTextField.becomeFirstResponder()
+        }
         if indexPath.section == 1 && indexPath.row == 0 {
+            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             submitAction()
         }
     }
@@ -112,7 +121,7 @@ class RecoveryPasswordTVController: UITableViewController {
 
 extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate {
     func resultOfCheckEmail(result: ServerResponseModel) {
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         // sendPassword.isEnabled = !result.isError
         //  if result.isError {
         //     errorTextLabel.text = result.message
@@ -121,13 +130,13 @@ extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate
     }
     
     @objc func goToRecoveryPassword() {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         //  model = UserEmailModel(email: emailTF.text!)
         //ApiServiceAdapter.shared.passwordRecovery(model: model!, delegate: self)
     }
     
     func resultOfPassordRecovery(result: ServerResponseModel) {
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка" : "Успех!",
@@ -160,5 +169,12 @@ extension RecoveryPasswordTVController {
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    func updateTableViewContentInset() {
+        let viewHeight: CGFloat = view.frame.size.height
+        let tableViewContentHeight: CGFloat = tableView.contentSize.height
+        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
+        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
     }
 }

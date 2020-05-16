@@ -8,9 +8,9 @@
 
 import UIKit
 
-func getCustomTextField(placeholder: String, translatesAutoresizingMaskIntoConstraints: Bool) -> UITextField {
+func getCustomTextField(placeholder: String) -> UITextField {
     let textField = UITextField()
-    textField.placeholder = "Ваш email адрес"
+    textField.placeholder = placeholder
     textField.translatesAutoresizingMaskIntoConstraints = false
     return textField
 }

@@ -13,12 +13,14 @@ public struct ResultModel: Decodable {
     var errorCode: Int
     var errorMessage: String?
     var data: String?
+    var refreshToken: String?
     
     enum CodingKeys: String, CodingKey {
         case isError = "isError"
         case errorCode = "errorCode"
         case errorMessage = "errorMessage"
         case data = "data"
+        case refreshToken = "refreshToken"
      }
 
 }

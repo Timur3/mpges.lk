@@ -29,7 +29,7 @@ class MainCoordinator: Coordinator {
     
     func start() {
         if (true) {
-            let firstViewController : FirstViewController = FirstViewController()
+            let firstViewController : FirstTVController = FirstTVController()
             firstViewController.delegate = self
             self.navigationController.viewControllers = [firstViewController]
         } else
@@ -54,13 +54,13 @@ extension MainCoordinator: MainCoordinatorDelegate {
     
     // Переход на страницу входа
     func navigateToSingInPage() {
-       let singInViewController : SingInViewController = SingInViewController()
+       let singInViewController : SingInTVController = SingInTVController()
        singInViewController.delegate = self
        self.navigationController.pushViewController(singInViewController, animated: true)
     }
     
     func navigateToFirstPage() {
-        let firstViewController : FirstViewController = FirstViewController()
+        let firstViewController : FirstTVController = FirstTVController()
         firstViewController.delegate = self
         self.navigationController.setNavigationBarHidden(false, animated: true)
         self.navigationController.viewControllers = [firstViewController]

@@ -48,9 +48,3 @@ public class ReceivedDataAddNewTemplateModelView  {
         self.receivedDataAddNewTemplates = receivedDataAddNewTemplates
     }
 }
-
-public struct ReceivedDataAddModel: Encodable {
-    let tariffZoneId: Int
-    let date: Date
-    let receivedDataValue: Int
-}

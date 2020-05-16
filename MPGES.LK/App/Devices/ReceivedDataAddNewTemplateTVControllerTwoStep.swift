@@ -65,7 +65,6 @@ class ReceivedDataAddNewTemplateTVControllerTwoStep: UITableViewController {
 }
 extension ReceivedDataAddNewTemplateTVControllerTwoStep {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
         
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NSTextAlignment, textColor: UIColor = .black, accessoryType: UITableViewCell.AccessoryType) -> UITableViewCell {
+func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NSTextAlignment, textColor: UIColor = .black, accessoryType: UITableViewCell.AccessoryType, isUserInteractionEnabled: Bool = true) -> UITableViewCell {
     
     let cell = UITableViewCell()
     if (imageCell != .none) {
@@ -20,6 +20,7 @@ func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NST
     }
     cell.textLabel?.textAlignment = textAlign
     cell.accessoryType = accessoryType
+    cell.isUserInteractionEnabled = isUserInteractionEnabled
     //cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
     //cell.layer.masksToBounds = true
     //cell.layer.cornerRadius = 5

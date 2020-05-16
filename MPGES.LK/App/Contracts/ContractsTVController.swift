@@ -42,10 +42,12 @@ class ContractsTVController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
         self.navigationItem.title = "Мои услуги"
         super.viewDidLoad()
         configuration()
     }
+    
     @objc func alertSheetContractAddShow() {
         let alert = UIAlertController(title: "Выберите действие", message: nil, preferredStyle: .actionSheet)
         let actionAddExistContract = UIAlertAction(title: "Добавить существующий договор", style: .default) {
@@ -86,7 +88,7 @@ class ContractsTVController: UITableViewController {
         return self.sections.count
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return 100 
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.sections[section]
@@ -116,14 +118,19 @@ class ContractsTVController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let model = ContractNumberModel(number: contractList[indexPath.row].number)
-            contractList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
-            ApiServiceAdapter.shared.removeContractBinding(model: model, delegate: self)
-            
+            alertSheetOfDelBindingShow(for: indexPath)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    func alertSheetOfDelBindingShow(for indexPath: IndexPath){
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите удалить договор из списка услуг?", form: self) { (UIAlertAction) in
+            let model = ContractNumberModel(number: self.contractList[indexPath.row].number)
+            ApiServiceAdapter.shared.removeContractBinding(model: model, delegate: self)
+            self.contractList.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.reloadData()
         }
     }
 }
@@ -150,6 +157,7 @@ extension ContractsTVController: ContractsTVControllerUserDelegate {
     func getContracts() {
         ApiServiceAdapter.shared.getContracts(delegate: self)
         self.refreshControl?.endRefreshing()
+        ActivityIndicatorViewService.shared.hideView()
     }
     
     func resultRemoveContractBinding(result: ServerResponseModel) {

@@ -6,4 +6,19 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+func getCustomForCardLabel(text: String) -> UILabel {
+    let label = UILabel()
+    label.text = text
+    label.font = UIFont.systemFont(ofSize: 14)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+}
+
+func getCustomForContractLabel(text: String) -> UILabel {
+    let label = UILabel()
+    label.text = text
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+}
