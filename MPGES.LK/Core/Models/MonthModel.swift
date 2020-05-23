@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+public struct MonthModel: Decodable {
+    let id: Int
+    let name: String
+    let shortName: String
+}

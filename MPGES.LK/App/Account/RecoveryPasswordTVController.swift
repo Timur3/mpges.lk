@@ -14,12 +14,11 @@ public protocol RecoveryPasswordTVControllerUserDelegate: class {
     func resultOfPassordRecovery(result: ServerResponseModel)
 }
 
-class RecoveryPasswordTVController: UITableViewController {
+class RecoveryPasswordTVController: CommonTableViewController {
     
     public weak var delegate: ContractsTVControllerUserDelegate?
     
     var sections: [String] {["Email указанный при регистрации", ""]}
-    var indexPath: IndexPath?
     
     var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
     var submitCell: UITableViewCell { getCustomCell(textLabel: "Напомнить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
@@ -148,26 +147,14 @@ extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate
         }
     }
 }
-extension RecoveryPasswordTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
 
 //MARK: - CONFIGURE
 extension RecoveryPasswordTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
-        
         self.hideKeyboardWhenTappedAround()
     }
     

@@ -13,20 +13,22 @@ public class ReceivedDataAddNewTemplateModelRoot: Decodable {
 }
 
 public struct ReceivedDataAddNewTemplateModel: Decodable {
-    var shkId: Int
-    var tariffZone: String
+    let tariffZoneId: Int
+    let tariffZone: String
     var meterCircle: Bool
-    var previousReceivedData: Int
+    let previousDate: String
+    let previousReceivedData: Int
     var receivedData: Int?
-    var tariffValue: Double
+    let tariffValue: Double
     var date: String
-    var deviceId: Int
-    var razryad: Int
+    let deviceId: Int
+    let razryad: Int
     
     enum CodingKeys: String, CodingKey {
-        case shkId = "shkId"
+        case tariffZoneId = "tariffZoneId"
         case tariffZone = "tariffZone"
         case meterCircle = "meterCircle"
+        case previousDate = "previousDate"
         case previousReceivedData = "previousReceivedData"
         case receivedData = "receivedData"
         case tariffValue = "tariffValue"

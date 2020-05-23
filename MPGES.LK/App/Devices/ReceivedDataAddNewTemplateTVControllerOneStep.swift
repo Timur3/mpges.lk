@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol ReceivedDataAddNewTemplateTVControllerOneStepDelegate: class {
+    func setData(model: ReceivedDataAddNewTemplateModelRoot)
+}
 
 class ReceivedDataAddNewTemplateTVControllerOneStep: UITableViewController {
     public weak var delegate: DeviceCoordinatorMain?
@@ -105,8 +108,7 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: UITableViewController {
         if indexPath.section == 1 && indexPath.row == 0 {
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             if isValidDate(dateStr: dateTextField.text!) {
-                //self.delegate?.showReceivedDataAddNewTemplatesTwoStepPage(device: device!, nav: self.navigationController!)
-                self.delegate?.showReceivedDataAddNewTemplatesPage(device: device!, nav: self.navigationController!)
+                ApiServiceAdapter.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
             } else {
                 AlertControllerAdapter.shared.show(
                     title: "Ошибка",
@@ -133,15 +135,25 @@ extension ReceivedDataAddNewTemplateTVControllerOneStep {
     }
 }
 
+extension ReceivedDataAddNewTemplateTVControllerOneStep: ReceivedDataAddNewTemplateTVControllerOneStepDelegate {
+    func setData(model: ReceivedDataAddNewTemplateModelRoot) {
+        //self.delegate?.showReceivedDataAddNewTemplatesTwoStepPage(device: device!,x nav: self.navigationController!)
+        self.delegate?.showReceivedDataAddNewTemplatesPage(device: device!, template: model.data[0], nav: self.navigationController!)
+    }
+    
+    
+}
+
 //MARK: - CONFIGURE
 extension ReceivedDataAddNewTemplateTVControllerOneStep {
     private func configuration() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()
+        //self.dateTextField.becomeFirstResponder()
         
         datePicker.addTarget(self, action: #selector(datePackerChanged), for: UIControl.Event.valueChanged)
         //Formate Date

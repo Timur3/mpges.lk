@@ -29,6 +29,7 @@ class ContractAddTVController: UITableViewController {
         let textField = UITextField()
         textField.placeholder = "Например: 860001000001"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = .numberPad
         return textField
     }()
     var codeTextField: UITextField = {
@@ -57,7 +58,7 @@ class ContractAddTVController: UITableViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // Получение списка договоров
-        delegate?.getContracts()
+        self.delegate?.getContracts()
     }
     
     func setUpLayout(){
@@ -190,8 +191,8 @@ extension ContractAddTVController {
 //MARK: - CONFIGURE
 extension ContractAddTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()

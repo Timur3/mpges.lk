@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoFirstPage" translatesAutoresizingMaskIntoConstraints="NO" id="2aZ-TQ-UAq">
+                <imageView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoFirstPage" translatesAutoresizingMaskIntoConstraints="NO" id="2aZ-TQ-UAq">
                     <rect key="frame" x="37.5" y="80" width="300" height="277"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="277" id="o5K-Q1-P4B"/>
@@ -47,6 +47,12 @@
                         <action selector="authBtn:" destination="-1" eventType="touchUpInside" id="CpN-a1-2B7"/>
                     </connections>
                 </button>
+                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rcS-V3-PGS">
+                    <rect key="frame" x="211" y="413" width="97" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>

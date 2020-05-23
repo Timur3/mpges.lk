@@ -206,7 +206,7 @@ extension PayWithCreditCardViewController {
     private func configuration() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()

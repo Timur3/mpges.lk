@@ -16,7 +16,7 @@ protocol InvoiceDetailsInfoTableViewControllerDelegate: class {
     func resultOfSendInvoice(result: ServerResponseModel)
 }
 
-class InvoiceDetailsInfoTableViewController: UITableViewController {
+class InvoiceDetailsInfoTableViewController: CommonTableViewController {
     var balanceBeginOfPeriod: UITableViewCell { getCustomCell(textLabel: (invoice?.statusSaldo.name ?? "...") + " \(invoice?.saldo ?? 0) руб.", imageCell: myImage.dollar, textAlign: .left, accessoryType: .none) }
     var balanceEndOfPeriod: UITableViewCell { getCustomCell(textLabel: (invoice?.statusSaldo.name ?? "...") + " \(invoice?.saldo ?? 0) руб.", imageCell: myImage.dollar, textAlign: .left, accessoryType: .none) }
     var notCalculations: UITableViewCell { getCustomCell(textLabel: "не производились", imageCell: myImage.textPlus, textAlign: .left, accessoryType: .none) }
@@ -117,9 +117,9 @@ class InvoiceDetailsInfoTableViewController: UITableViewController {
         self.refreshControl?.endRefreshing()
     }
     @objc func alertSheetSendInvoiceShow(){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите получить платежный документ на электронную почту?", form: self) { (UIAlertAction) in
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите получить платежный документ на электронную почту?", form: self, handlerYes: { (UIAlertAction) in
             self.sendInvoice(model: self.invoice!)
-        }
+        })
     }
     
 }

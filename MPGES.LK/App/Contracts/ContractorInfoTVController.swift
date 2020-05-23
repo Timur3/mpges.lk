@@ -204,24 +204,24 @@ extension ContractorInfoTVController {
         self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
 
         self.hideKeyboardWhenTappedAround()
     }
     func saveAlertSheetShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self) { (UIAlertAction) in
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self, handlerYes: { (UIAlertAction) in
             self.user?.name = self.nameTextField.text!
             self.user?.email = self.emailTextField.text!
             self.user?.mobile = self.mobileTextField.text!
             // save
             self.saveProfile(profile: self.user!)
-        }
+        })
     }
     
     func alertSheetExitShow(){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self) { (UIAlertAction) in
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self, handlerYes: { (UIAlertAction) in
             self.delegate?.navigateToFirstPage()
-        }
+        })
     }
 }

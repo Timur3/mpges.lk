@@ -16,7 +16,7 @@ class InvoiceTVCell: UITableViewCell {
     @IBOutlet weak var creditLabel: UILabel!
     
     func update(for invoice: InvoiceModel) {
-        monthAndYearLabel.text = "\(invoice.month)-" + "\(invoice.year)"
+        monthAndYearLabel.text = DateFormatter().standaloneMonthSymbols[invoice.monthId - 1] + " \(invoice.year)"
         saldoLabel.text = formatRusCurrency(for: "\(invoice.saldo)")
         debetLabel.text = formatRusCurrency(for: "\(invoice.debet)")
         creditLabel.text = formatRusCurrency(for: "\(invoice.credit)")

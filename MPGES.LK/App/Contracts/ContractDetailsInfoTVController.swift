@@ -241,7 +241,7 @@ extension ContractDetailsInfoTVController {
             self.delegate?.navigateToPayWithSberbankOnlinePage()
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        alert.addAction(actionApplePay)
+        // alert.addAction(actionApplePay)
         // alert.addAction(actionOthersBank)
         alert.addAction(actionSberBank)
         alert.addAction(actionCancel)

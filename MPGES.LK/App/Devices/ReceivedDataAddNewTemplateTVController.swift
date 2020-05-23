@@ -11,11 +11,12 @@ import UIKit
 class ReceivedDataAddNewTemplateTVController: UITableViewController {
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
+    
     let datePicker = UIDatePicker()
     
     var sections: [String] {["Тарифная зона", "Предыдущие показания", "Текущие показания", "Примерный расчет, с учетом всех тарифных зон", ""]}
     var tariffZoneCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
-    var receivedDataDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
+    var previousDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
     var previousReceivedDataCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     var deviceRazryadCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
     var tariffValueCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
@@ -25,19 +26,30 @@ class ReceivedDataAddNewTemplateTVController: UITableViewController {
     var calcCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Продолжить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
-    var receivedDataTF: UITextField = { getCustomTextField(placeholder: "Введите показания") }()
+    var receivedDataTF: UITextField = { getCustomTextField(placeholder: "Введите показания", keyboardType: .numberPad) }()
+    
+    public var model: ReceivedDataAddNewTemplateModel? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tariffZoneCell.textLabel?.text = self.model?.tariffZone
+                self.previousDateCell.textLabel?.text = self.model?.previousDate
+                self.previousReceivedDataCell.textLabel?.text = "\(self.model?.previousReceivedData ?? 0)"
+                
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         self.navigationItem.title = "Новые показания"
         super.viewDidLoad()
         configuration()
         setUpLayout()
+        self.receivedDataTF.becomeFirstResponder()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        // Получение списка договоров
-        //delegate?.getContracts()
     }
     
     func setUpLayout(){
@@ -82,7 +94,7 @@ class ReceivedDataAddNewTemplateTVController: UITableViewController {
         case 1:
             switch indexPath.row {
             case 0:
-                return receivedDataDateCell
+                return previousDateCell
             case 1:
                 return previousReceivedDataCell
             default:
@@ -112,6 +124,10 @@ class ReceivedDataAddNewTemplateTVController: UITableViewController {
         default:
             fatalError()
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return section == 0 ? "Стоимость 1 кВт*ч составляет: " + formatRusCurrency(for: "\(self.model?.tariffValue ?? 0)") : ""
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -153,9 +169,8 @@ extension ReceivedDataAddNewTemplateTVController {
     private func configuration() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
-        
         self.hideKeyboardWhenTappedAround()
     }
 }

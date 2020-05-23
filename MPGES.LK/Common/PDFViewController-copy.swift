@@ -10,10 +10,10 @@ import UIKit
 import PDFKit
 import Alamofire
 
-class PDFViewController: UIViewController {
+class PDFViewController1: UIViewController {
     
    //public var urlToPdfFile1 = "http://school3-hm.ru/images/Polojeni/03.05.2018/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf"
-   //public var urlToPdfFile = "file:///Users/Tima/Library/Developer/CoreSimulator/Devices/2B93A9CD-C450-4307-8C11-39A8E840B7C5/data/Containers/Data/Application/D6273EAB-0602-49B7-BFD1-76FB7FA94098/Documents/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf"
+   public var urlToPdfFile = "file:///Users/Tima/Library/Developer/CoreSimulator/Devices/2B93A9CD-C450-4307-8C11-39A8E840B7C5/data/Containers/Data/Application/D6273EAB-0602-49B7-BFD1-76FB7FA94098/Documents/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf"
     
     private var pdf: URL!
     
@@ -24,7 +24,7 @@ class PDFViewController: UIViewController {
     }
 }
 
-extension PDFViewController {
+extension PDFViewController1 {
     
     private func createPdfView(withFrame frame: CGRect) -> PDFView {
         let pdfView = PDFView(frame: frame)
@@ -104,7 +104,7 @@ extension PDFViewController {
     }
 }
 
-extension PDFViewController:  URLSessionDownloadDelegate {
+extension PDFViewController1:  URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         print("downloadLocation:", location)
         // create destination URL with the original pdf name

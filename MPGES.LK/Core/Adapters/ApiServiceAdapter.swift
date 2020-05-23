@@ -68,7 +68,7 @@ class ApiServiceAdapter {
     }
     
     // получение шаблона для передачи показаний
-    func getReceivedDataAddNewTemplatesByDeviceId(id: Int, delegate: ReceivedDataAddNewTemplateTVControllerTwoStepDelegate) {
+    func getReceivedDataAddNewTemplatesByDeviceId(id: Int, delegate: ReceivedDataAddNewTemplateTVControllerOneStepDelegate) {
         ApiService.shared.requestById(id: id, method: methodApi.getTemplateAddNew, completion: delegate.setData(model:))
     }
     

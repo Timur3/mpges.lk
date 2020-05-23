@@ -14,10 +14,11 @@ public struct InvoiceModelRoot: Decodable {
 }
 
 public struct InvoiceModel: Decodable {
-    var id: Int
-    var contractId: Int
-    var date: String
-    var month: Int
+    let id: Int
+    let contractId: Int
+    let date: String
+    let monthId: Int
+    let month: MonthModel?
     var year: Int
     var statusSaldoId: Int
     var statusSaldo: StatusSaldoModel

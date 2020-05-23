@@ -201,11 +201,11 @@ extension SingUpTVController {
 //MARK: - CONFIGURE
 extension SingUpTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         self.hideKeyboardWhenTappedAround()
         self.delegateUser = self
         
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
     @objc func cancelButton() {

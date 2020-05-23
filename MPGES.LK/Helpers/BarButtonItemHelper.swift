@@ -8,12 +8,30 @@
 
 import UIKit
 
-func getCustomUIBarButtonItem(target: AnyObject, selector: Selector) -> UIBarButtonItem {
+func getCustomUIBarButtonItem(image: String, target: AnyObject, action: Selector) -> UIBarButtonItem {
+    
+    let barBtn = UIBarButtonItem(image: UIImage(systemName: image),
+                                 style: .plain,
+                                 target: target,
+                                 action: action)
+    return barBtn
+}
+
+func getCloseUIBarButtonItem(target: AnyObject, action: Selector) -> UIBarButtonItem {
     
     let barBtn = UIBarButtonItem(image: UIImage(systemName: myImage.close.rawValue),
                                  style: .plain,
                                  target: target,
-                                 action: selector)
+                                 action: action)
+    return barBtn
+}
+
+func getPlusUIBarButtonItem(target: AnyObject, action: Selector) -> UIBarButtonItem {
+    
+    let barBtn = UIBarButtonItem(image: UIImage(systemName: myImage.plus.rawValue),
+                                 style: .plain,
+                                 target: target,
+                                 action: action)
     return barBtn
 }
 

@@ -21,9 +21,8 @@ protocol ProfileTVControllerUserDelegate: class {
     func resultOfSaveProfile(result: ServerResponseModel)
 }
 
-class ProfileTVController: UITableViewController {
+class ProfileTVController: CommonTableViewController {
     var sections: [String] {["Мои данные", "О программе", "Прочее"]}
-    var indexPath: IndexPath?
     
     public weak var delegate: ProfileTVControllerDelegate?
     
@@ -188,7 +187,7 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
     }
     func resultOfSaveProfile(result: ServerResponseModel) {
         AlertControllerAdapter.shared.show(title: result.isError ? "Ошибка!" : "Успешно!", mesg: result.message, form: self)
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        self.hiddenAI()
     }
     
     func setProfile(profile: UserModel) {
@@ -197,40 +196,30 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
     }
 }
 
-extension ProfileTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-
 //MARK: - CONFIGURE
 extension ProfileTVController {
     private func configuration() {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.getProfile()
         self.hideKeyboardWhenTappedAround()
     }
     func saveAlertSheetShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self) { (UIAlertAction) in
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self, handlerYes: { (UIAlertAction) in
             self.user?.name = self.nameTextField.text!
             self.user?.email = self.emailTextField.text!
             self.user?.mobile = self.mobileTextField.text!
             // save
             self.saveProfile(profile: self.user!)
+        }){ (UIAlertAction) in
+            self.hiddenAI()
         }
     }
     
     func alertSheetExitShow(){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self) { (UIAlertAction) in
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self, handlerYes: { (UIAlertAction) in
             self.delegate?.navigateToFirstPage()
-        }
+        })
     }
 }

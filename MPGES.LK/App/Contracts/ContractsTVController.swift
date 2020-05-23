@@ -63,8 +63,7 @@ class ContractsTVController: UITableViewController {
         })
     }
    
-    func showContractAddTVPage()
-    {
+    func showContractAddTVPage() {
         self.delegate?.navigationContractAddTVPage(delegate: self)
     }
     
@@ -119,13 +118,13 @@ class ContractsTVController: UITableViewController {
     }
     
     func alertSheetOfDelBindingShow(for indexPath: IndexPath){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите удалить договор из списка услуг?", form: self) { (UIAlertAction) in
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите удалить договор из списка услуг?", form: self, handlerYes: { (UIAlertAction) in
             let model = ContractNumberModel(number: self.contractList[indexPath.row].number)
             ApiServiceAdapter.shared.removeContractBinding(model: model, delegate: self)
             self.contractList.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             self.tableView.reloadData()
-        }
+        })
     }
 }
 // MARK: - SEARCH
@@ -170,7 +169,7 @@ extension ContractsTVController {
     
     private func configuration() {
         self.refreshControl = UIRefreshControl()
-        let addContract = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(alertSheetContractAddShow))
+        let addContract = getPlusUIBarButtonItem(target: self, action: #selector(alertSheetContractAddShow))
         self.navigationItem.rightBarButtonItems = [addContract]
         
         searchController.searchResultsUpdater = self

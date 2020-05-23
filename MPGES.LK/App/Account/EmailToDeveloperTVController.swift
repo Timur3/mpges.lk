@@ -132,7 +132,7 @@ class EmailToDeveloperTVController: UITableViewController {
             bodyMailTextView.becomeFirstResponder()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
-            alertSheetChangePasswordShow()
+            alertSheetSendMailShow()
         }
     }
 }
@@ -155,18 +155,18 @@ extension EmailToDeveloperTVController {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         self.hideKeyboardWhenTappedAround()
         
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
     @objc func cancelButton() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func alertSheetChangePasswordShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите направить обращение?", form: self) { (UIAlertAction) in
+    func alertSheetSendMailShow() {
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите направить обращение?", form: self, handlerYes: { (UIAlertAction) in
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             print("send mail")
             //self.delegate?.navigationChangePasswordPage()
-        }
+        })
     }
 }

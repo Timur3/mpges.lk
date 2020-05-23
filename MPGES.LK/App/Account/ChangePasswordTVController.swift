@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ChangePasswordTVController: UITableViewController {
+class ChangePasswordTVController: CommonTableViewController {
+    
     var sections: [String] {["Текущий пароль", "Новый пароль", ""]}
     
     public weak var delegate: ProfileCoordinator?
@@ -118,6 +119,7 @@ class ChangePasswordTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.indexPath = indexPath
         if indexPath.section == 0 && indexPath.row == 0 {
             currentPasswordTextField.becomeFirstResponder()
         }
@@ -128,40 +130,33 @@ class ChangePasswordTVController: UITableViewController {
             confirmPasswordTextField.becomeFirstResponder()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
+            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             alertSheetChangePasswordShow()
         }
     }
 }
 
-extension ChangePasswordTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
 
 //MARK: - CONFIGURE
 extension ChangePasswordTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         self.hideKeyboardWhenTappedAround()
        
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
+    
     @objc func cancelButton() {
         self.dismiss(animated: true, completion: nil)
     }
-    
+        
     func alertSheetChangePasswordShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self) { (UIAlertAction) in
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self, handlerYes: { (UIAlertAction) in
             print("change pass")
             //self.delegate?.navigationChangePasswordPage()
+        }) {
+            (UIAlertAction) in self.hiddenAI()
         }
     }
 }

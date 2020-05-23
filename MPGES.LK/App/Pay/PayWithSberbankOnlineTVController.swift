@@ -8,11 +8,10 @@
 
 import UIKit
 
-class PayWithSberbankOnlineTVController: UITableViewController {
+class PayWithSberbankOnlineTVController: CommonTableViewController {
     public weak var delegate: ContractDetailsInfoCoordinator?
     
     var sections: [String] {["Лицевой счет", "Доставка электронного чека", ""]}
-    var indexPath: IndexPath?
     
     var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
     var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
@@ -61,6 +60,7 @@ class PayWithSberbankOnlineTVController: UITableViewController {
         //if (UIApplication.shared.canOpenURL(url!)){
         //    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         //}
+        self.hiddenAI()
     }
     
     // MARK: - Table view data source
@@ -118,10 +118,12 @@ class PayWithSberbankOnlineTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
-        if indexPath.section == 2 && indexPath.row == 0 {
+        
+        if indexPath.section == 1 && indexPath.row == 0 {
             contactTextField.becomeFirstResponder()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
+            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
             submitAction()
         }
     }
@@ -162,26 +164,13 @@ extension PayWithSberbankOnlineTVController: ContractAddTVControllerUserDelegate
     }
 }
 
-extension PayWithSberbankOnlineTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-
 //MARK: - CONFIGURE
 extension PayWithSberbankOnlineTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
-        
         self.hideKeyboardWhenTappedAround()
     }
     

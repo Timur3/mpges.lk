@@ -50,10 +50,11 @@ extension DeviceCoordinatorMain {
         nav.pushViewController(receivedDataAddNewTemplateTVController, animated: true)
     }
     
-    func showReceivedDataAddNewTemplatesPage(device: DeviceModel, nav: UINavigationController){
+    func showReceivedDataAddNewTemplatesPage(device: DeviceModel, template: ReceivedDataAddNewTemplateModel, nav: UINavigationController){
         let receivedDataAddNewTemplateTVController : ReceivedDataAddNewTemplateTVController = ReceivedDataAddNewTemplateTVController()
         receivedDataAddNewTemplateTVController.delegate = self
         receivedDataAddNewTemplateTVController.device = device
+        receivedDataAddNewTemplateTVController.model = template
         nav.pushViewController(receivedDataAddNewTemplateTVController, animated: true)
     }
     

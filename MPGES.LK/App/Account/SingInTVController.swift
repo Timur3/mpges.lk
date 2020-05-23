@@ -35,7 +35,6 @@ class SingInTVController: UITableViewController {
     var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Ваш пароль"
-        textField.text = "admin123"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.isSecureTextEntry = true
         return textField
@@ -124,13 +123,10 @@ class SingInTVController: UITableViewController {
         sections[section]
     }
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if section == 0 {
-            
-            return """
-            Нажимая  кнопку "Войти", Вы принимаете условия пользовательского соглашения и политики конфиденциальности
+        return section == 0 ?
             """
-        }
-        return ""
+            Нажимая  кнопку "Войти", Вы принимаете условия пользовательского соглашения и политики конфиденциальности
+            """ : ""
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.indexPath = indexPath
@@ -143,41 +139,40 @@ class SingInTVController: UITableViewController {
         }
         if indexPath.section == 1 && indexPath.row == 0 {
             debugPrint("authButton press")
-            if isValidEmail(emailTextField.text!) {
-                let model = AuthModel(email: emailTextField.text!, password: passwordTextField.text!)
-                self.delegateUser?.authApi(model: model)
-            } else
-            {
-                let msg = "Не корректный email адрес"
+            let access = ApiService.Connectivity.isConnectedToInternet
+            if access {
+                if isValidEmail(emailTextField.text!) {
+                    let model = AuthModel(email: emailTextField.text!, password: passwordTextField.text!)
+                    self.delegateUser?.authApi(model: model)
+                } else
+                {
+                    let msg = "Не корректный email адрес"
+                    AlertControllerAdapter.shared.show(
+                        title: "Ошибка",
+                        mesg: msg,
+                        form: self) { (UIAlertAction) in
+                            print(msg as Any)
+                    }
+                    emailTextField.shake(times: 3, delta: 5)
+                }
+            } else {
+                let msg = "Нет соединения с интернетом"
                 AlertControllerAdapter.shared.show(
                     title: "Ошибка",
                     mesg: msg,
                     form: self) { (UIAlertAction) in
                         print(msg as Any)
                 }
-                emailTextField.shake(times: 3, delta: 5)
             }
         }
         if indexPath.section == 2 && indexPath.row == 0 {
             self.delegate?.navigateToRecoveryPasswordPage()
         }
     }
-
+    
     @objc func geToDemo() {
         let model = AuthModel(email: "demo@mp-ges.ru", password: "Qwerty123!")
         self.delegate?.authApi(model: model)
-    }
-}
-
-extension SingInTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }
 
@@ -196,6 +191,16 @@ extension SingInTVController {
         let tableViewContentHeight: CGFloat = tableView.contentSize.height
         let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
         self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

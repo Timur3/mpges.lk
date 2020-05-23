@@ -29,10 +29,10 @@ class AlertControllerAdapter {
         form.present(alert, animated: true, completion: nil)
     }
     
-    func actionSheetConfirmShow(title: String, mesg: String, form: UIViewController, handler: @escaping (UIAlertAction) -> Void) {
+    func actionSheetConfirmShow(title: String, mesg: String, form: UIViewController, handlerYes: @escaping (UIAlertAction) -> Void, handlerCancel: ((UIAlertAction) -> Void)? = nil) {
         let alertConfirm = UIAlertController(title: title, message: mesg, preferredStyle: .actionSheet)
-        let actionYes = UIAlertAction(title: "Да", style: .default, handler: handler)
-        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let actionYes = UIAlertAction(title: "Да", style: .default, handler: handlerYes)
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: handlerCancel)
         alertConfirm.addAction(actionYes)
         alertConfirm.addAction(actionCancel)
         form.present(alertConfirm, animated: true, completion: nil)

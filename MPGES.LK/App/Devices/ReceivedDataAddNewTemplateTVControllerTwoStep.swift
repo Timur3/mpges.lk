@@ -51,15 +51,15 @@ class ReceivedDataAddNewTemplateTVControllerTwoStep: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "receivedDataTemplateCell", for: indexPath) as! ReceivedDataAddNewTemplateTVCell
-        cell.imageView?.image = UIImage.init(systemName: myImage.textPlus.rawValue)
-        cell.update(for: templateAdd[indexPath.section].receivedDataAddNewTemplates[indexPath.row])
-        return cell
-    }
+    //override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "receivedDataTemplateCell", for: indexPath) as! ReceivedDataAddNewTemplateTVCell
+        //cell.imageView?.image = UIImage.init(systemName: myImage.textPlus.rawValue)
+        //cell.update(for: templateAdd[indexPath.section].receivedDataAddNewTemplates[indexPath.row])
+        //return cell
+   // }
     
     @objc func refreshReceivedData(){
-        ApiServiceAdapter.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
+        //ApiServiceAdapter.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
         self.refreshControl?.endRefreshing()
     }
 }
@@ -75,7 +75,7 @@ extension ReceivedDataAddNewTemplateTVControllerTwoStep {
         let saveBtn = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [saveBtn]
         // кнопка отмена
-        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         //self.navigationItem.leftBarButtonItems = [cancelBtn]
         
         self.refreshControl = UIRefreshControl()

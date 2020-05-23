@@ -121,7 +121,7 @@ extension ReceivedDataTVController {
         //segment.selectedSegmentIndex = 0
         //self.navigationItem.titleView = segment
         
-        let sendMeterDataDevice = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showMeterDataDevicePage))
+        let sendMeterDataDevice = getPlusUIBarButtonItem(target: self, action: #selector(showMeterDataDevicePage))
         self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
         
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
