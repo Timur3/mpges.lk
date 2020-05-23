@@ -9,8 +9,6 @@
 import UIKit
 
 public protocol ContractsTVControllerDelegate: class {
-    func navigationContractAddFisrtPage(delegate: ContractsTVControllerUserDelegate)
-    func navigationContractAddPage(delegate: ContractsTVControllerUserDelegate)
     func navigationContractAddTVPage(delegate: ContractsTVControllerUserDelegate)
     func navigationDetailsInfoPage(to contract: ContractModel)
 }
@@ -64,11 +62,7 @@ class ContractsTVController: UITableViewController {
             print("completion block")
         })
     }
-    func showNewContractPage()
-    {
-        self.delegate?.navigationContractAddPage(delegate: self)
-    }
-    
+   
     func showContractAddTVPage()
     {
         self.delegate?.navigationContractAddTVPage(delegate: self)

@@ -205,7 +205,7 @@ extension SingUpTVController {
         self.hideKeyboardWhenTappedAround()
         self.delegateUser = self
         
-        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
     @objc func cancelButton() {

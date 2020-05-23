@@ -75,7 +75,7 @@ extension ReceivedDataAddNewTemplateTVControllerTwoStep {
         let saveBtn = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [saveBtn]
         // кнопка отмена
-        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
         //self.navigationItem.leftBarButtonItems = [cancelBtn]
         
         self.refreshControl = UIRefreshControl()

@@ -191,9 +191,7 @@ extension ContractAddTVController {
 extension ContractAddTVController {
     private func configuration() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        
-        //let cancelBtn = UIBarButtonItem(image: UIImage(systemName: myImage.close.rawValue), style: .plain, target: self, action: #selector(cancelButton))
-        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()

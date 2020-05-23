@@ -12,4 +12,5 @@ import UIKit
 protocol ContractDetailsInfoTVControllerUserDelegate {
     var sections: [String] { get }
     func setContractById(contract: ContractModel)
+    func didFinishDeliveryMethodPage(for invoiceDeliveryMethod: InvoiceDeliveryMethodModel)
 }

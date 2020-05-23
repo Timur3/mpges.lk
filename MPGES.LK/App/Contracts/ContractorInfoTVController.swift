@@ -204,7 +204,7 @@ extension ContractorInfoTVController {
         self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
-        let cancelBtn = UIBarButtonItem(title: "Закрыть", style: .plain, target: self, action: #selector(cancelButton))
+        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
 
         self.hideKeyboardWhenTappedAround()

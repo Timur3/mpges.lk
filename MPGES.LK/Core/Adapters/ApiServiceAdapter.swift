@@ -33,12 +33,7 @@ class ApiServiceAdapter {
     func contractBinding(model: ContractBindingModel,delegate: ContractAddTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.contractBinding, completion: delegate.resultToBinding(result:))
     }
-    
-    // привязка договора
-    func getListOfContractNumbers(delegate: ContractAddFirstPageTVControllerDelegate) {
-        ApiService.shared.requestByToken(method: methodApi.getListOfContractNumbers, completion: delegate.setData(for:))
-    }
-    
+
     // удаление привязки договора
     func removeContractBinding(model: ContractNumberModel, delegate: ContractsTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.removeContractBinding, completion: delegate.resultRemoveContractBinding(result:))

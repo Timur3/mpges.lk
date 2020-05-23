@@ -15,7 +15,6 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigationToInvoicePage()
     func navigationDevicesPage()
     func navigationInvoiceDevileryMethodPage(for invoiceDeliveryMethodId: Int)
-    func didFinishDeliveryMethodPage(for invoiceDeliveryMethod: InvoiceDeliveryMethodModel)
     func navigationToContractorInfoPage()
     func navigateToPayWithCreditCardPage()
     func navigateToPayWithSberbankOnlinePage()
@@ -204,6 +203,10 @@ class ContractDetailsInfoTVController: UITableViewController {
 }
 
 extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDelegate {
+    
+    func didFinishDeliveryMethodPage(for invoiceDeliveryMethod: InvoiceDeliveryMethodModel) {
+        
+    }
     var sections: [String] { ["Основная информация", "Оплата",  "История платежей, начислений и приборы учета", "Доставка квитанций"] }
     
     func setContractById(contract: ContractModel) {

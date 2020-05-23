@@ -155,7 +155,7 @@ extension EmailToDeveloperTVController {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         self.hideKeyboardWhenTappedAround()
         
-        let cancelBtn = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelButton))
+        let cancelBtn = getCustomUIBarButtonItem(target: self, selector: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
     @objc func cancelButton() {

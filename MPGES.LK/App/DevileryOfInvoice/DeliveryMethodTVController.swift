@@ -12,6 +12,7 @@ public protocol DeliveryMethodTVControllerDelegate: class {
 }
 
 class DeliveryMethodTVController: UITableViewController {
+    private var indexPath: IndexPath?
     public weak var delegate: ContractDetailsInfoCoordinator?
     public var invoiceDeliveryMethodId: Int = 0
     public var selectedDeliveryMethod: InvoiceDeliveryMethodModel?
@@ -54,6 +55,7 @@ class DeliveryMethodTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.indexPath = indexPath
         deliveryMethodList[indexPath.row].selected = deliveryMethodList[indexPath.row].selected ? true : true
         selectedDeliveryMethod = deliveryMethodList[indexPath.row]
         var temp = [InvoiceDeliveryMethodModel]()
