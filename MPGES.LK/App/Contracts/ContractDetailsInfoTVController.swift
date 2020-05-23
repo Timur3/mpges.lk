@@ -20,9 +20,8 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigateToPayWithSberbankOnlinePage()
 }
 
-class ContractDetailsInfoTVController: UITableViewController {
+class ContractDetailsInfoTVController: CommonTableViewController {
     public weak var delegate: ContractDetailsInfoTVControllerDelegate?
-    var indexPath: IndexPath?
     
     private var paymentRequest: PKPaymentRequest = {
         let request = PKPaymentRequest()

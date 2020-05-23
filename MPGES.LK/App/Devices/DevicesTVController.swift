@@ -12,7 +12,7 @@ protocol DevicesTVControllerUserDelegate: class {
     func setDevices(devices:DevicesModelRoot)
 }
 
-class DevicesTVController: UITableViewController {
+class DevicesTVController: CommonTableViewController {
     private var searchController = UISearchController(searchResultsController: nil)
     public weak var delegate: DeviceCoordinatorMain?
     public var contractId: Int = 0

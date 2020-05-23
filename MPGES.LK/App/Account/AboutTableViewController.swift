@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AboutTableViewController: UITableViewController {
+class AboutTableViewController: CommonTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,15 +45,5 @@ extension AboutTableViewController {
            let tableViewContentHeight: CGFloat = tableView.contentSize.height
            let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
            self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
-       }
-       
-       func hideKeyboardWhenTappedAround() {
-           let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-           tap.cancelsTouchesInView = false
-           view.addGestureRecognizer(tap)
-       }
-       
-       @objc func dismissKeyboard() {
-           view.endEditing(true)
        }
 }

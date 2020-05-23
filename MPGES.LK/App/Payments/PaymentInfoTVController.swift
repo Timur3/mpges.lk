@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaymentInfoTVController: UITableViewController {
+class PaymentInfoTVController: CommonTableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()

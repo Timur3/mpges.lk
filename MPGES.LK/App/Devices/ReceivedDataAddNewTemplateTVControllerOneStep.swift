@@ -11,12 +11,11 @@ protocol ReceivedDataAddNewTemplateTVControllerOneStepDelegate: class {
     func setData(model: ReceivedDataAddNewTemplateModelRoot)
 }
 
-class ReceivedDataAddNewTemplateTVControllerOneStep: UITableViewController {
+class ReceivedDataAddNewTemplateTVControllerOneStep: CommonTableViewController {
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
     let datePicker = UIDatePicker()
     var sections: [String] {["Дата показаний", ""]}
-    var indexPath: IndexPath?
     
     var ReceivedDataDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Продолжить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
@@ -120,18 +119,6 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: UITableViewController {
     }
     @objc func cancelButton() {
         self.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension ReceivedDataAddNewTemplateTVControllerOneStep {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }
 

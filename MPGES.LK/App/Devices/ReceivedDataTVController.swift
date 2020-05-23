@@ -12,7 +12,7 @@ public protocol ReceivedDataTVControllerDelegate: class {
     func getReceivedDataAddNewTemplatePage()
 }
 
-class ReceivedDataTVController: UITableViewController {
+class ReceivedDataTVController: CommonTableViewController {
     let searchController = UISearchController(searchResultsController: nil)
     
     public weak var delegate: DeviceCoordinatorMain?

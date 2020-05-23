@@ -12,9 +12,9 @@ public protocol SingUpTVControllerUserDelegate: class {
     func resultOfCreateUser(result: ServerResponseModel)
 }
 
-class SingUpTVController: UITableViewController {
+class SingUpTVController: CommonTableViewController {
     var sections: [String] {["ФИО", "Контакты", "Пароль", ""]}
-    private var indexPath: IndexPath?
+
     public weak var delegateUser: SingUpTVControllerUserDelegate?
     public weak var delegate: MainCoordinatorDelegate?
     // ФИО
@@ -184,18 +184,6 @@ extension SingUpTVController: SingUpTVControllerUserDelegate {
         }
     }
     
-}
-
-extension SingUpTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
 }
 
 //MARK: - CONFIGURE

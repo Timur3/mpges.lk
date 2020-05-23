@@ -11,8 +11,7 @@ public protocol DeliveryMethodTVControllerDelegate: class {
     func setData(for deliveryMethod: InvoiceDeliveryMethodModelRoot)
 }
 
-class DeliveryMethodTVController: UITableViewController {
-    private var indexPath: IndexPath?
+class DeliveryMethodTVController: CommonTableViewController {
     public weak var delegate: ContractDetailsInfoCoordinator?
     public var invoiceDeliveryMethodId: Int = 0
     public var selectedDeliveryMethod: InvoiceDeliveryMethodModel?

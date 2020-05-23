@@ -20,7 +20,7 @@ protocol PaymentsTVControllerUserDelegate {
     func mapToPaymentsModelView(payments:[PaymentModel]) -> [PaymentsModelVeiw]
 }
 
-class PaymentsTVController: UITableViewController {
+class PaymentsTVController: CommonTableViewController {
     public weak var delegate: PaymentsTVControllerDelegate?
     private var searchController = UISearchController(searchResultsController: nil)
     var contractId: Int = 0

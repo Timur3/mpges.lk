@@ -93,10 +93,10 @@ class InvoicesTableViewController: CommonTableViewController {
         let alert = UIAlertController(title: "Выберите действие", message: nil, preferredStyle: .actionSheet)
         let actionOpenInvoice = UIAlertAction(title: "Скачать PDF-файл", style: .default) {
             (UIAlertAction) in
-             self.showPdf(for: "http://school3-hm.ru/images/Polojeni/03.05.2018/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf")
+            self.showPdf(for: "http://school3-hm.ru/images/Polojeni/03.05.2018/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf")
         }
         let actionSendInvoice = UIAlertAction(title: "Отправить по электронной почте", style: .default) {
-            (UIAlertAction) in //self.showNewContractPage()
+            (UIAlertAction) in self.alertShowSendByEmail()
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alert.addAction(actionOpenInvoice)
@@ -105,6 +105,21 @@ class InvoicesTableViewController: CommonTableViewController {
         self.present(alert, animated: true, completion: {
             print("completion block")
         })
+    }
+    func alertShowSendByEmail()
+    {
+        let alert = UIAlertController(title: "Отправка квитанции", message: "Укажите действующий email адрес, для получения документа", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = ""
+            textField.placeholder = "Ваш Email адрес"
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            //self.delegate.sendDoc()
+            print("Text field: \(textField!.text)")
+        }))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

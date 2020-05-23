@@ -310,8 +310,6 @@
 		22042A11235F602F0054D4DD /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				22E2870123E0133D00453CF3 /* FirstViewController.swift */,
-				22A8FE3E23FD933D00B07D0D /* FirstViewController.xib */,
 				22EB757F246D8AE90062F8F7 /* FirstTVController.swift */,
 				229A807D24195ECE009933D2 /* ProfileTVController.swift */,
 				22CEA24B244B8D7100F83C8E /* RecoveryPasswordTVController.swift */,
@@ -486,7 +484,6 @@
 				2235D7B4241E5DF2007A90DD /* DevicesTVController.swift */,
 				2235D7B8241E5F3D007A90DD /* DeviceTVCell.swift */,
 				2235D7B9241E5F3D007A90DD /* DeviceTVCell.xib */,
-				2216117F24536D480068DF13 /* ReceivedDataAddNewTemplateTVControllerTwoStep.swift */,
 				2238E3732455B51B009EDC83 /* ReceivedDataAddNewTemplateTVControllerOneStep.swift */,
 				22EE5169245F44C40075B6BE /* ReceivedDataAddNewTemplateTVController.swift */,
 			);
@@ -522,6 +519,9 @@
 		228E3E8A2421392D00402EF6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				22E2870123E0133D00453CF3 /* FirstViewController.swift */,
+				2216117F24536D480068DF13 /* ReceivedDataAddNewTemplateTVControllerTwoStep.swift */,
+				22A8FE3E23FD933D00B07D0D /* FirstViewController.xib */,
 				22721F1A2472DA11006F72C0 /* PDFViewController.swift */,
 				22BD866F24763C2E0064DAC3 /* PDFViewController-copy.swift */,
 				228E3E8B2421397400402EF6 /* PrototypeTVCell.swift */,

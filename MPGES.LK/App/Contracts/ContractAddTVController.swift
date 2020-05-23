@@ -14,12 +14,10 @@ protocol ContractAddTVControllerUserDelegate: class {
     func resultToBinding(result: ServerResponseModel)
 }
 
-class ContractAddTVController: UITableViewController {
-    
+class ContractAddTVController: CommonTableViewController {
     public weak var delegate: ContractsTVControllerUserDelegate?
     
     var sections: [String] {["Лицевой счет", "Код подтверждения", ""]}
-    var indexPath: IndexPath?
     
     var numberCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
     var codeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.edit, textAlign: .left, accessoryType: .none) }()
@@ -173,18 +171,6 @@ extension ContractAddTVController: ContractAddTVControllerUserDelegate {
                     self.cancelButton()
                 }
         }
-    }
-}
-
-extension ContractAddTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }
 

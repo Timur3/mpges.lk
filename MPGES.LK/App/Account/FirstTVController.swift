@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstTVController: UITableViewController {
+class FirstTVController: CommonTableViewController {
     
     public weak var delegate: MainCoordinatorDelegate?
     
@@ -119,18 +119,6 @@ class FirstTVController: UITableViewController {
         if indexPath.section == 2 && indexPath.row == 0 {
             delegate?.navigateToSingUpPage()
         }
-    }
-}
-
-extension FirstTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }
 

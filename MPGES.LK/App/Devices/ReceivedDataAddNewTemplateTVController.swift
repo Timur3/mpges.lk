@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ReceivedDataAddNewTemplateTVController: UITableViewController {
+class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
-    
+    public var mainModel: ReceivedDataAddNewTemplateModelView?
     let datePicker = UIDatePicker()
     
     var sections: [String] {["Тарифная зона", "Предыдущие показания", "Текущие показания", "Примерный расчет, с учетом всех тарифных зон", ""]}
@@ -146,21 +146,17 @@ class ReceivedDataAddNewTemplateTVController: UITableViewController {
         if indexPath.section == 1 && indexPath.row == 0 {
             
         }
+        if indexPath.section == 4 && indexPath.row == 0 {
+            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
+            func bindingTemplate()
+        }
     }
     @objc func cancelButton() {
         self.dismiss(animated: true, completion: nil)
     }
-}
-
-extension ReceivedDataAddNewTemplateTVController{
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    func bindingTemplate(){
+        
+        self.hiddenAI()
     }
 }
 

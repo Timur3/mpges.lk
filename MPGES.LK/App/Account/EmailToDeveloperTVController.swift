@@ -13,9 +13,9 @@ protocol EmailToDeveloperTVControllerDelegate: class {
     func resultSendMail(result: ServerResponseModel)
 }
 
-class EmailToDeveloperTVController: UITableViewController {
+class EmailToDeveloperTVController: CommonTableViewController {
     var sections: [String] {["Тема письма", "Содержание", ""]}
-    private var indexPath: IndexPath?
+    
     public weak var delegate: ProfileCoordinator?
     
     let subjectCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
@@ -134,18 +134,6 @@ class EmailToDeveloperTVController: UITableViewController {
         if indexPath.section == 2 && indexPath.row == 0 {
             alertSheetSendMailShow()
         }
-    }
-}
-
-extension EmailToDeveloperTVController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }
 
