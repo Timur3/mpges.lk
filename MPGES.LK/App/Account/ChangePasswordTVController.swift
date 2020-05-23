@@ -146,11 +146,7 @@ extension ChangePasswordTVController {
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
-    
-    @objc func cancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-        
+     
     func alertSheetChangePasswordShow() {
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self, handlerYes: { (UIAlertAction) in
             print("change pass")

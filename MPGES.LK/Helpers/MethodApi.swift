@@ -33,7 +33,7 @@ class MethodApi {
     let checkEmail: String
     let passwordRecovery: String
     let getDeliveryOfInvoice: String
-       
+    let updateDeliveryMethod: String
     init() {
         authApi = "auth/"
         getContracts = "contract/getByUser/"
@@ -43,6 +43,7 @@ class MethodApi {
         contractBinding = "contract/binding/"
         removeContractBinding = "contract/removeBinding/"
         checkContractByNumber = "contract/checkByNumber/"
+        updateDeliveryMethod = "contract/updateDeliveryMethod"
         getPaymentById = "payment/"
         getPaymentsByInvoiceId = "payment/getbyinvoiceid/"
         getPaymentsByContractId = "payment/getbyContractid/"

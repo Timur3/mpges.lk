@@ -43,18 +43,11 @@ extension DeviceCoordinatorMain {
         self.navigationController.present(navReceivedDataAddNewTemplateTVController, animated: true, completion: nil)
     }
     
-    func showReceivedDataAddNewTemplatesTwoStepPage(device: DeviceModel, nav: UINavigationController){
-        let receivedDataAddNewTemplateTVController : ReceivedDataAddNewTemplateTVControllerTwoStep = ReceivedDataAddNewTemplateTVControllerTwoStep()
-        receivedDataAddNewTemplateTVController.delegate = self
-        receivedDataAddNewTemplateTVController.device = device
-        nav.pushViewController(receivedDataAddNewTemplateTVController, animated: true)
-    }
-    
-    func showReceivedDataAddNewTemplatesPage(device: DeviceModel, template: ReceivedDataAddNewTemplateModel, nav: UINavigationController){
+    func showReceivedDataAddNewTemplatesPage(device: DeviceModel, template: ReceivedDataAddNewTemplateModelView, nav: UINavigationController){
         let receivedDataAddNewTemplateTVController : ReceivedDataAddNewTemplateTVController = ReceivedDataAddNewTemplateTVController()
         receivedDataAddNewTemplateTVController.delegate = self
         receivedDataAddNewTemplateTVController.device = device
-        receivedDataAddNewTemplateTVController.model = template
+        receivedDataAddNewTemplateTVController.mainModel = template
         nav.pushViewController(receivedDataAddNewTemplateTVController, animated: true)
     }
     

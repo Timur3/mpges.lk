@@ -160,9 +160,6 @@ class ContractorInfoTVController: CommonTableViewController {
             alertSheetExitShow()
         }
     }
-    @objc func cancelButton(){
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension ContractorInfoTVController: ProfileTVControllerUserDelegate {

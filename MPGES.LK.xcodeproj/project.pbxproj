@@ -13,7 +13,6 @@
 		22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22042A04235E224D0054D4DD /* LaunchScreen.storyboard */; };
 		220DC85A2464314F00A216B1 /* RequestBankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC8592464314F00A216B1 /* RequestBankModel.swift */; };
 		220DC85C2464317400A216B1 /* ResponseBankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC85B2464317400A216B1 /* ResponseBankModel.swift */; };
-		2216118124536D480068DF13 /* ReceivedDataAddNewTemplateTVControllerTwoStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2216117F24536D480068DF13 /* ReceivedDataAddNewTemplateTVControllerTwoStep.swift */; };
 		2217F5022403D117006654F9 /* TextFieldHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217F5012403D117006654F9 /* TextFieldHelper.swift */; };
 		2219EE082426A9F4009C6F0C /* DeliveryMethodTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2219EE062426A9F4009C6F0C /* DeliveryMethodTVController.swift */; };
 		2235D7B6241E5DF2007A90DD /* DevicesTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235D7B4241E5DF2007A90DD /* DevicesTVController.swift */; };
@@ -139,7 +138,6 @@
 		22042A07235E224D0054D4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		220DC8592464314F00A216B1 /* RequestBankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBankModel.swift; sourceTree = "<group>"; };
 		220DC85B2464317400A216B1 /* ResponseBankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBankModel.swift; sourceTree = "<group>"; };
-		2216117F24536D480068DF13 /* ReceivedDataAddNewTemplateTVControllerTwoStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDataAddNewTemplateTVControllerTwoStep.swift; sourceTree = "<group>"; };
 		2217F5012403D117006654F9 /* TextFieldHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldHelper.swift; sourceTree = "<group>"; };
 		2219EE062426A9F4009C6F0C /* DeliveryMethodTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMethodTVController.swift; sourceTree = "<group>"; };
 		2235D7B4241E5DF2007A90DD /* DevicesTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesTVController.swift; sourceTree = "<group>"; };
@@ -520,7 +518,6 @@
 			isa = PBXGroup;
 			children = (
 				22E2870123E0133D00453CF3 /* FirstViewController.swift */,
-				2216117F24536D480068DF13 /* ReceivedDataAddNewTemplateTVControllerTwoStep.swift */,
 				22A8FE3E23FD933D00B07D0D /* FirstViewController.xib */,
 				22721F1A2472DA11006F72C0 /* PDFViewController.swift */,
 				22BD866F24763C2E0064DAC3 /* PDFViewController-copy.swift */,
@@ -823,7 +820,6 @@
 				224634F6245BF51E00A412FD /* StatusSaldo.swift in Sources */,
 				224A2AB2246584170078A484 /* PayWithSberbankOnlineTVController.swift in Sources */,
 				226572D7240BE601005DBFA6 /* ProfileCoordinator.swift in Sources */,
-				2216118124536D480068DF13 /* ReceivedDataAddNewTemplateTVControllerTwoStep.swift in Sources */,
 				22CEA24D244B8D7100F83C8E /* RecoveryPasswordTVController.swift in Sources */,
 				22EB7582246FB69B0062F8F7 /* BarButtonItemHelper.swift in Sources */,
 				22A380732448C87F008CCFAC /* TariffZoneModel.swift in Sources */,

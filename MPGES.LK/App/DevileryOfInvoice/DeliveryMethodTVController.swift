@@ -9,6 +9,7 @@
 import UIKit
 public protocol DeliveryMethodTVControllerDelegate: class {
     func setData(for deliveryMethod: InvoiceDeliveryMethodModelRoot)
+    func resultOfUpdateDeliveryMethod(for resultModel: ServerResponseModel)
 }
 
 class DeliveryMethodTVController: CommonTableViewController {
@@ -30,7 +31,6 @@ class DeliveryMethodTVController: CommonTableViewController {
     }
     
     func getData() {
-        //ActivityIndicatorViewService.shared.showView(form: self.view)
         ApiServiceAdapter.shared.getDeliveryOfInvoices(delegate: self)
     }
     
@@ -88,6 +88,19 @@ class DeliveryMethodTVController: CommonTableViewController {
 }
 
 extension DeliveryMethodTVController: DeliveryMethodTVControllerDelegate {
+    func resultOfUpdateDeliveryMethod(for resultModel: ServerResponseModel) {
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        let isError = resultModel.isError
+        AlertControllerAdapter.shared.show(
+            title: isError ? "Ошибка" : "Успешно",
+            mesg: resultModel.message,
+            form: self) { (UIAlertAction) in
+                if !isError {
+                    self.cancelButton()
+                }
+        }
+        self.hiddenAI()
+    }
     
     func setData(for deliveryMethod: InvoiceDeliveryMethodModelRoot) {
         var temp = [InvoiceDeliveryMethodModel]()

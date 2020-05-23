@@ -196,7 +196,4 @@ extension SingUpTVController {
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
-    @objc func cancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
 }

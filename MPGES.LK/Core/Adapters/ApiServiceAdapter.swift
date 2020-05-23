@@ -38,6 +38,9 @@ class ApiServiceAdapter {
     func removeContractBinding(model: ContractNumberModel, delegate: ContractsTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.removeContractBinding, completion: delegate.resultRemoveContractBinding(result:))
     }
+    func updateDeliveryMethod(model: UpdateDeliveryMethodModel, delegate: DeliveryMethodTVControllerDelegate) {
+        ApiService.shared.requestByModel(model: model, method: methodApi.updateDeliveryMethod, completion: delegate.resultOfUpdateDeliveryMethod(for:))
+    }
     // получение начисление по квитанции
     func getCalculationsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerDelegate){
         ApiService.shared.requestById(id: id, method: methodApi.getCalculationsByInvoiceId, completion: delegate.setCalculations(calculations:))

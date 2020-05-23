@@ -140,6 +140,8 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.indexPath = indexPath
+        
         if indexPath.section == 2 && indexPath.row == 0 {
             receivedDataTF.becomeFirstResponder()
         }
@@ -148,12 +150,10 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
         }
         if indexPath.section == 4 && indexPath.row == 0 {
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
-            func bindingTemplate()
+            bindingTemplate()
         }
     }
-    @objc func cancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
+    
     func bindingTemplate(){
         
         self.hiddenAI()

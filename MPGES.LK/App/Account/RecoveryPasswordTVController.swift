@@ -113,9 +113,6 @@ class RecoveryPasswordTVController: CommonTableViewController {
             submitAction()
         }
     }
-    @objc func cancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate {

@@ -26,10 +26,6 @@ class AboutTableViewController: CommonTableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
-    
-    @objc func cancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension AboutTableViewController {

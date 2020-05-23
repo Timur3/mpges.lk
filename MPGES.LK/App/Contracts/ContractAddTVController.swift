@@ -137,9 +137,6 @@ class ContractAddTVController: CommonTableViewController {
             submitAction()
         }
     }
-    @objc func cancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension ContractAddTVController: ContractAddTVControllerUserDelegate {

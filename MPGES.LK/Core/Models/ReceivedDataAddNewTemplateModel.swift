@@ -23,6 +23,7 @@ public struct ReceivedDataAddNewTemplateModel: Decodable {
     var date: String
     let deviceId: Int
     let razryad: Int
+    var isFilled: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case tariffZoneId = "tariffZoneId"
@@ -40,13 +41,11 @@ public struct ReceivedDataAddNewTemplateModel: Decodable {
 
 public class ReceivedDataAddNewTemplateModelView  {
     var date: String
-    var tariffZone: String
     var receivedDataAddNewTemplates: [ReceivedDataAddNewTemplateModel] = []
     
-    init(date: String, tariffZone: String, receivedDataAddNewTemplates: [ReceivedDataAddNewTemplateModel])
+    init(date: String, receivedDataAddNewTemplates: [ReceivedDataAddNewTemplateModel])
     {
         self.date = date
-        self.tariffZone = tariffZone
         self.receivedDataAddNewTemplates = receivedDataAddNewTemplates
     }
 }

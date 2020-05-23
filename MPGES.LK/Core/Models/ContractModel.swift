@@ -68,3 +68,9 @@ public struct ListOfContractNumbersRoot: Decodable {
         case data = "data"
     }
 }
+
+public struct UpdateDeliveryMethodModel: Encodable
+{
+    let contractId: Int
+    let deliveryMethodId: Int
+}

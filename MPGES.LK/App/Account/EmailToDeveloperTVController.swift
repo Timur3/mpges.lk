@@ -146,9 +146,6 @@ extension EmailToDeveloperTVController {
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
-    @objc func cancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     func alertSheetSendMailShow() {
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите направить обращение?", form: self, handlerYes: { (UIAlertAction) in

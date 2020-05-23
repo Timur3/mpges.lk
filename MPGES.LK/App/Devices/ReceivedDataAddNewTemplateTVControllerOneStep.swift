@@ -117,18 +117,14 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CommonTableViewController {
             ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
     }
-    @objc func cancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension ReceivedDataAddNewTemplateTVControllerOneStep: ReceivedDataAddNewTemplateTVControllerOneStepDelegate {
     func setData(model: ReceivedDataAddNewTemplateModelRoot) {
+        let m = ReceivedDataAddNewTemplateModelView(date: "\(datePicker.date)", receivedDataAddNewTemplates: model.data)
         //self.delegate?.showReceivedDataAddNewTemplatesTwoStepPage(device: device!,x nav: self.navigationController!)
-        self.delegate?.showReceivedDataAddNewTemplatesPage(device: device!, template: model.data[0], nav: self.navigationController!)
+        self.delegate?.showReceivedDataAddNewTemplatesPage(device: device!, template: m, nav: self.navigationController!)
     }
-    
-    
 }
 
 //MARK: - CONFIGURE

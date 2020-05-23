@@ -28,4 +28,8 @@ class CommonTableViewController: UITableViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    @objc func cancelButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
