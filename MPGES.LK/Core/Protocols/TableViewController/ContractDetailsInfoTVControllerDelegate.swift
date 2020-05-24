@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-protocol ContractDetailsInfoTVControllerUserDelegate {
+protocol ContractDetailsInfoTVControllerUserDelegate: class {
     var sections: [String] { get }
     func setContractById(contract: ContractModel)
-    func didFinishDeliveryMethodPage(for invoiceDeliveryMethod: InvoiceDeliveryMethodModel)
+    func getContractById(id: Int)
 }

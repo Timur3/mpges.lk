@@ -164,12 +164,12 @@ class ContractorInfoTVController: CommonTableViewController {
 
 extension ContractorInfoTVController: ProfileTVControllerUserDelegate {
     func getProfile() {
-        ApiServiceAdapter.shared.getProfileById(delegate: self)
+        ApiServiceWrapper.shared.getProfileById(delegate: self)
         self.refreshControl?.endRefreshing()
     }
     
     func saveProfile(profile: UserModel) {
-        ApiServiceAdapter.shared.updateUser(model: profile, delegate: self)
+        ApiServiceWrapper.shared.updateUser(model: profile, delegate: self)
     }
     func resultOfSaveProfile(result: ServerResponseModel) {
         AlertControllerAdapter.shared.show(title: result.isError ? "Ошибка!" : "Успешно!", mesg: result.message, form: self)

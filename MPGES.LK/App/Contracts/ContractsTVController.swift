@@ -104,8 +104,8 @@ class ContractsTVController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let contractDI = contractList[indexPath.row]
-        self.delegate?.navigationDetailsInfoPage(to: contractDI)
+        let contract = contractList[indexPath.row]
+        self.delegate?.navigationDetailsInfoPage(to: contract)
     }
     
     // Override to support editing the table view.
@@ -120,7 +120,7 @@ class ContractsTVController: UITableViewController {
     func alertSheetOfDelBindingShow(for indexPath: IndexPath){
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите удалить договор из списка услуг?", form: self, handlerYes: { (UIAlertAction) in
             let model = ContractNumberModel(number: self.contractList[indexPath.row].number)
-            ApiServiceAdapter.shared.removeContractBinding(model: model, delegate: self)
+            ApiServiceWrapper.shared.removeContractBinding(model: model, delegate: self)
             self.contractList.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             self.tableView.reloadData()
@@ -148,7 +148,7 @@ extension ContractsTVController: UISearchResultsUpdating {
 extension ContractsTVController: ContractsTVControllerUserDelegate {
     
     func getContracts() {
-        ApiServiceAdapter.shared.getContracts(delegate: self)
+        ApiServiceWrapper.shared.getContracts(delegate: self)
         self.refreshControl?.endRefreshing()
         ActivityIndicatorViewService.shared.hideView()
     }

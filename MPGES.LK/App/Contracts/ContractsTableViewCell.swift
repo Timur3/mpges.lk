@@ -19,7 +19,7 @@ class ContractsTableViewCell: UITableViewCell {
         contractTypeName.text = contract.typeOfContract.name
            DispatchQueue.main.async { [weak self] in
                guard self != nil else { return }
-            ApiServiceAdapter.shared.loadSaldoContract(id: contract.id, label: self!.saldoContract)
+            ApiServiceWrapper.shared.loadSaldoContract(id: contract.id, label: self!.saldoContract)
            }
     }
     

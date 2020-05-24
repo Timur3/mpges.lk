@@ -138,13 +138,13 @@ extension PaymentsTVController: PaymentsTVControllerUserDelegate {
         //    self.paymentsList = mapToPaymentsModelView(payments: paymentsRM)
        //     ActivityIndicatorViewService.shared.hideView()
       //  } else {
-            ApiServiceAdapter.shared.getPaymentsByContractId(id: contractId, delegate: self)
+            ApiServiceWrapper.shared.getPaymentsByContractId(id: contractId, delegate: self)
     //    }
     }
     
     @objc func refreshData() {
         print("refresh")
-        ApiServiceAdapter.shared.getPaymentsByContractId(id: contractId, delegate: self)
+        ApiServiceWrapper.shared.getPaymentsByContractId(id: contractId, delegate: self)
         self.refreshControl?.endRefreshing()
     }
 

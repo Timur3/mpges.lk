@@ -139,19 +139,19 @@ extension PayWithSberbankOnlineTVController: ContractAddTVControllerUserDelegate
     }
     
     func checkContractByNumber(model: ContractNumberModel) {
-        ApiServiceAdapter.shared.checkByNumberContract(model: model, delegate: self)
+        ApiServiceWrapper.shared.checkByNumberContract(model: model, delegate: self)
     }
     
     func goToBinding(model: ContractBindingModel) {
         ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        ApiServiceAdapter.shared.contractBinding(model: model, delegate: self)
+        ApiServiceWrapper.shared.contractBinding(model: model, delegate: self)
     }
     
     func resultToBinding(result: ServerResponseModel) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         AlertControllerAdapter.shared.show(
-            title: isError ? "Ошибка" : "Успешно",
+            title: isError ? "Ошибка!" : "Успешно!",
             mesg: result.message,
             form: self) { (UIAlertAction) in
                 if !isError {

@@ -33,7 +33,7 @@ class DevicesTVController: CommonTableViewController {
     }
     
     @objc func refreshDataDevice(){
-        ApiServiceAdapter.shared.getDevicesByContractId(id: contractId, delegate: self)
+        ApiServiceWrapper.shared.getDevicesByContractId(id: contractId, delegate: self)
         // todo  сохраняем новые данные, предварительно удаляем старые данные
         self.refreshControl?.endRefreshing()
     }

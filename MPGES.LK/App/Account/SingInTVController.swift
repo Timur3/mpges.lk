@@ -199,7 +199,7 @@ extension SingInTVController: SingInTVControllerUserDelegate {
     
     func authApi(model: AuthModel) {
         ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        ApiServiceAdapter.shared.authApi(model: model, delegate: self)
+        ApiServiceWrapper.shared.authApi(model: model, delegate: self)
     }
     
     func resultAuthApi(result: ResultModel) {

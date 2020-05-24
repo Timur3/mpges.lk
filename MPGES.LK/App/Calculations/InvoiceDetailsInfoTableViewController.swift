@@ -113,7 +113,7 @@ class InvoiceDetailsInfoTableViewController: CommonTableViewController {
     }
     
     @objc func refreshData() {
-        ApiServiceAdapter.shared.getPaymentsByInvoiceId(id: invoice!.id, delegate: self)
+        ApiServiceWrapper.shared.getPaymentsByInvoiceId(id: invoice!.id, delegate: self)
         self.refreshControl?.endRefreshing()
     }
     @objc func alertSheetSendInvoiceShow(){
@@ -127,7 +127,7 @@ class InvoiceDetailsInfoTableViewController: CommonTableViewController {
 extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewControllerDelegate {
     func sendInvoice(model: InvoiceModel) {
         ActivityIndicatorViewService.shared.showView(form: self.navigationController!.view)
-        ApiServiceAdapter.shared.sendInvoiceByEmail(id: model.id, delegate: self)
+        ApiServiceWrapper.shared.sendInvoiceByEmail(id: model.id, delegate: self)
     }
     
     func resultOfSendInvoice(result: ServerResponseModel) {
@@ -135,14 +135,14 @@ extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewCont
         
         let isError = result.isError
         AlertControllerAdapter.shared.show(
-            title: isError ? "Ошибка" : "Успешно",
+            title: isError ? "Ошибка!" : "Успешно!",
             mesg: result.message,
             form: self)
     }
     
     func setPayments(payments: PaymentsModelRoot) {
         self.invoiceDetails.pay = payments.data
-        ApiServiceAdapter.shared.getCalculationsByInvoiceId(id: invoice!.id, delegate: self)
+        ApiServiceWrapper.shared.getCalculationsByInvoiceId(id: invoice!.id, delegate: self)
     }
     
     func setCalculations(calculations:CalculationModelRoot) {

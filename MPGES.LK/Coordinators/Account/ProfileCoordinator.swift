@@ -27,6 +27,14 @@ class ProfileCoordinator: Coordinator {
 
 }
 extension ProfileCoordinator: ProfileTVControllerDelegate {
+    
+    func navigationAboutPage() {
+        let aboutTVController : AboutTableViewController = AboutTableViewController()
+        aboutTVController.delegate = self
+        let navAboutTVContoller: UINavigationController = UINavigationController(rootViewController: aboutTVController)
+        self.navigationController.present(navAboutTVContoller, animated: true, completion: nil)
+    }
+    
     func navigationEmailToDeveloperPage() {
         let emailToDeveloperTV : EmailToDeveloperTVController = EmailToDeveloperTVController()
         emailToDeveloperTV.delegate = self

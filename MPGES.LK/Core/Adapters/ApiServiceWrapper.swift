@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ApiServiceAdapter {
+class ApiServiceWrapper {
     var methodApi = MethodApi()
     var uds = UserDataService()
     
-    static let shared = ApiServiceAdapter()
+    static let shared = ApiServiceWrapper()
     init(){ }
     
     func authApi(model: AuthModel, delegate: SingInTVControllerUserDelegate) {

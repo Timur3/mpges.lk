@@ -14,7 +14,7 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigateToPaymentsPage()
     func navigationToInvoicePage()
     func navigationDevicesPage()
-    func navigationInvoiceDevileryMethodPage(for invoiceDeliveryMethodId: Int)
+    func navigationInvoiceDevileryMethodPage(for contract: ContractModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
     func navigationToContractorInfoPage()
     func navigateToPayWithCreditCardPage()
     func navigateToPayWithSberbankOnlinePage()
@@ -59,7 +59,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
                 self.accountLabel.text = self.contractModel!.number
                 self.contractDateLabel.text = self.contractModel!.dateRegister
                 self.contractorLabel.text = self.contractModel!.contractor.nameSmall
-                ApiServiceAdapter.shared.loadSaldoContract(id: self.contractModel!.id, label: self.saldoSumLabel)
+                ApiServiceWrapper.shared.loadSaldoContract(id: self.contractModel!.id, label: self.saldoSumLabel)
                 self.tableView.reloadData()
             }
         }
@@ -196,20 +196,22 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         }
         
         if indexPath.section == 3 && indexPath.row == 0 {
-            self.delegate?.navigationInvoiceDevileryMethodPage(for: contractModel!.invoiceDeliveryMethodId)
+            self.delegate?.navigationInvoiceDevileryMethodPage(for: contractModel!, delegate: self)
         }
     }
 }
 
 extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDelegate {
     
-    func didFinishDeliveryMethodPage(for invoiceDeliveryMethod: InvoiceDeliveryMethodModel) {
-        
+    func getContractById(id: Int) {
+        ApiServiceWrapper.shared.getContractById(id: id, delegate: self)
     }
+    
     var sections: [String] { ["Основная информация", "Оплата",  "История платежей, начислений и приборы учета", "Доставка квитанций"] }
     
     func setContractById(contract: ContractModel) {
         contractModel = contract
+        self.refreshControl?.endRefreshing()
     }
 }
 
@@ -271,7 +273,7 @@ extension ContractDetailsInfoTVController {
     
     private func Configuration() {
         self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(refreshContract), for: UIControl.Event.valueChanged)
         
         definesPresentationContext = true
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
@@ -282,8 +284,7 @@ extension ContractDetailsInfoTVController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-    @objc func refreshData() {
-        self.refreshControl?.endRefreshing()
+    @objc func refreshContract() {
+        getContractById(id: contractModel!.id)
     }
 }

@@ -9,37 +9,51 @@
 import UIKit
 
 class AboutTableViewController: CommonTableViewController {
-
+    public weak var delegate: ProfileCoordinator?
+    var sections = ["Организация", "Разработчик"]
+    
     override func viewDidLoad() {
+        self.navigationItem.title = "О программе"
         super.viewDidLoad()
         configuration()
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return sections.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        switch section {
+        case 0:
+            return 0
+        case 1:
+            return 0
+        default:
+            fatalError()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
     }
 }
 
 extension AboutTableViewController {
-     private func configuration() {
-           let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
-           self.navigationItem.rightBarButtonItems = [cancelBtn]
-           self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
-           self.hideKeyboardWhenTappedAround()
-       }
-       
-       func updateTableViewContentInset() {
-           let viewHeight: CGFloat = view.frame.size.height
-           let tableViewContentHeight: CGFloat = tableView.contentSize.height
-           let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
-           self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
-       }
+    private func configuration() {
+        let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
+        self.navigationItem.rightBarButtonItems = [cancelBtn]
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.hideKeyboardWhenTappedAround()
+    }
+    
+    func updateTableViewContentInset() {
+        let viewHeight: CGFloat = view.frame.size.height
+        let tableViewContentHeight: CGFloat = tableView.contentSize.height
+        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
+        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
+    }
 }

@@ -7,7 +7,7 @@
 //
 public struct ContractorModel: Decodable {
     var id: Int
-    var nameFull: String
+    var nameFull: String?
     var nameSmall: String
     var dateOfBirth: String
 

@@ -42,7 +42,7 @@ class InvoicesTableViewController: CommonTableViewController {
     
     @objc func refreshInvoicesData(sender: AnyObject){
         print("refresh")
-        ApiServiceAdapter.shared.getInvoicesByContractId(id: contractId, delegate: self)
+        ApiServiceWrapper.shared.getInvoicesByContractId(id: contractId, delegate: self)
         self.refreshControl?.endRefreshing()
     }
     
@@ -70,42 +70,6 @@ class InvoicesTableViewController: CommonTableViewController {
         return invoiceList[section].invoices.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceTVCell
-        let cell = UITableViewCell()
-        let invoice = invoiceList[indexPath.section].invoices[indexPath.row]
-        
-        cell.textLabel?.text = (invoice.month?.name)! //+ " \(invoice.year)"
-        let imgView = UIImageView(image: UIImage(systemName: myImage.dote.rawValue))
-        imgView.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(alertShowInvoiceAction(tapGestureRecognizer:)))
-        //tapGestureRecognizer.setValue(indexPath, forKey: "indexPath")
-        imgView.addGestureRecognizer(tapGestureRecognizer)
-        
-        cell.accessoryView = imgView
-        cell.imageView?.image = UIImage(systemName: myImage.textPlus.rawValue)
-        //cell.update(for: invoiceList[indexPath.section].invoices[indexPath.row])
-        return cell
-    }
-    
-    @objc func alertShowInvoiceAction(tapGestureRecognizer: UITapGestureRecognizer) {
-        //self.indexPath = (tapGestureRecognizer.value(forKey: "indexPath") as! IndexPath)
-        let alert = UIAlertController(title: "Выберите действие", message: nil, preferredStyle: .actionSheet)
-        let actionOpenInvoice = UIAlertAction(title: "Скачать PDF-файл", style: .default) {
-            (UIAlertAction) in
-            self.showPdf(for: "http://school3-hm.ru/images/Polojeni/03.05.2018/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf")
-        }
-        let actionSendInvoice = UIAlertAction(title: "Отправить по электронной почте", style: .default) {
-            (UIAlertAction) in self.alertShowSendByEmail()
-        }
-        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        alert.addAction(actionOpenInvoice)
-        alert.addAction(actionSendInvoice)
-        alert.addAction(actionCancel)
-        self.present(alert, animated: true, completion: {
-            print("completion block")
-        })
-    }
     func alertShowSendByEmail()
     {
         let alert = UIAlertController(title: "Отправка квитанции", message: "Укажите действующий email адрес, для получения документа", preferredStyle: .alert)
@@ -123,14 +87,13 @@ class InvoicesTableViewController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
-        //let invoice = invoiceList[indexPath.section].invoices[indexPath.row]
         self.showPdf(for: "http://school3-hm.ru/images/Polojeni/03.05.2018/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf")
     }
     
     func showPdf(for urlFileInet: String) {
-        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let urlFile = downloadPdf(url: urlFileInet)
         self.delegate?.pdfView(for: urlFile, delegate: self)
     }
@@ -140,8 +103,44 @@ class InvoicesTableViewController: CommonTableViewController {
         // Return false if you do not want the specified item to be editable.
         return false
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceCell
+        cell.update(for: invoiceList[indexPath.section].invoices[indexPath.row])
+        
+        let imgView = UIImageView(image: UIImage(systemName: myImage.dote.rawValue))
+        imgView.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(alertShowInvoiceAction(tapGestureRecognizer:)))
+        imgView.addGestureRecognizer(tapGestureRecognizer)
+        cell.accessoryView = imgView
+        
+        return cell
+    }
+    
+    @objc func alertShowInvoiceAction(tapGestureRecognizer: UITapGestureRecognizer) {
+        let alert = UIAlertController(title: "Выберите действие", message: nil, preferredStyle: .actionSheet)
+        let actionOpenInvoice = UIAlertAction(title: "Скачать PDF-файл", style: .default) {
+            (UIAlertAction) in
+            self.showPdf(for: "http://school3-hm.ru/images/Polojeni/03.05.2018/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf")
+        }
+        let actionSendInvoice = UIAlertAction(title: "Отправить по электронной почте", style: .default) {
+            (UIAlertAction) in self.alertShowSendByEmail()
+        }
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alert.addAction(actionOpenInvoice)
+        alert.addAction(actionSendInvoice)
+        alert.addAction(actionCancel)
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
 }
-
+// MARK: - INVOICE CELL DELEGATE
+extension InvoicesTableViewController: InvoiceCellDelegate {
+    func accessoryViewTapping(indexPath: IndexPath) {
+        
+    }   
+}
 extension InvoicesTableViewController: InvoicesTableViewControllerUserDelegate {
     
     func mapToInvoicesModelView(invoices: [InvoiceModel]) -> [InvoiceModelVeiw] {
@@ -172,8 +171,8 @@ extension InvoicesTableViewController {
         self.refreshControl?.addTarget(self, action: #selector(refreshInvoicesData), for: UIControl.Event.valueChanged)
         
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        //let nib = UINib(nibName: "InvoiceTVCell", bundle: nil)
-        //self.tableView.register(nib, forCellReuseIdentifier: "invoiceCell")
+        let nib = UINib(nibName: "InvoiceCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "invoiceCell")
         refreshInvoicesData(sender: self)
         
         tableView.delegate = self

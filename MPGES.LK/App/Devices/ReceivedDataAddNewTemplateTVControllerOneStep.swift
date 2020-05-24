@@ -107,7 +107,7 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CommonTableViewController {
         if indexPath.section == 1 && indexPath.row == 0 {
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             if isValidDate(dateStr: dateTextField.text!) {
-                ApiServiceAdapter.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
+                ApiServiceWrapper.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
             } else {
                 AlertControllerAdapter.shared.show(
                     title: "Ошибка",

@@ -13,8 +13,8 @@ public protocol DeliveryMethodTVControllerDelegate: class {
 }
 
 class DeliveryMethodTVController: CommonTableViewController {
-    public weak var delegate: ContractDetailsInfoCoordinator?
-    public var invoiceDeliveryMethodId: Int = 0
+    public weak var delegate: ContractDetailsInfoTVControllerUserDelegate?
+    public var contract: ContractModel?
     public var selectedDeliveryMethod: InvoiceDeliveryMethodModel?
     
     override func viewDidLoad() {
@@ -27,11 +27,11 @@ class DeliveryMethodTVController: CommonTableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        delegate?.didFinishDeliveryMethodPage(for: selectedDeliveryMethod!)
+        delegate?.getContractById(id: contract!.id)
     }
     
     func getData() {
-        ApiServiceAdapter.shared.getDeliveryOfInvoices(delegate: self)
+        ApiServiceWrapper.shared.getDeliveryOfInvoices(delegate: self)
     }
     
     // MARK: - Table view data source
@@ -63,6 +63,10 @@ class DeliveryMethodTVController: CommonTableViewController {
             temp.append(item)
         }
         deliveryMethodList = temp
+        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+        //ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
+        let updDeliveryMethod = UpdateDeliveryMethodModel(contractId: contract!.id, deliveryMethodId: selectedDeliveryMethod!.id)
+        ApiServiceWrapper.shared.updateDeliveryMethod(model: updDeliveryMethod, delegate: self)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,24 +92,26 @@ class DeliveryMethodTVController: CommonTableViewController {
 }
 
 extension DeliveryMethodTVController: DeliveryMethodTVControllerDelegate {
+    
     func resultOfUpdateDeliveryMethod(for resultModel: ServerResponseModel) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = resultModel.isError
         AlertControllerAdapter.shared.show(
-            title: isError ? "Ошибка" : "Успешно",
+            title: isError ? "Ошибка!" : "Успешно!",
             mesg: resultModel.message,
             form: self) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()
                 }
         }
-        self.hiddenAI()
+        //self.hiddenAI()
+        ActivityIndicatorViewService.shared.hideView()
     }
     
     func setData(for deliveryMethod: InvoiceDeliveryMethodModelRoot) {
         var temp = [InvoiceDeliveryMethodModel]()
         for var item in deliveryMethod.data {
-            if (item.id == self.invoiceDeliveryMethodId) {
+            if (item.id == self.contract?.invoiceDeliveryMethodId) {
                 item.selected = true
                 selectedDeliveryMethod = item
             }

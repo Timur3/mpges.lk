@@ -39,7 +39,7 @@ class ReceivedDataTVController: CommonTableViewController {
     }
            
     @objc func refreshReceivedData(){
-        ApiServiceAdapter.shared.getReceivedDataByDeviceId(id: device!.id, delegate: self)
+        ApiServiceWrapper.shared.getReceivedDataByDeviceId(id: device!.id, delegate: self)
         self.refreshControl?.endRefreshing()
 }
            

@@ -55,7 +55,7 @@ class RecoveryPasswordTVController: CommonTableViewController {
     
     @objc func submitAction() {
         let model = UserEmailModel(email: emailTextField.text!)
-        ApiServiceAdapter.shared.passwordRecovery(model: model, delegate: self)
+        ApiServiceWrapper.shared.passwordRecovery(model: model, delegate: self)
     }
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {

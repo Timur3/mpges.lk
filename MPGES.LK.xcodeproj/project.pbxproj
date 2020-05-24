@@ -43,7 +43,7 @@
 		2267EFF723E8A6090097BEB0 /* ActivityIndicatorViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2267EFF623E8A6090097BEB0 /* ActivityIndicatorViewService.swift */; };
 		2269014A244E273D00DB21F2 /* ChangePasswordTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22690148244E273D00DB21F2 /* ChangePasswordTVController.swift */; };
 		2269849E24115C5B00EF8ED7 /* ArrayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2269849D24115C5B00EF8ED7 /* ArrayHelper.swift */; };
-		226A8B3C23D43901009B3B67 /* ApiServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A8B3B23D43901009B3B67 /* ApiServiceAdapter.swift */; };
+		226A8B3C23D43901009B3B67 /* ApiServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A8B3B23D43901009B3B67 /* ApiServiceWrapper.swift */; };
 		226A8B3E23D49ED7009B3B67 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A8B3D23D49ED7009B3B67 /* DateHelper.swift */; };
 		226AA7C723CE24BF003F006A /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7C623CE24BF003F006A /* ApiService.swift */; };
 		226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226AA7CC23CE30F7003F006A /* UserDataService.swift */; };
@@ -87,6 +87,8 @@
 		22B2E812247849DE00749CA1 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2E811247849DD00749CA1 /* AboutTableViewController.swift */; };
 		22B7F474244CD12000E84EC5 /* SingUpTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7F472244CD12000E84EC5 /* SingUpTVController.swift */; };
 		22BD867024763C2E0064DAC3 /* PDFViewController-copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD866F24763C2E0064DAC3 /* PDFViewController-copy.swift */; };
+		22C2EEE6247A679700D116CE /* InvoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C2EEE4247A679700D116CE /* InvoiceCell.swift */; };
+		22C2EEE7247A679700D116CE /* InvoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C2EEE5247A679700D116CE /* InvoiceCell.xib */; };
 		22CEA24D244B8D7100F83C8E /* RecoveryPasswordTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CEA24B244B8D7100F83C8E /* RecoveryPasswordTVController.swift */; };
 		22DA897B242E884A002D4D57 /* PayWithApplePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA8979242E884A002D4D57 /* PayWithApplePayViewController.swift */; };
 		22DA897C242E884A002D4D57 /* PayWithApplePayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DA897A242E884A002D4D57 /* PayWithApplePayViewController.xib */; };
@@ -167,7 +169,7 @@
 		2267EFF623E8A6090097BEB0 /* ActivityIndicatorViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewService.swift; sourceTree = "<group>"; };
 		22690148244E273D00DB21F2 /* ChangePasswordTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVController.swift; sourceTree = "<group>"; };
 		2269849D24115C5B00EF8ED7 /* ArrayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayHelper.swift; sourceTree = "<group>"; };
-		226A8B3B23D43901009B3B67 /* ApiServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceAdapter.swift; sourceTree = "<group>"; };
+		226A8B3B23D43901009B3B67 /* ApiServiceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceWrapper.swift; sourceTree = "<group>"; };
 		226A8B3D23D49ED7009B3B67 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		226AA7C623CE24BF003F006A /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		226AA7CC23CE30F7003F006A /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
@@ -211,6 +213,8 @@
 		22B2E811247849DD00749CA1 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		22B7F472244CD12000E84EC5 /* SingUpTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpTVController.swift; sourceTree = "<group>"; };
 		22BD866F24763C2E0064DAC3 /* PDFViewController-copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFViewController-copy.swift"; sourceTree = "<group>"; };
+		22C2EEE4247A679700D116CE /* InvoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCell.swift; sourceTree = "<group>"; };
+		22C2EEE5247A679700D116CE /* InvoiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceCell.xib; sourceTree = "<group>"; };
 		22CEA24B244B8D7100F83C8E /* RecoveryPasswordTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordTVController.swift; sourceTree = "<group>"; };
 		22DA8979242E884A002D4D57 /* PayWithApplePayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithApplePayViewController.swift; sourceTree = "<group>"; };
 		22DA897A242E884A002D4D57 /* PayWithApplePayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayWithApplePayViewController.xib; sourceTree = "<group>"; };
@@ -469,6 +473,8 @@
 				22DE41E624249EE80069DABE /* InvoiceDetailsInfoTableViewController.swift */,
 				22DE41EC2424E2700069DABE /* CalculationTVCell.swift */,
 				22DE41ED2424E2700069DABE /* CalculationTVCell.xib */,
+				22C2EEE4247A679700D116CE /* InvoiceCell.swift */,
+				22C2EEE5247A679700D116CE /* InvoiceCell.xib */,
 			);
 			path = Calculations;
 			sourceTree = "<group>";
@@ -541,7 +547,7 @@
 		22913B2124016AD0000F9677 /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
-				226A8B3B23D43901009B3B67 /* ApiServiceAdapter.swift */,
+				226A8B3B23D43901009B3B67 /* ApiServiceWrapper.swift */,
 				22913B2224016B31000F9677 /* DataProviderAdapter.swift */,
 				2298463B23EF3F9700DA93BF /* AlertControllerAdapter.swift */,
 			);
@@ -712,6 +718,7 @@
 				22DE41E52423E2830069DABE /* InvoiceTVCell.xib in Resources */,
 				22DE41EF2424E2700069DABE /* CalculationTVCell.xib in Resources */,
 				22913B1E23FF0152000F9677 /* MainTabBarViewController.xib in Resources */,
+				22C2EEE7247A679700D116CE /* InvoiceCell.xib in Resources */,
 				2235D7BB241E5F3D007A90DD /* DeviceTVCell.xib in Resources */,
 				22721F1D2472E3D7006F72C0 /* Storyboard.storyboard in Resources */,
 			);
@@ -792,6 +799,7 @@
 				2217F5022403D117006654F9 /* TextFieldHelper.swift in Sources */,
 				2269849E24115C5B00EF8ED7 /* ArrayHelper.swift in Sources */,
 				2235D7BA241E5F3D007A90DD /* DeviceTVCell.swift in Sources */,
+				22C2EEE6247A679700D116CE /* InvoiceCell.swift in Sources */,
 				22A3807124478B1B008CCFAC /* TypeOfCalculationModel.swift in Sources */,
 				2253EE2F23CF3335009FD4B5 /* AuthModel.swift in Sources */,
 				22B2E812247849DE00749CA1 /* AboutTableViewController.swift in Sources */,
@@ -810,7 +818,7 @@
 				2238E3752455B51B009EDC83 /* ReceivedDataAddNewTemplateTVControllerOneStep.swift in Sources */,
 				226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */,
 				22913B1D23FF0152000F9677 /* MainTabBarViewController.swift in Sources */,
-				226A8B3C23D43901009B3B67 /* ApiServiceAdapter.swift in Sources */,
+				226A8B3C23D43901009B3B67 /* ApiServiceWrapper.swift in Sources */,
 				22F07F0D23DF4E50007BF4A4 /* DataProviderService.swift in Sources */,
 				22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */,
 				22EF4B992451E65D00DBF46B /* SingInTVController.swift in Sources */,

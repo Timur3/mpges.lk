@@ -59,10 +59,10 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
     }
     
     // Ппереход на страницу способы доставки квитанций
-    func navigationInvoiceDevileryMethodPage(for invoiceDeliveryMehtodId: Int) {
+    func navigationInvoiceDevileryMethodPage(for contract: ContractModel, delegate: ContractDetailsInfoTVControllerUserDelegate) {
         let devileryOfInvoiceTV: DeliveryMethodTVController = DeliveryMethodTVController()
-        devileryOfInvoiceTV.invoiceDeliveryMethodId = invoiceDeliveryMehtodId
-        devileryOfInvoiceTV.delegate = self
+        devileryOfInvoiceTV.contract = contract
+        devileryOfInvoiceTV.delegate = delegate
         self.navigationController.pushViewController(devileryOfInvoiceTV, animated: true)
     }
     

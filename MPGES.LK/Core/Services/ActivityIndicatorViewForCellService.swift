@@ -12,13 +12,15 @@ class ActivityIndicatorViewForCellService {
     var activityIndicator = UIActivityIndicatorView(style: .medium)
     
     func showAI(cell: UITableViewCell) {
-        let cellHeight = (cell.bounds.height)
-        let cellWidth = (cell.bounds.width)
-        activityIndicator.startAnimating()
-        activityIndicator.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: cellWidth, height: cellHeight)
-        cell.textLabel?.isHidden = true;
-        cell.isUserInteractionEnabled = false
-        cell.addSubview(activityIndicator)
+        DispatchQueue.main.async {
+            let cellHeight = (cell.bounds.height)
+            let cellWidth = (cell.bounds.width)
+            self.activityIndicator.startAnimating()
+            self.activityIndicator.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: cellWidth, height: cellHeight)
+            cell.textLabel?.isHidden = true;
+            cell.isUserInteractionEnabled = false
+            cell.addSubview(self.activityIndicator)
+        }
     }
     
     func hiddenAI(cell: UITableViewCell) {
