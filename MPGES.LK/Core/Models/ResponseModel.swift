@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ResultModel: Decodable {
+public struct ResponseModel: Decodable {
     var isError: Bool
     var errorCode: Int
     var errorMessage: String?
