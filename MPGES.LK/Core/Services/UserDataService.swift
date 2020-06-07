@@ -10,7 +10,16 @@ import Foundation
 
 
 public class UserDataService: UserDataProtocol {
+    
     static let shared = UserDataService()
+    
+    func setKey(keyName: String, keyValue: String) {
+        UserDefaults.standard.set(keyValue, forKey: keyName)
+    }
+    
+    func getKey(keyName: String) -> String? {
+        return UserDefaults.standard.string(forKey: keyName)
+    }
     
     func setToken(token: String) {
         UserDefaults.standard.set(token, forKey: "accessToken")

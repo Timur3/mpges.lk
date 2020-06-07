@@ -12,11 +12,14 @@ class CommonTableViewController: UITableViewController {
     public var indexPath: IndexPath?
     
     override func viewDidLoad() {
+        print("show")
         super.viewDidLoad()
     }
     
     func hiddenAI(){
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        guard let index = self.indexPath else { return }
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: index)!)
+        ActivityIndicatorViewService.shared.hideView()
     }
     
     func hideKeyboardWhenTappedAround() {

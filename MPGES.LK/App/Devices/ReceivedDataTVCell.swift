@@ -17,7 +17,7 @@ class ReceivedDataTVCell: UITableViewCell {
     func update(for receivedData: ReceivedDataModel) {
         receivedDataDateLabel.text = receivedData.date
         valueLabel.text = "\(receivedData.value) кВт/час"
-        tariffZoneLabel.text = receivedData.tariffZone
+        tariffZoneLabel.text = receivedData.tariffZone.typeOfTariffZone.name
     }
     
     override func awakeFromNib() {

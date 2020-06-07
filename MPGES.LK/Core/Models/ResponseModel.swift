@@ -10,15 +10,15 @@ import Foundation
 
 public struct ResponseModel: Decodable {
     var isError: Bool
-    var errorCode: Int
-    var errorMessage: String?
+    var code: Int
+    var message: String?
     var data: String?
     var refreshToken: String?
     
     enum CodingKeys: String, CodingKey {
         case isError = "isError"
-        case errorCode = "errorCode"
-        case errorMessage = "errorMessage"
+        case code = "code"
+        case message = "message"
         case data = "data"
         case refreshToken = "refreshToken"
      }

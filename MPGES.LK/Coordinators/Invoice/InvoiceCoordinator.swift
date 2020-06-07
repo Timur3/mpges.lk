@@ -26,6 +26,11 @@ class InvoiceCoordinator: Coordinator {
     }
 }
 extension InvoiceCoordinator: InvoicesTableViewControllerDelegate {
+    
+    func sendDocByEmail(model: SendInvoiceModel, delegate: InvoicesTableViewControllerUserDelegate) {
+        ApiServiceWrapper.shared.sendInvoiceByEmail(model: model, delegate: delegate)
+    }
+    
     func navigantionInvoiceDetailsInfoPage(model: InvoiceModel) {
         let invoiceDetailsInfoTV: InvoiceDetailsInfoTableViewController = InvoiceDetailsInfoTableViewController()
         invoiceDetailsInfoTV.invoice = model

@@ -19,7 +19,8 @@ class MainTabBarCoordinator: Coordinator {
     
     func start() {
         let mainTabBarVC: MainTabBarViewController = MainTabBarViewController()
-     
+        mainTabBarVC.delegateUser = self
+        mainTabBarVC.email = ""
         // MARK: - Contracts
         let contractsNC = UINavigationController()
         contractsNC.navigationBar.isTranslucent = true
@@ -60,14 +61,14 @@ class MainTabBarCoordinator: Coordinator {
 
 extension MainTabBarCoordinator: MainTabBarViewControllerDelegate {
     func navigateToContractsPage() {
-        
+        print("nav main")
     }
     
     func navigateToOfficesPage() {
-        
+        print("nav office")
     }
     
     func navigateToProfilePage() {
-        
+        print("nav profile")
     }   
 }

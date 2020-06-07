@@ -19,6 +19,11 @@ class ApiServiceWrapper {
         ApiService.shared.requestByModel(model: model, method: methodApi.authApi, completion: delegate.resultAuthApi(result:))
     }
     
+    //
+    func getDeepLinkForIos(number: Int, delegate: PayWithSberbankOnlineTVControllerDelegate) {
+        ApiService.shared.requestById(id: number, method: methodApi.getDeepLinkforIos, completion: delegate.navigationToSberApp(response:))
+    }
+    
     // получение списка договора пользователя
     func getContracts(delegate: ContractsTVControllerUserDelegate) {
         ApiService.shared.requestByToken(method: methodApi.getContracts, completion: delegate.setContracts(contracts:))
@@ -61,8 +66,12 @@ class ApiServiceWrapper {
     }
     
     // отправка платежного документа
-    func sendInvoiceByEmail(id: Int, delegate: InvoiceDetailsInfoTableViewControllerDelegate) {
-        ApiService.shared.requestById(id: id, method: methodApi.sendInoicesByEmail, completion: delegate.resultOfSendInvoice(result:))
+    func sendInvoiceByEmail(id: Int, delegate: InvoicesTableViewControllerUserDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.sendInoicesByUserId, completion: delegate.responseSend(result:))
+    }
+    
+    func sendInvoiceByEmail(model: SendInvoiceModel, delegate: InvoicesTableViewControllerUserDelegate) {
+        ApiService.shared.requestByModel(model: model, method: methodApi.sendInoicesByEmail, completion: delegate.responseSend(result:))
     }
     
     // получение приборов учета по договору
@@ -78,6 +87,15 @@ class ApiServiceWrapper {
     // получение показаний по прибору учета
     func getReceivedDataByDeviceId(id: Int, delegate: ReceivedDataTVControllerDelegate) {
         ApiService.shared.requestById(id: id, method: methodApi.getReceivedData, completion: delegate.setData(model:))
+    }
+    
+    //
+    func sendReceivedData(model: [ReceivedDataOfSendingModel], delegate: ReceivedDataAddNewTemplateTVControllerDelegate) {
+        ApiService.shared.requestByModel(model: model, method: methodApi.receivedDataAddNew, completion: delegate.resultOfSending(result:))
+    }
+    
+    func receivedDataDelete(id: Int, delegate: ReceivedDataTVControllerDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.receivedDataDelete, completion: delegate.resultOfDelete(result:))
     }
     
     // получение деталей по договору
@@ -120,7 +138,10 @@ class ApiServiceWrapper {
     }
     
     func loadSaldoContract(id: Int, label: UILabel) {
-        //Thread.sleep(forTimeInterval: 1.0)
         ApiService.shared.loadTextInLabel(method: methodApi.getContractSaldoById, id: id, label: label)
+    }
+    
+    func loadSaldoContractForString(id: Int) -> String {
+        return ApiService.shared.loadTextForString(method: methodApi.getContractSaldoById, id: id)
     }
 }

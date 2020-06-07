@@ -12,6 +12,7 @@ class MethodApi {
     let authApi: String
     let getContracts: String
     let getContract: String
+    let getContractorById: String
     let getListOfContractNumbers: String
     let getContractSaldoById: String
     let contractBinding: String
@@ -23,8 +24,10 @@ class MethodApi {
     let getDevicesByContractId: String
     let getReceivedData: String
     let getTemplateAddNew: String
-    let ReceivedDataAddNew: String
+    let receivedDataAddNew: String
+    let receivedDataDelete: String
     let getInvoicesByContractId: String
+    let sendInoicesByUserId: String
     let sendInoicesByEmail: String
     let getCalculationsByInvoiceId: String
     let createUser: String
@@ -34,11 +37,13 @@ class MethodApi {
     let passwordRecovery: String
     let getDeliveryOfInvoice: String
     let updateDeliveryMethod: String
+    let getDeepLinkforIos: String
     init() {
         authApi = "auth/"
         getContracts = "contract/getByUser/"
         getListOfContractNumbers = "contract/getListOfContractNumbers/"
         getContract = "contract/"
+        getContractorById = "contractor/"
         getContractSaldoById = "contract/getsaldobyid/"
         contractBinding = "contract/binding/"
         removeContractBinding = "contract/removeBinding/"
@@ -48,17 +53,20 @@ class MethodApi {
         getPaymentsByInvoiceId = "payment/getbyinvoiceid/"
         getPaymentsByContractId = "payment/getbyContractid/"
         getInvoicesByContractId = "invoice/getbyContractid/"
+        sendInoicesByUserId = "invoice/sendInvoice/"
         sendInoicesByEmail = "invoice/sendInvoice/"
         getCalculationsByInvoiceId = "calculation/getbyinvoiceid/"
         getDevicesByContractId = "device/getbyContractid/"
         getReceivedData = "receivedData/getbydeviceid/"
         getTemplateAddNew = "receivedData/getTemplateAddNew/"
-        ReceivedDataAddNew = "receivedData/AddNew/"
+        receivedDataAddNew = "receivedData/addNew/"
+        receivedDataDelete = "receivedData/delete/"
         createUser = "user/create/"
         updateUser = "user/update/"
         getUser = "user/"
         checkEmail = "user/checkbyemail/"
         passwordRecovery = "user/passwordrecovery/"
         getDeliveryOfInvoice = "deliveryOfInvoice/getall/"
+        getDeepLinkforIos = "sberbank/getdeeplinkforios/"
     }
 }

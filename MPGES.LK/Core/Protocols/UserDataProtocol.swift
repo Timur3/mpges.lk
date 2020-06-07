@@ -10,6 +10,9 @@ import Foundation
 
 protocol UserDataProtocol {
     
+    func setKey(keyName: String, keyValue: String)
+    func getKey(keyName: String) -> String?
+    
     func setToken(token: String)
     func getToken() -> String?
     

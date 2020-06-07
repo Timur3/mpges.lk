@@ -9,75 +9,78 @@
 import UIKit
 
 class ContractorInfoTVController: CommonTableViewController {
-    var sections: [String] {["ФИО", "Паспортные данные", ""]}
+    
+    var sections: [String] {["Основные данные", "Паспортные данные", "Прочее"]}
     
     public weak var delegate: ProfileTVControllerDelegate?
     
-    var exitCell: UITableViewCell { getCustomCell(textLabel: "Выйти", imageCell: myImage.power, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
-    var passChange: UITableViewCell { getCustomCell(textLabel: "Изменить пароль", imageCell: myImage.edit, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
-    var mobileCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.phone, textAlign: .left, accessoryType: .none) }()
-    var saveCell: UITableViewCell { getCustomCell(textLabel: "Сохранить изменения", imageCell: myImage.save, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    var aboutCell: UITableViewCell { getCustomCell(textLabel: "Разработчик", imageCell: myImage.person, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    var emailToDeveloperCell: UITableViewCell { getCustomCell(textLabel: "Обратная связь", imageCell: myImage.mail, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
+    var nameCell: UITableViewCell = { getCustomCell(textLabel: "Имя:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
+    var familyCell: UITableViewCell = { getCustomCell(textLabel: "Фамилия:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
+    var middleNameCell: UITableViewCell = { getCustomCell(textLabel: "Отчество:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "Email:", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
+    var dateOfBirthCell: UITableViewCell = { getCustomCell(textLabel: "Дата рождения:", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
+    var passportSeriaAndNumberCell: UITableViewCell = { getCustomCell(textLabel: "Серия/Номер:", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var kemVydanCell: UITableViewCell = { getCustomCell(textLabel: "Выдан:", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var typeOfContractorCell: UITableViewCell = { getCustomCell(textLabel: "Тип:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
     
-    var nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Введите ваше имя"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Электронная почта"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isUserInteractionEnabled = false
-        return textField
-    }()
-    var mobileTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Ваш сотовый"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
-    var user: UserModel? {
+    var contractor: ContractorModel? {
         didSet {
-            DispatchQueue.main.async {
-                self.emailTextField.text = self.user?.email
-                self.nameTextField.text = self.user?.name
-                self.mobileTextField.text = self.user?.mobile
-            }
+            
+            self.nameLabel.text = self.contractor!.name
+            self.familyLabel.text = self.contractor!.family.prefix(1) + "."
+            self.middleNameLabel.text = self.contractor!.middleName!.prefix(1) + "."
+            self.dateOfBirthLabel.text = self.contractor!.dateOfBirth
+            self.passportLabel.text = self.contractor!.passportSeria + "/******"
+            self.kemVydanLabel.text = "****************"
+            self.typeOfContractorCell.textLabel!.text = self.contractor?.typeOfContractor.name
+            self.tableView.reloadData()
         }
     }
+    
+    var nameLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var familyLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var middleNameLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var dateOfBirthLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var passportLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var kemVydanLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    
     override func viewDidLoad() {
         self.navigationItem.title = "Информация"
         super.viewDidLoad()
         configuration()
         setUpLayout()
     }
-    @objc func refreshData()
-    {
-        //self.getProfile()
-    }
     
     func setUpLayout(){
-        nameCell.addSubview(nameTextField)
-        nameTextField.leadingAnchor.constraint(equalTo: nameCell.leadingAnchor, constant: 50).isActive = true
-        nameTextField.centerYAnchor.constraint(equalTo: nameCell.centerYAnchor).isActive = true
-        emailCell.addSubview(emailTextField)
-        emailTextField.leadingAnchor.constraint(equalTo: emailCell.leadingAnchor, constant: 50).isActive = true
-        emailTextField.centerYAnchor.constraint(equalTo: emailCell.centerYAnchor).isActive = true
-        mobileCell.addSubview(mobileTextField)
-        mobileTextField.leadingAnchor.constraint(equalTo: mobileCell.leadingAnchor, constant: 50).isActive = true
-        mobileTextField.centerYAnchor.constraint(equalTo: mobileCell.centerYAnchor).isActive = true
+        nameCell.addSubview(nameLabel)
+        nameLabel.rightAnchor.constraint(equalTo: nameCell.rightAnchor, constant: -50).isActive = true
+        nameLabel.centerYAnchor.constraint(equalTo: nameCell.centerYAnchor).isActive = true
+        familyCell.addSubview(familyLabel)
+        familyLabel.rightAnchor.constraint(equalTo: familyCell.rightAnchor, constant: -50).isActive = true
+        familyLabel.centerYAnchor.constraint(equalTo: familyCell.centerYAnchor).isActive = true
+        middleNameCell.addSubview(middleNameLabel)
+        middleNameLabel.rightAnchor.constraint(equalTo: middleNameCell.rightAnchor, constant: -50).isActive = true
+        middleNameLabel.centerYAnchor.constraint(equalTo: middleNameCell.centerYAnchor).isActive = true
+        dateOfBirthCell.addSubview(dateOfBirthLabel)
+        dateOfBirthLabel.rightAnchor.constraint(equalTo: dateOfBirthCell.rightAnchor, constant: -50).isActive = true
+        dateOfBirthLabel.centerYAnchor.constraint(equalTo: dateOfBirthCell.centerYAnchor).isActive = true
+        passportSeriaAndNumberCell.addSubview(passportLabel)
+        passportLabel.rightAnchor.constraint(equalTo: passportSeriaAndNumberCell.rightAnchor, constant: -50).isActive = true
+        passportLabel.centerYAnchor.constraint(equalTo: passportSeriaAndNumberCell.centerYAnchor).isActive = true
+        kemVydanCell.addSubview(kemVydanLabel)
+        kemVydanLabel.rightAnchor.constraint(equalTo: kemVydanCell.rightAnchor, constant: -50).isActive = true
+        kemVydanLabel.centerYAnchor.constraint(equalTo: kemVydanCell.centerYAnchor).isActive = true
     }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return section == 0 ? "Если указана дата рождения 01.01.1900, это означает что у Вас не заполнены данные, будет очень благодарны за информацию" : ""
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,7 +91,7 @@ class ContractorInfoTVController: CommonTableViewController {
         case 1:
             return 2
         case 2:
-            return 2
+            return 1
         default:
             fatalError()
         }
@@ -101,29 +104,27 @@ class ContractorInfoTVController: CommonTableViewController {
             case 0:
                 return nameCell
             case 1:
-                return emailCell
+                return familyCell
             case 2:
-                return mobileCell
+                return middleNameCell
             case 3:
-                return saveCell
+                return dateOfBirthCell
             default:
                 fatalError()
             }
         case 1:
             switch indexPath.row {
             case 0:
-                return aboutCell
+                return passportSeriaAndNumberCell
             case 1:
-                return emailToDeveloperCell
+                return kemVydanCell
             default:
                 fatalError()
             }
         case 2:
             switch indexPath.row {
             case 0:
-                return passChange
-            case 1:
-                return exitCell
+                return typeOfContractorCell
             default:
                 fatalError()
             }
@@ -137,47 +138,11 @@ class ContractorInfoTVController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.indexPath = indexPath
+        self.tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    @objc func refreshData() {
         
-        if indexPath.section == 0 && indexPath.row == 0 {
-            nameTextField.becomeFirstResponder()
-        }
-        if indexPath.section == 0 && indexPath.row == 2 {
-            mobileTextField.becomeFirstResponder()
-        }
-        if indexPath.section == 0 && indexPath.row == 3 {
-            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-            saveAlertSheetShow()
-        }
-        if indexPath.section == 1 && indexPath.row == 1 {
-            self.delegate?.navigationEmailToDeveloperPage()
-        }
-        if indexPath.section == 2 && indexPath.row == 0 {
-            self.delegate?.navigationChangePasswordPage()
-        }
-        if indexPath.section == 2 && indexPath.row == 1 {
-            alertSheetExitShow()
-        }
-    }
-}
-
-extension ContractorInfoTVController: ProfileTVControllerUserDelegate {
-    func getProfile() {
-        ApiServiceWrapper.shared.getProfileById(delegate: self)
-        self.refreshControl?.endRefreshing()
-    }
-    
-    func saveProfile(profile: UserModel) {
-        ApiServiceWrapper.shared.updateUser(model: profile, delegate: self)
-    }
-    func resultOfSaveProfile(result: ServerResponseModel) {
-        AlertControllerAdapter.shared.show(title: result.isError ? "Ошибка!" : "Успешно!", mesg: result.message, form: self)
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-    }
-    
-    func setProfile(profile: UserModel) {
-        user = profile
     }
 }
 
@@ -190,22 +155,7 @@ extension ContractorInfoTVController {
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
-
+        
         self.hideKeyboardWhenTappedAround()
-    }
-    func saveAlertSheetShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы подтверждаете операцию?", form: self, handlerYes: { (UIAlertAction) in
-            self.user?.name = self.nameTextField.text!
-            self.user?.email = self.emailTextField.text!
-            self.user?.mobile = self.mobileTextField.text!
-            // save
-            self.saveProfile(profile: self.user!)
-        })
-    }
-    
-    func alertSheetExitShow(){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self, handlerYes: { (UIAlertAction) in
-            self.delegate?.navigateToFirstPage()
-        })
     }
 }

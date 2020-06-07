@@ -40,19 +40,6 @@ public struct ContractModel: Decodable {
     var includedInEpd: Bool
     var invoiceDeliveryMethodId: Int
     var invoiceDeliveryMethod: InvoiceDeliveryMethodModel
-    /*enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case userProfileId = "userProfileId"
-        case codeBinding = "codeBinding"
-        case contractTypeId = "contractTypeId"
-        case number = "number"
-        case dateRegister = "dateRegister"
-        case providerId = "providerId"
-        case contractorId = "contractorId"
-        case contractorNameSmall = "contractorNameSmall"
-        case workerId = "workerId"
-        case note = "note"
-    }*/
 }
 
 public struct ContractBindingModel: Encodable {

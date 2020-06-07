@@ -21,7 +21,7 @@ class ActivityIndicatorViewService {
         
         containerView.frame = window.frame
         containerView.center = window.center
-        containerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.2)
+        containerView.backgroundColor = .none //UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.2)
         
         loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         loadingView.center = window.center

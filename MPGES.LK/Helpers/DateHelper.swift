@@ -53,17 +53,4 @@ func getCurrentDate() -> String {
     return formatter.string(from: Date())
 }
 
-func isValidDate(dateStr: String) -> Bool {
-    let dateFmt = DateFormatter()
-    dateFmt.timeZone = NSTimeZone.default
-    dateFmt.dateFormat =  "dd.MM.yyyy"
-    
-    let date = dateFmt.date(from: dateStr)
 
-    if date == nil {
-        return false
-    }
-    else {
-        return true
-    }
-}

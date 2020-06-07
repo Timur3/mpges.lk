@@ -10,7 +10,7 @@ import UIKit
 
 public protocol SingInTVControllerUserDelegate: class {
     func authApi(model: AuthModel)
-    func resultAuthApi(result: ResultModel)
+    func resultAuthApi(result: ResponseModel)
 }
 
 class SingInTVController: CommonTableViewController {
@@ -25,27 +25,14 @@ class SingInTVController: CommonTableViewController {
     var inputCell: UITableViewCell { getCustomCell(textLabel: "Войти", imageCell: myImage.none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     var passwordRecoveryCell: UITableViewCell { getCustomCell(textLabel: "Забыли пароль", imageCell: myImage.none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
     
-    var emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "example@email.com"
-        textField.text = "timon2006tevriz@mail.ru"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Ваш пароль"
-        textField.text = "admin123"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isSecureTextEntry = true
-        return textField
-    }()
+    var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com") }()
+    var passwordTextField: UITextField = { getCustomTextField(placeholder: "Ваш пароль", isPassword: true) }()
     
     var user: UserModel? {
         didSet {
             DispatchQueue.main.async {
                 self.emailTextField.text = self.user?.email
-                self.passwordTextField.text = self.user?.name
+                //self.passwordTextField.text = self.user?.name
             }
         }
     }
@@ -185,6 +172,9 @@ extension SingInTVController {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
         delegateUser = self
+        //-- заполняем email
+        self.emailTextField.text = userDataService.getKey(keyName: "email")
+        self.passwordTextField.text = userDataService.getKey(keyName: "dwp")
     }
     
     func updateTableViewContentInset() {
@@ -199,10 +189,12 @@ extension SingInTVController: SingInTVControllerUserDelegate {
     
     func authApi(model: AuthModel) {
         ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        userDataService.setKey(keyName: "email", keyValue: model.email)
+        userDataService.setKey(keyName: "dwp", keyValue: model.password)
         ApiServiceWrapper.shared.authApi(model: model, delegate: self)
     }
     
-    func resultAuthApi(result: ResultModel) {
+    func resultAuthApi(result: ResponseModel) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         if !result.isError {
             userDataService.setToken(token: result.data!)
@@ -211,9 +203,9 @@ extension SingInTVController: SingInTVControllerUserDelegate {
         } else {
             AlertControllerAdapter.shared.show(
                 title: "Ошибка",
-                mesg: result.errorMessage!,
+                mesg: result.message!,
                 form: self) { (UIAlertAction) in
-                    print(result.errorMessage as Any)
+                    print(result.message as Any)
             }
         }
     }

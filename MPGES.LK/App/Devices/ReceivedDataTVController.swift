@@ -10,6 +10,7 @@ import UIKit
 public protocol ReceivedDataTVControllerDelegate: class {
     func setData(model: ReceivedDataModelRoot)
     func getReceivedDataAddNewTemplatePage()
+    func resultOfDelete(result: ServerResponseModel)
 }
 
 class ReceivedDataTVController: CommonTableViewController {
@@ -18,8 +19,8 @@ class ReceivedDataTVController: CommonTableViewController {
     public weak var delegate: DeviceCoordinatorMain?
     
     public var device: DeviceModel? {
-    didSet {
-        refreshReceivedData()
+        didSet {
+            refreshReceivedData()
         }
     }
     
@@ -31,20 +32,20 @@ class ReceivedDataTVController: CommonTableViewController {
         }
     }
     
-     override func viewDidLoad() {
+    override func viewDidLoad() {
         ActivityIndicatorViewService.shared.showView(form: self.view)
         navigationItem.title = "Реестр показаний"
         super.viewDidLoad()
         configuration()
     }
-           
+    
     @objc func refreshReceivedData(){
         ApiServiceWrapper.shared.getReceivedDataByDeviceId(id: device!.id, delegate: self)
         self.refreshControl?.endRefreshing()
-}
-           
+    }
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return receivedDataList.count
@@ -67,15 +68,24 @@ class ReceivedDataTVController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        self.indexPath = indexPath
         if editingStyle == .delete {
-            receivedDataList[indexPath.section].receivedData.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
-            //ApiServiceAdapter.shared.removeContractBinding(model: model, delegate: self)
+            let id = receivedDataList[indexPath.section].receivedData[indexPath.row].id
+            ApiServiceWrapper.shared.receivedDataDelete(id: id, delegate: self)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
+    
+   /* override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let modifyAction = UIContextualAction(style: .normal, title:  "Удалить", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in success(true)
+              //self.tableView.deleteRows(at: [indexPath], with: .fade)
+          })
+        modifyAction.image = UIImage(systemName: myImage.delete.rawValue)
+        modifyAction.backgroundColor = .purple
+        return UISwipeActionsConfiguration(actions: [modifyAction])
+    }*/
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "receivedDataCell", for: indexPath) as! ReceivedDataTVCell
         cell.imageView?.image = UIImage.init(systemName: myImage.receivedData.rawValue)
@@ -129,15 +139,30 @@ extension ReceivedDataTVController {
         self.tableView.register(nib, forCellReuseIdentifier: "receivedDataCell")
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshReceivedData), for: UIControl.Event.valueChanged)
-
+        
         refreshReceivedData()
-               
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
 }
 
 extension ReceivedDataTVController: ReceivedDataTVControllerDelegate {
+    func resultOfDelete(result: ServerResponseModel) {
+        let isError = result.isError
+        AlertControllerAdapter.shared.show(
+            title: isError ? "Ошибка!" : "Успешно!",
+            mesg: result.message,
+            form: self) {
+                (UIAlertAction) in
+                if !isError {
+                    self.receivedDataList[self.indexPath!.section].receivedData.remove(at: self.indexPath!.row)
+                    self.tableView.deleteRows(at: [self.indexPath!], with: .automatic)
+                    self.tableView.reloadData()
+                }
+        }
+    }
+    
     
     func setData(model: ReceivedDataModelRoot) {
         // todo доделать получение данных из realm

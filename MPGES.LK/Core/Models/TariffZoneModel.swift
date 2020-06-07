@@ -10,10 +10,22 @@ import Foundation
 
 public struct TariffZoneModel: Decodable {
     var id: Int
-    var name: String
-
+    var deviceId: Int
+    var typeOfTariffZoneId: Int
+    var typeOfTariffZone: TypeOfTariffZoneModel
+    var dateStart: String
+    var dateEnd: String?
+    var isDelete: Bool
+    var statusId: Int
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
-        case name = "name"
+        case deviceId = "deviceId"
+        case typeOfTariffZoneId = "typeOfTariffZoneId"
+        case typeOfTariffZone = "typeOfTariffZone"
+        case dateStart = "dateStart"
+        case dateEnd = "dateEnd"
+        case isDelete = "isDelete"
+        case statusId = "statusId"
     }
 }

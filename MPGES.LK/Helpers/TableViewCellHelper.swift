@@ -15,12 +15,14 @@ func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NST
         cell.imageView?.image =  UIImage(systemName: imageCell.rawValue)
     }
     cell.textLabel?.text = textLabel
+    //cell.description = description
     if (textColor != .black) {
         cell.textLabel?.textColor = textColor
     }
     cell.textLabel?.textAlignment = textAlign
     cell.accessoryType = accessoryType
     cell.isUserInteractionEnabled = isUserInteractionEnabled
+    //cell.separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: UIScreen.main.bounds.width - 50)
     //cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
     //cell.layer.masksToBounds = true
     //cell.layer.cornerRadius = 5

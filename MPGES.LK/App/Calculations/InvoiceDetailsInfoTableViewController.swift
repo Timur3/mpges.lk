@@ -127,7 +127,7 @@ class InvoiceDetailsInfoTableViewController: CommonTableViewController {
 extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewControllerDelegate {
     func sendInvoice(model: InvoiceModel) {
         ActivityIndicatorViewService.shared.showView(form: self.navigationController!.view)
-        ApiServiceWrapper.shared.sendInvoiceByEmail(id: model.id, delegate: self)
+        //ApiServiceWrapper.shared.sendInvoiceByEmail(id: model.id, delegate: self)
     }
     
     func resultOfSendInvoice(result: ServerResponseModel) {

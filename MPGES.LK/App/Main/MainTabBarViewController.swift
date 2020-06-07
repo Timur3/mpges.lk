@@ -15,7 +15,7 @@ public protocol MainTabBarViewControllerDelegate: class {
 }
 
 class MainTabBarViewController: UITabBarController {
-    
+    public var email: String = ""
     public weak var delegateUser: MainTabBarViewControllerDelegate?
     
     override func viewDidLoad() {

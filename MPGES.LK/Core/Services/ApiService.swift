@@ -66,6 +66,7 @@ class ApiService {
                 .responseData { response in
                     switch response.result {
                     case let .success(value):
+                        //print(String(data: value, encoding: .utf8))
                         let myResponse = try! JSONDecoder().decode(T.self, from: value)
                         DispatchQueue.main.async {
                             completion(myResponse)
@@ -120,5 +121,23 @@ class ApiService {
                 label.text = formatRusCurrency(for: text)
 
         }
+    }
+    
+    func loadTextForString(method: String, id: Int) -> String {
+        var result = ""
+        let fullMethod = method + String(id)
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (userData.getToken() ?? "")
+        ]
+        AF.request(self.baseURL+fullMethod,
+                   method: .get,
+                   headers: headers)
+            .responseString {
+                response in
+                guard let strData = response.data,
+                    let text = String(data: strData, encoding: .utf8) else { return }
+                result = text
+        }
+        return result
     }
 }

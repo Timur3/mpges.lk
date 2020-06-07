@@ -39,4 +39,6 @@ enum myImage: String {
     case plus = "plus"
     case dote = "ellipsis"
     case shared = "square.and.arrow.up"
+    case delete = "trahs.circle"
+    case docCopy = "doc.on.doc"
 }

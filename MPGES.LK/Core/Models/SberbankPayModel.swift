@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+public struct SberbankPayModel {
+    var contractNumber: String
+    var emailOrMobile: String
+}

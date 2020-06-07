@@ -12,11 +12,13 @@ import PDFKit
 protocol InvoicesTableViewControllerDelegate: class {
     func navigantionInvoiceDetailsInfoPage(model: InvoiceModel)
     func pdfView(for urlToPdfFile: URL, delegate: InvoicesTableViewControllerUserDelegate)
+    func sendDocByEmail(model: SendInvoiceModel, delegate: InvoicesTableViewControllerUserDelegate)
 }
 
 protocol InvoicesTableViewControllerUserDelegate: class {
     var sections: [String] { get }
     func setInvoices(invoices:InvoiceModelRoot)
+    func responseSend(result: ServerResponseModel)
     func hiddenAI()
 }
 
@@ -70,78 +72,91 @@ class InvoicesTableViewController: CommonTableViewController {
         return invoiceList[section].invoices.count
     }
     
-    func alertShowSendByEmail()
-    {
-        let alert = UIAlertController(title: "Отправка квитанции", message: "Укажите действующий email адрес, для получения документа", preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            textField.text = ""
-            textField.placeholder = "Ваш Email адрес"
-        }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0]
-            //self.delegate.sendDoc()
-            print("Text field: \(textField!.text)")
-        }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.indexPath = indexPath
-        self.showPdf(for: "http://school3-hm.ru/images/Polojeni/03.05.2018/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf")
-    }
-    
-    func showPdf(for urlFileInet: String) {
-        let urlFile = downloadPdf(url: urlFileInet)
-        self.delegate?.pdfView(for: urlFile, delegate: self)
-    }
-    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
     }
     
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.indexPath = indexPath
+        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+        //ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
+        let id = "\(self.invoiceList[indexPath.section].invoices[indexPath.row].id)"
+        self.showPdf(for: "http://lk.mp-ges.ru/Bills/BillsPrintPdfForCash?InvoiceId=" + id)
+    }
+    
+    func showPdf(for urlFileInet: String) {
+        DispatchQueue.main.async {
+            let urlFile = downloadPdf(url: urlFileInet)
+            self.delegate?.pdfView(for: urlFile, delegate: self)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceCell
+        cell.indexPath = indexPath
+        cell.delegateCell = self
         cell.update(for: invoiceList[indexPath.section].invoices[indexPath.row])
-        
-        let imgView = UIImageView(image: UIImage(systemName: myImage.dote.rawValue))
-        imgView.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(alertShowInvoiceAction(tapGestureRecognizer:)))
-        imgView.addGestureRecognizer(tapGestureRecognizer)
-        cell.accessoryView = imgView
-        
         return cell
     }
     
-    @objc func alertShowInvoiceAction(tapGestureRecognizer: UITapGestureRecognizer) {
+    func alertShowSendByEmail(indexPath: IndexPath)
+    {
+        let alert = UIAlertController(title: "Отправка квитанции", message: "Укажите действующий email адрес, для получения документа", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = UserDataService.shared.getKey(keyName: "email")
+            textField.placeholder = "Ваш Email адрес"
+        }
+        alert.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            if isValidEmail((textField?.text)!) {
+                let id = self.invoiceList[indexPath.section].invoices[indexPath.row].id
+                let model = SendInvoiceModel(email: (textField?.text)!, invoiceId: id)
+                self.delegate?.sendDocByEmail(model: model, delegate: self)
+            } else { textField?.shake(times: 3, delta: 5)}
+        }))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - INVOICE CELL DELEGATE
+extension InvoicesTableViewController: InvoiceCellDelegate {
+    func accessoryViewTapping(indexPath: IndexPath) {
+        self.indexPath = indexPath
+        
         let alert = UIAlertController(title: "Выберите действие", message: nil, preferredStyle: .actionSheet)
         let actionOpenInvoice = UIAlertAction(title: "Скачать PDF-файл", style: .default) {
             (UIAlertAction) in
-            self.showPdf(for: "http://school3-hm.ru/images/Polojeni/03.05.2018/3Polozhenie_ob_obshchem_sobranii_rabotneykov.pdf")
+            let id = "\(self.invoiceList[indexPath.section].invoices[indexPath.row].id)"
+            self.showPdf(for: "http://lk.mp-ges.ru/Bills/BillsPrintPdfForCash?InvoiceId=" + id)
         }
-        let actionSendInvoice = UIAlertAction(title: "Отправить по электронной почте", style: .default) {
-            (UIAlertAction) in self.alertShowSendByEmail()
+        let actionSendInvoice = UIAlertAction(title: "Отправить на email", style: .default) {
+            (UIAlertAction) in self.alertShowSendByEmail(indexPath: indexPath)
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alert.addAction(actionOpenInvoice)
         alert.addAction(actionSendInvoice)
         alert.addAction(actionCancel)
-        self.present(alert, animated: true, completion: {
-            print("completion block")
-        })
-    }
-}
-// MARK: - INVOICE CELL DELEGATE
-extension InvoicesTableViewController: InvoiceCellDelegate {
-    func accessoryViewTapping(indexPath: IndexPath) {
-        
+        self.present(alert, animated: true, completion: { print("completion block") })
     }   
 }
 extension InvoicesTableViewController: InvoicesTableViewControllerUserDelegate {
+    func responseSend(result: ServerResponseModel) {
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        let isError = result.isError
+        AlertControllerAdapter.shared.show(
+            title: isError ? "Ошибка!" : "Успешно!",
+            mesg: result.message,
+            form: self) { (UIAlertAction) in
+                if !isError {
+                    self.cancelButton()
+                }
+        }
+    }
     
     func mapToInvoicesModelView(invoices: [InvoiceModel]) -> [InvoiceModelVeiw] {
         var res = [InvoiceModelVeiw]()

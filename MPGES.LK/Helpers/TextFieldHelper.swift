@@ -8,10 +8,11 @@
 
 import UIKit
 
-func getCustomTextField(placeholder: String, keyboardType: UIKeyboardType = .default) -> UITextField {
+func getCustomTextField(placeholder: String, keyboardType: UIKeyboardType = .default, isPassword: Bool = false) -> UITextField {
     let textField = UITextField()
     textField.placeholder = placeholder
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.keyboardType = keyboardType
+    textField.isSecureTextEntry = isPassword
     return textField
 }

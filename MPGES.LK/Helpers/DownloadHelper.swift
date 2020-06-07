@@ -8,7 +8,7 @@
 
 import Foundation
 
-func downloadPdf(url: String) -> URL{
+func downloadPdf(url: String) -> URL {
     var urlFile: URL?
     do {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]

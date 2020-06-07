@@ -12,10 +12,13 @@ class AboutTableViewController: CommonTableViewController {
     public weak var delegate: ProfileCoordinator?
     var sections = ["Организация", "Разработчик"]
     
+    var developerCell: UITableViewCell = { getCustomCell(textLabel: "Чалимов Тимур Тимергалиевич", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    
     override func viewDidLoad() {
         self.navigationItem.title = "О программе"
         super.viewDidLoad()
         configuration()
+        //developerCell.te = "Ведущий инженер-программист"
     }
     
     // MARK: - Table view data source
@@ -31,7 +34,21 @@ class AboutTableViewController: CommonTableViewController {
         case 0:
             return 0
         case 1:
-            return 0
+            return 1
+        default:
+            fatalError()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 1:
+            switch indexPath.row {
+            case 0:
+                return developerCell
+            default:
+                fatalError()
+            }
         default:
             fatalError()
         }

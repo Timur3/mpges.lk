@@ -12,7 +12,7 @@ public class ReceivedDataAddNewTemplateModelRoot: Decodable {
     var data: [ReceivedDataAddNewTemplateModel]
 }
 
-public struct ReceivedDataAddNewTemplateModel: Decodable {
+public struct ReceivedDataAddNewTemplateModel: Encodable, Decodable {
     let tariffZoneId: Int
     let tariffZone: String
     var meterCircle: Bool
@@ -39,13 +39,13 @@ public struct ReceivedDataAddNewTemplateModel: Decodable {
     }
 }
 
-public class ReceivedDataAddNewTemplateModelView  {
+public struct ReceivedDataAddNewTemplateModelView  {
     var date: String
     var receivedDataAddNewTemplates: [ReceivedDataAddNewTemplateModel] = []
-    
-    init(date: String, receivedDataAddNewTemplates: [ReceivedDataAddNewTemplateModel])
-    {
-        self.date = date
-        self.receivedDataAddNewTemplates = receivedDataAddNewTemplates
-    }
+}
+
+public struct ReceivedDataOfSendingModel: Encodable, Decodable {
+    var date: String
+    var tariffZoneId: Int
+    var receivedDataValue: Int
 }

@@ -49,3 +49,8 @@ public class InvoiceDetailsModelView {
         self.pay = pay
     }
 }
+
+public struct SendInvoiceModel: Encodable {
+    var email: String
+    var invoiceId: Int
+}

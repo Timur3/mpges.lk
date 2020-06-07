@@ -105,8 +105,8 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CommonTableViewController {
             dateTextField.becomeFirstResponder()
         }
         if indexPath.section == 1 && indexPath.row == 0 {
-            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-            if isValidDate(dateStr: dateTextField.text!) {
+            if isValidDate(tf: dateTextField) {
+                ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
                 ApiServiceWrapper.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
             } else {
                 AlertControllerAdapter.shared.show(
@@ -114,15 +114,28 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CommonTableViewController {
                     mesg: "Некорректная дата",
                     form: self)
             }
-            ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
+    }
+    func isValidDate(tf: UITextField) -> Bool {
+        let isValid = true
+        if tf.text!.isEmpty { return false }
+        
+        let dateFmt = DateFormatter()
+        dateFmt.timeZone = NSTimeZone.default
+        dateFmt.dateFormat =  "dd.MM.yyyy"
+        guard let date = dateFmt.date(from: tf.text!) else { return false }
+        if date < dateFmt.date(from: "01.01.2020")! { return false }
+        
+        datePicker.date = date
+        
+        return isValid
     }
 }
 
 extension ReceivedDataAddNewTemplateTVControllerOneStep: ReceivedDataAddNewTemplateTVControllerOneStepDelegate {
     func setData(model: ReceivedDataAddNewTemplateModelRoot) {
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let m = ReceivedDataAddNewTemplateModelView(date: "\(datePicker.date)", receivedDataAddNewTemplates: model.data)
-        //self.delegate?.showReceivedDataAddNewTemplatesTwoStepPage(device: device!,x nav: self.navigationController!)
         self.delegate?.showReceivedDataAddNewTemplatesPage(device: device!, template: m, nav: self.navigationController!)
     }
 }
@@ -136,8 +149,6 @@ extension ReceivedDataAddNewTemplateTVControllerOneStep {
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()
-        //self.dateTextField.becomeFirstResponder()
-        
         datePicker.addTarget(self, action: #selector(datePackerChanged), for: UIControl.Event.valueChanged)
         //Formate Date
         datePicker.datePickerMode = .date

@@ -15,25 +15,13 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigationToInvoicePage()
     func navigationDevicesPage()
     func navigationInvoiceDevileryMethodPage(for contract: ContractModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
-    func navigationToContractorInfoPage()
+    func navigationToContractorInfoPage(for contractor: ContractorModel)
     func navigateToPayWithCreditCardPage()
-    func navigateToPayWithSberbankOnlinePage()
+    func navigateToPayWithSberbankOnlinePage(model: SberbankPayModel)
 }
 
 class ContractDetailsInfoTVController: CommonTableViewController {
     public weak var delegate: ContractDetailsInfoTVControllerDelegate?
-    
-    private var paymentRequest: PKPaymentRequest = {
-        let request = PKPaymentRequest()
-        request.merchantIdentifier = "merchant.com.mpges.lk"
-        request.supportedNetworks = [.visa, .masterCard]
-        request.supportedCountries = ["RU"]
-        request.merchantCapabilities = .capability3DS
-        request.countryCode = "RU"
-        request.currencyCode = "RUB"
-        request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Потребленная электроэнергия", amount: 1.00)]
-        return request
-    }()
     
     var accountCell: UITableViewCell = { getCustomCell(textLabel: "Лицевой счет:", imageCell: myImage.tag, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var contractDateCell: UITableViewCell = { getCustomCell(textLabel: "Дата договора:", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
@@ -58,7 +46,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
             DispatchQueue.main.async {
                 self.accountLabel.text = self.contractModel!.number
                 self.contractDateLabel.text = self.contractModel!.dateRegister
-                self.contractorLabel.text = self.contractModel!.contractor.nameSmall
+                self.contractorLabel.text = self.contractModel!.contractor.name + " " + self.contractModel!.contractor.middleName!.prefix(1) + ". " + self.contractModel!.contractor.family.prefix(1) + "."
                 ApiServiceWrapper.shared.loadSaldoContract(id: self.contractModel!.id, label: self.saldoSumLabel)
                 self.tableView.reloadData()
             }
@@ -99,7 +87,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 2 {
-            self.delegate?.navigationToContractorInfoPage()
+            self.delegate?.navigationToContractorInfoPage(for: contractModel!.contractor)
         }
     }
     
@@ -179,10 +167,10 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
         if indexPath.section == 0 && indexPath.row == 2 {
-            self.delegate?.navigationToContractorInfoPage()
+            self.delegate?.navigationToContractorInfoPage(for: self.contractModel!.contractor)
         }
         if indexPath.section == 1 && indexPath.row == 0 {
-            alertSheetShow()
+            alertSheetMethodPayShow()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
             self.delegate?.navigationToInvoicePage()
@@ -217,6 +205,7 @@ extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDe
 
 extension ContractDetailsInfoTVController: PKPaymentAuthorizationViewControllerDelegate {
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+        
         completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
     }
     
@@ -228,7 +217,7 @@ extension ContractDetailsInfoTVController: PKPaymentAuthorizationViewControllerD
 //MARK: - CONFIGURE
 extension ContractDetailsInfoTVController {
     
-    func alertSheetShow() {
+    func alertSheetMethodPayShow() {
         let alert = UIAlertController(title: "Выбор способа оплаты:", message: nil, preferredStyle: .actionSheet)
         let actionApplePay = UIAlertAction(title: "Apple Pay", style: .default) {
             (UIAlertAction) in self.purchase()
@@ -238,11 +227,12 @@ extension ContractDetailsInfoTVController {
         //}
         let actionSberBank = UIAlertAction(title: "Сбербанк Онлайн", style: .default) {
             (UIAlertAction) in
-            //self.goToSberbankOnline()
-            self.delegate?.navigateToPayWithSberbankOnlinePage()
+            let model = SberbankPayModel(
+                contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "")
+            self.delegate?.navigateToPayWithSberbankOnlinePage(model: model)
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        // alert.addAction(actionApplePay)
+        alert.addAction(actionApplePay)
         // alert.addAction(actionOthersBank)
         alert.addAction(actionSberBank)
         alert.addAction(actionCancel)
@@ -265,11 +255,16 @@ extension ContractDetailsInfoTVController {
         //}
     }
     func purchase() {
+        //let sumStr = ApiServiceWrapper.shared.loadSaldoContractForString(id: self.contractModel!.id)
+        //let sum = (Double(sumStr)?.rounded(.up))!
+        let paymentRequest = createPaymentRequestForApplePay(sum: NSDecimalNumber(string: self.saldoSumLabel.text))
+        
         if let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest) {
             controller.delegate = self
             present(controller, animated: true, completion: nil)
         }
     }
+    
     
     private func Configuration() {
         self.refreshControl = UIRefreshControl()
@@ -287,4 +282,17 @@ extension ContractDetailsInfoTVController {
     @objc func refreshContract() {
         getContractById(id: contractModel!.id)
     }
+}
+
+func createPaymentRequestForApplePay(sum: NSDecimalNumber) -> PKPaymentRequest {
+    let label = "Потребленная электроэнергия"
+    let request = PKPaymentRequest()
+    request.merchantIdentifier = "merchant.com.mpges.lk"
+    request.supportedNetworks = [.visa, .masterCard]
+    request.supportedCountries = ["RU"]
+    request.merchantCapabilities = .capability3DS
+    request.countryCode = "RU"
+    request.currencyCode = "RUB"
+    request.paymentSummaryItems = [PKPaymentSummaryItem(label: label, amount: sum)]
+    return request
 }

@@ -28,7 +28,7 @@ public class ReceivedDataModel: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var meteringId: Int
     @objc dynamic var tariffZoneId: Int
-    @objc dynamic var tariffZone: String
+    var tariffZone: TariffZoneModel
     @objc dynamic var date: String
     @objc dynamic var value: Int
     @objc dynamic var volume: Int

@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+public struct TypeOfTariffZoneModel: Decodable {
+    var id: Int
+    var name: String
+
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+    }
+}
+

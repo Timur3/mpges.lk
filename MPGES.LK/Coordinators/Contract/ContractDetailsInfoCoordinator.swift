@@ -36,9 +36,10 @@ class ContractDetailsInfoCoordinator: Coordinator {
 }
 
 extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegate {
-    func navigateToPayWithSberbankOnlinePage() {
+    func navigateToPayWithSberbankOnlinePage(model: SberbankPayModel) {
         let payWithSberbankOnlinePageTVController : PayWithSberbankOnlineTVController = PayWithSberbankOnlineTVController()
         payWithSberbankOnlinePageTVController.delegate = self
+        payWithSberbankOnlinePageTVController.model = model
         let navPayWithSberbankOnlinePageTVController: UINavigationController = UINavigationController(rootViewController: payWithSberbankOnlinePageTVController)
         self.navigationController.present(navPayWithSberbankOnlinePageTVController, animated: true, completion: nil)
     }
@@ -51,9 +52,9 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
         self.navigationController.present(navPayWithCreditCardPageTVController, animated: true, completion: nil)
     }
     
-    func navigationToContractorInfoPage() {
+    func navigationToContractorInfoPage(for contractor: ContractorModel) {
         let contractorInfoPageTVController : ContractorInfoTVController = ContractorInfoTVController()
-        //contractorInfoPageTVController.delegate = delegate
+        contractorInfoPageTVController.contractor = contractor
         let navContractorInfoPageTVController: UINavigationController = UINavigationController(rootViewController: contractorInfoPageTVController)
         self.navigationController.present(navContractorInfoPageTVController, animated: true, completion: nil)
     }

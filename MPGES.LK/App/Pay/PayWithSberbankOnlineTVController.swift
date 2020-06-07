@@ -7,6 +7,10 @@
 //
 
 import UIKit
+protocol PayWithSberbankOnlineTVControllerDelegate: class {
+    func getDeepLink()
+    func navigationToSberApp(response: ResponseModel)
+}
 
 class PayWithSberbankOnlineTVController: CommonTableViewController {
     public weak var delegate: ContractDetailsInfoCoordinator?
@@ -20,12 +24,12 @@ class PayWithSberbankOnlineTVController: CommonTableViewController {
     
     var accountTextField: UITextField = { getCustomTextField(placeholder: "") }()
     var contactTextField: UITextField = { getCustomTextField(placeholder: "") }()
-  
-    var user: UserModel? {
+    
+    var model: SberbankPayModel? {
         didSet {
             DispatchQueue.main.async {
-                self.contactTextField.text = self.user?.email
-                self.accountTextField.text = self.user?.name
+                self.contactTextField.text = self.model?.emailOrMobile
+                self.accountTextField.text = self.model?.contractNumber
             }
         }
     }
@@ -42,25 +46,6 @@ class PayWithSberbankOnlineTVController: CommonTableViewController {
         super.viewDidDisappear(animated)
         // Получение списка договоров
         //delegate?.getContracts()
-    }
-    
-    @objc func submitAction() {
-        //let model = ContractBindingModel(number: accountTextField.text!, code: codeTextField.text!)
-        //self.goToBinding(model: model)
-        let url = URL(string: "sberbankonline://payments/services/init/?ids=eyJjbiI6eyJiIjoiMjg0IiwibiI6ItCt0LvQtdC60YLRgNC-0Y3QvdC10YDQs9C40Y8iLCJwcyI6IjU1MDY5Njc5NSJ9LCJucyI6eyJub2RlMC5vbmxpbmUuc2JlcmJhbmsucnUiOnsicHMiOiI1MDA2NjQyMDcifSwibm9kZTEub25saW5lLnNiZXJiYW5rLnJ1Ijp7InBzIjoiODQ3NTI1In0sIm5vZGUyLm9ubGluZS5zYmVyYmFuay5ydSI6eyJwcyI6IjUwMDY2NDY5MSJ9LCJub2RlMy5vbmxpbmUuc2JlcmJhbmsucnUiOnsicHMiOiI1MDA2NjQxMDgifSwibm9kZTQub25saW5lLnNiZXJiYW5rLnJ1Ijp7InBzIjoiNTAwNjU4MzkzIn0sIm5vZGU1Lm9ubGluZS5zYmVyYmFuay5ydSI6eyJwcyI6IjUwMDY1ODQ2MyJ9fSwiYXQiOmZhbHNlfQ==&vls=eyJ2cyI6W3sibiI6ItCb0JjQptCV0JLQntCZINCh0KfQldCiIiwidiI6Ijg2MDAwMzAwMDAzIn1dfQ==")
-               
-        UIApplication.shared.open(url!) { (result) in
-            if result {
-               // The URL was delivered successfully!
-                self.cancelButton()
-            }
-        }
-        //let strURL = "sberbankonline://payments/"
-        //let url = URL.init(string: strURL)
-        //if (UIApplication.shared.canOpenURL(url!)){
-        //    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-        //}
-        self.hiddenAI()
     }
     
     // MARK: - Table view data source
@@ -101,11 +86,11 @@ class PayWithSberbankOnlineTVController: CommonTableViewController {
             }
         case 2:
             switch indexPath.row {
-        case 0:
-            return saveCell
-        default:
-            fatalError()
-        }
+            case 0:
+                return saveCell
+            default:
+                fatalError()
+            }
         default:
             fatalError()
         }
@@ -123,41 +108,39 @@ class PayWithSberbankOnlineTVController: CommonTableViewController {
             contactTextField.becomeFirstResponder()
         }
         if indexPath.section == 2 && indexPath.row == 0 {
-            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
-            submitAction()
+            self.getDeepLink()
         }
     }
 }
 
-extension PayWithSberbankOnlineTVController: ContractAddTVControllerUserDelegate {
-    
-    func resultCheckContract(result: ServerResponseModel) {
-        if (result.isError) {
-            //accountTextField.shake(times: 3, delta: 5)
-        }
-        //errorNumberLabel.text = result.message
-    }
-    
-    func checkContractByNumber(model: ContractNumberModel) {
-        ApiServiceWrapper.shared.checkByNumberContract(model: model, delegate: self)
-    }
-    
-    func goToBinding(model: ContractBindingModel) {
+extension PayWithSberbankOnlineTVController: PayWithSberbankOnlineTVControllerDelegate {
+    func getDeepLink() {
         ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        ApiServiceWrapper.shared.contractBinding(model: model, delegate: self)
+        ApiServiceWrapper.shared.getDeepLinkForIos(number: Int(model!.contractNumber)!, delegate: self)
     }
     
-    func resultToBinding(result: ServerResponseModel) {
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        let isError = result.isError
-        AlertControllerAdapter.shared.show(
-            title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message,
-            form: self) { (UIAlertAction) in
-                if !isError {
+    func navigationToSberApp(response: ResponseModel) {
+        let isError = response.isError
+        if isError {
+            AlertControllerAdapter.shared.show(
+                title: isError ? "Ошибка!" : "Успешно!",
+                mesg: response.message!,
+                form: self) { (UIAlertAction) in
+                    if isError {
+                        self.cancelButton()
+                    }
+            }
+        } else {
+            let url = URL(string: response.data!) //"sberbankonline://payments/services/init/?ids=eyJjbiI6eyJiIjoiMjg0IiwibiI6ItCt0LvQtdC60YLRgNC-0Y3QvdC10YDQs9C40Y8iLCJwcyI6IjU1MDY5Njc5NSJ9LCJucyI6eyJub2RlMC5vbmxpbmUuc2JlcmJhbmsucnUiOnsicHMiOiI1MDA2NjQyMDcifSwibm9kZTEub25saW5lLnNiZXJiYW5rLnJ1Ijp7InBzIjoiODQ3NTI1In0sIm5vZGUyLm9ubGluZS5zYmVyYmFuay5ydSI6eyJwcyI6IjUwMDY2NDY5MSJ9LCJub2RlMy5vbmxpbmUuc2JlcmJhbmsucnUiOnsicHMiOiI1MDA2NjQxMDgifSwibm9kZTQub25saW5lLnNiZXJiYW5rLnJ1Ijp7InBzIjoiNTAwNjU4MzkzIn0sIm5vZGU1Lm9ubGluZS5zYmVyYmFuay5ydSI6eyJwcyI6IjUwMDY1ODQ2MyJ9fSwiYXQiOmZhbHNlfQ==&vls=eyJ2cyI6W3sibiI6ItCb0JjQptCV0JLQntCZINCh0KfQldCiIiwidiI6Ijg2MDAwMzAwMDAzIn1dfQ==")
+            UIApplication.shared.open(url!) { (result) in
+                if result {
+                    // The URL was delivered successfully!
                     self.cancelButton()
+                }
             }
         }
+        
+        self.hiddenAI()
     }
 }
 
