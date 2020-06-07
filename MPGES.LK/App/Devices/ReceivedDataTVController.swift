@@ -126,10 +126,10 @@ extension ReceivedDataTVController {
     private func configuration() {
         self.refreshControl = UIRefreshControl()
         
-        //let segment = UISegmentedControl(items: ["Реестр","График"])
-        //segment.addTarget(self, action: #selector(segmentSwicht), for: UIControl.Event.valueChanged)
-        //segment.selectedSegmentIndex = 0
-        //self.navigationItem.titleView = segment
+        let segment = UISegmentedControl(items: ["Реестр","График"])
+        segment.addTarget(self, action: #selector(segmentSwicht), for: UIControl.Event.valueChanged)
+        segment.selectedSegmentIndex = 0
+        self.navigationItem.titleView = segment
         
         let sendMeterDataDevice = getPlusUIBarButtonItem(target: self, action: #selector(showMeterDataDevicePage))
         self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]

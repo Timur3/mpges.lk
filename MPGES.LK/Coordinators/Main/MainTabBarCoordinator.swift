@@ -35,22 +35,22 @@ class MainTabBarCoordinator: Coordinator {
         //contractsNC.viewControllers = [contractsVC]
         
         // MARK: - Offices
-        //let officesVC = OfficesViewController(nibName: "OfficesViewController", bundle: nil)
-
-       // officesVC.tabBarItem = UITabBarItem(title: "Офисы", image: UIImage(systemName: "mappin.and.ellipse"), tag: 1)
-
+        let officesVC = OfficesViewController(nibName: "OfficesViewController", bundle: nil)
+        
+        officesVC.tabBarItem = UITabBarItem(title: "Офисы", image: UIImage(systemName: "mappin.and.ellipse"), tag: 1)
+        
         // MARK: - Profile
         let profileNC = UINavigationController()
         profileNC.navigationBar.isTranslucent = true
         profileNC.navigationBar.prefersLargeTitles = true
-       
+        
         let profileCoordinator = ProfileCoordinator(navigationController: profileNC)
         profileCoordinator.delegate = delegate
         childCoordinators.append(profileCoordinator)
         profileCoordinator.start()
         
-        let tabBarList = [contractsNC, /*officesVC,*/ profileNC]
-
+        let tabBarList = [contractsNC, officesVC, profileNC]
+        
         mainTabBarVC.viewControllers = tabBarList
         //mainTabBarVC.delegate = self
         //mainTabBarVC.delegateUser = self*/

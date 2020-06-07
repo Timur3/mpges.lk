@@ -179,6 +179,8 @@ extension ContractAddTVController {
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()
+        
+        self.numberTextField.becomeFirstResponder()
     }
     
     func updateTableViewContentInset() {

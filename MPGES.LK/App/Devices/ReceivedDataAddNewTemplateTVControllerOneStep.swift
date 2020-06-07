@@ -165,6 +165,8 @@ extension ReceivedDataAddNewTemplateTVControllerOneStep {
         dateTextField.inputAccessoryView = toolbar
         dateTextField.inputView = datePicker
         
+        self.dateTextField.becomeFirstResponder()
+        
     }
     @objc func datePackerChanged() {
         dateFormatterSet()

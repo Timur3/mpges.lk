@@ -12,6 +12,7 @@ class AboutTableViewController: CommonTableViewController {
     public weak var delegate: ProfileCoordinator?
     var sections = ["Организация", "Разработчик"]
     
+    var orgCell: UITableViewCell = { getCustomCell(textLabel: "МП ГЭС (ИНН: 8601005865)", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     var developerCell: UITableViewCell = { getCustomCell(textLabel: "Чалимов Тимур Тимергалиевич", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class AboutTableViewController: CommonTableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
-            return 0
+            return 1
         case 1:
             return 1
         default:
@@ -42,6 +43,13 @@ class AboutTableViewController: CommonTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                return orgCell
+            default:
+                fatalError()
+            }
         case 1:
             switch indexPath.row {
             case 0:
