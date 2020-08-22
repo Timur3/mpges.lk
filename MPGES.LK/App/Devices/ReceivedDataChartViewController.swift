@@ -1,21 +1,21 @@
 //
-//  PayWithApplePayViewController.swift
+//  ReceivedDataChartViewController.swift
 //  mpges.lk
 //
-//  Created by Timur on 28.03.2020.
+//  Created by Timur on 08.06.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
 import UIKit
 
-class PayWithApplePayViewController: UIViewController {
+class ReceivedDataChartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
+    
 
     /*
     // MARK: - Navigation

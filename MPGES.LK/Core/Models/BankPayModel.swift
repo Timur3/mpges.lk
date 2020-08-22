@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SberbankPayModel {
+public struct BankPayModel {
     var contractNumber: String
     var emailOrMobile: String
 }

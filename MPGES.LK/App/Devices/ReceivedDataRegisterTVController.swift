@@ -13,7 +13,7 @@ public protocol ReceivedDataTVControllerDelegate: class {
     func resultOfDelete(result: ServerResponseModel)
 }
 
-class ReceivedDataTVController: CommonTableViewController {
+class ReceivedDataRegisterTVController: CommonTableViewController {
     let searchController = UISearchController(searchResultsController: nil)
     
     public weak var delegate: DeviceCoordinatorMain?
@@ -111,18 +111,18 @@ class ReceivedDataTVController: CommonTableViewController {
     }
     
     @objc func segmentSwicht(){
-        
+        print("swicht")
     }
     
 }
 //MARK: - SEARCH
-extension ReceivedDataTVController: UISearchResultsUpdating {
+extension ReceivedDataRegisterTVController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
     }
 }
 
-extension ReceivedDataTVController {
+extension ReceivedDataRegisterTVController {
     private func configuration() {
         self.refreshControl = UIRefreshControl()
         
@@ -147,7 +147,7 @@ extension ReceivedDataTVController {
     }
 }
 
-extension ReceivedDataTVController: ReceivedDataTVControllerDelegate {
+extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
     func resultOfDelete(result: ServerResponseModel) {
         let isError = result.isError
         AlertControllerAdapter.shared.show(
