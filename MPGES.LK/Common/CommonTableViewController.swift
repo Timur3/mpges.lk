@@ -12,7 +12,7 @@ class CommonTableViewController: UITableViewController {
     public var indexPath: IndexPath?
     
     override func viewDidLoad() {
-        print("show")
+        self.hideKeyboardWhenTappedAround()
         super.viewDidLoad()
     }
     

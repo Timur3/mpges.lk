@@ -38,6 +38,7 @@ class MethodApi {
     let getDeliveryOfInvoice: String
     let updateDeliveryMethod: String
     let getDeepLinkforIos: String
+    let initApplePay: String
     init() {
         authApi = "auth/"
         getContracts = "contract/getByUser/"
@@ -52,6 +53,7 @@ class MethodApi {
         getPaymentById = "payment/"
         getPaymentsByInvoiceId = "payment/getbyinvoiceid/"
         getPaymentsByContractId = "payment/getbyContractid/"
+        initApplePay = "payment/initApplePay"
         getInvoicesByContractId = "invoice/getbyContractid/"
         sendInoicesByUserId = "invoice/sendInvoice/"
         sendInoicesByEmail = "invoice/sendInvoice/"

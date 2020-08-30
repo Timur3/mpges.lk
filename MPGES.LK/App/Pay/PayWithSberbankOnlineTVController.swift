@@ -12,7 +12,7 @@ protocol PayWithSberbankOnlineTVControllerDelegate: class {
     func navigationToSberApp(response: ResponseModel)
 }
 
-class PayWithSberbankOnlineTVController: CommonTableViewController {
+class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewController {
     public weak var delegate: ContractDetailsInfoCoordinator?
     
     var sections: [String] {["Лицевой счет", "Доставка электронного чека", ""]}
@@ -25,7 +25,7 @@ class PayWithSberbankOnlineTVController: CommonTableViewController {
     var accountTextField: UITextField = { getCustomTextField(placeholder: "") }()
     var contactTextField: UITextField = { getCustomTextField(placeholder: "") }()
     
-    var model: SberbankPayModel? {
+    var model: BankPayModel? {
         didSet {
             DispatchQueue.main.async {
                 self.contactTextField.text = self.model?.emailOrMobile
@@ -39,9 +39,7 @@ class PayWithSberbankOnlineTVController: CommonTableViewController {
         configuration()
         setUpLayout()
     }
-    override func viewWillLayoutSubviews() {
-        self.updateTableViewContentInset()
-    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // Получение списка договоров
@@ -152,13 +150,6 @@ extension PayWithSberbankOnlineTVController {
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         self.hideKeyboardWhenTappedAround()
-    }
-    
-    func updateTableViewContentInset() {
-        let viewHeight: CGFloat = view.frame.size.height
-        let tableViewContentHeight: CGFloat = tableView.contentSize.height
-        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
-        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  -marginHeight, right: 0)
     }
     
     func setUpLayout(){

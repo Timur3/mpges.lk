@@ -66,12 +66,12 @@ class ApiService {
                 .responseData { response in
                     switch response.result {
                     case let .success(value):
-                        //print(String(data: value, encoding: .utf8))
                         let myResponse = try! JSONDecoder().decode(T.self, from: value)
                         DispatchQueue.main.async {
                             completion(myResponse)
                         }
                     case let .failure(error):
+                        print("error")
                         print(error)
                     }
             }

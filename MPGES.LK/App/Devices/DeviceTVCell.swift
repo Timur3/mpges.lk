@@ -33,7 +33,7 @@ class DeviceTVCell: UITableViewCell {
         deviceDateOut.text = device.dateOut
         deviceDateCalibration.text = device.dateStateCalibration
         deviceDateNextCalibration.text = device.dateNextCalibration
-        modelNameDevice.text = device.deviceTypeName
+        modelNameDevice.text = device.modelsOfDevice.typeName
         addressSetDevice.text = device.addressSet
     }
     

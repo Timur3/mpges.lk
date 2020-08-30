@@ -14,7 +14,7 @@ public protocol RecoveryPasswordTVControllerUserDelegate: class {
     func resultOfPassordRecovery(result: ServerResponseModel)
 }
 
-class RecoveryPasswordTVController: CommonTableViewController {
+class RecoveryPasswordTVController: CenterContentAndCommonTableViewController {
     
     public weak var delegate: ContractsTVControllerUserDelegate?
     
@@ -41,10 +41,6 @@ class RecoveryPasswordTVController: CommonTableViewController {
         super.viewDidDisappear(animated)
         // Получение списка договоров
         delegate?.getContracts()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        self.updateTableViewContentInset()
     }
     
     func setUpLayout(){
@@ -153,12 +149,5 @@ extension RecoveryPasswordTVController {
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         self.hideKeyboardWhenTappedAround()
-    }
-    
-    func updateTableViewContentInset() {
-        let viewHeight: CGFloat = view.frame.size.height
-        let tableViewContentHeight: CGFloat = tableView.contentSize.height
-        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
-        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
     }
 }

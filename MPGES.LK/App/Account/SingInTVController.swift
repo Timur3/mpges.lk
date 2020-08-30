@@ -13,7 +13,7 @@ public protocol SingInTVControllerUserDelegate: class {
     func resultAuthApi(result: ResponseModel)
 }
 
-class SingInTVController: CommonTableViewController {
+class SingInTVController: CenterContentAndCommonTableViewController {
     var sections: [String] {["Авторизация", "", ""]}
     let userDataService = UserDataService()
     
@@ -41,10 +41,6 @@ class SingInTVController: CommonTableViewController {
         super.viewDidLoad()
         configuration()
         setUpLayout()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        self.updateTableViewContentInset()
     }
     
     func setUpLayout(){
@@ -175,13 +171,6 @@ extension SingInTVController {
         //-- заполняем email
         self.emailTextField.text = userDataService.getKey(keyName: "email")
         self.passwordTextField.text = userDataService.getKey(keyName: "dwp")
-    }
-    
-    func updateTableViewContentInset() {
-        let viewHeight: CGFloat = view.frame.size.height
-        let tableViewContentHeight: CGFloat = tableView.contentSize.height
-        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
-        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
     }
 }
 

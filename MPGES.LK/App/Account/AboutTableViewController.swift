@@ -10,11 +10,12 @@ import UIKit
 
 class AboutTableViewController: CommonTableViewController {
     public weak var delegate: ProfileCoordinator?
-    var sections = ["Организация", "Разработчик"]
+    var sections = ["Организация", "Разработчик", "Тестировщик" ]
     
     var orgCell: UITableViewCell = { getCustomCell(textLabel: "МП ГЭС (ИНН: 8601005865)", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
-    var developerCell: UITableViewCell = { getCustomCell(textLabel: "Чалимов Тимур Тимергалиевич", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var developerCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     
+    var helperDeveloperCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     override func viewDidLoad() {
         self.navigationItem.title = "О программе"
         super.viewDidLoad()
@@ -35,6 +36,8 @@ class AboutTableViewController: CommonTableViewController {
         case 0:
             return 1
         case 1:
+            return 1
+        case 2:
             return 1
         default:
             fatalError()
@@ -57,6 +60,13 @@ class AboutTableViewController: CommonTableViewController {
             default:
                 fatalError()
             }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                return helperDeveloperCell
+            default:
+                fatalError()
+            }
         default:
             fatalError()
         }
@@ -72,13 +82,5 @@ extension AboutTableViewController {
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
-        self.hideKeyboardWhenTappedAround()
-    }
-    
-    func updateTableViewContentInset() {
-        let viewHeight: CGFloat = view.frame.size.height
-        let tableViewContentHeight: CGFloat = tableView.contentSize.height
-        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
-        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
     }
 }

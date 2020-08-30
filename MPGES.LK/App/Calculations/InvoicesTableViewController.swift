@@ -42,9 +42,18 @@ class InvoicesTableViewController: CommonTableViewController {
         configuration()
     }
     
-    @objc func refreshInvoicesData(sender: AnyObject){
+    @objc func refreshInvoicesData(sender: AnyObject) {
         print("refresh")
-        ApiServiceWrapper.shared.getInvoicesByContractId(id: contractId, delegate: self)
+        do {
+            try ApiServiceWrapper.shared.getInvoicesByContractId(id: contractId, delegate: self)
+        } catch {
+            AlertControllerAdapter.shared.show(
+                title: "Ошибка!",
+                mesg: "Неизвестная ошибка, напишите в тех. поддержку",
+                form: self) { (UIAlertAction) in
+                    self.cancelButton()
+            }
+        }
         self.refreshControl?.endRefreshing()
     }
     
@@ -96,7 +105,7 @@ class InvoicesTableViewController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceCell
         cell.indexPath = indexPath
         cell.delegateCell = self
         cell.update(for: invoiceList[indexPath.section].invoices[indexPath.row])

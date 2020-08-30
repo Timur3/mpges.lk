@@ -12,8 +12,6 @@ class ContractorInfoTVController: CommonTableViewController {
     
     var sections: [String] {["Основные данные", "Паспортные данные", "Прочее"]}
     
-    public weak var delegate: ProfileTVControllerDelegate?
-    
     var nameCell: UITableViewCell = { getCustomCell(textLabel: "Имя:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
     var familyCell: UITableViewCell = { getCustomCell(textLabel: "Фамилия:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
     var middleNameCell: UITableViewCell = { getCustomCell(textLabel: "Отчество:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
@@ -80,7 +78,7 @@ class ContractorInfoTVController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return section == 0 ? "Если указана дата рождения 01.01.1900, это означает что у Вас не заполнены данные, будет очень благодарны за информацию" : ""
+        return section == 0 ? "Если указана дата рождения 01.01.1900, это означает что у Вас не заполнены данные, будем очень благодарны за информацию" : ""
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -155,7 +153,6 @@ extension ContractorInfoTVController {
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
-        
         self.hideKeyboardWhenTappedAround()
     }
 }

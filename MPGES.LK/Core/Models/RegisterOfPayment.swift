@@ -17,7 +17,7 @@ public class RegisterOfPayment: Object, Decodable {
     @objc dynamic var workerId: Int
     @objc dynamic var statusId: Int
     @objc dynamic var note: String?
-    @objc dynamic var createBy: String
+    //@objc dynamic var createBy: String
     @objc dynamic var createDate: String
     @objc dynamic var isDelete: Bool
     @objc dynamic var deleteBy: String?
@@ -32,7 +32,7 @@ public class RegisterOfPayment: Object, Decodable {
         case workerId = "workerId"
         case statusId = "statusId"
         case note = "note"
-        case createBy = "createBy"
+        //case createBy = "createBy"
         case createDate = "createDate"
         case isDelete = "isDelete"
         case deleteBy = "deleteBy"

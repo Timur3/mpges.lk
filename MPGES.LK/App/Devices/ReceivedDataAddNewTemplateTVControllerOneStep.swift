@@ -11,7 +11,7 @@ protocol ReceivedDataAddNewTemplateTVControllerOneStepDelegate: class {
     func setData(model: ReceivedDataAddNewTemplateModelRoot)
 }
 
-class ReceivedDataAddNewTemplateTVControllerOneStep: CommonTableViewController {
+class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTableViewController {
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
     let datePicker = UIDatePicker()
@@ -32,10 +32,6 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CommonTableViewController {
         super.viewDidLoad()
         configuration()
         setUpLayout()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        self.updateTableViewContentInset()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -182,11 +178,5 @@ extension ReceivedDataAddNewTemplateTVControllerOneStep {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         dateTextField.text = formatter.string(from: datePicker.date)
-    }
-    func updateTableViewContentInset() {
-        let viewHeight: CGFloat = view.frame.size.height
-        let tableViewContentHeight: CGFloat = tableView.contentSize.height
-        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
-        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
     }
 }

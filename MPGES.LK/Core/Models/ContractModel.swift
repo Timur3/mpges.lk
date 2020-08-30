@@ -19,7 +19,6 @@ public struct ContractNumberModel: Encodable {
 
 public struct ContractModel: Decodable {
     var id : Int
-    var userProfileId: Int
     var codeBinding: String?
     var contractTypeId: Int
     var typeOfContract: TypeOfContractModel
@@ -33,8 +32,6 @@ public struct ContractModel: Decodable {
     var allowSending: Bool
     var note: String?
     var statusId: Int
-    var createBy: String?
-    var createDate: String
     var jkuId: String?
     var numberEls: String?
     var includedInEpd: Bool

@@ -28,7 +28,7 @@ class DeviceCoordinatorMain: Coordinator {
 extension DeviceCoordinatorMain {
     
     func navigationReceivedDataPage(model: DeviceModel) {
-        let receivedDataTVController: ReceivedDataTVController = ReceivedDataTVController()
+        let receivedDataTVController: ReceivedDataCommonViewController = ReceivedDataCommonViewController()
         // todo доделать получение данных из realm
         receivedDataTVController.delegate = self
         receivedDataTVController.device = model

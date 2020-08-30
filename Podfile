@@ -11,5 +11,6 @@ target 'mpges.lk' do
    pod 'RealmSwift'
    pod 'SwiftKeychainWrapper'
    pod 'YandexMapKit'
+   pod 'Charts' 
 
 end

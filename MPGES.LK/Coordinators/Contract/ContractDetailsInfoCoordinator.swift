@@ -36,7 +36,16 @@ class ContractDetailsInfoCoordinator: Coordinator {
 }
 
 extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegate {
-    func navigateToPayWithSberbankOnlinePage(model: SberbankPayModel) {
+    
+    func navigateToPayWithApplePayPage(model: BankPayModel) {
+        let payWithApplePayTVController : PayWithApplePayTVController = PayWithApplePayTVController()
+        payWithApplePayTVController.contractDelegate = self
+        payWithApplePayTVController.model = model
+        let navPayWithApplePayTVController: UINavigationController = UINavigationController(rootViewController: payWithApplePayTVController)
+        self.navigationController.present(navPayWithApplePayTVController, animated: true, completion: nil)
+    }
+    
+    func navigateToPayWithSberbankOnlinePage(model: BankPayModel) {
         let payWithSberbankOnlinePageTVController : PayWithSberbankOnlineTVController = PayWithSberbankOnlineTVController()
         payWithSberbankOnlinePageTVController.delegate = self
         payWithSberbankOnlinePageTVController.model = model

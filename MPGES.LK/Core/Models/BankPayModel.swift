@@ -9,6 +9,15 @@
 import Foundation
 
 public struct BankPayModel {
+    var contractId: Int
     var contractNumber: String
     var emailOrMobile: String
+    var summa: String
+    
+    init(contractId: Int, contractNumber: String, emailOrMobile: String, summa: String) {
+        self.contractId = contractId
+        self.contractNumber = contractNumber
+        self.emailOrMobile = emailOrMobile
+        self.summa = summa
+    }
 }

@@ -50,6 +50,12 @@ class ApiServiceWrapper {
     func getCalculationsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerDelegate){
         ApiService.shared.requestById(id: id, method: methodApi.getCalculationsByInvoiceId, completion: delegate.setCalculations(calculations:))
     }
+    
+    // Init apple pay
+    func initApplePay(model: ApplePayModel, delegate: PayWithApplePayTVControllerDelegate)
+    {
+        ApiService.shared.requestByModel(model: model, method: methodApi.initApplePay, completion: delegate.resultOfApplePay(for:))
+    }
     // получение платежей по договору
     func getPaymentsByContractId(id: Int, delegate: PaymentsTVControllerUserDelegate) {
         ApiService.shared.requestById(id: id, method: methodApi.getPaymentsByContractId, completion: delegate.setPayments(payments:))
@@ -61,7 +67,7 @@ class ApiServiceWrapper {
     }
     
     // получение платежей по договору
-    func getInvoicesByContractId(id: Int, delegate: InvoicesTableViewControllerUserDelegate) {
+    func getInvoicesByContractId(id: Int, delegate: InvoicesTableViewControllerUserDelegate) throws {
         ApiService.shared.requestById(id: id, method: methodApi.getInvoicesByContractId, completion: delegate.setInvoices(invoices:))
     }
     

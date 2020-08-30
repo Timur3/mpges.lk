@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstTVController: CommonTableViewController {
+class FirstTVController: CenterContentAndCommonTableViewController {
     
     public weak var delegate: MainCoordinatorDelegate?
     
@@ -33,11 +33,7 @@ class FirstTVController: CommonTableViewController {
         configuration()
         setUpLayout()
     }
-    
-    override func viewWillLayoutSubviews() {
-        self.updateTableViewContentInset()
-    }
-    
+
     func setUpLayout(){
         logoCell.addSubview(logoImgView)
         logoImgView.leadingAnchor.constraint(equalTo: logoCell.leadingAnchor, constant: 5).isActive = true
@@ -127,12 +123,5 @@ extension FirstTVController {
     private func configuration() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
-    }
-    
-    func updateTableViewContentInset() {
-        let viewHeight: CGFloat = view.frame.size.height
-        let tableViewContentHeight: CGFloat = tableView.contentSize.height
-        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
-        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  0, right: 0)
     }
 }

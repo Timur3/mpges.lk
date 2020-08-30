@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PassKit
 
 protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigateToBackPage()
@@ -17,7 +16,8 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigationInvoiceDevileryMethodPage(for contract: ContractModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
     func navigationToContractorInfoPage(for contractor: ContractorModel)
     func navigateToPayWithCreditCardPage()
-    func navigateToPayWithSberbankOnlinePage(model: SberbankPayModel)
+    func navigateToPayWithSberbankOnlinePage(model: BankPayModel)
+    func navigateToPayWithApplePayPage(model: BankPayModel)
 }
 
 class ContractDetailsInfoTVController: CommonTableViewController {
@@ -57,7 +57,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         navigationItem.title = "Лицевой счет"
         super.viewDidLoad()
         setUpLayout()
-        Configuration()
+        configuration()
     }
     
     func setUpLayout(){
@@ -203,33 +203,21 @@ extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDe
     }
 }
 
-extension ContractDetailsInfoTVController: PKPaymentAuthorizationViewControllerDelegate {
-    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
-        
-        completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
-    }
-    
-    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-}
-
 //MARK: - CONFIGURE
 extension ContractDetailsInfoTVController {
     
     func alertSheetMethodPayShow() {
         let alert = UIAlertController(title: "Выбор способа оплаты:", message: nil, preferredStyle: .actionSheet)
         let actionApplePay = UIAlertAction(title: "Apple Pay", style: .default) {
-            (UIAlertAction) in self.purchase()
+            (UIAlertAction) in
+            self.goToApplePayPage()
         }
         //let actionOthersBank = UIAlertAction(title: "Банковские карты", style: .default) {//
         //  (UIAlertAction) in self.delegate?.navigateToPayWithCreditCardPage()
         //}
         let actionSberBank = UIAlertAction(title: "Сбербанк Онлайн", style: .default) {
             (UIAlertAction) in
-            let model = SberbankPayModel(
-                contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "")
-            self.delegate?.navigateToPayWithSberbankOnlinePage(model: model)
+            self.goToSberbankOnlinePage()
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alert.addAction(actionApplePay)
@@ -240,33 +228,20 @@ extension ContractDetailsInfoTVController {
             print("completion block")
         })
     }
-    func goToSberbankOnline(){
-        let url = URL(string: "sberbankonline://payments/services/init/?ids=eyJjbiI6eyJiIjoiMjg0IiwibiI6ItCt0LvQtdC60YLRgNC-0Y3QvdC10YDQs9C40Y8iLCJwcyI6IjU1MDY5Njc5NSJ9LCJucyI6eyJub2RlMC5vbmxpbmUuc2JlcmJhbmsucnUiOnsicHMiOiI1MDA2NjQyMDcifSwibm9kZTEub25saW5lLnNiZXJiYW5rLnJ1Ijp7InBzIjoiODQ3NTI1In0sIm5vZGUyLm9ubGluZS5zYmVyYmFuay5ydSI6eyJwcyI6IjUwMDY2NDY5MSJ9LCJub2RlMy5vbmxpbmUuc2JlcmJhbmsucnUiOnsicHMiOiI1MDA2NjQxMDgifSwibm9kZTQub25saW5lLnNiZXJiYW5rLnJ1Ijp7InBzIjoiNTAwNjU4MzkzIn0sIm5vZGU1Lm9ubGluZS5zYmVyYmFuay5ydSI6eyJwcyI6IjUwMDY1ODQ2MyJ9fSwiYXQiOmZhbHNlfQ")
-        
-        UIApplication.shared.open(url!) { (result) in
-            if result {
-                // The URL was delivered successfully!
-            }
-        }
-        //let strURL = "sberbankonline://payments/"
-        //let url = URL.init(string: strURL)
-        //if (UIApplication.shared.canOpenURL(url!)){
-        //    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-        //}
-    }
-    func purchase() {
-        //let sumStr = ApiServiceWrapper.shared.loadSaldoContractForString(id: self.contractModel!.id)
-        //let sum = (Double(sumStr)?.rounded(.up))!
-        let paymentRequest = createPaymentRequestForApplePay(sum: NSDecimalNumber(string: self.saldoSumLabel.text))
-        
-        if let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest) {
-            controller.delegate = self
-            present(controller, animated: true, completion: nil)
-        }
+
+    func goToApplePayPage() {
+        let model = BankPayModel(contractId: self.contractModel!.id, contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "", summa: self.saldoSumLabel.text!)
+        self.delegate?.navigateToPayWithApplePayPage(model: model)
     }
     
+    func goToSberbankOnlinePage()
+    {
+        let model = BankPayModel(
+            contractId: self.contractModel!.id, contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "", summa: self.saldoSumLabel.text!)
+        self.delegate?.navigateToPayWithSberbankOnlinePage(model: model)
+    }
     
-    private func Configuration() {
+    private func configuration() {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshContract), for: UIControl.Event.valueChanged)
         
@@ -284,15 +259,3 @@ extension ContractDetailsInfoTVController {
     }
 }
 
-func createPaymentRequestForApplePay(sum: NSDecimalNumber) -> PKPaymentRequest {
-    let label = "Потребленная электроэнергия"
-    let request = PKPaymentRequest()
-    request.merchantIdentifier = "merchant.com.mpges.lk"
-    request.supportedNetworks = [.visa, .masterCard]
-    request.supportedCountries = ["RU"]
-    request.merchantCapabilities = .capability3DS
-    request.countryCode = "RU"
-    request.currencyCode = "RUB"
-    request.paymentSummaryItems = [PKPaymentSummaryItem(label: label, amount: sum)]
-    return request
-}

@@ -14,7 +14,7 @@ protocol ContractAddTVControllerUserDelegate: class {
     func resultToBinding(result: ServerResponseModel)
 }
 
-class ContractAddTVController: CommonTableViewController {
+class ContractAddTVController: CenterContentAndCommonTableViewController {
     public weak var delegate: ContractsTVControllerUserDelegate?
     
     var sections: [String] {["Лицевой счет", "Код подтверждения", ""]}
@@ -25,7 +25,7 @@ class ContractAddTVController: CommonTableViewController {
     
     var numberTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Например: 860001000001"
+        textField.placeholder = "Например: 86000100001"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .numberPad
         return textField
@@ -50,9 +50,7 @@ class ContractAddTVController: CommonTableViewController {
         configuration()
         setUpLayout()
     }
-    override func viewWillLayoutSubviews() {
-        self.updateTableViewContentInset()
-    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // Получение списка договоров
@@ -177,16 +175,7 @@ extension ContractAddTVController {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
-        
-        self.hideKeyboardWhenTappedAround()
-        
         self.numberTextField.becomeFirstResponder()
-    }
-    
-    func updateTableViewContentInset() {
-        let viewHeight: CGFloat = view.frame.size.height
-        let tableViewContentHeight: CGFloat = tableView.contentSize.height
-        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 3.0
-        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  -marginHeight, right: 0)
+        self.hideKeyboardWhenTappedAround()
     }
 }

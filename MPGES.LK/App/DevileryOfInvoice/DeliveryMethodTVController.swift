@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 public protocol DeliveryMethodTVControllerDelegate: class {
     func setData(for deliveryMethod: InvoiceDeliveryMethodModelRoot)
     func resultOfUpdateDeliveryMethod(for resultModel: ServerResponseModel)
@@ -130,5 +131,6 @@ extension DeliveryMethodTVController {
         self.tableView.dataSource = self
         tableView.delegate = self
         tableView.dataSource = self
+        self.hideKeyboardWhenTappedAround()
     }
 }

@@ -26,34 +26,40 @@ public struct DevicesModelRoot: Decodable {
 public struct DeviceModel: Decodable{
     var id: Int
     var deviceNumber: String
-    var deviceTypeName: String
-    var dateSet: String?
-    var dateRemove: String?
+    var modelsOfDevice: ModelsOfDevice
     var dateOut: String?
     var dateStateCalibration: String
     var dateNextCalibration: String?
     var addressSet: String
     var deviceAiiscueId: Int?
+    var linksOfBuildingToDevices: [LinksOfBuildingToDevicesModel]
     
    enum CodingKeys: String, CodingKey {
        case id = "id"
        case deviceNumber = "deviceNumber"
-       case deviceTypeName = "deviceTypeName"
-       case dateSet = "dateSet"
-       case dateRemove = "dateRemove"
+       case modelsOfDevice = "modelsOfDevice"
        case dateOut = "dateOut"
        case dateStateCalibration = "dateStateCalibration"
        case dateNextCalibration = "dateNextCalibration"
        case addressSet = "addressSet"
        case deviceAiiscueId = "deviceAiiscueId"
+       case linksOfBuildingToDevices = "linksOfBuildingToDevices"
    }
 }
 
-public struct DeviceType: Decodable {
+public struct ModelsOfDevice: Decodable {
     var id: Int
-    var marka: String
+    var marka: String?
     var typeName: String
-    var razryad: Int
+    var razryad: Int?
     var faza: Int
     var calibrationPeriod: Int
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case marka = "marka"
+        case typeName = "typeName"
+        case razryad = "razryad"
+        case faza = "faza"
+        case calibrationPeriod = "calibrationPeriod"
+    }
 }

@@ -34,7 +34,6 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     
     override func viewDidLoad() {
         ActivityIndicatorViewService.shared.showView(form: self.view)
-        navigationItem.title = "Реестр показаний"
         super.viewDidLoad()
         configuration()
     }
@@ -42,6 +41,9 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     @objc func refreshReceivedData(){
         ApiServiceWrapper.shared.getReceivedDataByDeviceId(id: device!.id, delegate: self)
         self.refreshControl?.endRefreshing()
+    }
+    @objc func showMeterDataDevicePage() {
+        self.showReceivedDataAddNewTemplateTVPage()
     }
     
     // MARK: - Table view data source
@@ -93,9 +95,6 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
         return cell
     }
     
-    @objc func showMeterDataDevicePage() {
-        self.showReceivedDataAddNewTemplateTVPage()
-    }
     func showReceivedDataAddNewTemplateTVPage() {
         self.delegate?.showReceivedDataAddNewTemplatesOneStepPage(device: device!)
     }
@@ -109,11 +108,6 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
         }
         return res.sorted(by: { $0.year > $1.year })
     }
-    
-    @objc func segmentSwicht(){
-        print("swicht")
-    }
-    
 }
 //MARK: - SEARCH
 extension ReceivedDataRegisterTVController: UISearchResultsUpdating {
@@ -125,19 +119,13 @@ extension ReceivedDataRegisterTVController: UISearchResultsUpdating {
 extension ReceivedDataRegisterTVController {
     private func configuration() {
         self.refreshControl = UIRefreshControl()
-        
-        let segment = UISegmentedControl(items: ["Реестр","График"])
-        segment.addTarget(self, action: #selector(segmentSwicht), for: UIControl.Event.valueChanged)
-        segment.selectedSegmentIndex = 0
-        self.navigationItem.titleView = segment
-        
+
         let sendMeterDataDevice = getPlusUIBarButtonItem(target: self, action: #selector(showMeterDataDevicePage))
         self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
         
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         let nib = UINib(nibName: "ReceivedDataTVCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "receivedDataCell")
-        self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshReceivedData), for: UIControl.Event.valueChanged)
         
         refreshReceivedData()

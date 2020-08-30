@@ -28,7 +28,6 @@ public class PaymentModel: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var serviceId: Int
     var invoiceId: Int?
-    @objc dynamic var meteringId: Int = 0
     @objc dynamic var registerPaytsId: Int = 0
     var registerOfPayment: RegisterOfPayment?
     @objc dynamic var contractId: Int = 0
@@ -41,7 +40,6 @@ public class PaymentModel: Object, Decodable {
         case id = "id"
         case serviceId = "serviceId"
         case invoiceId = "invoiceId"
-        case meteringId = "meteringId"
         case registerPaytsId = "registerPaytsId"
         case registerOfPayment = "registerOfPayment"
         case contractId = "contractId"
