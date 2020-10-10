@@ -29,6 +29,7 @@ class ReceivedDataCommonViewController: UIViewController {
     }
     
     private lazy var receivedDataRegisterTVController: ReceivedDataRegisterTVController = {
+        ActivityIndicatorViewService.shared.showView(form: self.view)	
         var viewController = ReceivedDataRegisterTVController()
         viewController.delegate = delegate
         viewController.device = device
@@ -38,6 +39,8 @@ class ReceivedDataCommonViewController: UIViewController {
     
     private lazy var receivedDataChartViewController: ReceivedDataChartViewController = {
         var viewController = ReceivedDataChartViewController()
+        viewController.delegate = delegate
+        viewController.device = device
         self.add(asChildViewController: viewController)
         return viewController
     }()
@@ -68,7 +71,6 @@ extension ReceivedDataCommonViewController {
     }
     
     @objc func segmentSwicht(){
-        
         if segment.selectedSegmentIndex == 0 {
             navigationItem.title = "Реестр показаний"
             remove(asChildViewController: receivedDataChartViewController)
@@ -78,7 +80,6 @@ extension ReceivedDataCommonViewController {
             remove(asChildViewController: receivedDataRegisterTVController)
             add(asChildViewController: receivedDataChartViewController)
         }
-        
     }
     
     private func add(asChildViewController viewController: UIViewController) {

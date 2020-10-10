@@ -38,9 +38,6 @@ class DevicesTVController: CommonTableViewController {
         self.refreshControl?.endRefreshing()
     }
     // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 210
-    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -62,11 +59,12 @@ class DevicesTVController: CommonTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell", for: indexPath) as! DeviceTVCell
-        let cellImg : UIImageView = UIImageView(frame: CGRect(x: 5, y: (cell.bounds.height/2)-20, width: 40, height: 40))
-        cellImg.image = UIImage(named:myImage.device.rawValue)
-        cell.addSubview(cellImg)
+        //let cellImg : UIImageView = UIImageView(frame: CGRect(x: 5, y: (cell.bounds.height/2)-50, width: 40, height: 40))
+        //cellImg.image = UIImage(named:myImage.gauge.rawValue)
+        //cell.addSubview(cellImg)
         //cell.imageView?.image = imageWithImage(UIImage(named: myImage.device.rawValue), scaledToSize: CGSize(width: 20, height: 20))
         cell.update(for: deviceList[indexPath.row])
+        cell.imageView?.image = UIImage(systemName: myImage.gauge.rawValue)
         cell.delegateCell = self
         cell.index = indexPath
         return cell

@@ -9,7 +9,33 @@
 import UIKit
 import Charts
 
+public protocol ReceivedDataChartViewControllerDelegate: class {
+    func setData(model: ReceivedDataVolumeModelRoot)
+}
+
+extension ReceivedDataChartViewController: ReceivedDataChartViewControllerDelegate {
+    func setData(model: ReceivedDataVolumeModelRoot) {
+        
+        //let d = (0..<model.count).map { (i) -> BarChartDataEntry in
+          //  return BarChartDataEntry(x: Double(model.data[i].date)!, y: model.data[i].volume)
+        //}
+        
+        //self.updateChartData(count: model.count, data: d)
+    }
+}
+
 class ReceivedDataChartViewController: UIViewController, ChartViewDelegate {
+    public weak var delegate: DeviceCoordinatorMain?
+    
+    public var device: DeviceModel? {
+        didSet {
+            refreshReceivedData()
+        }
+    }
+    
+    @objc func refreshReceivedData(){
+        ApiServiceWrapper.shared.getReceivedDataVolumeByDeviceId(id: device!.id, delegate: self)
+    }
     
     var chartView = BarChartView()
     
@@ -24,7 +50,7 @@ class ReceivedDataChartViewController: UIViewController, ChartViewDelegate {
         self.view.addSubview(chartView)
         // Do any additional setup after loading the view.
         //self.title = "Horizontal Bar Char"
-
+        
         chartView.delegate = self
         
         chartView.drawBarShadowEnabled = false
@@ -37,7 +63,7 @@ class ReceivedDataChartViewController: UIViewController, ChartViewDelegate {
         xAxis.labelFont = .systemFont(ofSize: 10)
         xAxis.drawAxisLineEnabled = true
         xAxis.granularity = 2
-        xAxis.valueFormatter = DateValueFormatter()
+        xAxis.valueFormatter = DateValueFormatter(chart: chartView)
         
         let leftAxis = chartView.leftAxis
         leftAxis.labelFont = .systemFont(ofSize: 10)
@@ -60,26 +86,29 @@ class ReceivedDataChartViewController: UIViewController, ChartViewDelegate {
         l.formSize = 8
         l.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
         l.xEntrySpace = 4
-      
+        
         chartView.fitBars = true
         chartView.animate(yAxisDuration: 2.5)
         
-        self.updateChartData()
+        //self.updateChartData()
     }
     
-    func updateChartData() {
-        self.setDataCount(Int(12), range: UInt32(1000))
+    func updateChartData(count: Int, data: [BarChartDataEntry]) {
+        self.setDataCount(count, data: data)
     }
     
-    func setDataCount(_ count: Int, range: UInt32) {
+    func setDataCount(_ count: Int, data: [BarChartDataEntry]) {
         let barWidth = 4.0
         let spaceForBar = 10.0
         
-        let yVals = (0..<count).map { (i) -> BarChartDataEntry in
-            let mult = range + 1
-            let val = Double(arc4random_uniform(mult))
-            return BarChartDataEntry(x: Double(i)*spaceForBar, y: val)
-        }
+        /*let yVals = (0..<count).map { (i) -> BarChartDataEntry in
+         let mult = range + 1
+         let val = Double(arc4random_uniform(mult))
+         return BarChartDataEntry(x: Double(i)*spaceForBar, y: val)
+         }*/
+        
+        let yVals: [BarChartDataEntry] = data
+        
         
         let set1 = BarChartDataSet(entries: yVals, label: "Потребленный объем в кВт*ч в месяц")
         set1.drawIconsEnabled = false

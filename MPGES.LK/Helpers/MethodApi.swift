@@ -15,6 +15,7 @@ class MethodApi {
     let getContractorById: String
     let getListOfContractNumbers: String
     let getContractSaldoById: String
+    let getContractStatusById: String
     let contractBinding: String
     let removeContractBinding: String
     let checkContractByNumber: String
@@ -26,6 +27,7 @@ class MethodApi {
     let getTemplateAddNew: String
     let receivedDataAddNew: String
     let receivedDataDelete: String
+    let getReceivedDateVolumesForChart: String
     let getInvoicesByContractId: String
     let sendInoicesByUserId: String
     let sendInoicesByEmail: String
@@ -35,6 +37,7 @@ class MethodApi {
     let getUser: String
     let checkEmail: String
     let passwordRecovery: String
+    let passwordChange: String
     let getDeliveryOfInvoice: String
     let updateDeliveryMethod: String
     let getDeepLinkforIos: String
@@ -45,7 +48,8 @@ class MethodApi {
         getListOfContractNumbers = "contract/getListOfContractNumbers/"
         getContract = "contract/"
         getContractorById = "contractor/"
-        getContractSaldoById = "contract/getsaldobyid/"
+        getContractSaldoById = "contract/getSaldobyid/"
+        getContractStatusById = "contract/getStatusbyid/"
         contractBinding = "contract/binding/"
         removeContractBinding = "contract/removeBinding/"
         checkContractByNumber = "contract/checkByNumber/"
@@ -61,13 +65,15 @@ class MethodApi {
         getDevicesByContractId = "device/getbyContractid/"
         getReceivedData = "receivedData/getbydeviceid/"
         getTemplateAddNew = "receivedData/getTemplateAddNew/"
+        getReceivedDateVolumesForChart = "receivedData/volumesForChartByDeviceId/"
         receivedDataAddNew = "receivedData/addNew/"
         receivedDataDelete = "receivedData/delete/"
-        createUser = "user/create/"
+        createUser = "user/singUp/"
         updateUser = "user/update/"
         getUser = "user/"
         checkEmail = "user/checkbyemail/"
         passwordRecovery = "user/passwordrecovery/"
+        passwordChange = "user/passwordchange/"
         getDeliveryOfInvoice = "deliveryOfInvoice/getall/"
         getDeepLinkforIos = "sberbank/getdeeplinkforios/"
     }

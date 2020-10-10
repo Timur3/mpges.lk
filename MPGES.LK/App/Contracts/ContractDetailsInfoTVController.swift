@@ -18,6 +18,7 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigateToPayWithCreditCardPage()
     func navigateToPayWithSberbankOnlinePage(model: BankPayModel)
     func navigateToPayWithApplePayPage(model: BankPayModel)
+    func navigationToResultOfPayment()
 }
 
 class ContractDetailsInfoTVController: CommonTableViewController {
@@ -28,7 +29,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     var contractorCell: UITableViewCell = { getCustomCell(textLabel: "Контрагент:", imageCell: myImage.person, textAlign: .left, accessoryType: .detailButton) }()
     
     // Отображение баланса
-    var contractSaldoCell: UITableViewCell = { getCustomCell(textLabel: "Баланс:", imageCell: myImage.rub, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
+    var contractSaldoCell: UITableViewCell = { getCustomCell(textLabel: "Баланс:", imageCell: myImage.rub, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: true) }()
     var saldoSumLabel: UILabel = { getCustomForContractLabel(text: "0.00") }()
     var contractorLabel: UILabel = { getCustomForContractLabel(text: "...") }()
     var contractDateLabel: UILabel = { getCustomForContractLabel(text: "...") }()
@@ -38,16 +39,17 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Пополнить счет", imageCell: myImage.creditcard, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
     var paymentsOfContract: UITableViewCell { getCustomCell(textLabel: "История платежей", imageCell: myImage.rub, textAlign: .left, accessoryType: .disclosureIndicator) }
     var calculationsOfContract: UITableViewCell { getCustomCell(textLabel: "История начислений", imageCell: myImage.calc, textAlign: .left, accessoryType: .disclosureIndicator) }
-    var devicesOfContract: UITableViewCell { getCustomCell(textLabel: "Приборы учета", imageCell: myImage.link, textAlign: .left, accessoryType: .disclosureIndicator) }
+    var devicesOfContract: UITableViewCell { getCustomCell(textLabel: "Приборы учета", imageCell: myImage.gauge, textAlign: .left, accessoryType: .disclosureIndicator) }
     var mailOfContract: UITableViewCell { getCustomCell(textLabel: (contractModel?.invoiceDeliveryMethod.devileryMethodName ?? "..."), imageCell: myImage.mail, textAlign: .left, accessoryType: .disclosureIndicator)}
     
     public var contractModel: ContractModel? {
         didSet {
             DispatchQueue.main.async {
+                //self.accountCell.detailTextLabel?.text = self.contractModel!.number
                 self.accountLabel.text = self.contractModel!.number
                 self.contractDateLabel.text = self.contractModel!.dateRegister
                 self.contractorLabel.text = self.contractModel!.contractor.name + " " + self.contractModel!.contractor.middleName!.prefix(1) + ". " + self.contractModel!.contractor.family.prefix(1) + "."
-                ApiServiceWrapper.shared.loadSaldoContract(id: self.contractModel!.id, label: self.saldoSumLabel)
+                ApiServiceWrapper.shared.getContractStatus(id: self.contractModel!.id, status: self.contractSaldoCell, value: self.saldoSumLabel)
                 self.tableView.reloadData()
             }
         }
@@ -81,12 +83,35 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         return sections.count
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            
+           /* if !(saldoSumLabel.text!.isEmpty) {
+                let amount = self.saldoSumLabel.text!.removeFormatAndSpace()
+                if amount >= 0.00 {
+                    self.contractSaldoCell.textLabel?.text = "Задолженность:"
+                    self.saldoSumLabel.layer.backgroundColor = UIColor.systemRed.cgColor
+                    self.contractSaldoCell.layer.borderColor = UIColor.systemRed.cgColor
+                } else
+                {
+                    self.contractSaldoCell.textLabel?.text = "Переплата:"
+                    self.saldoSumLabel.layer.backgroundColor = UIColor.systemGreen.cgColor
+                    self.contractSaldoCell.layer.borderColor = UIColor.systemGreen.cgColor
+                }
+                self.contractSaldoCell.layer.borderWidth = 1.0
+            }*/
+            //cell.layer.backgroundColor = UIColor.systemGreen.cgColor
+            //cell.layer.borderColor = UIColor.white.cgColor
+            //cell.layer.borderWidth = 1.0
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.row == 2 {
+        if indexPath.section == 1 && indexPath.row == 2 {
             self.delegate?.navigationToContractorInfoPage(for: contractModel!.contractor)
         }
     }
@@ -95,12 +120,14 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
-            return 4
-        case 1:
             return 1
-        case 2:
+        case 1:
             return 3
+        case 2:
+            return 1
         case 3:
+            return 3
+        case 4:
             return 1
         default:
             fatalError()
@@ -113,26 +140,29 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                return accountCell
-            case 1:
-                return contractDateCell
-            case 2:
-                return contractorCell
-            case 3:
                 return contractSaldoCell
-            case 4:
-                return makeAPayment
             default:
                 fatalError()
             }
         case 1:
             switch indexPath.row {
             case 0:
-                return makeAPayment
+                return accountCell
+            case 1:
+                return contractDateCell
+            case 2:
+                return contractorCell
             default:
                 fatalError()
             }
         case 2:
+            switch indexPath.row {
+            case 0:
+                return makeAPayment
+            default:
+                fatalError()
+            }
+        case 3:
             switch indexPath.row {
             case 0:
                 return calculationsOfContract
@@ -143,7 +173,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
             default:
                 fatalError()
             }
-        case 3:
+        case 4:
             switch indexPath.row {
             case 0:
                 return mailOfContract
@@ -166,24 +196,27 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
-        if indexPath.section == 0 && indexPath.row == 2 {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            self.delegate?.navigationToResultOfPayment()
+        }
+        if indexPath.section == 1 && indexPath.row == 2 {
             self.delegate?.navigationToContractorInfoPage(for: self.contractModel!.contractor)
         }
-        if indexPath.section == 1 && indexPath.row == 0 {
+        if indexPath.section == 2 && indexPath.row == 0 {
             alertSheetMethodPayShow()
         }
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 3 && indexPath.row == 0 {
             self.delegate?.navigationToInvoicePage()
         }
-        if indexPath.section == 2 && indexPath.row == 1 {
+        if indexPath.section == 3 && indexPath.row == 1 {
             self.delegate?.navigateToPaymentsPage()
         }
         
-        if indexPath.section == 2 && indexPath.row == 2 {
+        if indexPath.section == 3 && indexPath.row == 2 {
             self.delegate?.navigationDevicesPage()
         }
         
-        if indexPath.section == 3 && indexPath.row == 0 {
+        if indexPath.section == 4 && indexPath.row == 0 {
             self.delegate?.navigationInvoiceDevileryMethodPage(for: contractModel!, delegate: self)
         }
     }
@@ -195,7 +228,7 @@ extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDe
         ApiServiceWrapper.shared.getContractById(id: id, delegate: self)
     }
     
-    var sections: [String] { ["Основная информация", "Оплата",  "История платежей, начислений и приборы учета", "Доставка квитанций"] }
+    var sections: [String] { ["Состояние лицевого счета", "Основная информация", "Оплата",  "История платежей, начислений и приборы учета", "Доставка квитанций"] }
     
     func setContractById(contract: ContractModel) {
         contractModel = contract
@@ -228,7 +261,7 @@ extension ContractDetailsInfoTVController {
             print("completion block")
         })
     }
-
+    
     func goToApplePayPage() {
         let model = BankPayModel(contractId: self.contractModel!.id, contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "", summa: self.saldoSumLabel.text!)
         self.delegate?.navigateToPayWithApplePayPage(model: model)

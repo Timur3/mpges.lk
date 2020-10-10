@@ -41,4 +41,7 @@ enum myImage: String {
     case shared = "square.and.arrow.up"
     case delete = "trahs.circle"
     case docCopy = "doc.on.doc"
+    case gauge = "gauge"
+    case xmark = "xmark.circle.fill"
+    case checkmark 	= "checkmark.circle.fill"
 }

@@ -11,9 +11,12 @@ class Options {
     
     let baseUrl: String
     let versionApi: String
+    let baseUrlInitPro: String
        
     init() {
         baseUrl = "https://webapi.mp-ges.ru/api/"
         versionApi = "1"
+        baseUrlInitPro = "http://kassa.initpro.ru/lk/check-bill/"
+        
     }
 }

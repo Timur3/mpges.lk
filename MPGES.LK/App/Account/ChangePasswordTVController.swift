@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol ChangePasswordTVControllerDelegate: class {
+    func requestForChange(model: PasswordChangeModel)
+    func responseOfChange(result: ServerResponseModel)
+}
+
 class ChangePasswordTVController: CommonTableViewController {
     
     var sections: [String] {["Текущий пароль", "Новый пароль", ""]}
     
-    public weak var delegate: ProfileCoordinator?
+    public weak var delegateProfile: ProfileCoordinator?
+    
     // ФИО
     let currentPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lockOpen, textAlign: .left, accessoryType: .none) }()
     // Пароль
@@ -21,24 +27,10 @@ class ChangePasswordTVController: CommonTableViewController {
     // Кнопка
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Сохранить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
-    var currentPasswordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Пароль"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Придумайте пароль"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var confirmPasswordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Повторите пароль"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
+    var currentPasswordTextField: UITextField = { getCustomTextField(placeholder: "Ваш пароль", isPassword: true) }()
+    var passwordTextField: UITextField = { getCustomTextField(placeholder: "Придумайте пароль", isPassword: true) }()
+    var confirmPasswordTextField: UITextField = { getCustomTextField(placeholder: "Повторите пароль", isPassword: true) }()
+    
     override func viewDidLoad() {
         self.navigationItem.title = "Новый пароль"
         super.viewDidLoad()
@@ -134,6 +126,36 @@ class ChangePasswordTVController: CommonTableViewController {
             alertSheetChangePasswordShow()
         }
     }
+    func alertSheetChangePasswordShow() {
+        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self, handlerYes: { (UIAlertAction) in
+            print("change pass")
+            if (self.isValidData())
+            {
+                let model = PasswordChangeModel( currentPassword: self.currentPasswordTextField.text!, newPassword: self.passwordTextField.text!)
+                self.requestForChange(model: model)
+            } else
+            {
+                self.hiddenAI()
+            }
+        })
+        {
+            (UIAlertAction) in self.hiddenAI()
+        }
+    }
+    
+    func isValidData()->Bool {
+        let result: Bool = true
+        if (self.currentPasswordTextField.text!.isEmpty) {
+            AlertControllerAdapter.shared.show(title: "Ошибка", mesg: "Пустой пароль", form: self)
+            return false
+        } else
+        if (self.passwordTextField.text != self.confirmPasswordTextField.text)
+        {
+            AlertControllerAdapter.shared.show(title: "Ошибка", mesg: "Новый пароль и пароль подтверждения не совпадают", form: self)
+            return false
+        }
+        return result
+    }
 }
 
 
@@ -142,17 +164,32 @@ extension ChangePasswordTVController {
     private func configuration() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
         self.hideKeyboardWhenTappedAround()
-       
+        
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
     }
-     
-    func alertSheetChangePasswordShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите изменить пароль?", form: self, handlerYes: { (UIAlertAction) in
-            print("change pass")
-            //self.delegate?.navigationChangePasswordPage()
-        }) {
-            (UIAlertAction) in self.hiddenAI()
+}
+
+extension ChangePasswordTVController: ChangePasswordTVControllerDelegate {
+    func requestForChange(model: PasswordChangeModel) {
+        ApiServiceWrapper.shared.passwordChange(model: model, delegate: self)
+    }
+    
+    func responseOfChange(result: ServerResponseModel) {
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        let isError = result.isError
+        
+        AlertControllerAdapter.shared.show(
+            title: isError ? "Ошибка" : "Успешно",
+            mesg: result.message,
+            form: self) { (UIAlertAction) in
+            print(result.message as Any)
+            if !isError {
+                self.cancelButton()
+                self.delegateProfile?.navigateToFirstPage()
+            }
         }
     }
+    
+    
 }

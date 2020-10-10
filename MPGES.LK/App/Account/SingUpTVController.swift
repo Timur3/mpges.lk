@@ -8,7 +8,7 @@
 
 import UIKit
 public protocol SingUpTVControllerUserDelegate: class {
-    func createUser(user: UserCreateModel)
+    func singUp(user: SingUpModel)
     func resultOfCreateUser(result: ServerResponseModel)
 }
 
@@ -24,7 +24,7 @@ class SingUpTVController: CommonTableViewController {
     var mobileCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.phone, textAlign: .left, accessoryType: .none) }()
     // Пароль
     var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
-    var confirmPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
+    //var confirmPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
     // Кнопка
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Зарегистрировать", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
@@ -32,7 +32,7 @@ class SingUpTVController: CommonTableViewController {
     var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com") }()
     var mobileTextField: UITextField = { getCustomTextField(placeholder: "+7(909)-012-34-56") }()
     var passwordTextField: UITextField = { getCustomTextField(placeholder: "Придумайте пароль") }()
-    var confirmPasswordTextField: UITextField = { getCustomTextField(placeholder: "Повторите пароль") }()
+    //var confirmPasswordTextField: UITextField = { getCustomTextField(placeholder: "Повторите пароль") }()
     
     var user: UserModel?
     
@@ -58,9 +58,9 @@ class SingUpTVController: CommonTableViewController {
         passwordCell.addSubview(passwordTextField)
         passwordTextField.leadingAnchor.constraint(equalTo: passwordCell.leadingAnchor, constant: 50).isActive = true
         passwordTextField.centerYAnchor.constraint(equalTo: passwordCell.centerYAnchor).isActive = true
-        confirmPasswordCell.addSubview(confirmPasswordTextField)
-        confirmPasswordTextField.leadingAnchor.constraint(equalTo: confirmPasswordCell.leadingAnchor, constant: 50).isActive = true
-        confirmPasswordTextField.centerYAnchor.constraint(equalTo: confirmPasswordCell.centerYAnchor).isActive = true
+        //confirmPasswordCell.addSubview(confirmPasswordTextField)
+        //confirmPasswordTextField.leadingAnchor.constraint(equalTo: confirmPasswordCell.leadingAnchor, constant: 50).isActive = true
+        //confirmPasswordTextField.centerYAnchor.constraint(equalTo: confirmPasswordCell.centerYAnchor).isActive = true
     }
     // MARK: - Table view data source
     
@@ -77,7 +77,7 @@ class SingUpTVController: CommonTableViewController {
         case 1:
             return 2
         case 2:
-            return 2
+            return 1
         case 3:
             return 1
         default:
@@ -107,8 +107,8 @@ class SingUpTVController: CommonTableViewController {
             switch indexPath.row {
             case 0:
                 return passwordCell
-            case 1:
-                return confirmPasswordCell
+            //case 1:
+                //return confirmPasswordCell
             default:
                 fatalError()
             }
@@ -144,9 +144,9 @@ class SingUpTVController: CommonTableViewController {
         if indexPath.section == 2 && indexPath.row == 0 {
             passwordTextField.becomeFirstResponder()
         }
-        if indexPath.section == 2 && indexPath.row == 1 {
+        /*if indexPath.section == 2 && indexPath.row == 1 {
             confirmPasswordTextField.becomeFirstResponder()
-        }
+        }*/
         if indexPath.section == 3 && indexPath.row == 0 {
             createUserAction()
         }
@@ -158,17 +158,17 @@ class SingUpTVController: CommonTableViewController {
             if (!isValidEmail(emailTextField.text!) || emailTextField.text!.isEmpty) {
                 emailTextField.shake(times: 3, delta: 5)
             } else {
-                let user = UserCreateModel(name: nameTextField.text!, password: passwordTextField.text!, Email: emailTextField.text!, Mobile: "", RoleId: 3)
-                self.delegateUser?.createUser(user: user)
+                let user = SingUpModel(name: nameTextField.text!, password: passwordTextField.text!, Email: emailTextField.text!, Mobile: mobileTextField.text!, RoleId: 3)
+                self.delegateUser?.singUp(user: user)
         }
     }
 }
 
 extension SingUpTVController: SingUpTVControllerUserDelegate {
     
-    func createUser(user: UserCreateModel) {
+    func singUp(user: SingUpModel) {
         ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        ApiServiceWrapper.shared.createUser(model: user, delegate: self)
+        ApiServiceWrapper.shared.singUp(model: user, delegate: self)
     }
     
     func resultOfCreateUser(result: ServerResponseModel) {

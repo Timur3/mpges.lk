@@ -60,11 +60,11 @@ class OfficesViewController: UIViewController, YMKUserLocationObjectListener {
         let placeMarkMainOffice = mapObjects.addPlacemark(with: MAIN_OFFICE, view: viewProvider!)
         //placeMarkMainOffice
         placeMarkMainOffice.opacity = 0.5
-        placeMarkMainOffice.isDraggable = true
+        placeMarkMainOffice.isDraggable = false
         
         let placeMarkMainOfficeChehova = mapObjects.addPlacemark(with: OFFICE_CHEHOVA, view: viewProvider!)
         placeMarkMainOfficeChehova.opacity = 0.5
-        placeMarkMainOfficeChehova.isDraggable = true
+        placeMarkMainOfficeChehova.isDraggable = false
     }
 
 }

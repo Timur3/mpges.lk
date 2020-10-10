@@ -26,6 +26,7 @@ class ApiService {
             return NetworkReachabilityManager()?.isReachable ?? false
         }
     }
+    
     func requestByModel<T: Decodable, M: Encodable>(model: M, requestMethod: HTTPMethod = .post, method: String, completion: @escaping (T) -> Void) {
         
         let headers: HTTPHeaders = [
@@ -38,8 +39,7 @@ class ApiService {
                        encoder: JSONParameterEncoder.default, headers: headers)
                 
                 .responseData { response in
-                    debugPrint("print reponse")
-                    debugPrint(response)
+                    debugPrint("\(response.response?.statusCode)")
                     switch response.result {
                     case let .success(value):
                         let myResponse = try! JSONDecoder().decode(T.self, from: value)
@@ -64,6 +64,7 @@ class ApiService {
                        method: .get,
                        headers: headers)
                 .responseData { response in
+                    debugPrint("\(response.response?.statusCode)")
                     switch response.result {
                     case let .success(value):
                         let myResponse = try! JSONDecoder().decode(T.self, from: value)
@@ -89,6 +90,7 @@ class ApiService {
                        method: .get,
                        headers: headers)
                 .responseData { response in
+                    debugPrint("\(response.response?.statusCode)")
                     switch response.result {
                     case let .success(value):
                         let myResponse = try! JSONDecoder().decode(T.self, from: value)
@@ -139,5 +141,33 @@ class ApiService {
                 result = text
         }
         return result
+    }
+    
+    // MARK - for apple pay
+    func getResponseApplePay(model: ApplePayModel, methodName: String, completion: @escaping (ServerResponseModel) -> Void){
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (userData.getToken() ?? "")
+        ]
+        AF.request(
+            self.baseURL + methodName,
+            method:.post,
+            parameters: model,
+            encoder: JSONParameterEncoder.default, headers: headers)
+            
+            .responseData(completionHandler: { response in
+            
+                debugPrint("print reponse")
+                debugPrint(response)
+                switch response.result {
+                case let .success(value):
+                    
+                    let myResponse = try! JSONDecoder().decode(ServerResponseModel.self, from: value)
+                        completion(myResponse)
+                    
+                case let .failure(error):
+                    print(error)
+                }
+        }
+        )
     }
 }

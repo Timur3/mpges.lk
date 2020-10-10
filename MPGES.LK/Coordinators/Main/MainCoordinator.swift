@@ -14,7 +14,6 @@ protocol MainCoordinatorDelegate: class {
     func navigateToFirstPage()
     func navigateToRecoveryPasswordPage()
     func goToNextSceneApp()
-    func goToDemo()
     func childDidFinish(_ child: Coordinator)
 }
 
@@ -79,14 +78,6 @@ extension MainCoordinator: MainCoordinatorDelegate {
         mainTabBarCoordinator.delegate = self
         childCoordinators.append(mainTabBarCoordinator)
         mainTabBarCoordinator.start()
-    }
-    
-    func goToDemo() {
-        
-    }
-    
-    func authApi(model: AuthModel){
-        
     }
     
     func navigateToSingUpPage() {

@@ -105,7 +105,7 @@ class InvoicesTableViewController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceCell
         cell.indexPath = indexPath
         cell.delegateCell = self
         cell.update(for: invoiceList[indexPath.section].invoices[indexPath.row])

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ServerResponseModel: Decodable {
+public class ServerResponseModel: Decodable {
     var isError: Bool
     var responseCode: Int
     var message: String
@@ -17,5 +17,11 @@ public struct ServerResponseModel: Decodable {
         case isError = "isError"
         case responseCode = "responseCode"
         case message = "message"
+    }
+    
+    init(isError: Bool, responseCode: Int, message: String) {
+        self.isError = isError
+        self.responseCode = responseCode
+        self.message = message
     }
 }

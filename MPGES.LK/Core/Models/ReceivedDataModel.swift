@@ -32,7 +32,7 @@ public class ReceivedDataModel: Object, Decodable {
     @objc dynamic var date: String
     @objc dynamic var value: Int
     @objc dynamic var volume: Int
-    @objc dynamic var monthAverage: Int
+    var monthAverage: Double
     @objc dynamic var sredneSut: Double
     @objc dynamic var sredneYear: Double
     @objc dynamic var meterCircle: Bool

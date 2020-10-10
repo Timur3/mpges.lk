@@ -8,6 +8,7 @@
 
 import UIKit
 import PassKit
+import Alamofire
 
 public protocol PayWithApplePayTVControllerDelegate: class {
     func setPay(for pay: ApplePayModel)
@@ -32,28 +33,20 @@ class PayWithApplePayTVController: CenterContentAndCommonTableViewController {
         let textField = UITextField()
         textField.placeholder = ""
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.keyboardType = .numberPad
+        textField.keyboardType = .decimalPad
+        //textField.
         return textField
     }()
     
     var applePayPaymentButton: PKPaymentButton = {
-        let paymentButton = PKPaymentButton(paymentButtonType: .buy, paymentButtonStyle: .black)
+        let paymentButton = PKPaymentButton(paymentButtonType: .buy, paymentButtonStyle: .whiteOutline)
         paymentButton.translatesAutoresizingMaskIntoConstraints = false
         paymentButton.addTarget(self, action: #selector(applePayButtonTapped(sender:)), for: .touchUpInside)
         return paymentButton
     }()
     
-    @objc private func applePayButtonTapped(sender: UIButton) {
-        if isValidSumma(tf: summaTextField) {
-            self.purchase()
-        } else {
-            AlertControllerAdapter.shared.show(
-                title: "Ошибка",
-                mesg: "Некорректная сумма",
-                form: self)
-        }
-    }
-    
+
+    var response: ServerResponseModel?
     var model: BankPayModel? {
         didSet {
             DispatchQueue.main.async {
@@ -91,8 +84,6 @@ class PayWithApplePayTVController: CenterContentAndCommonTableViewController {
             return 1
         case 2:
             return 1
-        //case 3:
-          //  return 1
         default:
             fatalError()
         }
@@ -121,13 +112,6 @@ class PayWithApplePayTVController: CenterContentAndCommonTableViewController {
             default:
                 fatalError()
             }
-       /* case 3:
-            switch indexPath.row {
-            case 0:
-                return saveCell
-            default:
-                fatalError()
-            }*/
         default:
             fatalError()
         }
@@ -159,44 +143,30 @@ class PayWithApplePayTVController: CenterContentAndCommonTableViewController {
         }
         return UIView()
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == 2 ? 150 : UITableView.automaticDimension
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 && indexPath.row == 0 {
-            //cell.isUserInteractionEnabled = false
-            
-            //cell.addSubview(applePayPaymentButton)
-            //applePayPaymentButton.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-            //applePayPaymentButton.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+    @objc func inputSummaTFAction(){
+        if !(summaTextField.text!.isEmpty) {
+            let amount = summaTextField.text!.removeFormatAndSpace()
+            if amount > 0.00 {
+                summaTextField.text = formatRusCurrency(for: "\(amount)")
+            } else
+            {
+                summaTextField.text = formatRusCurrency(for: "1000")
+            }
         }
     }
-    
-    func isValidSumma(tf: UITextField) -> Bool {
-        let isValid = true
-        if tf.text!.isEmpty { return false }
-        
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "ru_RU")
-        formatter.numberStyle = .currency
-        
-        guard let number = formatter.number(from: tf.text!) else { return false }
-        let amount = number.decimalValue
-        if amount < 0.00 { return false }
-        
-        return isValid
-    }
-    
-    @objc func inputSummaTFAction(){
-        let formatter = NumberFormatter()
-        let sumStr = self.summaTextField.text!
-        if let number = formatter.number(from: sumStr) {
-            let amount = number.decimalValue
-            if amount > 0 {
-                summaTextField.text = formatRusCurrency(for: sumStr)
-            }
+    @objc private func applePayButtonTapped(sender: UIButton) {
+        if isValidSumma(tf: summaTextField) {
+            self.purchase()
+        } else {
+            AlertControllerAdapter.shared.show(
+                title: "Ошибка",
+                mesg: "Некорректная сумма",
+                form: self)
         }
     }
 }
@@ -213,7 +183,6 @@ extension PayWithApplePayTVController {
     }
     
     func setUpLayout(){
-        
         accountCell.addSubview(accountTextField)
         accountTextField.leadingAnchor.constraint(equalTo: accountCell.leadingAnchor, constant: 50).isActive = true
         accountTextField.centerYAnchor.constraint(equalTo: accountCell.centerYAnchor).isActive = true
@@ -225,16 +194,6 @@ extension PayWithApplePayTVController {
         contactCell.addSubview(contactTextField)
         contactTextField.leadingAnchor.constraint(equalTo: contactCell.leadingAnchor, constant: 50).isActive = true
         contactTextField.centerYAnchor.constraint(equalTo: contactCell.centerYAnchor).isActive = true
-        
-        //saveCell.addSubview(applePayPaymentButton)
-        //applePayPaymentButton.centerYAnchor.constraint(equalTo: saveCell.centerYAnchor).isActive = true
-        //applePayPaymentButton.leadingAnchor.constraint(equalTo: saveCell.leadingAnchor, constant: 50).isActive = true
-        //applePayPaymentButton.trailingAnchor.constraint(equalTo: saveCell.trailingAnchor, constant: -50).isActive = true
-        //applePayPaymentButton.topAnchor.constraint(equalTo: saveCell.topAnchor, constant: 2).isActive = true
-        //applePayPaymentButton.bottomAnchor.constraint(equalTo: saveCell.bottomAnchor, constant: 2).isActive = true
-        //saveCell.addConstraint(NSLayoutConstraint(item: applePayPaymentButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
-        //saveCell.addConstraint(NSLayoutConstraint(item: applePayPaymentButton, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
-           
     }
     
     func purchase() {
@@ -246,6 +205,7 @@ extension PayWithApplePayTVController {
         if let number = formatter.number(from: sumStr) {
             let amount = number.decimalValue
             let paymentRequest = createPaymentRequestForApplePay(sum: NSDecimalNumber(decimal: amount))
+            
             if let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest) {
                 
                 controller.delegate = self
@@ -268,50 +228,34 @@ extension PayWithApplePayTVController {
     }
 }
 extension PayWithApplePayTVController: PKPaymentAuthorizationViewControllerDelegate {
+    
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         
+        var sum: Decimal = 0.00
         let pd = String(data: payment.token.paymentData.base64EncodedData(), encoding: .utf8)!
         print("pd:" + pd)
-        let model = ApplePayModel(EncryptedPaymentData: pd, Amount: Int(5.00), ContractId: self.model!.contractId)
-        //setPay(for: model)
-        //completion(PKPaymentAuthorizationResult(status:.success, errors: nil))
         
+        let sumStr = self.summaTextField.text!
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.numberStyle = .currency
+        if let number = formatter.number(from: sumStr) {
+            sum = number.decimalValue
+        }
+        let model = ApplePayModel(encryptedPaymentData: pd, amount: sum, contractId: self.model!.contractId)
+        
+        ApiService.shared.getResponseApplePay(model: model, methodName: "payment/initApplePay") { (response) in
+            if (!response.isError) {
+                completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
+            } else
+            {
+                completion(PKPaymentAuthorizationResult(status: .failure, errors: nil))
+            }
+        }
     }
     
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         controller.dismiss(animated: true, completion: nil)
         self.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension PayWithApplePayTVController: PayWithApplePayTVControllerDelegate {
-   
-    func setPay(for pay: ApplePayModel) {
-        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        ApiServiceWrapper.shared.initApplePay(model: pay, delegate: self)
-    }
-    
-    func resultOfApplePay(for response: ServerResponseModel) {
-        
-        let isError = response.isError
-            if isError {
-                AlertControllerAdapter.shared.show(
-                    title: isError ? "Ошибка!" : "Успешно!",
-                    mesg: response.message,
-                    form: self) { (UIAlertAction) in
-                        if isError {
-                            self.cancelButton()
-                        }
-                }
-            } else {
-//                let url = URL(string: response.data!)
-//                UIApplication.shared.open(url!) { (result) in
-//                    if result {
-//                        self.cancelButton()
-//                    }
-//                }
-            }
-            
-            self.hiddenAI()
     }
 }

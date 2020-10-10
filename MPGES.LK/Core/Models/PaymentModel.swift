@@ -35,6 +35,7 @@ public class PaymentModel: Object, Decodable {
     @objc dynamic var summa: Double = 0.0
     @objc dynamic var workerId: Int = 0
     var note: String?
+    var uuid: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -47,6 +48,7 @@ public class PaymentModel: Object, Decodable {
         case summa = "summa"
         case workerId = "workerId"
         case note = "note"
+        case uuid = "uuid"
     }
        
     @objc open override class func primaryKey() -> String? {

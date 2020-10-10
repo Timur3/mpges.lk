@@ -48,6 +48,7 @@ extension DeviceCoordinatorMain {
         receivedDataAddNewTemplateTVController.delegate = self
         receivedDataAddNewTemplateTVController.mainModel = template
         nav.pushViewController(receivedDataAddNewTemplateTVController, animated: true)
+        
     }
     
 }

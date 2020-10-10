@@ -12,11 +12,13 @@ class ContractsTableViewCell: UITableViewCell {
     @IBOutlet weak var numberContract: UILabel!
     @IBOutlet weak var contractTypeName: UILabel!
     @IBOutlet weak var saldoContract: UILabel!
+    @IBOutlet weak var contractAddress: UILabel!
     
     func update(for contract: ContractModel) {
         let conNum = "\(contract.id)"
-        numberContract.text =  "#"+conNum
+        numberContract.text = conNum
         contractTypeName.text = contract.typeOfContract.name
+        contractAddress.text = contract.primaryAddress
            DispatchQueue.main.async { [weak self] in
                guard self != nil else { return }
             ApiServiceWrapper.shared.loadSaldoContract(id: contract.id, label: self!.saldoContract)

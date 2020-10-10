@@ -30,15 +30,15 @@ class ApiServiceWrapper {
     }
     
     // проверка договора
-    func checkByNumberContract(model: ContractNumberModel,delegate: ContractAddTVControllerUserDelegate) {
+    func checkByNumberContract(model: ContractNumberModel, delegate: ContractAddTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.checkContractByNumber, completion: delegate.resultCheckContract(result:))
     }
     
     // привязка договора
-    func contractBinding(model: ContractBindingModel,delegate: ContractAddTVControllerUserDelegate) {
+    func contractBinding(model: ContractBindingModel, delegate: ContractAddTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.contractBinding, completion: delegate.resultToBinding(result:))
     }
-
+    
     // удаление привязки договора
     func removeContractBinding(model: ContractNumberModel, delegate: ContractsTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.removeContractBinding, completion: delegate.resultRemoveContractBinding(result:))
@@ -55,7 +55,13 @@ class ApiServiceWrapper {
     func initApplePay(model: ApplePayModel, delegate: PayWithApplePayTVControllerDelegate)
     {
         ApiService.shared.requestByModel(model: model, method: methodApi.initApplePay, completion: delegate.resultOfApplePay(for:))
+        
     }
+    func getResponseApplePay(model: ApplePayModel, delegate: PayWithApplePayTVControllerDelegate){
+  
+        ApiService.shared.getResponseApplePay(model: model, methodName: methodApi.initApplePay, completion: delegate.resultOfApplePay(for:))
+    }
+    
     // получение платежей по договору
     func getPaymentsByContractId(id: Int, delegate: PaymentsTVControllerUserDelegate) {
         ApiService.shared.requestById(id: id, method: methodApi.getPaymentsByContractId, completion: delegate.setPayments(payments:))
@@ -95,6 +101,10 @@ class ApiServiceWrapper {
         ApiService.shared.requestById(id: id, method: methodApi.getReceivedData, completion: delegate.setData(model:))
     }
     
+    func getReceivedDataVolumeByDeviceId(id: Int, delegate: ReceivedDataChartViewControllerDelegate) {
+        ApiService.shared.requestById(id: id, method: methodApi.getReceivedDateVolumesForChart, completion: delegate.setData(model:))
+    }
+    
     //
     func sendReceivedData(model: [ReceivedDataOfSendingModel], delegate: ReceivedDataAddNewTemplateTVControllerDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.receivedDataAddNew, completion: delegate.resultOfSending(result:))
@@ -122,9 +132,9 @@ class ApiServiceWrapper {
     func checkByEmail(model: UserEmailModel, delegate: RecoveryPasswordTVControllerUserDelegate){
         ApiService.shared.requestByModel(model: model, requestMethod: .post, method: methodApi.checkEmail, completion: delegate.resultOfCheckEmail(result:))
     }
-        
+    
     // регистрация профиля
-    func createUser(model: UserCreateModel, delegate: SingUpTVControllerUserDelegate) {
+    func singUp(model: SingUpModel, delegate: SingUpTVControllerUserDelegate) {
         ApiService.shared.requestByModel(model: model, method: methodApi.createUser, completion: delegate.resultOfCreateUser(result:))
     }
     
@@ -138,6 +148,10 @@ class ApiServiceWrapper {
         ApiService.shared.requestByModel(model: model, requestMethod: .post, method: methodApi.passwordRecovery, completion: delegate.resultOfPassordRecovery(result:))
     }
     
+    func passwordChange(model: PasswordChangeModel, delegate: ChangePasswordTVControllerDelegate){
+        ApiService.shared.requestByModel(model: model, method: methodApi.passwordChange, completion: delegate.responseOfChange(result:))
+    }
+    
     // получение способов доставки
     func getDeliveryOfInvoices(delegate: DeliveryMethodTVControllerDelegate) {
         ApiService.shared.requestByToken(method: methodApi.getDeliveryOfInvoice, completion: delegate.setData(for:))
@@ -149,5 +163,12 @@ class ApiServiceWrapper {
     
     func loadSaldoContractForString(id: Int) -> String {
         return ApiService.shared.loadTextForString(method: methodApi.getContractSaldoById, id: id)
+    }
+    
+    func getContractStatus(id: Int, status: UITableViewCell, value: UILabel){
+        ApiService.shared.requestById(id: id, method: methodApi.getContractStatusById) { (model: ContractStatusModel) in
+            status.textLabel?.text = model.statusName
+            value.text = formatRusCurrency(for: "\(model.value)")
+        }
     }
 }

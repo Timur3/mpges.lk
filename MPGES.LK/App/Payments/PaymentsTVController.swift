@@ -8,15 +8,16 @@
 
 import UIKit
 import RealmSwift
+import SafariServices
 
 public protocol PaymentsTVControllerDelegate: class {
-    func navigationPaymentInfoPage(payment: PaymentModel)
+    func navigationPaymentInfoPage(uuid: String)
+    func navigationPaymentInfoForSafariService(uuid: String)
 }
 
 protocol PaymentsTVControllerUserDelegate {
     func setPayments(payments:PaymentsModelRoot)
     func refreshData()
-    func getDataForRealm()
     func mapToPaymentsModelView(payments:[PaymentModel]) -> [PaymentsModelVeiw]
 }
 
@@ -24,7 +25,8 @@ class PaymentsTVController: CommonTableViewController {
     public weak var delegate: PaymentsTVControllerDelegate?
     private var searchController = UISearchController(searchResultsController: nil)
     var contractId: Int = 0
-
+    let options = Options()
+    
     private var tempPayments = [PaymentModel]()
     private var searchBarIsEmpty: Bool {
         guard let str = searchController.searchBar.text else { return false }
@@ -44,7 +46,7 @@ class PaymentsTVController: CommonTableViewController {
         super.viewDidLoad()
         configuration()
     }
-
+    
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         print("did End Displaying Header View")
     }
@@ -76,11 +78,11 @@ class PaymentsTVController: CommonTableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "\(paymentsList[section].year)" + " год"
     }
- 
+    
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "Количество записей: " + "\(paymentsList[section].payments.count)" + " на сумму: " + "\(paymentsList[section].payments.map({ $0.summa }).reduce(0, +))"
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return paymentsList[section].payments.count
@@ -97,8 +99,19 @@ class PaymentsTVController: CommonTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let paymentSend = paymentsList[indexPath.section].payments[indexPath.row]
-        self.delegate?.navigationPaymentInfoPage(payment: paymentSend)
+        let pay = paymentsList[indexPath.section].payments[indexPath.row]
+        let msg = "Отсутствуют информация по чеку, возможно чек выдали Вам после оплаты на кассе предприятия"
+        if ((pay.uuid) != nil) {
+            self.delegate?.navigationPaymentInfoForSafariService(uuid: pay.uuid!)
+        }
+        else {
+            AlertControllerAdapter.shared.show(
+                title: "Ошибка",
+                mesg: msg,
+                form: self) { (UIAlertAction) in
+                print(msg as Any)
+            }
+        }
     }
 }
 
@@ -111,9 +124,9 @@ extension PaymentsTVController: UISearchResultsUpdating {
     }
     private func filterContent(_ searchText: String)
     {
-//       paymentsList = mapToPaymentsModelView(payments: tempPayments.filter({ (contractList: PaymentModel) -> Bool in
-            //return tempPayments.summa.lowercased().contains(searchText.lowercased())
-//        }))
+        //       paymentsList = mapToPaymentsModelView(payments: tempPayments.filter({ (contractList: PaymentModel) -> Bool in
+        //return tempPayments.summa.lowercased().contains(searchText.lowercased())
+        //        }))
     }
     
 }
@@ -129,25 +142,24 @@ extension PaymentsTVController: PaymentsTVControllerUserDelegate {
         return res.sorted(by: { $0.year > $1.year })
     }
     
-    // получение данных из Realm, лишний раз не отправлять запрос на сервер
-    func getDataForRealm(){
-        //let predicate = NSPredicate(format: "contractId == " + "\(contractId)")
-        
-        //let paymentsRM = (DataProviderService.shared.getObjects(predicate: predicate) as [PaymentModel])
-        //if (paymentsRM.count) > 0 {
-        //    self.paymentsList = mapToPaymentsModelView(payments: paymentsRM)
-       //     ActivityIndicatorViewService.shared.hideView()
-      //  } else {
-            ApiServiceWrapper.shared.getPaymentsByContractId(id: contractId, delegate: self)
-    //    }
-    }
-    
+    // todo: получение данных из Realm, лишний раз не отправлять запрос на сервер
     @objc func refreshData() {
-        print("refresh")
-        ApiServiceWrapper.shared.getPaymentsByContractId(id: contractId, delegate: self)
+        let access = ApiService.Connectivity.isConnectedToInternet
+        if access {
+            print("refresh")
+            ApiServiceWrapper.shared.getPaymentsByContractId(id: contractId, delegate: self)
+        } else {
+            let msg = "Нет соединения с интернетом, попробуйте выполнить запрос позже"
+            AlertControllerAdapter.shared.show(
+                title: "Ошибка",
+                mesg: msg,
+                form: self) { (UIAlertAction) in
+                print(msg as Any)
+            }
+        }
         self.refreshControl?.endRefreshing()
     }
-
+    
     func setPayments(payments: PaymentsModelRoot) {
         // todo доделать получение данных из realm
         let model = mapToPaymentsModelView(payments: payments.data)
@@ -174,7 +186,7 @@ extension PaymentsTVController {
         self.tableView.dataSource = self
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
-        getDataForRealm()
+        refreshData()
         tableView.delegate = self
     }
 }

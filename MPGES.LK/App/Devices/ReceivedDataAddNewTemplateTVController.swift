@@ -13,6 +13,7 @@ public protocol ReceivedDataAddNewTemplateTVControllerDelegate: class {
 
 class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     public weak var delegate: DeviceCoordinatorMain?
+    
     public var mainModel: ReceivedDataAddNewTemplateModelView? {
         didSet {
             DispatchQueue.main.async {
@@ -46,7 +47,7 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
                 self.receivedDataTF.text = ""
                 self.saveCell.textLabel?.text = self.isFilledAll ? "Передать" : "Продолжить"
                 self.tableView.reloadData()
-                self.receivedDataTF.becomeFirstResponder()
+                print("1")
             }
         }
     }
@@ -56,6 +57,11 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
         super.viewDidLoad()
         configuration()
         setUpLayout()
+        print("2")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -72,6 +78,10 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.receivedDataTF.becomeFirstResponder()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -208,7 +218,7 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
             self.isFilledAll = true
         }
         self.hiddenAI()
-        receivedDataTF.becomeFirstResponder()
+        //receivedDataTF.becomeFirstResponder()
     }
     
     @objc func inputReceivedDataTFAction(){

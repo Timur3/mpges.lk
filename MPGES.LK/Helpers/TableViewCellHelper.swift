@@ -8,9 +8,9 @@
 
 import UIKit
 
-func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NSTextAlignment, textColor: UIColor = .black, accessoryType: UITableViewCell.AccessoryType, isUserInteractionEnabled: Bool = true) -> UITableViewCell {
+func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NSTextAlignment, textColor: UIColor = .black, accessoryType: UITableViewCell.AccessoryType, isUserInteractionEnabled: Bool = true, style: UITableViewCell.CellStyle = .default) -> UITableViewCell {
     
-    let cell = UITableViewCell()
+    let cell = UITableViewCell(style: style, reuseIdentifier: "")
     if (imageCell != .none) {
         cell.imageView?.image =  UIImage(systemName: imageCell.rawValue)
     }

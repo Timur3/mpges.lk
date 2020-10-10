@@ -50,7 +50,7 @@ public struct UserModel: Decodable, Encodable {
     }
 }
 
-public struct UserCreateModel: Encodable {
+public struct SingUpModel: Encodable {
     let password: String
     let name: String
     let email: String

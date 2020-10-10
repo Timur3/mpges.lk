@@ -16,3 +16,18 @@ func getCustomTextField(placeholder: String, keyboardType: UIKeyboardType = .def
     textField.isSecureTextEntry = isPassword
     return textField
 }
+
+func isValidSumma(tf: UITextField) -> Bool {
+    let isValid = true
+    if tf.text!.isEmpty { return false }
+
+    let formatter = NumberFormatter()
+    formatter.locale = Locale(identifier: "ru_RU")
+    formatter.numberStyle = .currency
+    
+    guard let number = formatter.number(from: tf.text!) else { return false }
+    let amount = number.decimalValue
+    if amount < 0.00 { return false }
+    
+    return isValid
+}

@@ -156,7 +156,7 @@ class SingInTVController: CenterContentAndCommonTableViewController {
     
     @objc func geToDemo() {
         let model = AuthModel(email: "demo@mp-ges.ru", password: "Qwerty123!")
-        self.delegate?.authApi(model: model)
+        ApiServiceWrapper.shared.authApi(model: model, delegate: self)
     }
 }
 
@@ -177,14 +177,18 @@ extension SingInTVController {
 extension SingInTVController: SingInTVControllerUserDelegate {
     
     func authApi(model: AuthModel) {
-        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        if (self.indexPath != nil) {
+            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        }
         userDataService.setKey(keyName: "email", keyValue: model.email)
         userDataService.setKey(keyName: "dwp", keyValue: model.password)
         ApiServiceWrapper.shared.authApi(model: model, delegate: self)
     }
     
     func resultAuthApi(result: ResponseModel) {
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        if (self.indexPath != nil) {
+            ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        }
         if !result.isError {
             userDataService.setToken(token: result.data!)
             self.delegate?.goToNextSceneApp()

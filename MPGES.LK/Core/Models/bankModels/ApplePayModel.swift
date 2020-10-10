@@ -9,7 +9,7 @@
 import Foundation
 
 public struct ApplePayModel: Encodable {
-    let EncryptedPaymentData: String
-    let Amount: Int
-    let ContractId: Int
+    let encryptedPaymentData: String
+    let amount: Decimal
+    let contractId: Int
 }

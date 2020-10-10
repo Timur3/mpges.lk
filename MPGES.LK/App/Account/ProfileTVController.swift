@@ -13,6 +13,7 @@ protocol ProfileTVControllerDelegate: class {
     func navigationChangePasswordPage()
     func navigationEmailToDeveloperPage()
     func navigationAboutPage()
+    func navigationToMailSend()
 }
 
 protocol ProfileTVControllerUserDelegate: class {
@@ -53,6 +54,7 @@ class ProfileTVController: CommonTableViewController {
         let textField = UITextField()
         textField.placeholder = "Ваш сотовый"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = .numberPad
         return textField
     }()
     

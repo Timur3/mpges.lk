@@ -14,7 +14,16 @@ protocol ReceivedDataAddNewTemplateTVControllerOneStepDelegate: class {
 class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTableViewController {
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
-    let datePicker = UIDatePicker()
+    var datePicker: UIDatePicker = {
+        let date = UIDatePicker()
+        date.layer.masksToBounds = true
+        date.translatesAutoresizingMaskIntoConstraints = false
+        date.datePickerMode = .date
+        date.maximumDate = Date()
+        date.locale = Locale.init(identifier: "ru_RU")
+        return date
+        }()
+    
     var sections: [String] {["Дата показаний", ""]}
     
     var ReceivedDataDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
@@ -36,14 +45,13 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTable
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        // Получение списка договоров
-        //delegate?.getContracts()
     }
     
     func setUpLayout(){
-        ReceivedDataDateCell.addSubview(dateTextField)
-        dateTextField.leadingAnchor.constraint(equalTo: ReceivedDataDateCell.leadingAnchor, constant: 50).isActive = true
-        dateTextField.centerYAnchor.constraint(equalTo: ReceivedDataDateCell.centerYAnchor).isActive = true
+        ReceivedDataDateCell.addSubview(datePicker)
+        datePicker.leadingAnchor.constraint(equalTo: ReceivedDataDateCell.leadingAnchor, constant: 50).isActive = true
+        datePicker.centerYAnchor.constraint(equalTo: ReceivedDataDateCell.centerYAnchor).isActive = true
+        datePicker.trailingAnchor.constraint(equalTo: ReceivedDataDateCell.trailingAnchor, constant: -10).isActive = true
     }
     
     // MARK: - Table view data source
@@ -98,20 +106,21 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTable
         self.indexPath = indexPath
         
         if indexPath.section == 0 && indexPath.row == 0 {
-            dateTextField.becomeFirstResponder()
+            //dateTextField.becomeFirstResponder()
         }
         if indexPath.section == 1 && indexPath.row == 0 {
-            if isValidDate(tf: dateTextField) {
+            //if isValidDate(tf: dateTextField) {
                 ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
                 ApiServiceWrapper.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
-            } else {
+            /*} else {
                 AlertControllerAdapter.shared.show(
                     title: "Ошибка",
                     mesg: "Некорректная дата",
                     form: self)
-            }
+            }*/
         }
     }
+        
     func isValidDate(tf: UITextField) -> Bool {
         let isValid = true
         if tf.text!.isEmpty { return false }
@@ -145,9 +154,7 @@ extension ReceivedDataAddNewTemplateTVControllerOneStep {
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         
         self.hideKeyboardWhenTappedAround()
-        datePicker.addTarget(self, action: #selector(datePackerChanged), for: UIControl.Event.valueChanged)
-        //Formate Date
-        datePicker.datePickerMode = .date
+        //datePicker.addTarget(self, action: #selector(datePackerChanged), for: UIControl.Event.valueChanged)
         
         //ToolBar
         let toolbar = UIToolbar();
@@ -158,10 +165,10 @@ extension ReceivedDataAddNewTemplateTVControllerOneStep {
         
         toolbar.setItems([cancelButton,spaceButton,doneButton], animated: false)
         
-        dateTextField.inputAccessoryView = toolbar
-        dateTextField.inputView = datePicker
+        //dateTextField.inputAccessoryView = toolbar
+        //dateTextField.inputView = datePicker
         
-        self.dateTextField.becomeFirstResponder()
+        //self.dateTextField.becomeFirstResponder()
         
     }
     @objc func datePackerChanged() {

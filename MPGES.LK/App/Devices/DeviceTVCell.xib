@@ -1,169 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="deviceCell" rowHeight="216" id="bHV-DV-gWT" customClass="DeviceTVCell" customModule="МП_ГЭС" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="210"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="deviceCell" rowHeight="231" id="bHV-DV-gWT" customClass="DeviceTVCell" customModule="МП_ГЭС" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="352" height="231"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bHV-DV-gWT" id="o4Y-IN-VwI">
-                <rect key="frame" x="0.0" y="0.0" width="383" height="210"/>
+                <rect key="frame" x="0.0" y="0.0" width="321" height="231"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Завод. номер:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="se4-wu-gkO">
-                        <rect key="frame" x="50" y="6" width="105" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="K2F-hf-o1r"/>
-                            <constraint firstAttribute="width" constant="105" id="Kwg-LF-dJ9"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Модель:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y05-YG-J5h">
-                        <rect key="frame" x="50" y="106" width="65" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="2dX-Jy-jcq"/>
-                            <constraint firstAttribute="width" constant="65" id="BD1-QK-5lf"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адрес:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxI-Dk-iLP">
-                        <rect key="frame" x="50" y="131" width="55" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="FeH-J7-T0X"/>
-                            <constraint firstAttribute="width" constant="55" id="WpI-pp-Q6w"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234456" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXt-vr-xas">
-                        <rect key="frame" x="160" y="6" width="203" height="17"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="г. Ханты-Мансийск ул. Комсомольская 34 34" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o08-qb-dvJ">
-                        <rect key="frame" x="110" y="129" width="253" height="31.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Год выпуска:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXq-mm-oKa">
-                        <rect key="frame" x="50" y="31" width="100" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="2AO-nu-nZq"/>
-                            <constraint firstAttribute="width" constant="100" id="HeU-e7-MCq"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата гос. поверки:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0O-p3-GnX">
-                        <rect key="frame" x="50" y="56" width="135" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="s35-4h-LTa"/>
-                            <constraint firstAttribute="width" constant="135" id="sIb-Y5-6AI"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Следующая поверка:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zh-GU-f35">
-                        <rect key="frame" x="50" y="81" width="155" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="MKp-tF-hTR"/>
-                            <constraint firstAttribute="width" constant="155" id="r1x-pi-gq2"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020-02-30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbQ-yy-Qef">
-                        <rect key="frame" x="155" y="32" width="208" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020-02-34" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8H-GY-bQM">
-                        <rect key="frame" x="190" y="57" width="173" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020-03-24" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQ2-vZ-Eal">
-                        <rect key="frame" x="210" y="83" width="153" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NP-515" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7g-ym-4IB">
-                        <rect key="frame" x="120" y="107" width="243" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaq-e7-Wpe">
-                        <rect key="frame" x="213" y="168.5" width="170" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="170" id="QjW-tM-SQ2"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                        <state key="normal" title="Сообщить показания"/>
-                        <connections>
-                            <action selector="ReceivedDataAddNewAction:" destination="bHV-DV-gWT" eventType="touchUpInside" id="5HN-fY-YwP"/>
-                        </connections>
-                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="y3l-90-eEf">
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="231"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VX3-fq-POC">
+                                <rect key="frame" x="55" y="12" width="258" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Завод. номер:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="se4-wu-gkO">
+                                        <rect key="frame" x="0.0" y="0.0" width="198" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="1234456" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXt-vr-xas">
+                                        <rect key="frame" x="198" y="0.0" width="60" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEF-Jg-YBN">
+                                <rect key="frame" x="55" y="35" width="258" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Год выпуска:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXq-mm-oKa">
+                                        <rect key="frame" x="0.0" y="0.0" width="87" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2020-02-30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbQ-yy-Qef">
+                                        <rect key="frame" x="87" y="0.0" width="171" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLZ-us-eXP">
+                                <rect key="frame" x="55" y="58" width="258" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Дата гос. поверки:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0O-p3-GnX">
+                                        <rect key="frame" x="0.0" y="0.0" width="126.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2020-02-34" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8H-GY-bQM">
+                                        <rect key="frame" x="126.5" y="0.0" width="131.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZV-An-HyU">
+                                <rect key="frame" x="55" y="81" width="258" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Следующая поверка:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zh-GU-f35">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="Y61-Qi-kAB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020-03-24" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQ2-vZ-Eal">
+                                        <rect key="frame" x="160" y="0.0" width="98" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgQ-IY-yvv">
+                                <rect key="frame" x="55" y="104" width="258" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Модель:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y05-YG-J5h">
+                                        <rect key="frame" x="0.0" y="0.0" width="208" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NP-515" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7g-ym-4IB">
+                                        <rect key="frame" x="208" y="0.0" width="50" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phm-a5-jzY">
+                                <rect key="frame" x="55" y="127" width="258" height="33.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адрес:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxI-Dk-iLP">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="33.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="Pgk-Zt-u85"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="г. Ханты-Мансийск ул. Комсомольская 34 34" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o08-qb-dvJ">
+                                        <rect key="frame" x="70" y="0.0" width="188" height="33.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Qxz-Ie-tDo">
+                                <rect key="frame" x="55" y="166.5" width="258" height="52.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaq-e7-Wpe">
+                                        <rect key="frame" x="78" y="0.0" width="180" height="52.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="jza-3M-eWE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                        <state key="normal" title="Сообщить показания"/>
+                                        <connections>
+                                            <action selector="ReceivedDataAddNewAction:" destination="bHV-DV-gWT" eventType="touchUpInside" id="5HN-fY-YwP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <directionalEdgeInsets key="directionalLayoutMargins" top="12" leading="55" bottom="12" trailing="8"/>
+                    </stackView>
                 </subviews>
                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.80000000000000004"/>
                 <constraints>
-                    <constraint firstItem="FxI-Dk-iLP" firstAttribute="leading" secondItem="o4Y-IN-VwI" secondAttribute="leading" constant="50" id="03d-4f-qpz"/>
-                    <constraint firstItem="o08-qb-dvJ" firstAttribute="top" secondItem="y05-YG-J5h" secondAttribute="bottom" constant="6" id="1cY-xE-QC7"/>
-                    <constraint firstItem="FxI-Dk-iLP" firstAttribute="top" secondItem="y05-YG-J5h" secondAttribute="bottom" constant="8" id="2Ck-UC-Wf9"/>
-                    <constraint firstItem="a8H-GY-bQM" firstAttribute="top" secondItem="SbQ-yy-Qef" secondAttribute="bottom" constant="8" id="3KJ-dQ-cRF"/>
-                    <constraint firstAttribute="trailing" secondItem="y7g-ym-4IB" secondAttribute="trailing" constant="20" id="3wi-K7-SgU"/>
-                    <constraint firstItem="VXt-vr-xas" firstAttribute="top" secondItem="o4Y-IN-VwI" secondAttribute="top" constant="6" id="6oE-Y8-6yc"/>
-                    <constraint firstItem="y05-YG-J5h" firstAttribute="leading" secondItem="o4Y-IN-VwI" secondAttribute="leading" constant="50" id="Cjn-2K-ctb"/>
-                    <constraint firstItem="qaq-e7-Wpe" firstAttribute="top" secondItem="o08-qb-dvJ" secondAttribute="bottom" constant="8" id="DSg-ST-BQv"/>
-                    <constraint firstItem="VXt-vr-xas" firstAttribute="leading" secondItem="se4-wu-gkO" secondAttribute="trailing" constant="5" id="Eny-Vc-4JD"/>
-                    <constraint firstItem="y05-YG-J5h" firstAttribute="top" secondItem="1zh-GU-f35" secondAttribute="bottom" constant="8" id="GYk-Y0-rpi"/>
-                    <constraint firstItem="TXq-mm-oKa" firstAttribute="leading" secondItem="o4Y-IN-VwI" secondAttribute="leading" constant="8" id="Ijd-cP-4X7"/>
-                    <constraint firstItem="se4-wu-gkO" firstAttribute="leading" secondItem="o4Y-IN-VwI" secondAttribute="leading" constant="50" id="JU9-wf-F3F"/>
-                    <constraint firstAttribute="trailing" secondItem="SbQ-yy-Qef" secondAttribute="trailing" constant="20" id="Jri-zA-fAL"/>
-                    <constraint firstAttribute="trailing" secondItem="a8H-GY-bQM" secondAttribute="trailing" constant="20" id="Lpg-EW-YQG"/>
-                    <constraint firstItem="1zh-GU-f35" firstAttribute="leading" secondItem="o4Y-IN-VwI" secondAttribute="leading" constant="50" id="MkX-rJ-1sa"/>
-                    <constraint firstItem="D0O-p3-GnX" firstAttribute="leading" secondItem="o4Y-IN-VwI" secondAttribute="leading" constant="50" id="NkD-Cv-aTe"/>
-                    <constraint firstAttribute="trailing" secondItem="eQ2-vZ-Eal" secondAttribute="trailing" constant="20" id="P6r-zp-tp0"/>
-                    <constraint firstItem="TXq-mm-oKa" firstAttribute="leading" secondItem="o4Y-IN-VwI" secondAttribute="leading" constant="50" id="QwS-ey-Ku8"/>
-                    <constraint firstItem="y7g-ym-4IB" firstAttribute="leading" secondItem="y05-YG-J5h" secondAttribute="trailing" constant="5" id="Wpf-7q-nHf"/>
-                    <constraint firstItem="o08-qb-dvJ" firstAttribute="leading" secondItem="FxI-Dk-iLP" secondAttribute="trailing" constant="5" id="XPV-Tj-E9p"/>
-                    <constraint firstItem="a8H-GY-bQM" firstAttribute="leading" secondItem="D0O-p3-GnX" secondAttribute="trailing" constant="5" id="YOC-vB-kmL"/>
-                    <constraint firstItem="se4-wu-gkO" firstAttribute="top" secondItem="o4Y-IN-VwI" secondAttribute="top" constant="6" id="YXY-jm-KH0"/>
-                    <constraint firstItem="eQ2-vZ-Eal" firstAttribute="leading" secondItem="1zh-GU-f35" secondAttribute="trailing" constant="5" id="b25-zp-heI"/>
-                    <constraint firstItem="eQ2-vZ-Eal" firstAttribute="top" secondItem="a8H-GY-bQM" secondAttribute="bottom" constant="9" id="ctJ-CC-wZy"/>
-                    <constraint firstItem="1zh-GU-f35" firstAttribute="top" secondItem="D0O-p3-GnX" secondAttribute="bottom" constant="8" id="dU9-2v-76b"/>
-                    <constraint firstItem="SbQ-yy-Qef" firstAttribute="top" secondItem="VXt-vr-xas" secondAttribute="bottom" constant="9" id="egO-x5-tJR"/>
-                    <constraint firstAttribute="trailing" secondItem="VXt-vr-xas" secondAttribute="trailing" constant="20" id="fab-Mc-N1u"/>
-                    <constraint firstItem="SbQ-yy-Qef" firstAttribute="leading" secondItem="TXq-mm-oKa" secondAttribute="trailing" constant="5" id="fzG-CN-JEW"/>
-                    <constraint firstAttribute="trailing" secondItem="qaq-e7-Wpe" secondAttribute="trailing" id="gf0-8K-7o8"/>
-                    <constraint firstAttribute="trailing" secondItem="o08-qb-dvJ" secondAttribute="trailing" constant="20" id="kJc-YG-DYz"/>
-                    <constraint firstItem="TXq-mm-oKa" firstAttribute="top" secondItem="se4-wu-gkO" secondAttribute="bottom" constant="8" id="rvC-AR-fXO"/>
-                    <constraint firstItem="y7g-ym-4IB" firstAttribute="top" secondItem="1zh-GU-f35" secondAttribute="bottom" constant="9" id="sBq-Z2-cJs"/>
-                    <constraint firstItem="D0O-p3-GnX" firstAttribute="top" secondItem="TXq-mm-oKa" secondAttribute="bottom" constant="8" id="wPA-Nt-miw"/>
+                    <constraint firstAttribute="bottom" secondItem="y3l-90-eEf" secondAttribute="bottom" id="Al9-Lv-I42"/>
+                    <constraint firstAttribute="trailing" secondItem="y3l-90-eEf" secondAttribute="trailing" id="Hko-l8-gre"/>
+                    <constraint firstItem="y3l-90-eEf" firstAttribute="leading" secondItem="o4Y-IN-VwI" secondAttribute="leading" id="Jmn-7i-wKF"/>
+                    <constraint firstItem="y3l-90-eEf" firstAttribute="top" secondItem="o4Y-IN-VwI" secondAttribute="top" id="exG-oK-zM0"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="Ijd-cP-4X7"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addressSetDevice" destination="o08-qb-dvJ" id="g6x-IO-dcU"/>
@@ -174,7 +164,7 @@
                 <outlet property="modelNameDevice" destination="y7g-ym-4IB" id="Nxw-wF-kEP"/>
                 <outlet property="receivedDataAddNewButton" destination="qaq-e7-Wpe" id="c6a-ZT-9a7"/>
             </connections>
-            <point key="canvasLocation" x="50.724637681159422" y="84.375"/>
+            <point key="canvasLocation" x="12" y="76"/>
         </tableViewCell>
     </objects>
 </document>

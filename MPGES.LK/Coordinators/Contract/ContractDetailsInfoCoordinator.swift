@@ -104,4 +104,12 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
     func navigateToBackPage() {
         
     }
+        
+    func navigationToResultOfPayment() {
+        let resultOfPay: ResultOfPaymentTableViewController = ResultOfPaymentTableViewController()
+        //resultOfPay.delegate = self
+        //resultOfPay.contractId = contract!.id
+        let navResultOfPay: UINavigationController = UINavigationController(rootViewController: resultOfPay)
+        self.navigationController.present(navResultOfPay, animated: true, completion: nil)
+    }
 }

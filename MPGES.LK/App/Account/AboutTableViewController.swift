@@ -13,9 +13,9 @@ class AboutTableViewController: CommonTableViewController {
     var sections = ["Организация", "Разработчик", "Тестировщик" ]
     
     var orgCell: UITableViewCell = { getCustomCell(textLabel: "МП ГЭС (ИНН: 8601005865)", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
-    var developerCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var developerCell: UITableViewCell = { getCustomCell(textLabel: "Тимур Тимергалиевич Ч.", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
     
-    var helperDeveloperCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var helperDeveloperCell: UITableViewCell = { getCustomCell(textLabel: "Антон Юрьевич Т.", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
     override func viewDidLoad() {
         self.navigationItem.title = "О программе"
         super.viewDidLoad()

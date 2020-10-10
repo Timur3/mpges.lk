@@ -37,6 +37,7 @@ public struct ContractModel: Decodable {
     var includedInEpd: Bool
     var invoiceDeliveryMethodId: Int
     var invoiceDeliveryMethod: InvoiceDeliveryMethodModel
+    var primaryAddress: String?
 }
 
 public struct ContractBindingModel: Encodable {

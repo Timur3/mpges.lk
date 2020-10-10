@@ -23,7 +23,6 @@ class ContractsTVController: UITableViewController {
     var sections: [String] { ["Список действующих услуг"] }
     
     public weak var delegate: ContractsTVControllerDelegate?
-    
     private var searchController = UISearchController(searchResultsController: nil)
     private var tempContractList = [ContractModel]()
     private var searchBarIsEmpty: Bool {
@@ -44,6 +43,7 @@ class ContractsTVController: UITableViewController {
         self.navigationItem.title = "Мои услуги"
         super.viewDidLoad()
         configuration()
+        //self.tableView.backgroundView = getEmptyLabelView(header: "У Вас нет активных договоров. Для добавления договора нажмите на \"+\".", width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
     }
     
     @objc func alertSheetContractAddShow() {
@@ -79,9 +79,6 @@ class ContractsTVController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return self.sections.count
-    }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100 
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.sections[section]

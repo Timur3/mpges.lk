@@ -33,7 +33,7 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     }
     
     override func viewDidLoad() {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
+        //ActivityIndicatorViewService.shared.showView(form: self.view)
         super.viewDidLoad()
         configuration()
     }
@@ -57,9 +57,6 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     }
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "Количество записей: " + "\(receivedDataList[section].receivedData.count)"
-    }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows

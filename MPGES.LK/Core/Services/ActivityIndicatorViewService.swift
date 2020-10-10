@@ -37,6 +37,7 @@ class ActivityIndicatorViewService {
         UIApplication.shared.windows[0].addSubview(containerView)
         
         activityIndicator.startAnimating()
+        
     }
     
     func showViewWinthoutBackground(form: UIView) { 

@@ -6,9 +6,11 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 import UIKit
+import SafariServices
 
 class PaymentCoordinator: Coordinator {
-
+    let options = Options()
+    
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
     public var contract: ContractModel?
@@ -24,14 +26,26 @@ class PaymentCoordinator: Coordinator {
         self.navigationController.pushViewController(paymentTV, animated: true)
     }
     
-
+    
 }
 extension PaymentCoordinator: PaymentsTVControllerDelegate {
-    func navigationPaymentInfoPage(payment: PaymentModel) {
-        
+    func navigationPaymentInfoPage(uuid: String) {
+        let webView: WebViewController = WebViewController()
+        webView.uuid = uuid
+        let navWebView: UINavigationController = UINavigationController(rootViewController: webView)
+        self.navigationController.present(navWebView, animated: true, completion: nil)
     }
     
     func navigateToFirstPage() {
         //delegate?.navigateBackToFirstPage(newOrderCoordinator: self)
     }
+    
+    func navigationPaymentInfoForSafariService(uuid: String) {
+        if let url = URL(string: options.baseUrlInitPro + uuid) {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            let vc = SFSafariViewController(url: url, configuration: config)
+            self.navigationController.present(vc, animated: true, completion: nil)
+        }
+    }    
 }

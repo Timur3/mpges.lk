@@ -11,7 +11,7 @@ import Foundation
 public struct ResponseBankModel: Decodable {
     let success: String
     let data: String?
-    let error: Error
+    let error: ApiError
     
     enum CodingKeys: String, CodingKey {
        case success = ""
@@ -20,10 +20,11 @@ public struct ResponseBankModel: Decodable {
     }
 }
 
-public struct Error: Decodable {
+public struct ApiError: Decodable {
     let code: Int
     let description: String
     let message: Int
+    
     enum CodingKeys: String, CodingKey {
         case code = "code"
         case description = "description"

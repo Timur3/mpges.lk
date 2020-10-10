@@ -44,11 +44,15 @@ extension ProfileCoordinator: ProfileTVControllerDelegate {
     
     func navigationChangePasswordPage() {
         let changePasswordVC : ChangePasswordTVController = ChangePasswordTVController()
-        changePasswordVC.delegate = self
+        changePasswordVC.delegateProfile = self
         let navChangePasswordVC: UINavigationController = UINavigationController(rootViewController: changePasswordVC)
         self.navigationController.present(navChangePasswordVC, animated: true, completion: nil)    }
     
     func navigateToFirstPage() {
         delegate?.navigateToFirstPage()
+    }
+    
+    func navigationToMailSend() {
+        
     }
 }
