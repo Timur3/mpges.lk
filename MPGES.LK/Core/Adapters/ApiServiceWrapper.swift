@@ -54,12 +54,12 @@ class ApiServiceWrapper {
     // Init apple pay
     func initApplePay(model: ApplePayModel, delegate: PayWithApplePayTVControllerDelegate)
     {
-        ApiService.shared.requestByModel(model: model, method: methodApi.initApplePay, completion: delegate.resultOfApplePay(for:))
+       //ApiService.shared.requestByModel(model: model, method: methodApi.initApplePay, completion: delegate.resultOfApplePay(for:))
         
     }
-    func getResponseApplePay(model: ApplePayModel, delegate: PayWithApplePayTVControllerDelegate){
+    func getStateApplePay(model: RequestOfPayModel, delegate: ContractDetailsInfoTVControllerDelegate){
   
-        ApiService.shared.getResponseApplePay(model: model, methodName: methodApi.initApplePay, completion: delegate.resultOfApplePay(for:))
+        ApiService.shared.requestById(id: model.id, method: methodApi.getStateApplePay, completion: delegate.navigationToResultOfPayment())
     }
     
     // получение платежей по договору

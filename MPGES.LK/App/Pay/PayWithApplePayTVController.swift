@@ -11,11 +11,10 @@ import PassKit
 import Alamofire
 
 public protocol PayWithApplePayTVControllerDelegate: class {
-    func setPay(for pay: ApplePayModel)
-    func resultOfApplePay(for response: ServerResponseModel)
+    func getStatePayment(for model: RequestOfPayModel)
 }
 
-class PayWithApplePayTVController: CenterContentAndCommonTableViewController {
+class PayWithApplePayTVController: CenterContentAndCommonTableViewController, PayWithApplePayTVControllerDelegate {
     
     public weak var contractDelegate: ContractDetailsInfoCoordinator?
     public weak var delegate: PayWithApplePayTVControllerDelegate?
@@ -47,6 +46,8 @@ class PayWithApplePayTVController: CenterContentAndCommonTableViewController {
     
 
     var response: ServerResponseModel?
+    var paymentId: Int = 0
+    var requestModel: RequestOfPayModel?
     var model: BankPayModel? {
         didSet {
             DispatchQueue.main.async {
@@ -243,19 +244,28 @@ extension PayWithApplePayTVController: PKPaymentAuthorizationViewControllerDeleg
             sum = number.decimalValue
         }
         let model = ApplePayModel(encryptedPaymentData: pd, amount: sum, contractId: self.model!.contractId)
+        self.requestModel = RequestOfPayModel(id: 0, summa: sum)
         
         ApiService.shared.getResponseApplePay(model: model, methodName: "payment/initApplePay") { (response) in
             if (!response.isError) {
+                self.requestModel?.id = Int(response.message)!
                 completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
             } else
             {
                 completion(PKPaymentAuthorizationResult(status: .failure, errors: nil))
             }
         }
+        
     }
     
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         controller.dismiss(animated: true, completion: nil)
         self.dismiss(animated: true, completion: nil)
+        self.delegate?.getStatePayment(for: self.requestModel!)
     }
+    
+    func getStatePayment(for model: RequestOfPayModel) {
+        
+    }
+    
 }

@@ -19,6 +19,7 @@
 		2217F5022403D117006654F9 /* TextFieldHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217F5012403D117006654F9 /* TextFieldHelper.swift */; };
 		2219EE082426A9F4009C6F0C /* DeliveryMethodTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2219EE062426A9F4009C6F0C /* DeliveryMethodTVController.swift */; };
 		2219FDAE248EABDF00058832 /* CenterContentAndCommonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2219FDAD248EABDF00058832 /* CenterContentAndCommonTableViewController.swift */; };
+		221E924625338E2800BD0A0F /* ResultOfPayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221E924525338E2800BD0A0F /* ResultOfPayModel.swift */; };
 		222AEA3C24FD271E008547D8 /* FinishAuthorizeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AEA3B24FD271E008547D8 /* FinishAuthorizeResponse.swift */; };
 		2233B826251CC41900EA4EB7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2233B825251CC41900EA4EB7 /* WebViewController.swift */; };
 		2235D7B6241E5DF2007A90DD /* DevicesTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235D7B4241E5DF2007A90DD /* DevicesTVController.swift */; };
@@ -163,6 +164,7 @@
 		2217F5012403D117006654F9 /* TextFieldHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldHelper.swift; sourceTree = "<group>"; };
 		2219EE062426A9F4009C6F0C /* DeliveryMethodTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMethodTVController.swift; sourceTree = "<group>"; };
 		2219FDAD248EABDF00058832 /* CenterContentAndCommonTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterContentAndCommonTableViewController.swift; sourceTree = "<group>"; };
+		221E924525338E2800BD0A0F /* ResultOfPayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultOfPayModel.swift; sourceTree = "<group>"; };
 		222AEA3B24FD271E008547D8 /* FinishAuthorizeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishAuthorizeResponse.swift; sourceTree = "<group>"; };
 		2233B825251CC41900EA4EB7 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		2235D7B4241E5DF2007A90DD /* DevicesTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesTVController.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 		220DC8582464312300A216B1 /* bankModels */ = {
 			isa = PBXGroup;
 			children = (
+				221E924525338E2800BD0A0F /* ResultOfPayModel.swift */,
 				220DC8592464314F00A216B1 /* RequestBankModel.swift */,
 				220DC85B2464317400A216B1 /* ResponseBankModel.swift */,
 				228B8F9F249A9A4200D4E5E2 /* ApplePayModel.swift */,
@@ -873,6 +876,7 @@
 				22B2E812247849DE00749CA1 /* AboutTableViewController.swift in Sources */,
 				22F1736723D77DF90065751E /* ReceivedDataRegisterTVController.swift in Sources */,
 				2284AE70242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift in Sources */,
+				221E924625338E2800BD0A0F /* ResultOfPayModel.swift in Sources */,
 				22DABD2E2508040B00A8B79B /* PasswordChangeModel.swift in Sources */,
 				22E796DE2519F28D00DC197D /* ContractStatusModel.swift in Sources */,
 				226AA7D123CE34BF003F006A /* Options.swift in Sources */,
