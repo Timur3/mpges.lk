@@ -18,9 +18,9 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
     var sections: [String] {["Лицевой счет", "Доставка электронного чека", ""]}
     
     var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
-    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
+    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Подтвердить платеж", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
-    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
+    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
     
     var accountTextField: UITextField = { getCustomTextField(placeholder: "") }()
     var contactTextField: UITextField = { getCustomTextField(placeholder: "") }()
@@ -42,18 +42,14 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        // Получение списка договоров
-        //delegate?.getContracts()
     }
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return sections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
             return 1
@@ -129,10 +125,9 @@ extension PayWithSberbankOnlineTVController: PayWithSberbankOnlineTVControllerDe
                     }
             }
         } else {
-            let url = URL(string: response.data!) //"sberbankonline://payments/services/init/?ids=eyJjbiI6eyJiIjoiMjg0IiwibiI6ItCt0LvQtdC60YLRgNC-0Y3QvdC10YDQs9C40Y8iLCJwcyI6IjU1MDY5Njc5NSJ9LCJucyI6eyJub2RlMC5vbmxpbmUuc2JlcmJhbmsucnUiOnsicHMiOiI1MDA2NjQyMDcifSwibm9kZTEub25saW5lLnNiZXJiYW5rLnJ1Ijp7InBzIjoiODQ3NTI1In0sIm5vZGUyLm9ubGluZS5zYmVyYmFuay5ydSI6eyJwcyI6IjUwMDY2NDY5MSJ9LCJub2RlMy5vbmxpbmUuc2JlcmJhbmsucnUiOnsicHMiOiI1MDA2NjQxMDgifSwibm9kZTQub25saW5lLnNiZXJiYW5rLnJ1Ijp7InBzIjoiNTAwNjU4MzkzIn0sIm5vZGU1Lm9ubGluZS5zYmVyYmFuay5ydSI6eyJwcyI6IjUwMDY1ODQ2MyJ9fSwiYXQiOmZhbHNlfQ==&vls=eyJ2cyI6W3sibiI6ItCb0JjQptCV0JLQntCZINCh0KfQldCiIiwidiI6Ijg2MDAwMzAwMDAzIn1dfQ==")
+            let url = URL(string: response.data!)
             UIApplication.shared.open(url!) { (result) in
                 if result {
-                    // The URL was delivered successfully!
                     self.cancelButton()
                 }
             }

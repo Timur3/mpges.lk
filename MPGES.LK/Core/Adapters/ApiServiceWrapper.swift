@@ -52,14 +52,12 @@ class ApiServiceWrapper {
     }
     
     // Init apple pay
-    func initApplePay(model: ApplePayModel, delegate: PayWithApplePayTVControllerDelegate)
-    {
+    //func initApplePay(model: ApplePayModel, delegate: PayWithApplePayTVControllerDelegate) {
        //ApiService.shared.requestByModel(model: model, method: methodApi.initApplePay, completion: delegate.resultOfApplePay(for:))
         
-    }
-    func getStateApplePay(model: RequestOfPayModel, delegate: ContractDetailsInfoTVControllerDelegate){
-  
-        ApiService.shared.requestById(id: model.id, method: methodApi.getStateApplePay, completion: delegate.navigationToResultOfPayment())
+    //}
+    func getStateApplePay(model: RequestOfPayModel, delegate: ContractDetailsInfoTVControllerDelegate) {
+        ApiService.shared.requestById(id: model.id, method: methodApi.getStateOfPayment, completion: delegate.navigationToResultOfPayment(for:))
     }
     
     // получение платежей по договору
@@ -168,7 +166,7 @@ class ApiServiceWrapper {
     func getContractStatus(id: Int, status: UITableViewCell, value: UILabel){
         ApiService.shared.requestById(id: id, method: methodApi.getContractStatusById) { (model: ContractStatusModel) in
             status.textLabel?.text = model.statusName
-            value.text = formatRusCurrency(for: "\(model.value)")
+            value.text = formatRusCurrency(model.value)
         }
     }
 }

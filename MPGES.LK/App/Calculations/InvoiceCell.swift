@@ -18,7 +18,7 @@ class InvoiceCell: UITableViewCell {
     
     func update(for invoice: InvoiceModel) {
         textLabel!.text = invoice.month?.name
-        detailTextLabel?.text = "Начислено: " + formatRusCurrency(for: "\(invoice.debet)")
+        detailTextLabel?.text = "Начислено: " + formatRusCurrency(invoice.debet)
         imageView?.image = UIImage(systemName: myImage.textPlus.rawValue)
         
         let imgView = UIImageView(image: UIImage(systemName: myImage.dote.rawValue))
@@ -31,9 +31,6 @@ class InvoiceCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.detailTextLabel!.layer.cornerRadius = 4
-        //self.layer.cornerRadius = 8
-        self.detailTextLabel!.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

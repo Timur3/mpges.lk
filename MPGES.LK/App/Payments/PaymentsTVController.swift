@@ -42,7 +42,7 @@ class PaymentsTVController: CommonTableViewController {
     
     override func viewDidLoad() {
         ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
-        navigationItem.title = "История платежей"
+        navigationItem.title = "Платежи"
         super.viewDidLoad()
         configuration()
     }
@@ -76,13 +76,12 @@ class PaymentsTVController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(paymentsList[section].year)" + " год"
+        let count = paymentsList[section].payments.count
+        let sum = paymentsList[section].payments.map({ $0.summa }).reduce(0, +)
+        let msg = "Всего записей: \(count) на сумму \(formatRusCurrency(sum))"
+        return "\(paymentsList[section].year) год\n\(msg)"
     }
-    
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Количество записей: " + "\(paymentsList[section].payments.count)" + " на сумму: " + "\(paymentsList[section].payments.map({ $0.summa }).reduce(0, +))"
-    }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return paymentsList[section].payments.count

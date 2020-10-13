@@ -10,21 +10,16 @@ import UIKit
 import PassKit
 import Alamofire
 
-public protocol PayWithApplePayTVControllerDelegate: class {
-    func getStatePayment(for model: RequestOfPayModel)
-}
-
-class PayWithApplePayTVController: CenterContentAndCommonTableViewController, PayWithApplePayTVControllerDelegate {
+class PayWithApplePayTVController: CommonTableViewController {
     
-    public weak var contractDelegate: ContractDetailsInfoCoordinator?
-    public weak var delegate: PayWithApplePayTVControllerDelegate?
+    public weak var contractDelegate: ContractDetailsInfoTVControllerUserDelegate?
     
     var sections: [String] {["Лицевой счет", "Сумма к оплате", "Доставка электронного чека"]}
     
     var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
-    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
+    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }()
     //var saveCell: UITableViewCell { getCustomCell(textLabel: "", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
-    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
+    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
     
     var accountTextField: UITextField = { getCustomTextField(placeholder: "") }()
     var contactTextField: UITextField = { getCustomTextField(placeholder: "") }()
@@ -44,7 +39,7 @@ class PayWithApplePayTVController: CenterContentAndCommonTableViewController, Pa
         return paymentButton
     }()
     
-
+    
     var response: ServerResponseModel?
     var paymentId: Int = 0
     var requestModel: RequestOfPayModel?
@@ -67,7 +62,10 @@ class PayWithApplePayTVController: CenterContentAndCommonTableViewController, Pa
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // Получение списка договоров
-        //delegate?.getContracts()
+        if (requestModel != nil) {
+            self.contractDelegate?.getStatePayment(for: requestModel!)
+            print("getState")
+        }
     }
     
     // MARK: - Table view data source
@@ -150,16 +148,10 @@ class PayWithApplePayTVController: CenterContentAndCommonTableViewController, Pa
     }
     
     @objc func inputSummaTFAction(){
-        if !(summaTextField.text!.isEmpty) {
-            let amount = summaTextField.text!.removeFormatAndSpace()
-            if amount > 0.00 {
-                summaTextField.text = formatRusCurrency(for: "\(amount)")
-            } else
-            {
-                summaTextField.text = formatRusCurrency(for: "1000")
-            }
-        }
+        let amount = removeFormatAndSpace(for: summaTextField.text!)
+        summaTextField.text = formatRusCurrency(amount)
     }
+    
     @objc private func applePayButtonTapped(sender: UIButton) {
         if isValidSumma(tf: summaTextField) {
             self.purchase()
@@ -198,20 +190,18 @@ extension PayWithApplePayTVController {
     }
     
     func purchase() {
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "ru_RU")
-        formatter.numberStyle = .currency
-        
-        let sumStr = self.summaTextField.text!
-        if let number = formatter.number(from: sumStr) {
-            let amount = number.decimalValue
-            let paymentRequest = createPaymentRequestForApplePay(sum: NSDecimalNumber(decimal: amount))
-            
-            if let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest) {
-                
+        let amount = removeFormatAndSpace(for: self.summaTextField.text!)
+        if amount > 4.99 {
+        let paymentRequest = createPaymentRequestForApplePay(sum: NSDecimalNumber(decimal: amount))
+        if let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest) {
                 controller.delegate = self
                 present(controller, animated: true, completion: nil)
             }
+        } else {
+            AlertControllerAdapter.shared.show(
+                title: "Ошибка",
+                mesg: "Минимальная сумма платежа 5.00 ₽",
+                form: self)
         }
     }
     
@@ -244,11 +234,11 @@ extension PayWithApplePayTVController: PKPaymentAuthorizationViewControllerDeleg
             sum = number.decimalValue
         }
         let model = ApplePayModel(encryptedPaymentData: pd, amount: sum, contractId: self.model!.contractId)
-        self.requestModel = RequestOfPayModel(id: 0, summa: sum)
         
+        self.requestModel = RequestOfPayModel(id: 0, summa: sum)
         ApiService.shared.getResponseApplePay(model: model, methodName: "payment/initApplePay") { (response) in
             if (!response.isError) {
-                self.requestModel?.id = Int(response.message)!
+                self.requestModel?.id = Int(response.data!)!
                 completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
             } else
             {
@@ -261,11 +251,6 @@ extension PayWithApplePayTVController: PKPaymentAuthorizationViewControllerDeleg
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         controller.dismiss(animated: true, completion: nil)
         self.dismiss(animated: true, completion: nil)
-        self.delegate?.getStatePayment(for: self.requestModel!)
+        //self.getStatePayment(for: self.requestModel!)
     }
-    
-    func getStatePayment(for model: RequestOfPayModel) {
-        
-    }
-    
 }

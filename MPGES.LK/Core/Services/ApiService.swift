@@ -120,7 +120,7 @@ class ApiService {
                 response in
                 guard let strData = response.data,
                     let text = String(data: strData, encoding: .utf8) else { return }
-                label.text = formatRusCurrency(for: text)
+                label.text = formatRusCurrency(text)
 
         }
     }

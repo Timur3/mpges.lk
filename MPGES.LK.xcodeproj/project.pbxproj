@@ -106,7 +106,7 @@
 		22DA897B242E884A002D4D57 /* PayWithApplePayTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA8979242E884A002D4D57 /* PayWithApplePayTVController.swift */; };
 		22DABD2E2508040B00A8B79B /* PasswordChangeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DABD2D2508040B00A8B79B /* PasswordChangeModel.swift */; };
 		22DB7BC3253035AE00F70737 /* ResultOfPaymentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB7BC2253035AE00F70737 /* ResultOfPaymentTableViewController.swift */; };
-		22DB7BC7253063A700F70737 /* StateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB7BC6253063A700F70737 /* StateResponse.swift */; };
+		22DB7BC7253063A700F70737 /* StatePaymentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB7BC6253063A700F70737 /* StatePaymentResponse.swift */; };
 		22DB7BCF2530828D00F70737 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DB7BCD2530828D00F70737 /* TableViewCell.swift */; };
 		22DB7BD02530828D00F70737 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DB7BCE2530828D00F70737 /* TableViewCell.xib */; };
 		22DE41E52423E2830069DABE /* InvoiceTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DE41E42423E2830069DABE /* InvoiceTVCell.xib */; };
@@ -250,7 +250,7 @@
 		22DA8979242E884A002D4D57 /* PayWithApplePayTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithApplePayTVController.swift; sourceTree = "<group>"; };
 		22DABD2D2508040B00A8B79B /* PasswordChangeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeModel.swift; sourceTree = "<group>"; };
 		22DB7BC2253035AE00F70737 /* ResultOfPaymentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultOfPaymentTableViewController.swift; sourceTree = "<group>"; };
-		22DB7BC6253063A700F70737 /* StateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateResponse.swift; sourceTree = "<group>"; };
+		22DB7BC6253063A700F70737 /* StatePaymentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatePaymentResponse.swift; sourceTree = "<group>"; };
 		22DB7BCD2530828D00F70737 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		22DB7BCE2530828D00F70737 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		22DE41E42423E2830069DABE /* InvoiceTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceTVCell.xib; sourceTree = "<group>"; };
@@ -368,7 +368,7 @@
 				220DC85B2464317400A216B1 /* ResponseBankModel.swift */,
 				228B8F9F249A9A4200D4E5E2 /* ApplePayModel.swift */,
 				222AEA3B24FD271E008547D8 /* FinishAuthorizeResponse.swift */,
-				22DB7BC6253063A700F70737 /* StateResponse.swift */,
+				22DB7BC6253063A700F70737 /* StatePaymentResponse.swift */,
 			);
 			path = bankModels;
 			sourceTree = "<group>";
@@ -930,7 +930,7 @@
 				22C6A03E2529E0E300623593 /* EmailToDeveloperTVController copy.swift in Sources */,
 				226AA7C723CE24BF003F006A /* ApiService.swift in Sources */,
 				22BC8330248EB9090061182E /* ReceivedDataCommonViewController.swift in Sources */,
-				22DB7BC7253063A700F70737 /* StateResponse.swift in Sources */,
+				22DB7BC7253063A700F70737 /* StatePaymentResponse.swift in Sources */,
 				223FDF8923D092BD0029E547 /* ContractModel.swift in Sources */,
 				223F8FAC241A0A8A00CDCF01 /* OfficesViewController.swift in Sources */,
 				2269014A244E273D00DB21F2 /* ChangePasswordTVController.swift in Sources */,
@@ -1123,7 +1123,7 @@
 				CODE_SIGN_ENTITLEMENTS = "mpges.lk/МП ГЭС.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8P5Z32Z62F;
 				INFOPLIST_FILE = mpges.lk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1147,7 +1147,7 @@
 				CODE_SIGN_ENTITLEMENTS = "mpges.lk/МП ГЭС.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8P5Z32Z62F;
 				INFOPLIST_FILE = mpges.lk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;

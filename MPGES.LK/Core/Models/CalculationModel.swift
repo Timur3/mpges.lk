@@ -31,9 +31,9 @@ public struct CalculationModel: Decodable {
     var testi:                  Int
     var pTesti:                 Int
     var volume:                 Int
-    var summa:                  Double
-    var powerObj:               Double
-    var factorUseValue:         Double
+    var summa:                  Decimal
+    var powerObj:               Decimal
+    var factorUseValue:         Decimal
     var createBy:               String
     var createDate:             String
     var note:                   String

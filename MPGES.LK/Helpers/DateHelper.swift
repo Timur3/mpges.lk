@@ -47,10 +47,10 @@ func getCurrentYear() -> Int {
     return Calendar.current.component(.year, from: Date())
 }
 
-func getCurrentDate() -> String {
+func formatRusDate(for date: Date) -> String {
     let formatter = DateFormatter()
-    formatter.dateFormat = "dd.MM.yyyy"
-    return formatter.string(from: Date())
+    formatter.locale = Locale(identifier: "ru_RU")
+    formatter.dateStyle = .short
+    
+    return formatter.string(from: date)
 }
-
-

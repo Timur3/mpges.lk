@@ -12,7 +12,7 @@ class FirstTVController: CenterContentAndCommonTableViewController {
     
     public weak var delegate: MainCoordinatorDelegate?
     
-    var sections: [String] {["", "", ""]}
+    var sections: [String?] {[nil, nil, nil]}
     
     var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.none, textAlign: .left, accessoryType: .none) }()
     var inputCell: UITableViewCell { getCustomCell(textLabel: "Войти", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }

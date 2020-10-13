@@ -46,7 +46,7 @@ class OfficesViewController: UIViewController, YMKUserLocationObjectListener {
         
         mapView.mapWindow.map.move(
         with: YMKCameraPosition.init(target: YMKPoint(latitude: 61.008456, longitude: 69.020479), zoom: 13, azimuth: 0, tilt: 0),
-        animationType: YMKAnimation(type: YMKAnimationType.smooth, duration: 5),
+            animationType: YMKAnimation(type: YMKAnimationType.linear, duration: 1),
         cameraCallback: nil)
     }
     

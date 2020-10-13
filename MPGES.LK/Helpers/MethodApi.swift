@@ -42,6 +42,7 @@ class MethodApi {
     let updateDeliveryMethod: String
     let getDeepLinkforIos: String
     let initApplePay: String
+    let getStateOfPayment: String
     init() {
         authApi = "auth/"
         getContracts = "contract/getByUser/"
@@ -76,5 +77,6 @@ class MethodApi {
         passwordChange = "user/passwordchange/"
         getDeliveryOfInvoice = "deliveryOfInvoice/getall/"
         getDeepLinkforIos = "sberbank/getdeeplinkforios/"
+        getStateOfPayment = "payment/getState/"
     }
 }

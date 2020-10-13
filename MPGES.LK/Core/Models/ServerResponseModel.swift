@@ -12,16 +12,19 @@ public class ServerResponseModel: Decodable {
     var isError: Bool
     var responseCode: Int
     var message: String
+    var data: String?
     
     enum CodingKeys: String, CodingKey {
         case isError = "isError"
         case responseCode = "responseCode"
         case message = "message"
+        case data = "data"
     }
     
-    init(isError: Bool, responseCode: Int, message: String) {
+    init(isError: Bool, responseCode: Int, message: String, data: String) {
         self.isError = isError
         self.responseCode = responseCode
         self.message = message
+        self.data = data
     }
 }

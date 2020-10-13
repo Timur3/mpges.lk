@@ -6,9 +6,10 @@
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
+import UIKit
 
 public struct ContractStatusModel: Decodable {
     let statusName: String
-    let value: Double
+    let value: Decimal
     let statusId: Int?
 }

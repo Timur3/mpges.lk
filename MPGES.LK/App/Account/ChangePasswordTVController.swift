@@ -45,13 +45,16 @@ class ChangePasswordTVController: CommonTableViewController {
     func setUpLayout(){
         currentPasswordCell.addSubview(currentPasswordTextField)
         currentPasswordTextField.leadingAnchor.constraint(equalTo: currentPasswordCell.leadingAnchor, constant: 50).isActive = true
+        currentPasswordTextField.trailingAnchor.constraint(equalTo: currentPasswordCell.trailingAnchor, constant: -1).isActive = true
         currentPasswordTextField.centerYAnchor.constraint(equalTo: currentPasswordCell.centerYAnchor).isActive = true
         // Пароль
         passwordCell.addSubview(passwordTextField)
         passwordTextField.leadingAnchor.constraint(equalTo: passwordCell.leadingAnchor, constant: 50).isActive = true
+        passwordTextField.trailingAnchor.constraint(equalTo: passwordCell.trailingAnchor, constant: -1).isActive = true
         passwordTextField.centerYAnchor.constraint(equalTo: passwordCell.centerYAnchor).isActive = true
         confirmPasswordCell.addSubview(confirmPasswordTextField)
         confirmPasswordTextField.leadingAnchor.constraint(equalTo: confirmPasswordCell.leadingAnchor, constant: 50).isActive = true
+        confirmPasswordTextField.trailingAnchor.constraint(equalTo: confirmPasswordCell.trailingAnchor, constant: -1).isActive = true
         confirmPasswordTextField.centerYAnchor.constraint(equalTo: confirmPasswordCell.centerYAnchor).isActive = true
     }
     // MARK: - Table view data source

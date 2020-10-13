@@ -12,7 +12,7 @@ class ReceivedDataCommonViewController: UIViewController {
     
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
-    private let segment = UISegmentedControl(items: ["Реестр","График"])
+    private let segment = UISegmentedControl(items: ["Список","График"])
     private var containerView = UIView()
     
     override func viewDidLoad() {
@@ -72,7 +72,7 @@ extension ReceivedDataCommonViewController {
     
     @objc func segmentSwicht(){
         if segment.selectedSegmentIndex == 0 {
-            navigationItem.title = "Реестр показаний"
+            navigationItem.title = "Показания"
             remove(asChildViewController: receivedDataChartViewController)
             add(asChildViewController: receivedDataRegisterTVController)
         } else {

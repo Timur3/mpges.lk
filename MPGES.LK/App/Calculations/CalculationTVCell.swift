@@ -20,7 +20,7 @@ class CalculationTVCell: UITableViewCell {
     func update(for calc: CalculationModel){
         calcDateLabel.text = calc.date
         calcTypeOfCalculationLabel.text = calc.typeOfCalculation.name
-        calcSumLabel.text = formatRusCurrency(for: "\(calc.summa)")
+        calcSumLabel.text = formatRusCurrency(calc.summa)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

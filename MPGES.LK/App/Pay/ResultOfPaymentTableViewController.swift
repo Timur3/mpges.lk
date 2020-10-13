@@ -11,12 +11,13 @@ import UIKit
 class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewController {
     //public weak var delegate: MainCoordinatorDelegate?
     
-    var sections: [String] {["", "Сумма платежа", "Статус платежа", ""]}
+    var sections: [String] {["", "Сумма платежа", "Статус платежа", "Детали ошибки", ""]}
     
     var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.none, textAlign: .left, accessoryType: .none) }()
-    var closeCell: UITableViewCell { getCustomCell(textLabel: "Готово", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
-    var summaCell: UITableViewCell = { getCustomCell(textLabel: "1000.00 руб.", imageCell: .none, textAlign: .center, accessoryType: .none, style: .value1) }()
-    var statusCell: UITableViewCell { getCustomCell(textLabel: "Отклонено", imageCell: .none, textAlign: .center, accessoryType: .none, style: .value1) }
+    var closeCell: UITableViewCell = { getCustomCell(textLabel: "Готово", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }()
+    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .center, accessoryType: .none) }()
+    var statusCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .center, accessoryType: .none, style: .value1) }()
+    var detailsCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .left, accessoryType: .none) }()
     
     var statusImgView: UIImageView = {
         let img = UIImageView()
@@ -27,6 +28,8 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
         return img
     }()
     
+    var hideDetails: Bool = true
+    
     override func viewDidLoad() {
         self.navigationItem.title = "Результат оплаты"
         self.navigationController?.navigationBar.prefersLargeTitles = false
@@ -35,11 +38,20 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
         setUpLayout()
     }
     
-    var statusPay: StateResponse? {
+    var statusPay: StatePaymentResponse? {
         didSet {
             DispatchQueue.main.async {
-                self.statusCell.textLabel?.text = "Отклонено"
-                self.statusCell.detailTextLabel?.text = "09-10-2020 22:52"
+                self.summaCell.textLabel?.text = formatRusCurrency(self.statusPay!.summa)
+                self.statusCell.detailTextLabel?.text = formatRusDate(for: Date())
+                if !(self.statusPay!.isError) {
+                    self.statusCell.textLabel?.text = "Успешно"
+                    self.statusImgView.image = UIImage(systemName: myImage.checkmark.rawValue)
+                    self.statusImgView.tintColor = .systemGreen
+                } else {
+                    self.statusCell.textLabel?.text = "Отклонено"
+                    self.detailsCell.textLabel?.text = self.statusPay?.message
+                    self.hideDetails = false
+                }
                 self.tableView.reloadData()
             }
         }
@@ -60,7 +72,7 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (indexPath.section == 0 && indexPath.row == 0) ? CGFloat(150) : UITableView.automaticDimension
+        return (indexPath.section == 0 && indexPath.row == 0) ? CGFloat(100) : UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -71,60 +83,32 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return 1
-        case 2:
-            return 1
-        case 3:
-            return 1
-        default:
-            fatalError()
-        }
+        if (hideDetails && section == 3) { return 0 }
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            switch indexPath.row {
-            case 0:
-                return logoCell
-            default:
-                fatalError()
-            }
+            return logoCell
         case 1:
-            switch indexPath.row {
-            case 0:
-                return summaCell
-            default:
-                fatalError()
-            }
+            return summaCell
         case 2:
-            switch indexPath.row {
-            case 0:
-                return statusCell
-            default:
-                fatalError()
-            }
+            return statusCell
         case 3:
-            switch indexPath.row {
-            case 0:
-                return closeCell
-            default:
-                fatalError()
-            }
+            return detailsCell
+        case 4:
+            return closeCell
         default:
             fatalError()
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        sections[section]
+        if (hideDetails && section == 3) { return nil }
+        return sections[section]
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 3 && indexPath.row == 0 {
@@ -136,6 +120,7 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
 //MARK: - CONFIGURE
 extension ResultOfPaymentTableViewController {
     private func configuration() {
+      
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
         

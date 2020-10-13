@@ -40,10 +40,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esD-hx-nMJ">
-                                <rect key="frame" x="55" y="33" width="281" height="18"/>
+                                <rect key="frame" x="55" y="33" width="281" height="17"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сумма:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nG-If-yMF">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="PFA-YV-vW4"/>
                                         </constraints>
@@ -52,18 +52,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="200000,00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzy-8s-XUc">
-                                        <rect key="frame" x="70" y="0.0" width="211" height="18"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <rect key="frame" x="70" y="0.0" width="211" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gd-Vk-Itb">
-                                <rect key="frame" x="55" y="55" width="281" height="45"/>
+                                <rect key="frame" x="55" y="54" width="281" height="46"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Касса:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Mb-0k-oGY">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="tx3-D3-4NV"/>
                                         </constraints>
@@ -72,7 +72,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label Label Label Label Label Label Label Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b72-G8-vp2">
-                                        <rect key="frame" x="70" y="0.0" width="211" height="45"/>
+                                        <rect key="frame" x="70" y="0.0" width="211" height="46"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

@@ -53,10 +53,10 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
         return receivedDataList.count
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(receivedDataList[section].year)" + " год"
-    }
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Количество записей: " + "\(receivedDataList[section].receivedData.count)"
+        let count = receivedDataList[section].receivedData.count
+        let volume = receivedDataList[section].receivedData.map({$0.volume}).reduce(0, +)
+        let msg = "Всего записей: \(count)\nобъем потребления: \(volume) кВт/ч"
+        return "\(receivedDataList[section].year)" + " год\n\(msg)"
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows

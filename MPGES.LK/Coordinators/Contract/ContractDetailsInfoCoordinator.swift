@@ -37,9 +37,9 @@ class ContractDetailsInfoCoordinator: Coordinator {
 
 extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegate {
     
-    func navigateToPayWithApplePayPage(model: BankPayModel) {
+    func navigateToPayWithApplePayPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate) {
         let payWithApplePayTVController : PayWithApplePayTVController = PayWithApplePayTVController()
-        payWithApplePayTVController.contractDelegate = self
+        payWithApplePayTVController.contractDelegate = delegate
         payWithApplePayTVController.model = model
         let navPayWithApplePayTVController: UINavigationController = UINavigationController(rootViewController: payWithApplePayTVController)
         self.navigationController.present(navPayWithApplePayTVController, animated: true, completion: nil)
@@ -105,11 +105,12 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
         
     }
         
-    func navigationToResultOfPayment() {
+    func navigationToResultOfPayment(for model: StatePaymentResponse) {
         let resultOfPay: ResultOfPaymentTableViewController = ResultOfPaymentTableViewController()
         //resultOfPay.delegate = self
-        //resultOfPay.contractId = contract!.id
+        resultOfPay.statusPay = model
         let navResultOfPay: UINavigationController = UINavigationController(rootViewController: resultOfPay)
         self.navigationController.present(navResultOfPay, animated: true, completion: nil)
+        ActivityIndicatorViewService.shared.hideView()
     }
 }

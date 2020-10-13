@@ -33,7 +33,7 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     
     var receivedDataCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     
-    var calcCell: UITableViewCell = { getCustomCell(textLabel: formatRusCurrency(for: "0"), imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var calcCell: UITableViewCell = { getCustomCell(textLabel: formatRusCurrency(0), imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }()
     
     var receivedDataTF: UITextField = { getCustomTextField(placeholder: "Введите показания", keyboardType: .numberPad) }()
@@ -147,7 +147,7 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return section == 0 ? "Стоимость 1 кВт*ч составляет: " + formatRusCurrency(for: "\(self.model?.tariffValue ?? 0)") : ""
+        return section == 0 ? "Стоимость 1 кВт*ч составляет: " + formatRusCurrency((self.model?.tariffValue ?? 0.00)) : ""
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -224,11 +224,11 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     @objc func inputReceivedDataTFAction(){
         receivedDataCell.layer.borderColor = .none
         receivedDataCell.layer.borderWidth = 0
-        guard let v1 = Double((previousReceivedDataCell.textLabel?.text)!) else { return }
-        guard let v2 = Double(receivedDataTF.text!) else { return }
+        guard let v1 = Decimal(string: (previousReceivedDataCell.textLabel?.text)!) else { return }
+        guard let v2 = Decimal(string: receivedDataTF.text!) else { return }
         let volume = v2 - v1
         let itog = volume * self.model!.tariffValue
-        calcCell.textLabel?.text = formatRusCurrency(for: "\(itog)")
+        calcCell.textLabel?.text = formatRusCurrency(itog)
     }
 }
 //MARK: - DELEGATE

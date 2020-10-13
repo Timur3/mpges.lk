@@ -20,7 +20,6 @@ public protocol ContractsTVControllerUserDelegate: class {
 }
 
 class ContractsTVController: UITableViewController {
-    var sections: [String] { ["Список действующих услуг"] }
     
     public weak var delegate: ContractsTVControllerDelegate?
     private var searchController = UISearchController(searchResultsController: nil)
@@ -40,7 +39,7 @@ class ContractsTVController: UITableViewController {
     
     override func viewDidLoad() {
         ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
-        self.navigationItem.title = "Мои услуги"
+        self.navigationItem.title = "Мои договоры"
         super.viewDidLoad()
         configuration()
         //self.tableView.backgroundView = getEmptyLabelView(header: "У Вас нет активных договоров. Для добавления договора нажмите на \"+\".", width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
@@ -78,25 +77,28 @@ class ContractsTVController: UITableViewController {
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return self.sections.count
+        return contractList.count
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sections[section]
+        return ""
     }
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Всего записей: " + String(contractList.count)
+        return "" //"Всего записей: " + String(contractList.count)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return contractList.count
+        return 1
     }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "contractCell", for: indexPath) as! ContractsTableViewCell
         cell.imageView?.image = UIImage(systemName: myImage.docText.rawValue)
-        cell.update(for: contractList[indexPath.row])
-        
+        cell.update(for: contractList[indexPath.section])
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

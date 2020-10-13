@@ -14,9 +14,9 @@ class PaymentTVCell: UITableViewCell {
     @IBOutlet weak var cashBox: UILabel!
     
     func update(for pay: PaymentModel) {
-        let sum: Double = (pay.summa)
+        let sum: Decimal = (pay.summa)
         dataPay.text = pay.datePay
-        sumPay.text = formatRusCurrency(for: "\(sum)")
+        sumPay.text = formatRusCurrency(sum)
         cashBox.text = pay.registerOfPayment?.typeOfPayment?.name
         /*let imgView = UIImageView(image: UIImage(systemName: myImage.dote.rawValue))
         imgView.isUserInteractionEnabled = true

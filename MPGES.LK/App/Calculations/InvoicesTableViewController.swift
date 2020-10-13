@@ -37,7 +37,7 @@ class InvoicesTableViewController: CommonTableViewController {
     
     override func viewDidLoad() {
         ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
-        navigationItem.title = "История начислений"
+        navigationItem.title = "Начисления"
         super.viewDidLoad()
         configuration()
     }
@@ -69,11 +69,10 @@ class InvoicesTableViewController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(invoiceList[section].year)" + " год"
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Всего записей: " + String(invoiceList[section].invoices.count)
+        let count = invoiceList[section].invoices.count
+        let sum = invoiceList[section].invoices.map({$0.debet}).reduce(0, +)
+        let msg = "Всего записей: \(count) на сумму \(formatRusCurrency(sum))"
+        return "\(invoiceList[section].year) год\n\(msg)"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

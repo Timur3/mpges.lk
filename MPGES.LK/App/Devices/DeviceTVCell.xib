@@ -136,7 +136,7 @@
                                             <constraint firstAttribute="width" constant="180" id="jza-3M-eWE"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                                        <state key="normal" title="Сообщить показания"/>
+                                        <state key="normal" title="Передать показания"/>
                                         <connections>
                                             <action selector="ReceivedDataAddNewAction:" destination="bHV-DV-gWT" eventType="touchUpInside" id="5HN-fY-YwP"/>
                                         </connections>

@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 protocol ContractDetailsInfoTVControllerUserDelegate: class {
-    var sections: [String] { get }
+    var sections: [String?] { get }
     func setContractById(contract: ContractModel)
     func getContractById(id: Int)
+    func getStatePayment(for model: RequestOfPayModel)
 }

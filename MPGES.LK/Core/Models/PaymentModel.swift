@@ -25,15 +25,15 @@ public class PaymentsModelVeiw  {
 }
 
 public class PaymentModel: Object, Decodable {
-    @objc dynamic var id: Int
-    @objc dynamic var serviceId: Int
+    var id: Int
+    var serviceId: Int
     var invoiceId: Int?
-    @objc dynamic var registerPaytsId: Int = 0
+    var registerPaytsId: Int = 0
     var registerOfPayment: RegisterOfPayment?
-    @objc dynamic var contractId: Int = 0
-    @objc dynamic var datePay: String = ""
-    @objc dynamic var summa: Double = 0.0
-    @objc dynamic var workerId: Int = 0
+    var contractId: Int = 0
+    var datePay: String = ""
+    var summa: Decimal = 0.00
+    var workerId: Int = 0
     var note: String?
     var uuid: String?
     
@@ -51,9 +51,9 @@ public class PaymentModel: Object, Decodable {
         case uuid = "uuid"
     }
        
-    @objc open override class func primaryKey() -> String? {
-        return "id"
-    }
+    //@objc open override class func primaryKey() -> String? {
+     //   return "id"
+    //}
     func payYear() -> Int {
         return getYear(dateStr: datePay)
     }
