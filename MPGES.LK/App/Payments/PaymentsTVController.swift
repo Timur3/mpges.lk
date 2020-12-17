@@ -16,7 +16,7 @@ public protocol PaymentsTVControllerDelegate: class {
 }
 
 protocol PaymentsTVControllerUserDelegate {
-    func setPayments(payments:PaymentsModelRoot)
+    func setPayments(payments:ResultModel<[PaymentModel]>)
     func refreshData()
     func mapToPaymentsModelView(payments:[PaymentModel]) -> [PaymentsModelVeiw]
 }
@@ -25,7 +25,6 @@ class PaymentsTVController: CommonTableViewController {
     public weak var delegate: PaymentsTVControllerDelegate?
     private var searchController = UISearchController(searchResultsController: nil)
     var contractId: Int = 0
-    let options = Options()
     
     private var tempPayments = [PaymentModel]()
     private var searchBarIsEmpty: Bool {
@@ -159,12 +158,12 @@ extension PaymentsTVController: PaymentsTVControllerUserDelegate {
         self.refreshControl?.endRefreshing()
     }
     
-    func setPayments(payments: PaymentsModelRoot) {
+    func setPayments(payments: ResultModel<[PaymentModel]>) {
         // todo доделать получение данных из realm
-        let model = mapToPaymentsModelView(payments: payments.data)
+        let model = mapToPaymentsModelView(payments: payments.data!)
         paymentsList = model
         // для поиска
-        tempPayments = payments.data
+        tempPayments = payments.data!
         
         //DataProviderService.shared.saveObjects(payments.data)
         ActivityIndicatorViewService.shared.hideView()

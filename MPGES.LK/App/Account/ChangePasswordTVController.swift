@@ -10,7 +10,7 @@ import UIKit
 
 protocol ChangePasswordTVControllerDelegate: class {
     func requestForChange(model: PasswordChangeModel)
-    func responseOfChange(result: ServerResponseModel)
+    func responseOfChange(result: ResultModel<String>)
 }
 
 class ChangePasswordTVController: CommonTableViewController {
@@ -165,7 +165,7 @@ class ChangePasswordTVController: CommonTableViewController {
 //MARK: - CONFIGURE
 extension ChangePasswordTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
@@ -178,13 +178,13 @@ extension ChangePasswordTVController: ChangePasswordTVControllerDelegate {
         ApiServiceWrapper.shared.passwordChange(model: model, delegate: self)
     }
     
-    func responseOfChange(result: ServerResponseModel) {
+    func responseOfChange(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка" : "Успешно",
-            mesg: result.message,
+            mesg: result.message!,
             form: self) { (UIAlertAction) in
             print(result.message as Any)
             if !isError {

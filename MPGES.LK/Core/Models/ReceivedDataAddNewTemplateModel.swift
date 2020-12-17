@@ -7,11 +7,6 @@
 //
 import Foundation
 
-public class ReceivedDataAddNewTemplateModelRoot: Decodable {
-    var count: Int
-    var data: [ReceivedDataAddNewTemplateModel]
-}
-
 public struct ReceivedDataAddNewTemplateModel: Encodable, Decodable {
     let tariffZoneId: Int
     let tariffZone: String

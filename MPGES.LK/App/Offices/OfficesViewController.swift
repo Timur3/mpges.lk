@@ -51,19 +51,19 @@ class OfficesViewController: UIViewController, YMKUserLocationObjectListener {
     }
     
     func createOfObjects(){
-        let iconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        iconView.image = UIImage(named:"MarkGES")
+        let iconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        iconView.image = UIImage(named:"ScreenPageLogo")
         let viewProvider = YRTViewProvider(uiView: iconView);
         
         let mapObjects = mapView.mapWindow.map.mapObjects
         
         let placeMarkMainOffice = mapObjects.addPlacemark(with: MAIN_OFFICE, view: viewProvider!)
         //placeMarkMainOffice
-        placeMarkMainOffice.opacity = 0.5
+        placeMarkMainOffice.opacity = 1
         placeMarkMainOffice.isDraggable = false
         
         let placeMarkMainOfficeChehova = mapObjects.addPlacemark(with: OFFICE_CHEHOVA, view: viewProvider!)
-        placeMarkMainOfficeChehova.opacity = 0.5
+        placeMarkMainOfficeChehova.opacity = 1
         placeMarkMainOfficeChehova.isDraggable = false
     }
 

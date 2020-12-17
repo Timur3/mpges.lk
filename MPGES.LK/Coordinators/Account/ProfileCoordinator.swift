@@ -23,8 +23,6 @@ class ProfileCoordinator: Coordinator {
         profileVC.delegate = self
         self.navigationController.pushViewController(profileVC, animated: true)
     }
-    
-
 }
 extension ProfileCoordinator: ProfileTVControllerDelegate {
     

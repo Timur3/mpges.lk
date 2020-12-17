@@ -11,7 +11,7 @@ import UIKit
 
 protocol ContractDetailsInfoTVControllerUserDelegate: class {
     var sections: [String?] { get }
-    func setContractById(contract: ContractModel)
+    func setContractById(contract: ResultModel<ContractModel>)
     func getContractById(id: Int)
     func getStatePayment(for model: RequestOfPayModel)
 }

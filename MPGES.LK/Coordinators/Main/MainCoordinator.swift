@@ -9,8 +9,8 @@
 import UIKit
 
 protocol MainCoordinatorDelegate: class {
-    func navigateToSingInPage()
-    func navigateToSingUpPage()
+    func navigateToSignInPage()
+    func navigateToSignUpPage()
     func navigateToFirstPage()
     func navigateToRecoveryPasswordPage()
     func goToNextSceneApp()
@@ -52,10 +52,10 @@ extension MainCoordinator: MainCoordinatorDelegate {
     }
     
     // Переход на страницу входа
-    func navigateToSingInPage() {
-       let singInViewController : SingInTVController = SingInTVController()
-       singInViewController.delegate = self
-       self.navigationController.pushViewController(singInViewController, animated: true)
+    func navigateToSignInPage() {
+       let signInViewController : SignInTVController = SignInTVController()
+       signInViewController.delegate = self
+       self.navigationController.pushViewController(signInViewController, animated: true)
     }
     
     func navigateToFirstPage() {
@@ -80,9 +80,9 @@ extension MainCoordinator: MainCoordinatorDelegate {
         mainTabBarCoordinator.start()
     }
     
-    func navigateToSingUpPage() {
-        let singUpTVController : SingUpTVController = SingUpTVController()
-        let navSingUpTVController: UINavigationController = UINavigationController(rootViewController: singUpTVController)
-        self.navigationController.present(navSingUpTVController, animated: true, completion: nil)
+    func navigateToSignUpPage() {
+        let signUpTVController : SignUpTVController = SignUpTVController()
+        let navSignUpTVController: UINavigationController = UINavigationController(rootViewController: signUpTVController)
+        self.navigationController.present(navSignUpTVController, animated: true, completion: nil)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 public protocol ReceivedDataAddNewTemplateTVControllerDelegate: class {
-    func resultOfSending(result: ServerResponseModel)
+    func resultOfSending(result: ResultModel<String>)
 }
 
 class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
@@ -233,18 +233,18 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
 }
 //MARK: - DELEGATE
 extension ReceivedDataAddNewTemplateTVController: ReceivedDataAddNewTemplateTVControllerDelegate {
-    func resultOfSending(result: ServerResponseModel) {
+    func resultOfSending(result: ResultModel<String>) {
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message,
+            mesg: result.message!,
             form: self) { (UIAlertAction) in self.cancelButton() }
     }
 }
 //MARK: - CONFIGURE
 extension ReceivedDataAddNewTemplateTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]

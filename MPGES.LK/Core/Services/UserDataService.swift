@@ -10,6 +10,10 @@ import Foundation
 
 
 public class UserDataService: UserDataProtocol {
+    func delToken() {
+        UserDefaults.standard.set("", forKey: "accessToken")
+        UserDefaults.standard.set("", forKey: "refreshToken")
+    }
     
     static let shared = UserDataService()
     
@@ -27,6 +31,15 @@ public class UserDataService: UserDataProtocol {
     
     func getToken() -> String? {
            return UserDefaults.standard.string(forKey: "accessToken")
+    }
+    
+    
+    func setRefreshToken(token: String) {
+        UserDefaults.standard.set(token, forKey: "refreshToken")
+    }
+    
+    func getRefreshToken() -> String? {
+           return UserDefaults.standard.string(forKey: "refreshToken")
     }
     
     func setCurrentContract(contract: ContractModel) {
@@ -49,5 +62,6 @@ public class UserDataService: UserDataProtocol {
         UserDefaults.standard.set("", forKey: "accessToken")
         UserDefaults.standard.set("", forKey: "currentContract")
         UserDefaults.standard.set("", forKey: "currentInvoice")
+        UserDefaults.standard.set("", forKey: "refreshToken")
     }
 }

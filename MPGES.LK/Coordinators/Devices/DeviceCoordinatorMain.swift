@@ -23,10 +23,7 @@ class DeviceCoordinatorMain: Coordinator {
         deviceTV.contractId = contract!.id
         self.navigationController.pushViewController(deviceTV, animated: true)
     }
-    
-}
-extension DeviceCoordinatorMain {
-    
+  
     func navigationReceivedDataPage(model: DeviceModel) {
         let receivedDataTVController: ReceivedDataCommonViewController = ReceivedDataCommonViewController()
         // todo доделать получение данных из realm

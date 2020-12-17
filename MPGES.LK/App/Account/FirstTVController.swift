@@ -17,7 +17,7 @@ class FirstTVController: CenterContentAndCommonTableViewController {
     var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.none, textAlign: .left, accessoryType: .none) }()
     var inputCell: UITableViewCell { getCustomCell(textLabel: "Войти", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
-    var singUpCell: UITableViewCell { getCustomCell(textLabel: "Регистрация", imageCell: .none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
+    var signUpCell: UITableViewCell { getCustomCell(textLabel: "Регистрация", imageCell: .none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
     
     var logoImgView: UIImageView = {
         let img = UIImageView()
@@ -92,7 +92,7 @@ class FirstTVController: CenterContentAndCommonTableViewController {
         case 2:
             switch indexPath.row {
             case 0:
-                return singUpCell
+                return signUpCell
             default:
                 fatalError()
             }
@@ -109,11 +109,11 @@ class FirstTVController: CenterContentAndCommonTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         if indexPath.section == 1 && indexPath.row == 0 {
-            delegate?.navigateToSingInPage()
+            delegate?.navigateToSignInPage()
         }
         
         if indexPath.section == 2 && indexPath.row == 0 {
-            delegate?.navigateToSingUpPage()
+            delegate?.navigateToSignUpPage()
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SingInTVController.swift
+//  SignInTVController.swift
 //  mpges.lk
 //
 //  Created by Timur on 23.04.2020.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-public protocol SingInTVControllerUserDelegate: class {
-    func authApi(model: AuthModel)
-    func resultAuthApi(result: ResponseModel)
+public protocol SignInTVControllerUserDelegate: class {
+    func authApi(model: SignInModel)
+    func resultAuthApi(result: ResultModel<TokensModel>)
 }
 
-class SingInTVController: CenterContentAndCommonTableViewController {
+class SignInTVController: CenterContentAndCommonTableViewController {
     var sections: [String] {["Авторизация", "", ""]}
-    let userDataService = UserDataService()
+    let userDataService = UserDataService.shared
     
     public weak var delegate: MainCoordinator?
-    public weak var delegateUser: SingInTVControllerUserDelegate?
+    public weak var delegateUser: SignInTVControllerUserDelegate?
     
     var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
     var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
@@ -126,7 +126,8 @@ class SingInTVController: CenterContentAndCommonTableViewController {
             let access = ApiService.Connectivity.isConnectedToInternet
             if access {
                 if isValidEmail(emailTextField.text!) {
-                    let model = AuthModel(email: emailTextField.text!, password: passwordTextField.text!)
+                    let deviceId = String(UIDevice.current.identifierForVendor!.hashValue)
+                    let model = SignInModel(email: emailTextField.text!, password: passwordTextField.text!, deviceId: deviceId)
                     self.delegateUser?.authApi(model: model)
                 } else
                 {
@@ -155,13 +156,15 @@ class SingInTVController: CenterContentAndCommonTableViewController {
     }
     
     @objc func geToDemo() {
-        let model = AuthModel(email: "demo@mp-ges.ru", password: "Qwerty123!")
+        ActivityIndicatorViewForNaviagtionItem.shared.showAI(nav: self.navigationItem)
+        let deviceId = String(UIDevice.current.identifierForVendor!.hashValue)
+        let model = SignInModel(email: "demo@mp-ges.ru", password: "Qwerty123!", deviceId: deviceId)
         ApiServiceWrapper.shared.authApi(model: model, delegate: self)
     }
 }
 
 //MARK: - CONFIGURE
-extension SingInTVController {
+extension SignInTVController {
     private func configuration() {
         let demoBtn = UIBarButtonItem(title: "Demo", style: .plain, target: self, action: #selector(geToDemo))
         self.navigationItem.rightBarButtonItems = [demoBtn]
@@ -174,23 +177,24 @@ extension SingInTVController {
     }
 }
 
-extension SingInTVController: SingInTVControllerUserDelegate {
+extension SignInTVController: SignInTVControllerUserDelegate {
     
-    func authApi(model: AuthModel) {
+    func authApi(model: SignInModel) {
         if (self.indexPath != nil) {
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
         userDataService.setKey(keyName: "email", keyValue: model.email)
         userDataService.setKey(keyName: "dwp", keyValue: model.password)
         ApiServiceWrapper.shared.authApi(model: model, delegate: self)
+        
     }
     
-    func resultAuthApi(result: ResponseModel) {
+    func resultAuthApi(result: ResultModel<TokensModel>) {
         if (self.indexPath != nil) {
             ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
         if !result.isError {
-            userDataService.setToken(token: result.data!)
+            userDataService.setToken(token: result.data!.accessToken)
             self.delegate?.goToNextSceneApp()
             navigationController?.isNavigationBarHidden = true
         } else {

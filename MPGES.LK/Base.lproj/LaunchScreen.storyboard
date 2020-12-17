@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScreenPageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-Ea-Dae">
-                                <rect key="frame" x="137.5" y="250" width="100" height="100"/>
+                                <rect key="frame" x="137.5" y="283.5" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="JdK-vH-KWd"/>
                                     <constraint firstAttribute="height" constant="100" id="qGv-Qm-ItI"/>
@@ -36,7 +36,7 @@
                         <constraints>
                             <constraint firstItem="dkh-Ea-Dae" firstAttribute="centerX" secondItem="Qip-qG-lYF" secondAttribute="centerX" id="9rB-kU-nJb"/>
                             <constraint firstItem="T1c-bz-avG" firstAttribute="centerX" secondItem="Qip-qG-lYF" secondAttribute="centerX" id="Cyd-Ad-DU3"/>
-                            <constraint firstItem="dkh-Ea-Dae" firstAttribute="top" secondItem="yQQ-Oy-Urk" secondAttribute="top" constant="250" id="jRH-gm-Vw3"/>
+                            <constraint firstItem="dkh-Ea-Dae" firstAttribute="centerY" secondItem="Qip-qG-lYF" secondAttribute="centerY" id="PaP-kS-wEu"/>
                             <constraint firstItem="yQQ-Oy-Urk" firstAttribute="bottom" secondItem="T1c-bz-avG" secondAttribute="bottom" constant="70" id="jaB-NT-2LJ"/>
                         </constraints>
                     </view>

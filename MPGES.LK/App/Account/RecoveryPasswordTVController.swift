@@ -10,8 +10,8 @@ import UIKit
 
 public protocol RecoveryPasswordTVControllerUserDelegate: class {
     func goToRecoveryPassword()
-    func resultOfCheckEmail(result: ServerResponseModel)
-    func resultOfPassordRecovery(result: ServerResponseModel)
+    func resultOfCheckEmail(result: ResultModel<String>)
+    func resultOfPassordRecovery(result: ResultModel<String>)
 }
 
 class RecoveryPasswordTVController: CenterContentAndCommonTableViewController {
@@ -112,7 +112,7 @@ class RecoveryPasswordTVController: CenterContentAndCommonTableViewController {
 }
 
 extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate {
-    func resultOfCheckEmail(result: ServerResponseModel) {
+    func resultOfCheckEmail(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         // sendPassword.isEnabled = !result.isError
         //  if result.isError {
@@ -127,12 +127,12 @@ extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate
         //ApiServiceAdapter.shared.passwordRecovery(model: model!, delegate: self)
     }
     
-    func resultOfPassordRecovery(result: ServerResponseModel) {
+    func resultOfPassordRecovery(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка" : "Успех!",
-            mesg: result.message,
+            mesg: result.message!,
             form: self) { (UIAlertAction) in
                 if (!isError) {
                     self.cancelButton()
@@ -144,7 +144,7 @@ extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate
 //MARK: - CONFIGURE
 extension RecoveryPasswordTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]

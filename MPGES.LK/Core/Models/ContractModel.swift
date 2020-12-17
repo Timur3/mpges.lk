@@ -8,11 +8,6 @@
 
 import Foundation
 
-public struct ContractModelRoot: Decodable {
-    var count: Int
-    var data: [ContractModel]
-}
-
 public struct ContractNumberModel: Encodable {
     var number: String
 }

@@ -9,7 +9,7 @@
 import UIKit
 protocol PayWithSberbankOnlineTVControllerDelegate: class {
     func getDeepLink()
-    func navigationToSberApp(response: ResponseModel)
+    func navigationToSberApp(response: ResultModel<String>)
 }
 
 class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewController {
@@ -113,7 +113,7 @@ extension PayWithSberbankOnlineTVController: PayWithSberbankOnlineTVControllerDe
         ApiServiceWrapper.shared.getDeepLinkForIos(number: Int(model!.contractNumber)!, delegate: self)
     }
     
-    func navigationToSberApp(response: ResponseModel) {
+    func navigationToSberApp(response: ResultModel<String>) {
         let isError = response.isError
         if isError {
             AlertControllerAdapter.shared.show(
@@ -140,7 +140,7 @@ extension PayWithSberbankOnlineTVController: PayWithSberbankOnlineTVControllerDe
 //MARK: - CONFIGURE
 extension PayWithSberbankOnlineTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]

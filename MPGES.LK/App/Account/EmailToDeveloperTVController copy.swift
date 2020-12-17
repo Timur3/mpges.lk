@@ -10,7 +10,7 @@ import UIKit
 
 protocol EmailToDeveloperTVControllerDelegate1: class {
     func sendMail(model: ContractBindingModel)
-    func resultSendMail(result: ServerResponseModel)
+    func resultSendMail(result: ResultModel<String>)
 }
 
 class EmailToDeveloperTVController1: CommonTableViewController {
@@ -155,7 +155,7 @@ class EmailToDeveloperTVController1: CommonTableViewController {
 //MARK: - CONFIGURE
 extension EmailToDeveloperTVController1 {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
@@ -168,7 +168,7 @@ extension EmailToDeveloperTVController1: EmailToDeveloperTVControllerDelegate1 {
         
     }
     
-    func resultSendMail(result: ServerResponseModel) {
+    func resultSendMail(result: ResultModel<String>) {
         
     }
     

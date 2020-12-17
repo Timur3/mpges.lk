@@ -10,11 +10,11 @@ import UIKit
 import Charts
 
 public protocol ReceivedDataChartViewControllerDelegate: class {
-    func setData(model: ReceivedDataVolumeModelRoot)
+    func setData(model: ResultModel<[ReceivedDataVolumeModel]>)
 }
 
 extension ReceivedDataChartViewController: ReceivedDataChartViewControllerDelegate {
-    func setData(model: ReceivedDataVolumeModelRoot) {
+    func setData(model: ResultModel<[ReceivedDataVolumeModel]>) {
         
         //let d = (0..<model.count).map { (i) -> BarChartDataEntry in
           //  return BarChartDataEntry(x: Double(model.data[i].date)!, y: model.data[i].volume)
@@ -99,9 +99,9 @@ class ReceivedDataChartViewController: UIViewController, ChartViewDelegate {
     
     func setDataCount(_ count: Int, data: [BarChartDataEntry]) {
         let barWidth = 4.0
-        let spaceForBar = 10.0
+        /*let spaceForBar = 10.0
         
-        /*let yVals = (0..<count).map { (i) -> BarChartDataEntry in
+        let yVals = (0..<count).map { (i) -> BarChartDataEntry in
          let mult = range + 1
          let val = Double(arc4random_uniform(mult))
          return BarChartDataEntry(x: Double(i)*spaceForBar, y: val)

@@ -159,7 +159,7 @@ class PayWithCreditCardViewController: UITableViewController {
 
 extension PayWithCreditCardViewController: ContractAddTVControllerUserDelegate {
     
-    func resultCheckContract(result: ServerResponseModel) {
+    func resultCheckContract(result: ResultModel<String>) {
         if (result.isError) {
             accountTextField.shake(times: 3, delta: 5)
         }
@@ -175,12 +175,12 @@ extension PayWithCreditCardViewController: ContractAddTVControllerUserDelegate {
         ApiServiceWrapper.shared.contractBinding(model: model, delegate: self)
     }
     
-    func resultToBinding(result: ServerResponseModel) {
+    func resultToBinding(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message,
+            mesg: result.message!,
             form: self) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()

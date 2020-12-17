@@ -10,10 +10,10 @@ import UIKit
 
 protocol InvoiceDetailsInfoTableViewControllerDelegate: class {
     var sections: [String] { get }
-    func setPayments(payments: PaymentsModelRoot)
-    func setCalculations(calculations: CalculationModelRoot)
+    func setPayments(payments: ResultModel<[PaymentModel]>)
+    func setCalculations(calculations: ResultModel<[CalculationModel]>)
     func sendInvoice(model: InvoiceModel)
-    func resultOfSendInvoice(result: ServerResponseModel)
+    func resultOfSendInvoice(result: ResultModel<String>)
 }
 
 class InvoiceDetailsInfoTableViewController: CommonTableViewController {
@@ -130,23 +130,23 @@ extension InvoiceDetailsInfoTableViewController: InvoiceDetailsInfoTableViewCont
         //ApiServiceWrapper.shared.sendInvoiceByEmail(id: model.id, delegate: self)
     }
     
-    func resultOfSendInvoice(result: ServerResponseModel) {
+    func resultOfSendInvoice(result: ResultModel<String>) {
         ActivityIndicatorViewService.shared.hideView()
         
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message,
+            mesg: result.message!,
             form: self)
     }
     
-    func setPayments(payments: PaymentsModelRoot) {
-        self.invoiceDetails.pay = payments.data
+    func setPayments(payments: ResultModel<[PaymentModel]>) {
+        self.invoiceDetails.pay = payments.data!
         ApiServiceWrapper.shared.getCalculationsByInvoiceId(id: invoice!.id, delegate: self)
     }
     
-    func setCalculations(calculations:CalculationModelRoot) {
-        self.invoiceDetails.calc = calculations.data
+    func setCalculations(calculations:ResultModel<[CalculationModel]>) {
+        self.invoiceDetails.calc = calculations.data!
         self.tableView.reloadData()
     }
     
@@ -161,7 +161,7 @@ extension InvoiceDetailsInfoTableViewController {
     func configuration() {
         let sendInvoice = UIBarButtonItem(image: UIImage(systemName: myImage.trayUp.rawValue), style: .plain, target: self, action: #selector(alertSheetSendInvoiceShow))
         self.navigationItem.rightBarButtonItems = [sendInvoice]
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         let nibCalc = UINib(nibName: "CalculationTVCell", bundle: nil)
         self.tableView.register(nibCalc, forCellReuseIdentifier: "calculationCell")
         let nibPay = UINib(nibName: "PaymentTVCell", bundle: nil)

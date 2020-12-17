@@ -10,5 +10,5 @@ import Foundation
 
 protocol CalculationsTVControllerDelegate {
     var sections: [String] { get }
-    func setCalculations(payments:CalculationModelRoot)
+    func setCalculations(payments:ResultModel<[PaymentModel]>)
 }

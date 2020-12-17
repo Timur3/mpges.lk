@@ -8,11 +8,6 @@
 
 import Foundation
 
-public struct ReceivedDataVolumeModelRoot: Decodable {
-    var count:  Int
-    var data:   [ReceivedDataVolumeModel]
-}
-
 public struct ReceivedDataVolumeModel: Decodable {
     var volume: Double
     var date:   String

@@ -9,7 +9,6 @@ import UIKit
 import SafariServices
 
 class PaymentCoordinator: Coordinator {
-    let options = Options()
     
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
@@ -41,7 +40,7 @@ extension PaymentCoordinator: PaymentsTVControllerDelegate {
     }
     
     func navigationPaymentInfoForSafariService(uuid: String) {
-        if let url = URL(string: options.baseUrlInitPro + uuid) {
+        if let url = URL(string: MethodApi.baseUrlInitPro + uuid) {
             let config = SFSafariViewController.Configuration()
             config.entersReaderIfAvailable = true
             let vc = SFSafariViewController(url: url, configuration: config)

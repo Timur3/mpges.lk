@@ -8,11 +8,6 @@
 
 import Foundation
 
-public struct UserModelRoot: Decodable {
-    var count: Int
-    var data: [UserModel]
-}
-
 public struct UserEmailModel: Encodable {
     var email: String
 }
@@ -48,29 +43,4 @@ public struct UserModel: Decodable, Encodable {
         self.createDate = CreateDate
         self.roleId = RoleId
     }
-}
-
-public struct SingUpModel: Encodable {
-    let password: String
-    let name: String
-    let email: String
-    let mobile: String?
-    let roleId: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case password = "password"
-        case name = "name"
-        case email = "email"
-        case mobile = "mobile"
-        case roleId = "roleId"
-    }
-    
-    init(name: String, password: String, Email: String, Mobile: String, RoleId: Int) {
-        self.password = password
-        self.name = name
-        self.email = Email
-        self.mobile = Mobile
-        self.roleId = RoleId
-    }
-
 }

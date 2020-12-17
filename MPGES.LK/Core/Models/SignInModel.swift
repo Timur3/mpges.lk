@@ -8,15 +8,8 @@
 
 import Foundation
 
-public struct AuthModel: Encodable {
+public struct SignInModel: Encodable {
     let email: String
     let password: String
-}
-
-public struct AccountModel: Encodable {
-    let email: String
-    let password: String
-    let name: String
-    let contractNumber: String
-    let code: String
+    let deviceId: String
 }

@@ -8,11 +8,6 @@
 
 import RealmSwift
 
-public class PaymentsModelRoot: Object, Decodable {
-    var count: Int
-    var data: [PaymentModel]
-}
-
 public class PaymentsModelVeiw  {
     var year: Int = 0
     var payments: [PaymentModel] = []

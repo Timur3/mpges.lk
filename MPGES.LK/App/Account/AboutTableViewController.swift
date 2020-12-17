@@ -81,6 +81,6 @@ extension AboutTableViewController {
     private func configuration() {
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
     }
 }

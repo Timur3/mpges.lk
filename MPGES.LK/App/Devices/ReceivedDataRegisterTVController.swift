@@ -8,9 +8,9 @@
 
 import UIKit
 public protocol ReceivedDataTVControllerDelegate: class {
-    func setData(model: ReceivedDataModelRoot)
+    func setData(model: ResultModel<[ReceivedDataModel]>)
     func getReceivedDataAddNewTemplatePage()
-    func resultOfDelete(result: ServerResponseModel)
+    func resultOfDelete(result: ResultModel<String>)
 }
 
 class ReceivedDataRegisterTVController: CommonTableViewController {
@@ -133,11 +133,11 @@ extension ReceivedDataRegisterTVController {
 }
 
 extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
-    func resultOfDelete(result: ServerResponseModel) {
+    func resultOfDelete(result: ResultModel<String>) {
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message,
+            mesg: result.message!,
             form: self) {
                 (UIAlertAction) in
                 if !isError {
@@ -149,9 +149,9 @@ extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
     }
     
     
-    func setData(model: ReceivedDataModelRoot) {
+    func setData(model: ResultModel<[ReceivedDataModel]>) {
         // todo доделать получение данных из realm
-        self.receivedDataList =  mapToReceivedDataModelView(receivedData: model.data)
+        self.receivedDataList =  mapToReceivedDataModelView(receivedData: model.data!)
         ActivityIndicatorViewService.shared.hideView()
     }
     

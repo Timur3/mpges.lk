@@ -17,8 +17,8 @@ protocol InvoicesTableViewControllerDelegate: class {
 
 protocol InvoicesTableViewControllerUserDelegate: class {
     var sections: [String] { get }
-    func setInvoices(invoices:InvoiceModelRoot)
-    func responseSend(result: ServerResponseModel)
+    func setInvoices(invoices: ResultModel<[InvoiceModel]>)
+    func responseSend(result: ResultModel<String>)
     func hiddenAI()
 }
 
@@ -149,16 +149,24 @@ extension InvoicesTableViewController: InvoiceCellDelegate {
         alert.addAction(actionOpenInvoice)
         alert.addAction(actionSendInvoice)
         alert.addAction(actionCancel)
+        
+        if UIDevice.isPad {
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.tableView
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = [];
+          }
+        }
         self.present(alert, animated: true, completion: { print("completion block") })
     }   
 }
 extension InvoicesTableViewController: InvoicesTableViewControllerUserDelegate {
-    func responseSend(result: ServerResponseModel) {
+    func responseSend(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message,
+            mesg: result.message!,
             form: self) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()
@@ -181,9 +189,9 @@ extension InvoicesTableViewController: InvoicesTableViewControllerUserDelegate {
         print("search")
     }
     
-    func setInvoices(invoices: InvoiceModelRoot) {
+    func setInvoices(invoices: ResultModel<[InvoiceModel]>) {
         // todo получение данных из realm
-        invoiceList = mapToInvoicesModelView(invoices: invoices.data)
+        invoiceList = mapToInvoicesModelView(invoices: invoices.data!)
         ActivityIndicatorViewService.shared.hideView()
     }
 }

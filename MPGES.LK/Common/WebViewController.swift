@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController, WKNavigationDelegate, UIWebViewDelegate {
-    let options = Options()
     var webView = WKWebView()
     var uuid: String?
     
@@ -21,7 +20,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, UIWebViewDelega
         let webView = WKWebView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         self.view.addSubview(webView)
         webView.navigationDelegate = self
-        webView.load(URLRequest(url: URL(string: options.baseUrlInitPro + uuid!)!))
+        webView.load(URLRequest(url: URL(string: MethodApi.baseUrlInitPro + uuid!)!))
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {

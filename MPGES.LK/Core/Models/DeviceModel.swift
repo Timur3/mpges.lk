@@ -8,21 +8,6 @@
 
 import Foundation
 
-public struct DevicesModelRoot: Decodable {
-    var count: Int
-    var data: [DeviceModel]
-    
-    enum CodingKeys: String, CodingKey {
-        case count = "count"
-        case data = "data"
-    }
-    
-    init(count: Int, data: [DeviceModel]) {
-        self.count = count
-        self.data = data
-    }
-}
-
 public struct DeviceModel: Decodable{
     var id: Int
     var deviceNumber: String

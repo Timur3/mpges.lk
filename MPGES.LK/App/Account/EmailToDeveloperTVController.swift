@@ -140,7 +140,7 @@ extension EmailToDeveloperTVController: MFMailComposeViewControllerDelegate {
 //MARK: - CONFIGURE
 extension EmailToDeveloperTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))

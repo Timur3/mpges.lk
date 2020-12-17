@@ -9,9 +9,9 @@
 import UIKit
 protocol ContractAddTVControllerUserDelegate: class {
     func checkContractByNumber(model: ContractNumberModel)
-    func resultCheckContract(result: ServerResponseModel)
+    func resultCheckContract(result: ResultModel<String>)
     func goToBinding(model: ContractBindingModel)
-    func resultToBinding(result: ServerResponseModel)
+    func resultToBinding(result: ResultModel<String>)
 }
 
 class ContractAddTVController: CenterContentAndCommonTableViewController {
@@ -139,7 +139,7 @@ class ContractAddTVController: CenterContentAndCommonTableViewController {
 
 extension ContractAddTVController: ContractAddTVControllerUserDelegate {
     
-    func resultCheckContract(result: ServerResponseModel) {
+    func resultCheckContract(result: ResultModel<String>) {
         if (result.isError) {
             numberTextField.shake(times: 3, delta: 5)
         }
@@ -155,12 +155,12 @@ extension ContractAddTVController: ContractAddTVControllerUserDelegate {
         ApiServiceWrapper.shared.contractBinding(model: model, delegate: self)
     }
     
-    func resultToBinding(result: ServerResponseModel) {
+    func resultToBinding(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message,
+            mesg: result.message!,
             form: self) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()
@@ -172,7 +172,7 @@ extension ContractAddTVController: ContractAddTVControllerUserDelegate {
 //MARK: - CONFIGURE
 extension ContractAddTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         self.numberTextField.becomeFirstResponder()

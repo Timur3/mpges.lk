@@ -1,5 +1,5 @@
 //
-//  SingUpTVController.swift
+//  SignUpTVController.swift
 //  mpges.lk
 //
 //  Created by Timur on 19.04.2020.
@@ -7,16 +7,18 @@
 //
 
 import UIKit
-public protocol SingUpTVControllerUserDelegate: class {
-    func singUp(user: SingUpModel)
-    func resultOfCreateUser(result: ServerResponseModel)
+public protocol SignUpTVControllerUserDelegate: class {
+    func signUp(user: SingUpModel)
+    func resultOfCreateUser(result: ResultModel<String>)
 }
 
-class SingUpTVController: CommonTableViewController {
-    var sections: [String] {["ФИО", "Контакты", "Пароль", ""]}
+class SignUpTVController: CommonTableViewController {
+    var sections: [String] {["", "ФИО", "Контакты", "Пароль", ""]}
 
-    public weak var delegateUser: SingUpTVControllerUserDelegate?
+    public weak var delegateUser: SignUpTVControllerUserDelegate?
     public weak var delegate: MainCoordinatorDelegate?
+    
+    let infoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .left, accessoryType: .none) }()
     // ФИО
     let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
     // Контакты
@@ -73,12 +75,14 @@ class SingUpTVController: CommonTableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
-            return 1
+            return 0
         case 1:
-            return 2
-        case 2:
             return 1
+        case 2:
+            return 2
         case 3:
+            return 1
+        case 4:
             return 1
         default:
             fatalError()
@@ -87,14 +91,14 @@ class SingUpTVController: CommonTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
+        case 1:
             switch indexPath.row {
             case 0:
                 return nameCell
             default:
                 fatalError()
             }
-        case 1:
+        case 2:
             switch indexPath.row {
             case 0:
                 return emailCell
@@ -103,7 +107,7 @@ class SingUpTVController: CommonTableViewController {
             default:
                 fatalError()
             }
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 return passwordCell
@@ -112,7 +116,7 @@ class SingUpTVController: CommonTableViewController {
             default:
                 fatalError()
             }
-        case 3:
+        case 4:
             switch indexPath.row {
             case 0:
                 return saveCell
@@ -125,29 +129,33 @@ class SingUpTVController: CommonTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        sections[section]
+        if section == 0 { return
+            """
+            Если Вы ранее пользовались веб-версией личного кабинета, то нет необходимости повторно регистрироваться, используйте для входа Ваши логин и пароль
+            """ }
+        return sections[section]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
         
-        if indexPath.section == 0 && indexPath.row == 0 {
+        if indexPath.section == 1 && indexPath.row == 0 {
             nameTextField.becomeFirstResponder()
         }
-        if indexPath.section == 1 && indexPath.row == 0 {
+        if indexPath.section == 2 && indexPath.row == 0 {
             emailTextField.becomeFirstResponder()
         }
-        if indexPath.section == 1 && indexPath.row == 1 {
+        if indexPath.section == 2 && indexPath.row == 1 {
             mobileTextField.becomeFirstResponder()
         }
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 3 && indexPath.row == 0 {
             passwordTextField.becomeFirstResponder()
         }
         /*if indexPath.section == 2 && indexPath.row == 1 {
             confirmPasswordTextField.becomeFirstResponder()
         }*/
-        if indexPath.section == 3 && indexPath.row == 0 {
+        if indexPath.section == 4 && indexPath.row == 0 {
             createUserAction()
         }
     }
@@ -159,24 +167,24 @@ class SingUpTVController: CommonTableViewController {
                 emailTextField.shake(times: 3, delta: 5)
             } else {
                 let user = SingUpModel(name: nameTextField.text!, password: passwordTextField.text!, Email: emailTextField.text!, Mobile: mobileTextField.text!, RoleId: 3)
-                self.delegateUser?.singUp(user: user)
+                self.delegateUser?.signUp(user: user)
         }
     }
 }
 
-extension SingUpTVController: SingUpTVControllerUserDelegate {
+extension SignUpTVController: SignUpTVControllerUserDelegate {
     
-    func singUp(user: SingUpModel) {
+    func signUp(user: SingUpModel) {
         ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        ApiServiceWrapper.shared.singUp(model: user, delegate: self)
+        ApiServiceWrapper.shared.signUp(model: user, delegate: self)
     }
     
-    func resultOfCreateUser(result: ServerResponseModel) {
+    func resultOfCreateUser(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message,
+            mesg: result.message!,
             form: self) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()
@@ -187,9 +195,9 @@ extension SingUpTVController: SingUpTVControllerUserDelegate {
 }
 
 //MARK: - CONFIGURE
-extension SingUpTVController {
+extension SignUpTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         self.hideKeyboardWhenTappedAround()
         self.delegateUser = self
         

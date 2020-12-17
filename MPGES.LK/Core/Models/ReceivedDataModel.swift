@@ -8,11 +8,6 @@
 
 import RealmSwift
 
-public class ReceivedDataModelRoot: Object, Decodable {
-    var count: Int
-    var data: [ReceivedDataModel]
-}
-
 public class ReceivedDataModelVeiw  {
     var year: Int = 0
     var receivedData: [ReceivedDataModel] = []

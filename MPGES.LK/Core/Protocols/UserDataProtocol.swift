@@ -15,6 +15,7 @@ protocol UserDataProtocol {
     
     func setToken(token: String)
     func getToken() -> String?
+    func delToken()
     
     func setCurrentContract(contract: ContractModel)
     func getCurrentContract() -> Int?

@@ -8,11 +8,6 @@
 
 import Foundation
 
-public struct InvoiceModelRoot: Decodable {
-    var count: Int
-    var data: [InvoiceModel]
-}
-
 public struct InvoiceModel: Decodable {
     let id: Int
     let contractId: Int

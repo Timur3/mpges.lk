@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DevicesTVControllerUserDelegate: class {
-    func setDevices(devices:DevicesModelRoot)
+    func setDevices(devices:ResultModel<[DeviceModel]>)
 }
 
 class DevicesTVController: CommonTableViewController {
@@ -97,9 +97,9 @@ extension DevicesTVController: DevicesTVControllerUserDelegate {
     
     var sections: [String] { ["Установленные приборы учета"] }
 
-    func setDevices(devices: DevicesModelRoot) {
+    func setDevices(devices: ResultModel<[DeviceModel]>) {
         // todo доделать получение данных из realm
-        deviceList = devices.data
+        deviceList = devices.data!
         ActivityIndicatorViewService.shared.hideView()
     }
 }

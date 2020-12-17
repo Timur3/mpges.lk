@@ -40,7 +40,7 @@ class PayWithApplePayTVController: CommonTableViewController {
     }()
     
     
-    var response: ServerResponseModel?
+    var response: ResultModel<String>?
     var paymentId: Int = 0
     var requestModel: RequestOfPayModel?
     var model: BankPayModel? {
@@ -167,7 +167,7 @@ class PayWithApplePayTVController: CommonTableViewController {
 //MARK: - CONFIGURE
 extension PayWithApplePayTVController {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
@@ -206,7 +206,8 @@ extension PayWithApplePayTVController {
     }
     
     func createPaymentRequestForApplePay(sum: NSDecimalNumber) -> PKPaymentRequest {
-        let label = "Потребленная электроэнергия"
+        let label = "МП \"ГЭС\""
+        
         let request = PKPaymentRequest()
         request.merchantIdentifier = "merchant.com.mpges.lk"
         request.supportedNetworks = [.visa, .masterCard]
@@ -214,6 +215,7 @@ extension PayWithApplePayTVController {
         request.merchantCapabilities = .capability3DS
         request.countryCode = "RU"
         request.currencyCode = "RUB"
+        //request.billingContact =
         request.paymentSummaryItems = [PKPaymentSummaryItem(label: label, amount: sum)]
         return request
     }
@@ -236,7 +238,7 @@ extension PayWithApplePayTVController: PKPaymentAuthorizationViewControllerDeleg
         let model = ApplePayModel(encryptedPaymentData: pd, amount: sum, contractId: self.model!.contractId)
         
         self.requestModel = RequestOfPayModel(id: 0, summa: sum)
-        ApiService.shared.getResponseApplePay(model: model, methodName: "payment/initApplePay") { (response) in
+        ApiService.shared.requestByModel(model: model, method: "payment/initApplePay") { (response: ResultModel<String>) in
             if (!response.isError) {
                 self.requestModel?.id = Int(response.data!)!
                 completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
@@ -245,7 +247,6 @@ extension PayWithApplePayTVController: PKPaymentAuthorizationViewControllerDeleg
                 completion(PKPaymentAuthorizationResult(status: .failure, errors: nil))
             }
         }
-        
     }
     
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {

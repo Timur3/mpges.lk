@@ -8,12 +8,13 @@
 
 import UIKit
 protocol ReceivedDataAddNewTemplateTVControllerOneStepDelegate: class {
-    func setData(model: ReceivedDataAddNewTemplateModelRoot)
+    func setData(model: ResultModel<[ReceivedDataAddNewTemplateModel]>)
 }
 
 class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTableViewController {
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
+    
     var datePicker: UIDatePicker = {
         let date = UIDatePicker()
         date.layer.masksToBounds = true
@@ -109,18 +110,18 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTable
             //dateTextField.becomeFirstResponder()
         }
         if indexPath.section == 1 && indexPath.row == 0 {
-            //if isValidDate(tf: dateTextField) {
+            if isValidDate(tf: dateTextField) {
                 ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
                 ApiServiceWrapper.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
-            /*} else {
+            } else {
                 AlertControllerAdapter.shared.show(
                     title: "Ошибка",
                     mesg: "Некорректная дата",
                     form: self)
-            }*/
+            }
         }
     }
-        
+    
     func isValidDate(tf: UITextField) -> Bool {
         let isValid = true
         if tf.text!.isEmpty { return false }
@@ -138,9 +139,9 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTable
 }
 
 extension ReceivedDataAddNewTemplateTVControllerOneStep: ReceivedDataAddNewTemplateTVControllerOneStepDelegate {
-    func setData(model: ReceivedDataAddNewTemplateModelRoot) {
+    func setData(model: ResultModel<[ReceivedDataAddNewTemplateModel]>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        let m = ReceivedDataAddNewTemplateModelView(date: "\(datePicker.date)", receivedDataAddNewTemplates: model.data)
+        let m = ReceivedDataAddNewTemplateModelView(date: "\(datePicker.date)", receivedDataAddNewTemplates: model.data!)
         self.delegate?.showReceivedDataAddNewTemplatesPage(device: device!, template: m, nav: self.navigationController!)
     }
 }
@@ -148,7 +149,7 @@ extension ReceivedDataAddNewTemplateTVControllerOneStep: ReceivedDataAddNewTempl
 //MARK: - CONFIGURE
 extension ReceivedDataAddNewTemplateTVControllerOneStep {
     private func configuration() {
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]

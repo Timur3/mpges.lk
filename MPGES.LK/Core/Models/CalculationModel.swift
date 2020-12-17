@@ -8,11 +8,6 @@
 
 import Foundation
 
-public struct CalculationModelRoot: Decodable {
-    var count: Int
-    var data: [CalculationModel]
-}
-
 public struct CalculationModel: Decodable {
     var id:                     Int
     var meteringId:             Int

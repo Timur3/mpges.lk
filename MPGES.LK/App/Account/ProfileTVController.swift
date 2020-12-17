@@ -20,7 +20,7 @@ protocol ProfileTVControllerUserDelegate: class {
     func getProfile()
     func setProfile(profile: UserModel)
     func saveProfile(profile: UserModel)
-    func resultOfSaveProfile(result: ServerResponseModel)
+    func resultOfSaveProfile(result: ResultModel<String>)
 }
 
 class ProfileTVController: CommonTableViewController {
@@ -191,8 +191,8 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
     func saveProfile(profile: UserModel) {
         ApiServiceWrapper.shared.updateUser(model: profile, delegate: self)
     }
-    func resultOfSaveProfile(result: ServerResponseModel) {
-        AlertControllerAdapter.shared.show(title: result.isError ? "Ошибка!" : "Успешно!", mesg: result.message, form: self)
+    func resultOfSaveProfile(result: ResultModel<String>) {
+        AlertControllerAdapter.shared.show(title: result.isError ? "Ошибка!" : "Успешно!", mesg: result.message!, form: self)
         self.hiddenAI()
     }
     
@@ -225,6 +225,7 @@ extension ProfileTVController {
     
     func alertSheetExitShow(){
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", form: self, handlerYes: { (UIAlertAction) in
+            UserDataService.shared.delToken()
             self.delegate?.navigateToFirstPage()
         })
     }

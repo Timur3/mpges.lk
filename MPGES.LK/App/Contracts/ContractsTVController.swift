@@ -15,8 +15,8 @@ public protocol ContractsTVControllerDelegate: class {
 
 public protocol ContractsTVControllerUserDelegate: class {
     func getContracts()
-    func setContracts(contracts: ContractModelRoot)
-    func resultRemoveContractBinding(result: ServerResponseModel)
+    func setContracts(contracts: ResultModel<[ContractModel]>)
+    func resultRemoveContractBinding(result: ResultModel<String>)
 }
 
 class ContractsTVController: UITableViewController {
@@ -57,9 +57,13 @@ class ContractsTVController: UITableViewController {
         alert.addAction(actionAddExistContract)
         //alert.addAction(actionNewContract)
         alert.addAction(actionCancel)
-        self.present(alert, animated: true, completion: {
-            print("completion block")
-        })
+        
+        if UIDevice.isPad {
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.barButtonItem = self.navigationItem.rightBarButtonItem
+          }
+        }
+        self.present(alert, animated: true, completion: nil)
     }
    
     func showContractAddTVPage() {
@@ -79,20 +83,10 @@ class ContractsTVController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return contractList.count
     }
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ""
-    }
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "" //"Всего записей: " + String(contractList.count)
-    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,7 +97,7 @@ class ContractsTVController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let contract = contractList[indexPath.row]
+        let contract = contractList[indexPath.section]
         self.delegate?.navigationDetailsInfoPage(to: contract)
     }
     
@@ -118,11 +112,9 @@ class ContractsTVController: UITableViewController {
     
     func alertSheetOfDelBindingShow(for indexPath: IndexPath){
         AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите удалить договор из списка услуг?", form: self, handlerYes: { (UIAlertAction) in
-            let model = ContractNumberModel(number: self.contractList[indexPath.row].number)
+            ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+            let model = ContractNumberModel(number: self.contractList[indexPath.section].number)
             ApiServiceWrapper.shared.removeContractBinding(model: model, delegate: self)
-            self.contractList.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
-            self.tableView.reloadData()
         })
     }
 }
@@ -152,14 +144,15 @@ extension ContractsTVController: ContractsTVControllerUserDelegate {
         ActivityIndicatorViewService.shared.hideView()
     }
     
-    func resultRemoveContractBinding(result: ServerResponseModel) {
+    func resultRemoveContractBinding(result: ResultModel<String>) {
+        self.getContracts()
         debugPrint("Success")
     }
-    func setContracts(contracts: ContractModelRoot) {
+    func setContracts(contracts: ResultModel<[ContractModel]>) {
         // todo доделать получение данных из realm
-        contractList = contracts.data
+        contractList = contracts.data!
         // для поиска
-        tempContractList = contracts.data
+        tempContractList = contracts.data!
     }
 }
 

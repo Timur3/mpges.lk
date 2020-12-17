@@ -230,8 +230,8 @@ extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDe
     
     var sections: [String?] { ["Основная информация", "Состояние лицевого счета", "", "Доставка квитанций"] }
     
-    func setContractById(contract: ContractModel) {
-        contractModel = contract
+    func setContractById(contract: ResultModel<ContractModel>) {
+        contractModel = contract.data
         self.refreshControl?.endRefreshing()
     }
     
@@ -246,6 +246,7 @@ extension ContractDetailsInfoTVController {
     
     func alertSheetMethodPayShow() {
         let alert = UIAlertController(title: "Выбор способа оплаты:", message: nil, preferredStyle: .actionSheet)
+        alert.modalPresentationStyle = .popover
         let actionApplePay = UIAlertAction(title: "Apple Pay", style: .default) {
             (UIAlertAction) in
             self.goToApplePayPage()
@@ -262,6 +263,14 @@ extension ContractDetailsInfoTVController {
         // alert.addAction(actionOthersBank)
         alert.addAction(actionSberBank)
         alert.addAction(actionCancel)
+        
+        if UIDevice.isPad {
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.tableView
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = [];
+          }
+        }
         self.present(alert, animated: true, completion: {
             print("completion block")
         })

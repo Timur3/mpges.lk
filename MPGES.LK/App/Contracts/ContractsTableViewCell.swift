@@ -28,6 +28,14 @@ class ContractsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
            super.awakeFromNib()
            // Initialization code
+//        self.layer.masksToBounds = false
+//        self.layer.shadowColor = UIColor.black.cgColor
+//        self.layer.shadowOpacity = 0.5
+//        self.layer.shadowOffset = CGSize(width: -1, height: 1)
+//        self.layer.shadowRadius = 10
+//        self.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+//        self.layer.shouldRasterize = true
+//        self.layer.rasterizationScale = UIScreen.main.scale
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -9,8 +9,8 @@
 import UIKit
 
 public protocol DeliveryMethodTVControllerDelegate: class {
-    func setData(for deliveryMethod: InvoiceDeliveryMethodModelRoot)
-    func resultOfUpdateDeliveryMethod(for resultModel: ServerResponseModel)
+    func setData(for deliveryMethod: ResultModel<[InvoiceDeliveryMethodModel]>)
+    func resultOfUpdateDeliveryMethod(for resultModel: ResultModel<String>)
 }
 
 class DeliveryMethodTVController: CommonTableViewController {
@@ -94,12 +94,12 @@ class DeliveryMethodTVController: CommonTableViewController {
 
 extension DeliveryMethodTVController: DeliveryMethodTVControllerDelegate {
     
-    func resultOfUpdateDeliveryMethod(for resultModel: ServerResponseModel) {
+    func resultOfUpdateDeliveryMethod(for resultModel: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = resultModel.isError
         AlertControllerAdapter.shared.show(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: resultModel.message,
+            mesg: resultModel.message!,
             form: self) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()
@@ -109,9 +109,9 @@ extension DeliveryMethodTVController: DeliveryMethodTVControllerDelegate {
         ActivityIndicatorViewService.shared.hideView()
     }
     
-    func setData(for deliveryMethod: InvoiceDeliveryMethodModelRoot) {
+    func setData(for deliveryMethod: ResultModel<[InvoiceDeliveryMethodModel]>) {
         var temp = [InvoiceDeliveryMethodModel]()
-        for var item in deliveryMethod.data {
+        for var item in deliveryMethod.data! {
             if (item.id == self.contract?.invoiceDeliveryMethodId) {
                 item.selected = true
                 selectedDeliveryMethod = item
