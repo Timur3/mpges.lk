@@ -23,7 +23,7 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTable
         date.maximumDate = Date()
         date.locale = Locale.init(identifier: "ru_RU")
         return date
-        }()
+    }()
     
     var sections: [String] {["Дата показаний", ""]}
     
@@ -110,14 +110,14 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTable
             //dateTextField.becomeFirstResponder()
         }
         if indexPath.section == 1 && indexPath.row == 0 {
-            if isValidDate(tf: dateTextField) {
+            //if isValidDate(tf: dateTextField) {
+            if true {
                 ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
                 ApiServiceWrapper.shared.getReceivedDataAddNewTemplatesByDeviceId(id: device!.id, delegate: self)
             } else {
-                AlertControllerAdapter.shared.show(
+                self.showAlert(
                     title: "Ошибка",
-                    mesg: "Некорректная дата",
-                    form: self)
+                    mesg: "Некорректная дата")
             }
         }
     }

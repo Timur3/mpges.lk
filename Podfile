@@ -8,9 +8,10 @@ target 'mpges.lk' do
   # Pods for mpges.lk
    pod 'Alamofire'
    pod 'SwiftyJSON'
-   pod 'RealmSwift'
+   pod 'RealmSwift', '~> 5.2'
    pod 'SwiftKeychainWrapper'
    pod 'YandexMapKit'
    pod 'Charts' 
+   pod 'SkeletonView'
 
 end

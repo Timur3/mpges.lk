@@ -11,8 +11,7 @@ import UIKit
 class ApiServiceWrapper {
     let uds = UserDataService()
     let api = ApiService.shared
-    
-    //let api: ApiServiceProtocol?
+    var mainCoordinator: MainCoordinator?
     
     static let shared = ApiServiceWrapper()
     
@@ -52,41 +51,32 @@ class ApiServiceWrapper {
     func updateDeliveryMethod(model: UpdateDeliveryMethodModel, delegate: DeliveryMethodTVControllerDelegate) {
         api.requestByModel(model: model, method: MethodApi.updateDeliveryMethod, completion: delegate.resultOfUpdateDeliveryMethod(for:))
     }
-    // получение начисление по квитанции
-    func getCalculationsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerDelegate){
-        api.requestById(id: id, method: MethodApi.getCalculationsByInvoiceId, completion: delegate.setCalculations(calculations:))
-    }
     
     func getStateApplePay(model: RequestOfPayModel, delegate: ContractDetailsInfoTVControllerDelegate) {
         api.requestById(id: model.id, method: MethodApi.getStateOfPayment, completion: delegate.navigationToResultOfPayment(for:))
     }
     
     // получение платежей по договору
-    func getPaymentsByContractId(id: Int, delegate: PaymentsTVControllerUserDelegate) {
+    func getPaymentsByContractId(id: Int, delegate: PaymentsViewController) {
         api.requestById(id: id, method: MethodApi.getPaymentsByContractId, completion: delegate.setPayments(payments:))
     }
     
-    // получение платежей по квитанции
-    func getPaymentsByInvoiceId(id: Int, delegate: InvoiceDetailsInfoTableViewControllerDelegate) {
-        api.requestById(id: id, method: MethodApi.getPaymentsByInvoiceId, completion: delegate.setPayments(payments:))
-    }
-    
     // получение платежей по договору
-    func getInvoicesByContractId(id: Int, delegate: InvoicesTableViewControllerUserDelegate) throws {
+    func getInvoicesByContractId(id: Int, delegate: InvoicesViewControllerUserDelegate) throws {
         api.requestById(id: id, method: MethodApi.getInvoicesByContractId, completion: delegate.setInvoices(invoices:))
     }
     
     // отправка платежного документа
-    func sendInvoiceByEmail(id: Int, delegate: InvoicesTableViewControllerUserDelegate) {
+    func sendInvoiceByEmail(id: Int, delegate: InvoicesViewControllerUserDelegate) {
         api.requestById(id: id, method: MethodApi.sendInoicesByUserId, completion: delegate.responseSend(result:))
     }
     
-    func sendInvoiceByEmail(model: SendInvoiceModel, delegate: InvoicesTableViewControllerUserDelegate) {
+    func sendInvoiceByEmail(model: SendInvoiceModel, delegate: InvoicesViewControllerUserDelegate) {
         api.requestByModel(model: model, method: MethodApi.sendInoicesByEmail, completion: delegate.responseSend(result:))
     }
     
     // получение приборов учета по договору
-    func getDevicesByContractId(id: Int, delegate: DevicesTVControllerUserDelegate) {
+    func getDevicesByContractId(id: Int, delegate: DevicesViewControllerUserDelegate) {
         api.requestById(id: id, method: MethodApi.getDevicesByContractId, completion: delegate.setDevices(devices:))
     }
     
@@ -128,7 +118,7 @@ class ApiServiceWrapper {
     }
     
     // проверка email
-    func checkByEmail(model: UserEmailModel, delegate: RecoveryPasswordTVControllerUserDelegate){
+    func checkByEmail(model: UserEmailModel, delegate: PasswordRecoveryTVControllerUserDelegate){
         api.requestByModel(model: model, method: MethodApi.checkEmail, completion: delegate.resultOfCheckEmail(result:))
     }
     
@@ -143,12 +133,16 @@ class ApiServiceWrapper {
     }
     
     // восстановление пароля
-    func passwordRecovery(model: UserEmailModel, delegate: RecoveryPasswordTVControllerUserDelegate){
-        api.requestByModel(model: model, method: MethodApi.passwordRecovery, completion: delegate.resultOfPassordRecovery(result:))
+    func passwordRecovery(model: UserEmailModel, delegate: PasswordRecoveryTVControllerUserDelegate){
+        api.requestByModel(model: model, method: MethodApi.passwordRecovery, completion: delegate.resultOfPasswordRecovery(result:))
     }
     
-    func passwordChange(model: PasswordChangeModel, delegate: ChangePasswordTVControllerDelegate){
+    func passwordChange(model: PasswordChangeModel, delegate: PasswordChangeTVControllerDelegate){
         api.requestByModel(model: model, method: MethodApi.passwordChange, completion: delegate.responseOfChange(result:))
+    }
+    
+    func passwordReset(model: PasswordResetModel, delegate: PasswordResetTVControllerDelegate){
+        api.requestByModel(model: model, method: MethodApi.passwordReset, completion: delegate.responseOfReset(result:))
     }
     
     // получение способов доставки

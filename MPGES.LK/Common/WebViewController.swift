@@ -24,11 +24,11 @@ class WebViewController: UIViewController, WKNavigationDelegate, UIWebViewDelega
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        ActivityIndicatorViewService.shared.showView(form: self.view)
+        ActivityIndicationService.shared.showView(form: self.view)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicationService.shared.hideView()
     }
     
     private func configure() {

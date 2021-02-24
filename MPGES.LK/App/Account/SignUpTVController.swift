@@ -166,7 +166,7 @@ class SignUpTVController: CommonTableViewController {
             if (!isValidEmail(emailTextField.text!) || emailTextField.text!.isEmpty) {
                 emailTextField.shake(times: 3, delta: 5)
             } else {
-                let user = SingUpModel(name: nameTextField.text!, password: passwordTextField.text!, Email: emailTextField.text!, Mobile: mobileTextField.text!, RoleId: 3)
+                let user = SingUpModel(name: nameTextField.text!, password: passwordTextField.text!, email: emailTextField.text!, mobile: mobileTextField.text!)
                 self.delegateUser?.signUp(user: user)
         }
     }
@@ -182,10 +182,9 @@ extension SignUpTVController: SignUpTVControllerUserDelegate {
     func resultOfCreateUser(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
-        AlertControllerAdapter.shared.show(
+        self.showAlert(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message!,
-            form: self) { (UIAlertAction) in
+            mesg: result.message!) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()
                 }

@@ -12,7 +12,7 @@ class AboutTableViewController: CommonTableViewController {
     public weak var delegate: ProfileCoordinator?
     var sections = ["Организация", "Разработчик", "Тестировщик" ]
     
-    var orgCell: UITableViewCell = { getCustomCell(textLabel: "МП ГЭС (ИНН: 8601005865)", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var orgCell: UITableViewCell = { getCustomCell(textLabel: "ООО \"ГЭС\" (ИНН: 8601070751)", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
     var developerCell: UITableViewCell = { getCustomCell(textLabel: "Тимур Тимергалиевич Ч.", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
     
     var helperDeveloperCell: UITableViewCell = { getCustomCell(textLabel: "Антон Юрьевич Т.", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()

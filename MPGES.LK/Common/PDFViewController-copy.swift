@@ -41,7 +41,7 @@ extension PDFViewController1 {
             pdfView.document = pdfDocument
         }
         
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicationService.shared.hideView()
     }
     
     private func createPdfDocument(for UrlToFile: String) -> PDFDocument? {
@@ -54,7 +54,7 @@ extension PDFViewController1 {
     }
     
     func configure() {
-        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+        ActivityIndicationService.shared.showView(form: self.view)
         self.navigationItem.title = "Просмотр PDF"
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationItem.largeTitleDisplayMode = .never

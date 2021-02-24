@@ -18,7 +18,7 @@ class DeviceCoordinatorMain: Coordinator {
     }
     
     func start() {
-        let deviceTV: DevicesTVController = DevicesTVController()
+        let deviceTV = DevicesViewController(nibName: "DevicesViewController", bundle: nil)
         deviceTV.delegate = self
         deviceTV.contractId = contract!.id
         self.navigationController.pushViewController(deviceTV, animated: true)

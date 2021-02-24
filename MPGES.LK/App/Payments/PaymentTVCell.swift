@@ -13,6 +13,8 @@ class PaymentTVCell: UITableViewCell {
     @IBOutlet weak var sumPay: UILabel!
     @IBOutlet weak var cashBox: UILabel!
     
+    static let identifier = "paymentCell"
+    
     func update(for pay: PaymentModel) {
         let sum: Decimal = (pay.summa)
         dataPay.text = pay.datePay
@@ -26,7 +28,8 @@ class PaymentTVCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // for skeletonView
+        textLabel?.linesCornerRadius = 5
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

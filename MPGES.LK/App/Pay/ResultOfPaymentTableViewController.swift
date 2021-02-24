@@ -38,18 +38,18 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
         setUpLayout()
     }
     
-    var statusPay: StatePaymentResponse? {
+    var resultPay: ResultModel<Decimal>? {
         didSet {
             DispatchQueue.main.async {
-                self.summaCell.textLabel?.text = formatRusCurrency(self.statusPay!.summa)
+                self.summaCell.textLabel?.text = formatRusCurrency(self.resultPay!.data!)
                 self.statusCell.detailTextLabel?.text = formatRusDate(for: Date())
-                if !(self.statusPay!.isError) {
+                if !(self.resultPay!.isError) {
                     self.statusCell.textLabel?.text = "Успешно"
                     self.statusImgView.image = UIImage(systemName: myImage.checkmark.rawValue)
                     self.statusImgView.tintColor = .systemGreen
                 } else {
                     self.statusCell.textLabel?.text = "Отклонено"
-                    self.detailsCell.textLabel?.text = self.statusPay?.message
+                    self.detailsCell.textLabel?.text = self.resultPay?.message
                     self.hideDetails = false
                 }
                 self.tableView.reloadData()

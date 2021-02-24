@@ -16,10 +16,14 @@ class CommonTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        ActivityIndicationService.shared.hideView()
+    }
+    
     func hiddenAI(){
         guard let index = self.indexPath else { return }
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: index)!)
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicationService.shared.hideView()
     }
     
     func hideKeyboardWhenTappedAround() {

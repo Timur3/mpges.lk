@@ -17,7 +17,9 @@ class ActivityIndicatorViewForCellService {
             let cellWidth = (cell.bounds.width)
             self.activityIndicator.startAnimating()
             self.activityIndicator.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: cellWidth, height: cellHeight)
-            cell.textLabel?.isHidden = true;
+            self.activityIndicator.backgroundColor = .systemBackground
+            cell.textLabel?.isHidden = true
+            cell.detailTextLabel?.isHidden = true
             cell.isUserInteractionEnabled = false
             cell.addSubview(self.activityIndicator)
         }
@@ -25,7 +27,8 @@ class ActivityIndicatorViewForCellService {
     
     func hiddenAI(cell: UITableViewCell) {
         DispatchQueue.main.async {
-            cell.textLabel?.isHidden = false;
+            cell.textLabel?.isHidden = false
+            cell.detailTextLabel?.isHidden = false
             cell.isUserInteractionEnabled = true
             self.activityIndicator.removeFromSuperview()
         }

@@ -20,7 +20,7 @@ public protocol ContractsTVControllerUserDelegate: class {
 }
 
 class ContractsTVController: UITableViewController {
-    
+    public weak var mainCoordinator: MainCoordinator?
     public weak var delegate: ContractsTVControllerDelegate?
     private var searchController = UISearchController(searchResultsController: nil)
     private var tempContractList = [ContractModel]()
@@ -38,11 +38,10 @@ class ContractsTVController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+        ActivityIndicationService.shared.showView(form: self.view)
         self.navigationItem.title = "Мои договоры"
         super.viewDidLoad()
         configuration()
-        //self.tableView.backgroundView = getEmptyLabelView(header: "У Вас нет активных договоров. Для добавления договора нажмите на \"+\".", width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
     }
     
     @objc func alertSheetContractAddShow() {
@@ -89,6 +88,10 @@ class ContractsTVController: UITableViewController {
         return 1
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Договор заключен: " + contractList[section].dateRegister
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contractCell", for: indexPath) as! ContractsTableViewCell
         cell.imageView?.image = UIImage(systemName: myImage.docText.rawValue)
@@ -111,8 +114,8 @@ class ContractsTVController: UITableViewController {
     }
     
     func alertSheetOfDelBindingShow(for indexPath: IndexPath){
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите удалить договор из списка услуг?", form: self, handlerYes: { (UIAlertAction) in
-            ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите удалить договор из списка услуг?", handlerYes: { (UIAlertAction) in
+            ActivityIndicationService.shared.showView(form: self.view)
             let model = ContractNumberModel(number: self.contractList[indexPath.section].number)
             ApiServiceWrapper.shared.removeContractBinding(model: model, delegate: self)
         })
@@ -141,7 +144,6 @@ extension ContractsTVController: ContractsTVControllerUserDelegate {
     func getContracts() {
         ApiServiceWrapper.shared.getContracts(delegate: self)
         self.refreshControl?.endRefreshing()
-        ActivityIndicatorViewService.shared.hideView()
     }
     
     func resultRemoveContractBinding(result: ResultModel<String>) {
@@ -153,6 +155,8 @@ extension ContractsTVController: ContractsTVControllerUserDelegate {
         contractList = contracts.data!
         // для поиска
         tempContractList = contracts.data!
+        
+        ActivityIndicationService.shared.hideView()
     }
 }
 

@@ -8,25 +8,26 @@
 
 import UIKit
 
-public protocol RecoveryPasswordTVControllerUserDelegate: class {
+public protocol PasswordRecoveryTVControllerUserDelegate: class {
     func goToRecoveryPassword()
     func resultOfCheckEmail(result: ResultModel<String>)
-    func resultOfPassordRecovery(result: ResultModel<String>)
+    func resultOfPasswordRecovery(result: ResultModel<String>)
 }
 
-class RecoveryPasswordTVController: CenterContentAndCommonTableViewController {
+class PasswordRecoveryTVController: CenterContentAndCommonTableViewController {
     
-    public weak var delegate: ContractsTVControllerUserDelegate?
+    public weak var mainCoordinator: MainCoordinator?
     
     var sections: [String] {["Email указанный при регистрации", ""]}
     
     var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
-    var submitCell: UITableViewCell { getCustomCell(textLabel: "Напомнить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
+    var submitCell: UITableViewCell { getCustomCell(textLabel: "Продолжить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
     var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "example@email.com"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        //textField.text = "timon2006tevriz@mail.ru"
         return textField
     }()
     
@@ -39,19 +40,12 @@ class RecoveryPasswordTVController: CenterContentAndCommonTableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        // Получение списка договоров
-        delegate?.getContracts()
     }
     
     func setUpLayout(){
         emailCell.addSubview(emailTextField)
         emailTextField.leadingAnchor.constraint(equalTo: emailCell.leadingAnchor, constant: 50).isActive = true
         emailTextField.centerYAnchor.constraint(equalTo: emailCell.centerYAnchor).isActive = true
-    }
-    
-    @objc func submitAction() {
-        let model = UserEmailModel(email: emailTextField.text!)
-        ApiServiceWrapper.shared.passwordRecovery(model: model, delegate: self)
     }
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,9 +103,14 @@ class RecoveryPasswordTVController: CenterContentAndCommonTableViewController {
             submitAction()
         }
     }
+    
+    @objc func submitAction() {
+        let model = UserEmailModel(email: emailTextField.text!)
+        ApiServiceWrapper.shared.passwordRecovery(model: model, delegate: self)
+    }
 }
 
-extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate {
+extension PasswordRecoveryTVController: PasswordRecoveryTVControllerUserDelegate {
     func resultOfCheckEmail(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         // sendPassword.isEnabled = !result.isError
@@ -127,22 +126,22 @@ extension RecoveryPasswordTVController: RecoveryPasswordTVControllerUserDelegate
         //ApiServiceAdapter.shared.passwordRecovery(model: model!, delegate: self)
     }
     
-    func resultOfPassordRecovery(result: ResultModel<String>) {
+    func resultOfPasswordRecovery(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
-        AlertControllerAdapter.shared.show(
-            title: isError ? "Ошибка" : "Успех!",
-            mesg: result.message!,
-            form: self) { (UIAlertAction) in
-                if (!isError) {
-                    self.cancelButton()
-                }
+        if (!isError){
+            self.mainCoordinator?.navigationPasswordResetPage(navigationController: self.navigationController!)
+        } else {
+            self.showAlert(
+                title: "Ошибка",
+                mesg: result.message!)
         }
     }
 }
 
+
 //MARK: - CONFIGURE
-extension RecoveryPasswordTVController {
+extension PasswordRecoveryTVController {
     private func configuration() {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         

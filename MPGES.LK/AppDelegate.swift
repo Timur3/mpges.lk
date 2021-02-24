@@ -30,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(documentsDirectory!)
         print(cacheDirectory!)
         print(tmpDirectory)
+        //guard let isAuth = UserDefaults.standard.bool(forKey: "isAuth"), isAuth != nil else { return true }
+        
+        UserDefaults.standard.register(defaults: ["isAuth" : false])
         
         //Thread.sleep(forTimeInterval: 1.0)
         return true

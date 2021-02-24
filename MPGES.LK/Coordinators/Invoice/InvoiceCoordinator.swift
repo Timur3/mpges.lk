@@ -19,25 +19,20 @@ class InvoiceCoordinator: Coordinator {
     }
     
     func start() {
-        let invoiceTV: InvoicesTableViewController = InvoicesTableViewController()
+        let invoiceTV = InvoicesViewController(nibName: "InvoicesViewController", bundle: nil)
+        //InvoicesTableViewController = InvoicesTableViewController()
         invoiceTV.delegate = self
         invoiceTV.contractId = contract!.id
         self.navigationController.pushViewController(invoiceTV, animated: true)
     }
 }
-extension InvoiceCoordinator: InvoicesTableViewControllerDelegate {
+extension InvoiceCoordinator: InvoicesViewControllerDelegate {
     
-    func sendDocByEmail(model: SendInvoiceModel, delegate: InvoicesTableViewControllerUserDelegate) {
+    func sendDocByEmail(model: SendInvoiceModel, delegate: InvoicesViewControllerUserDelegate) {
         ApiServiceWrapper.shared.sendInvoiceByEmail(model: model, delegate: delegate)
     }
-    
-    func navigantionInvoiceDetailsInfoPage(model: InvoiceModel) {
-        let invoiceDetailsInfoTV: InvoiceDetailsInfoTableViewController = InvoiceDetailsInfoTableViewController()
-        invoiceDetailsInfoTV.invoice = model
-        self.navigationController.pushViewController(invoiceDetailsInfoTV, animated: true)
-    }
-    
-    func pdfView(for urlToPdfFile: URL, delegate: InvoicesTableViewControllerUserDelegate) {
+
+    func pdfView(for urlToPdfFile: URL, delegate: InvoicesViewControllerUserDelegate) {
         let pdfViewController: PDFViewController = PDFViewController()
         pdfViewController.urlToPdf = urlToPdfFile
         pdfViewController.delegate = delegate

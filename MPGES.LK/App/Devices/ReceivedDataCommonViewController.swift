@@ -29,7 +29,7 @@ class ReceivedDataCommonViewController: UIViewController {
     }
     
     private lazy var receivedDataRegisterTVController: ReceivedDataRegisterTVController = {
-        ActivityIndicatorViewService.shared.showView(form: self.view)	
+        ActivityIndicationService.shared.showView(form: self.view)
         var viewController = ReceivedDataRegisterTVController()
         viewController.delegate = delegate
         viewController.device = device

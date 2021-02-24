@@ -17,30 +17,19 @@ public struct UserModel: Decodable, Encodable {
     var name: String
     var email: String
     var mobile: String?
-    let isOnline: Bool
-    let confirmed: Bool
-    let createDate: String
-    let roleId: Int
+
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
         case email = "email"
         case mobile = "mobile"
-        case isOnline = "isOnline"
-        case confirmed = "confirmed"
-        case createDate = "createDate"
-        case roleId = "roleId"
     }
     
-    init(Id: Int, Name: String, Password: String, PasswordHash: String, Email: String, Mobile: String, IsOnline: Bool, Confirmed: Bool, CreateDate: String, RoleId: Int) {
-        self.id = Id
-        self.name = Name
-        self.email = Email
-        self.mobile = Mobile
-        self.isOnline = IsOnline
-        self.confirmed = Confirmed
-        self.createDate = CreateDate
-        self.roleId = RoleId
+    init(id: Int, name: String, email: String, mobile: String) {
+        self.id = id
+        self.name = name
+        self.email = email
+        self.mobile = mobile
     }
 }

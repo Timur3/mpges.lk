@@ -135,10 +135,9 @@ extension ReceivedDataRegisterTVController {
 extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
     func resultOfDelete(result: ResultModel<String>) {
         let isError = result.isError
-        AlertControllerAdapter.shared.show(
+        self.showAlert(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message!,
-            form: self) {
+            mesg: result.message!) {
                 (UIAlertAction) in
                 if !isError {
                     self.receivedDataList[self.indexPath!.section].receivedData.remove(at: self.indexPath!.row)
@@ -152,7 +151,7 @@ extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
     func setData(model: ResultModel<[ReceivedDataModel]>) {
         // todo доделать получение данных из realm
         self.receivedDataList =  mapToReceivedDataModelView(receivedData: model.data!)
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicationService.shared.hideView()
     }
     
     func getReceivedDataAddNewTemplatePage() {

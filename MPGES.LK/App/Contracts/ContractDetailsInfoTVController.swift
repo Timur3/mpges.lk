@@ -18,7 +18,7 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigateToPayWithCreditCardPage()
     func navigateToPayWithSberbankOnlinePage(model: BankPayModel)
     func navigateToPayWithApplePayPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
-    func navigationToResultOfPayment(for model: StatePaymentResponse)
+    func navigationToResultOfPayment(for model: ResultModel<Decimal>)
 }
 
 class ContractDetailsInfoTVController: CommonTableViewController {
@@ -236,7 +236,7 @@ extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDe
     }
     
     func getStatePayment(for model: RequestOfPayModel) {
-        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+        ActivityIndicationService.shared.showView(form: self.view)
         ApiServiceWrapper.shared.getStateApplePay(model: model, delegate: self.delegate!)
     }
 }

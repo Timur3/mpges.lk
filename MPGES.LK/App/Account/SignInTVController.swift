@@ -131,27 +131,25 @@ class SignInTVController: CenterContentAndCommonTableViewController {
                     self.delegateUser?.authApi(model: model)
                 } else
                 {
-                    let msg = "Не корректный email адрес"
-                    AlertControllerAdapter.shared.show(
+                    let msg = "Некорректный email адрес"
+                    self.showAlert(
                         title: "Ошибка",
-                        mesg: msg,
-                        form: self) { (UIAlertAction) in
+                        mesg: msg) { (UIAlertAction) in
                             print(msg as Any)
                     }
                     emailTextField.shake(times: 3, delta: 5)
                 }
             } else {
                 let msg = "Нет соединения с интернетом"
-                AlertControllerAdapter.shared.show(
+                self.showAlert(
                     title: "Ошибка",
-                    mesg: msg,
-                    form: self) { (UIAlertAction) in
+                    mesg: msg) { (UIAlertAction) in
                         print(msg as Any)
                 }
             }
         }
         if indexPath.section == 2 && indexPath.row == 0 {
-            self.delegate?.navigateToRecoveryPasswordPage()
+            self.delegate?.navigateToPasswordRecoveryPage()
         }
     }
     
@@ -180,11 +178,13 @@ extension SignInTVController {
 extension SignInTVController: SignInTVControllerUserDelegate {
     
     func authApi(model: SignInModel) {
+        self.showToast(message: "Успешно!", font: .systemFont(ofSize: 12.0))
         if (self.indexPath != nil) {
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
         userDataService.setKey(keyName: "email", keyValue: model.email)
         userDataService.setKey(keyName: "dwp", keyValue: model.password)
+        debugPrint(model.password)
         ApiServiceWrapper.shared.authApi(model: model, delegate: self)
         
     }
@@ -195,14 +195,14 @@ extension SignInTVController: SignInTVControllerUserDelegate {
         }
         if !result.isError {
             userDataService.setToken(token: result.data!.accessToken)
+            userDataService.setIsAuth()
+            
             self.delegate?.goToNextSceneApp()
             navigationController?.isNavigationBarHidden = true
         } else {
-            AlertControllerAdapter.shared.show(
-                title: "Ошибка",
-                mesg: result.message!,
-                form: self) { (UIAlertAction) in
-                    print(result.message as Any)
+            //self.showT(msg: "Успешно!", seconds: 2)
+            self.showAlert(title: "Ошибка", mesg: result.message!) { (UIAlertAction) in
+                print(result.message as Any)
             }
         }
     }

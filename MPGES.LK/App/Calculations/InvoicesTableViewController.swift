@@ -10,7 +10,6 @@ import UIKit
 import PDFKit
 
 protocol InvoicesTableViewControllerDelegate: class {
-    func navigantionInvoiceDetailsInfoPage(model: InvoiceModel)
     func pdfView(for urlToPdfFile: URL, delegate: InvoicesTableViewControllerUserDelegate)
     func sendDocByEmail(model: SendInvoiceModel, delegate: InvoicesTableViewControllerUserDelegate)
 }
@@ -22,7 +21,7 @@ protocol InvoicesTableViewControllerUserDelegate: class {
     func hiddenAI()
 }
 
-class InvoicesTableViewController: CommonTableViewController {
+class InvoicesTableViewController1: CommonTableViewController {
     
     public var contractId: Int = 0
     public weak var delegate: InvoicesTableViewControllerDelegate?
@@ -36,7 +35,7 @@ class InvoicesTableViewController: CommonTableViewController {
     }
     
     override func viewDidLoad() {
-        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
+        ActivityIndicationService.shared.showView(form: self.view)
         navigationItem.title = "Начисления"
         super.viewDidLoad()
         configuration()
@@ -45,13 +44,12 @@ class InvoicesTableViewController: CommonTableViewController {
     @objc func refreshInvoicesData(sender: AnyObject) {
         print("refresh")
         do {
-            try ApiServiceWrapper.shared.getInvoicesByContractId(id: contractId, delegate: self)
+            //try ApiServiceWrapper.shared.getInvoicesByContractId(id: contractId, delegate: self)
         } catch {
-            AlertControllerAdapter.shared.show(
+            self.showAlert(
                 title: "Ошибка!",
-                mesg: "Неизвестная ошибка, напишите в тех. поддержку",
-                form: self) { (UIAlertAction) in
-                    self.cancelButton()
+                mesg: "Неизвестная ошибка, напишите в тех. поддержку") { (UIAlertAction) in
+                    //self.cancelButton()
             }
         }
         self.refreshControl?.endRefreshing()
@@ -90,8 +88,7 @@ class InvoicesTableViewController: CommonTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
-        ActivityIndicatorViewService.shared.showView(form: (self.navigationController?.view)!)
-        //ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: indexPath)!)
+        ActivityIndicationService.shared.showView(form: self.view)
         let id = "\(self.invoiceList[indexPath.section].invoices[indexPath.row].id)"
         self.showPdf(for: "http://lk.mp-ges.ru/Bills/BillsPrintPdfForCash?InvoiceId=" + id)
     }
@@ -99,7 +96,7 @@ class InvoicesTableViewController: CommonTableViewController {
     func showPdf(for urlFileInet: String) {
         DispatchQueue.main.async {
             let urlFile = downloadPdf(url: urlFileInet)
-            self.delegate?.pdfView(for: urlFile, delegate: self)
+            //self.delegate?.pdfView(for: urlFile, delegate: self)
         }
     }
     
@@ -123,7 +120,7 @@ class InvoicesTableViewController: CommonTableViewController {
             if isValidEmail((textField?.text)!) {
                 let id = self.invoiceList[indexPath.section].invoices[indexPath.row].id
                 let model = SendInvoiceModel(email: (textField?.text)!, invoiceId: id)
-                self.delegate?.sendDocByEmail(model: model, delegate: self)
+                //self.delegate?.sendDocByEmail(model: model, delegate: self)
             } else { textField?.shake(times: 3, delta: 5)}
         }))
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
@@ -132,7 +129,7 @@ class InvoicesTableViewController: CommonTableViewController {
 }
 
 // MARK: - INVOICE CELL DELEGATE
-extension InvoicesTableViewController: InvoiceCellDelegate {
+extension InvoicesTableViewController1: InvoiceCellDelegate {
     func accessoryViewTapping(indexPath: IndexPath) {
         self.indexPath = indexPath
         
@@ -160,16 +157,15 @@ extension InvoicesTableViewController: InvoiceCellDelegate {
         self.present(alert, animated: true, completion: { print("completion block") })
     }   
 }
-extension InvoicesTableViewController: InvoicesTableViewControllerUserDelegate {
+extension InvoicesTableViewController1: InvoicesTableViewControllerUserDelegate {
     func responseSend(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
-        AlertControllerAdapter.shared.show(
+        self.showAlert(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message!,
-            form: self) { (UIAlertAction) in
+            mesg: result.message!) { (UIAlertAction) in
                 if !isError {
-                    self.cancelButton()
+                    //self.cancelButton()
                 }
         }
     }
@@ -192,11 +188,11 @@ extension InvoicesTableViewController: InvoicesTableViewControllerUserDelegate {
     func setInvoices(invoices: ResultModel<[InvoiceModel]>) {
         // todo получение данных из realm
         invoiceList = mapToInvoicesModelView(invoices: invoices.data!)
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicationService.shared.hideView()
     }
 }
 
-extension InvoicesTableViewController {
+extension InvoicesTableViewController1 {
     func configuration() {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshInvoicesData), for: UIControl.Event.valueChanged)
@@ -211,7 +207,7 @@ extension InvoicesTableViewController {
     }
 }
 
-extension InvoicesTableViewController:  URLSessionDownloadDelegate {
+extension InvoicesTableViewController1:  URLSessionDownloadDelegate {
     func downloadPDF1(urlFile: String, completion: @escaping() -> Void){
         guard let url = URL(string: urlFile) else { return }
         let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())

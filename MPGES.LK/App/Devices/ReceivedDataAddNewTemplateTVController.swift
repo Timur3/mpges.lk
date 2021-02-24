@@ -235,10 +235,9 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
 extension ReceivedDataAddNewTemplateTVController: ReceivedDataAddNewTemplateTVControllerDelegate {
     func resultOfSending(result: ResultModel<String>) {
         let isError = result.isError
-        AlertControllerAdapter.shared.show(
+        self.showAlert(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message!,
-            form: self) { (UIAlertAction) in self.cancelButton() }
+            mesg: result.message!) { (UIAlertAction) in self.cancelButton() }
     }
 }
 //MARK: - CONFIGURE

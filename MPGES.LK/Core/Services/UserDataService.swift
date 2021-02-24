@@ -10,16 +10,18 @@ import Foundation
 
 
 public class UserDataService: UserDataProtocol {
+    
+    func setKey<T>(keyName: String, keyValue: T) {
+        UserDefaults.standard.set(keyValue, forKey: keyName)
+    }
+    
     func delToken() {
         UserDefaults.standard.set("", forKey: "accessToken")
         UserDefaults.standard.set("", forKey: "refreshToken")
+        UserDefaults.standard.set(false, forKey: "isAuth")
     }
     
     static let shared = UserDataService()
-    
-    func setKey(keyName: String, keyValue: String) {
-        UserDefaults.standard.set(keyValue, forKey: keyName)
-    }
     
     func getKey(keyName: String) -> String? {
         return UserDefaults.standard.string(forKey: keyName)
@@ -63,5 +65,9 @@ public class UserDataService: UserDataProtocol {
         UserDefaults.standard.set("", forKey: "currentContract")
         UserDefaults.standard.set("", forKey: "currentInvoice")
         UserDefaults.standard.set("", forKey: "refreshToken")
+    }
+    
+    func setIsAuth(){
+        UserDefaults.standard.set(true, forKey: "isAuth")
     }
 }

@@ -9,10 +9,10 @@
 import UIKit
 
 class ProfileCoordinator: Coordinator {
-    public weak var delegate: MainCoordinator?
+    public weak var mainCoordinator: MainCoordinator?
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-   
+    
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -41,13 +41,21 @@ extension ProfileCoordinator: ProfileTVControllerDelegate {
     }
     
     func navigationChangePasswordPage() {
-        let changePasswordVC : ChangePasswordTVController = ChangePasswordTVController()
+        let changePasswordVC : PasswordChangeTVController = PasswordChangeTVController()
         changePasswordVC.delegateProfile = self
         let navChangePasswordVC: UINavigationController = UINavigationController(rootViewController: changePasswordVC)
-        self.navigationController.present(navChangePasswordVC, animated: true, completion: nil)    }
+        self.navigationController.present(navChangePasswordVC, animated: true, completion: nil)
+    }
+    
+    func navigationPasswordPage() {
+        let changePasswordVC : PasswordChangeTVController = PasswordChangeTVController()
+        changePasswordVC.delegateProfile = self
+        let navChangePasswordVC: UINavigationController = UINavigationController(rootViewController: changePasswordVC)
+        self.navigationController.present(navChangePasswordVC, animated: true, completion: nil)
+    }
     
     func navigateToFirstPage() {
-        delegate?.navigateToFirstPage()
+        mainCoordinator?.navigateToFirstPage()
     }
     
     func navigationToMailSend() {

@@ -16,13 +16,11 @@ class ApiService: ApiServiceProtocol {
     let vershionApi: String
     let interceptor = TokenRequestInterceptor()
     
-    
-    var userData = UserDataService()
-    
     init() {
         baseURL = MethodApi.baseUrl
         vershionApi = MethodApi.versionApi
     }
+    
     class Connectivity {
         class var isConnectedToInternet: Bool {
             return NetworkReachabilityManager()?.isReachable ?? false

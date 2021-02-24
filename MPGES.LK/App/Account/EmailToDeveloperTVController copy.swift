@@ -144,7 +144,7 @@ class EmailToDeveloperTVController1: CommonTableViewController {
     }
     
     func alertSheetSendMailShow() {
-        AlertControllerAdapter.shared.actionSheetConfirmShow(title: "Внимание!", mesg: "Вы действительно хотите направить обращение?", form: self, handlerYes: { (UIAlertAction) in
+        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите направить обращение?", handlerYes: { (UIAlertAction) in
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             print("send mail")
             //sendMail()

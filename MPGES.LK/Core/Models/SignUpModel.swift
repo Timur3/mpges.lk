@@ -9,25 +9,25 @@
 import Foundation
 
 public struct SingUpModel: Encodable {
+    let id: Int
     let password: String
     let name: String
     let email: String
     let mobile: String?
-    let roleId: Int
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
         case password = "password"
         case name = "name"
         case email = "email"
         case mobile = "mobile"
-        case roleId = "roleId"
     }
     
-    init(name: String, password: String, Email: String, Mobile: String, RoleId: Int) {
+    init(name: String, password: String, email: String, mobile: String) {
+        self.id = 0
         self.password = password
         self.name = name
-        self.email = Email
-        self.mobile = Mobile
-        self.roleId = RoleId
+        self.email = email
+        self.mobile = mobile
     }
 }

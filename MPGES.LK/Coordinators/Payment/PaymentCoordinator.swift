@@ -19,7 +19,7 @@ class PaymentCoordinator: Coordinator {
     }
     
     func start() {
-        let paymentTV: PaymentsTVController = PaymentsTVController()
+        let paymentTV = PaymentsViewController(nibName: "PaymentsViewController", bundle: nil) //: PaymentsTVController = PaymentsTVController()
         paymentTV.delegate = self
         paymentTV.contractId = contract!.id
         self.navigationController.pushViewController(paymentTV, animated: true)
@@ -27,7 +27,7 @@ class PaymentCoordinator: Coordinator {
     
     
 }
-extension PaymentCoordinator: PaymentsTVControllerDelegate {
+extension PaymentCoordinator: PaymentsViewControllerDelegate {
     func navigationPaymentInfoPage(uuid: String) {
         let webView: WebViewController = WebViewController()
         webView.uuid = uuid

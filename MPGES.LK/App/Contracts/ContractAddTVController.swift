@@ -158,10 +158,9 @@ extension ContractAddTVController: ContractAddTVControllerUserDelegate {
     func resultToBinding(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
-        AlertControllerAdapter.shared.show(
+        self.showAlert(
             title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message!,
-            form: self) { (UIAlertAction) in
+            mesg: result.message!) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()
                 }

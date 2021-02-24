@@ -114,7 +114,7 @@ extension EmailToDeveloperTVController: MFMailComposeViewControllerDelegate {
            
             } else {
                 let msg = "Убедитесь что у Вас настроено приложение Почта и есть активная учетная запись"
-                AlertControllerAdapter.shared.show(title: "Ошибка", mesg: msg, form: self){
+                self.showAlert(title: "Ошибка", mesg: msg){
                     (UIAlertAction) in
                     self.cancelButton()
                 }
@@ -125,7 +125,7 @@ extension EmailToDeveloperTVController: MFMailComposeViewControllerDelegate {
         
         if (result == .failed) {
             let msg = "Ошибка отправки письма, убедитесь что у Вас настроено приложение Почта и есть активная учетная запись"
-            AlertControllerAdapter.shared.show(title: "Ошибка", mesg: msg, form: self){
+                self.showAlert(title: "Ошибка", mesg: msg){
                 (UIAlertAction) in
                 self.cancelButton()
             }

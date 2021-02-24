@@ -70,7 +70,7 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
     
     // Ппереход на страницу способы доставки квитанций
     func navigationInvoiceDevileryMethodPage(for contract: ContractModel, delegate: ContractDetailsInfoTVControllerUserDelegate) {
-        let devileryOfInvoiceTV: DeliveryMethodTVController = DeliveryMethodTVController()
+        let devileryOfInvoiceTV = DeliveryMethodsViewController(nibName: "DeliveryMethodsViewController", bundle: nil)
         devileryOfInvoiceTV.contract = contract
         devileryOfInvoiceTV.delegate = delegate
         self.navigationController.pushViewController(devileryOfInvoiceTV, animated: true)
@@ -105,12 +105,12 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
         
     }
         
-    func navigationToResultOfPayment(for model: StatePaymentResponse) {
+    func navigationToResultOfPayment(for model: ResultModel<Decimal>) {
         let resultOfPay: ResultOfPaymentTableViewController = ResultOfPaymentTableViewController()
         //resultOfPay.delegate = self
-        resultOfPay.statusPay = model
+        resultOfPay.resultPay = model
         let navResultOfPay: UINavigationController = UINavigationController(rootViewController: resultOfPay)
         self.navigationController.present(navResultOfPay, animated: true, completion: nil)
-        ActivityIndicatorViewService.shared.hideView()
+        ActivityIndicationService.shared.hideView()
     }
 }

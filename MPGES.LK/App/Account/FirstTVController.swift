@@ -32,6 +32,7 @@ class FirstTVController: CenterContentAndCommonTableViewController {
         super.viewDidLoad()
         configuration()
         setUpLayout()
+        ActivityIndicationService.shared.hideView()
     }
 
     func setUpLayout(){

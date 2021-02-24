@@ -156,10 +156,7 @@ class PayWithApplePayTVController: CommonTableViewController {
         if isValidSumma(tf: summaTextField) {
             self.purchase()
         } else {
-            AlertControllerAdapter.shared.show(
-                title: "Ошибка",
-                mesg: "Некорректная сумма",
-                form: self)
+            self.showAlert(title: "Ошибка", mesg: "Некорректная сумма")
         }
     }
 }
@@ -198,10 +195,9 @@ extension PayWithApplePayTVController {
                 present(controller, animated: true, completion: nil)
             }
         } else {
-            AlertControllerAdapter.shared.show(
+            self.showAlert(
                 title: "Ошибка",
-                mesg: "Минимальная сумма платежа 5.00 ₽",
-                form: self)
+                mesg: "Минимальная сумма платежа 5.00 ₽")
         }
     }
     

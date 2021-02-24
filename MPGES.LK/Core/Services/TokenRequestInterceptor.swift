@@ -11,7 +11,6 @@ import Alamofire
 
 
 public class TokenRequestInterceptor: RequestInterceptor {
-    var delegate: MainCoordinator?
     var accesToken: String {
         get {
             return UserDataService.shared.getToken() ?? ""
@@ -26,8 +25,6 @@ public class TokenRequestInterceptor: RequestInterceptor {
     public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var urlRequest = urlRequest
         debugPrint(urlRequest.url?.path ?? "")
-        debugPrint(urlRequest.url?.baseURL ?? "")
-        debugPrint(urlRequest.url?.absoluteURL ?? "")
         
         if (!accesToken.isEmpty) {
             urlRequest.headers.add(.authorization(bearerToken: accesToken))
@@ -45,10 +42,11 @@ public class TokenRequestInterceptor: RequestInterceptor {
         //этап 1 если 401 и дергаю апи на обновление основного токена
         if (statusCode == 401) {
             if (pathUrl == "/v2/auth/refreshtoken"){
+                UserDataService.shared.delToken()
                 // todo выкинуть на окно авторизации и очистить токены
             } else {
                 // здесь обновляем токен и записываем
-                
+                UserDataService.shared.delToken()
             }
         }
         //этап 2 если refreshtoken тоже вернул 401 ошибку, то

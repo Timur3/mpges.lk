@@ -12,29 +12,44 @@ protocol MainCoordinatorDelegate: class {
     func navigateToSignInPage()
     func navigateToSignUpPage()
     func navigateToFirstPage()
-    func navigateToRecoveryPasswordPage()
+    func navigateToPasswordRecoveryPage()
     func goToNextSceneApp()
     func childDidFinish(_ child: Coordinator)
 }
 
 class MainCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
-    
     unowned let navigationController: UINavigationController
+    
+    var authObserver: UserDefaultsObserver?
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        
+        self.authObserver = UserDefaultsObserver(key: "isAuth")  { old, new in
+            if !(new as? Bool ?? false) {
+                DispatchQueue.main.async {
+                    let firstViewController : FirstTVController = FirstTVController()
+                    firstViewController.delegate = self
+                    self.navigationController.isNavigationBarHidden = false
+                    self.navigationController.popToRootViewController(animated: true)
+                }
+            }
+        }
     }
     
     func start() {
-        if (true) {
+        let isAuth = UserDefaults.standard.bool(forKey: "isAuth")
+        ActivityIndicationService.shared.hideView()
+        if !(isAuth) {
             let firstViewController : FirstTVController = FirstTVController()
             firstViewController.delegate = self
+            self.navigationController.isNavigationBarHidden = false
             self.navigationController.viewControllers = [firstViewController]
         } else
         {
             let mainTabBarCoordinator = MainTabBarCoordinator(navigationController: navigationController)
-            mainTabBarCoordinator.delegate = self
+            mainTabBarCoordinator.mainCoordinator = self
             childCoordinators.append(mainTabBarCoordinator)
             mainTabBarCoordinator.start()
         }
@@ -53,9 +68,9 @@ extension MainCoordinator: MainCoordinatorDelegate {
     
     // Переход на страницу входа
     func navigateToSignInPage() {
-       let signInViewController : SignInTVController = SignInTVController()
-       signInViewController.delegate = self
-       self.navigationController.pushViewController(signInViewController, animated: true)
+        let signInViewController : SignInTVController = SignInTVController()
+        signInViewController.delegate = self
+        self.navigationController.pushViewController(signInViewController, animated: true)
     }
     
     func navigateToFirstPage() {
@@ -63,19 +78,25 @@ extension MainCoordinator: MainCoordinatorDelegate {
         firstViewController.delegate = self
         self.navigationController.setNavigationBarHidden(false, animated: true)
         self.navigationController.viewControllers = [firstViewController]
-        //self.navigationController
         self.childCoordinators.removeAll()
     }
     
-    func navigateToRecoveryPasswordPage() {
-        let recoveryPasswordViewController : RecoveryPasswordTVController = RecoveryPasswordTVController()
+    func navigateToPasswordRecoveryPage() {
+        let recoveryPasswordViewController : PasswordRecoveryTVController = PasswordRecoveryTVController()
+        recoveryPasswordViewController.mainCoordinator = self
         let navRecoveryPasswordViewController: UINavigationController = UINavigationController(rootViewController: recoveryPasswordViewController)
         self.navigationController.present(navRecoveryPasswordViewController, animated: true, completion: nil)
     }
     
+    func navigationPasswordResetPage(navigationController: UINavigationController) {
+        let passwordResetVC : PasswordResetTVController = PasswordResetTVController()
+        passwordResetVC.email = "timon2006tevriz@mail.ru"
+        navigationController.pushViewController(passwordResetVC, animated: true)
+    }   
+    
     func goToNextSceneApp() {
         let mainTabBarCoordinator = MainTabBarCoordinator(navigationController: navigationController)
-        mainTabBarCoordinator.delegate = self
+        mainTabBarCoordinator.mainCoordinator = self
         childCoordinators.append(mainTabBarCoordinator)
         mainTabBarCoordinator.start()
     }

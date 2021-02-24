@@ -44,6 +44,7 @@ final class MethodApi {
     static let checkEmail = "user/checkbyemail/"
     static let passwordRecovery = "user/passwordrecovery/"
     static let passwordChange = "user/passwordchange/"
+    static let passwordReset = "user/passwordReset"
     static let getDeliveryOfInvoice = "deliveryOfInvoice/getall/"
     static let getDeepLinkforIos = "sberbank/getdeeplinkforios/"
     static let getStateOfPayment = "payment/getState/"

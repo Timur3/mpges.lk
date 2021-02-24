@@ -13,7 +13,7 @@ import Alamofire
 class PDFViewController: UIViewController {
     
     public var urlToPdf: URL!
-    public weak var delegate: InvoicesTableViewControllerUserDelegate?
+    public weak var delegate: InvoicesViewControllerUserDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

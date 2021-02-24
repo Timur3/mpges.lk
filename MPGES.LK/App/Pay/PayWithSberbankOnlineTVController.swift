@@ -116,10 +116,9 @@ extension PayWithSberbankOnlineTVController: PayWithSberbankOnlineTVControllerDe
     func navigationToSberApp(response: ResultModel<String>) {
         let isError = response.isError
         if isError {
-            AlertControllerAdapter.shared.show(
+            self.showAlert(
                 title: isError ? "Ошибка!" : "Успешно!",
-                mesg: response.message!,
-                form: self) { (UIAlertAction) in
+                mesg: response.message!) { (UIAlertAction) in
                     if isError {
                         self.cancelButton()
                     }

@@ -12,7 +12,8 @@ class MainTabBarCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    public weak var delegate: MainCoordinator?
+    public weak var mainCoordinator: MainCoordinator?
+    
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -25,7 +26,7 @@ class MainTabBarCoordinator: Coordinator {
         let contractsNC = UINavigationController()
         contractsNC.navigationBar.isTranslucent = true
         contractsNC.navigationBar.prefersLargeTitles = true
-        
+        contractsNC.isNavigationBarHidden = false
         //let contractsVC = ContractsTVController(nibName: "ContractsTVController", bundle: nil)
         //contractsVC.delegate = ContractsListCoordinator(navigationController: contractsNC)
         //contractsVC.tabBarItem = UITabBarItem(title: "Мои услуги", image: UIImage(systemName: "text.badge.checkmark"), tag: 0)
@@ -45,11 +46,22 @@ class MainTabBarCoordinator: Coordinator {
         profileNC.navigationBar.prefersLargeTitles = true
         
         let profileCoordinator = ProfileCoordinator(navigationController: profileNC)
-        profileCoordinator.delegate = delegate
+        profileCoordinator.mainCoordinator = mainCoordinator
         childCoordinators.append(profileCoordinator)
         profileCoordinator.start()
         
-        let tabBarList = [contractsNC, officesVC, profileNC]
+        // MARK: - Заявки и обращения
+        let applicationNC = UINavigationController()
+        applicationNC.navigationBar.isTranslucent = true
+        applicationNC.navigationBar.prefersLargeTitles = true
+        
+        let applicationCoordinator = ProfileCoordinator(navigationController: applicationNC)
+        profileCoordinator.mainCoordinator = mainCoordinator
+        childCoordinators.append(applicationCoordinator)
+        applicationCoordinator.start()
+        
+        
+        let tabBarList = [contractsNC, officesVC, profileNC, applicationNC]
         
         mainTabBarVC.viewControllers = tabBarList
         //mainTabBarVC.delegate = self

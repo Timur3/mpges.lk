@@ -1,23 +1,31 @@
 //
-//  ActivityIndicatorViewService.swift
+//  UINavigationControllerHelper.swift
 //  mpges.lk
 //
-//  Created by Timur on 04.02.2020.
+//  Created by Timur on 20.12.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class ActivityIndicatorViewService {
-    public static let shared = ActivityIndicatorViewService()
+extension UINavigationController {
     
-    var containerView = UIView()
-    var loadingView = UIView()
-    var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+    private var containerView: UIView {
+        set { }
+        get { return UIView() }
+    }
+    private var loadingView: UIView {
+        get { return UIView() }
+    }
+    private var activityIndicator: UIActivityIndicatorView {
+        get { return UIActivityIndicatorView(style: .large) }
+    }
+
     
-    func showView(form: UIView) {
-        
-        let window = UIWindow(frame: form.bounds)
+    func showActivityIndicator1() {
+
+        let window = UIWindow(frame: self.view.bounds)
         
         containerView.frame = window.frame
         containerView.center = window.center
@@ -34,28 +42,13 @@ class ActivityIndicatorViewService {
         
         loadingView.addSubview(activityIndicator)
         containerView.addSubview(loadingView)
-        UIApplication.shared.windows[0].addSubview(containerView)
+        self.view.addSubview(containerView)
         
         activityIndicator.startAnimating()
         
     }
     
-    func showViewWinthoutBackground(form: UIView) { 
-        let window = UIWindow(frame: form.bounds)
-        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        containerView.frame = window.frame
-        containerView.center = window.center
-        containerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.2)
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        activityIndicator.center = window.center
-        
-        containerView.addSubview(activityIndicator)
-        UIApplication.shared.keyWindow?.addSubview(containerView)
-        
-        activityIndicator.startAnimating()
-    }
-    
-    func hideView() {
+    func hideActivityIndicator1() {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.containerView.removeFromSuperview()
