@@ -18,7 +18,7 @@ protocol ProfileTVControllerDelegate: class {
 
 protocol ProfileTVControllerUserDelegate: class {
     func getProfile()
-    func setProfile(profile: UserModel)
+    func setProfile(profile: ResultModel<UserModel>)
     func saveProfile(profile: UserModel)
     func resultOfSaveProfile(result: ResultModel<String>)
 }
@@ -37,26 +37,9 @@ class ProfileTVController: CommonTableViewController {
     var aboutCell: UITableViewCell { getCustomCell(textLabel: "Разработчик", imageCell: myImage.person, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
     var emailToDeveloperCell: UITableViewCell { getCustomCell(textLabel: "Обратная связь", imageCell: myImage.mail, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
     
-    var nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Введите ваше имя"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    var emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Электронная почта"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isUserInteractionEnabled = false
-        return textField
-    }()
-    var mobileTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Ваш сотовый"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.keyboardType = .numberPad
-        return textField
-    }()
+    var nameTextField: UITextField = { getCustomTextField(placeholder: "Введите ваше имя", text: "Фамилия имя отчество") }()
+    var emailTextField: UITextField = { getCustomTextField(placeholder: "Электронная почта", text: "Электронная почта", isUserInteractionEnabled: false) }()    
+    var mobileTextField: UITextField = { getCustomTextField(placeholder: "Ваш сотовый", text: "Ваш сотовый", keyboardType: .numberPad) }()
     
     var user: UserModel? {
         didSet {
@@ -68,25 +51,34 @@ class ProfileTVController: CommonTableViewController {
         }
     }
     override func viewDidLoad() {
-        ActivityIndicationService.shared.showView(form: self.view)
         self.navigationItem.title = "Больше"
         super.viewDidLoad()
         configuration()
         setUpLayout()
+        getData()
     }
-    @objc func refreshData()
+    
+    @objc func getData()
     {
+        //skeletonView
+        showSkeleton()
         self.getProfile()
     }
     
+    func showSkeleton(){
+        self.emailTextField.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        self.nameTextField.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        self.mobileTextField.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+    }
+    
     func setUpLayout(){
-        nameCell.addSubview(nameTextField)
+        nameCell.contentView.addSubview(nameTextField)
         nameTextField.leadingAnchor.constraint(equalTo: nameCell.leadingAnchor, constant: 50).isActive = true
         nameTextField.centerYAnchor.constraint(equalTo: nameCell.centerYAnchor).isActive = true
-        emailCell.addSubview(emailTextField)
+        emailCell.contentView.addSubview(emailTextField)
         emailTextField.leadingAnchor.constraint(equalTo: emailCell.leadingAnchor, constant: 50).isActive = true
         emailTextField.centerYAnchor.constraint(equalTo: emailCell.centerYAnchor).isActive = true
-        mobileCell.addSubview(mobileTextField)
+        mobileCell.contentView.addSubview(mobileTextField)
         mobileTextField.leadingAnchor.constraint(equalTo: mobileCell.leadingAnchor, constant: 50).isActive = true
         mobileTextField.centerYAnchor.constraint(equalTo: mobileCell.centerYAnchor).isActive = true
     }
@@ -184,8 +176,10 @@ class ProfileTVController: CommonTableViewController {
 
 extension ProfileTVController: ProfileTVControllerUserDelegate {
     func getProfile() {
-        ApiServiceWrapper.shared.getProfileById(delegate: self)
-        self.refreshControl?.endRefreshing()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            ApiServiceWrapper.shared.getProfileById(delegate: self)
+            self.refreshControl?.endRefreshing()
+        }
     }
     
     func saveProfile(profile: UserModel) {
@@ -196,9 +190,10 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
         self.hiddenAI()
     }
     
-    func setProfile(profile: UserModel) {
-        user = profile
-        ActivityIndicationService.shared.hideView()
+    func setProfile(profile: ResultModel<UserModel>) {
+        user = profile.data
+        // stop skeletonView
+        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }
 
@@ -206,9 +201,8 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
 extension ProfileTVController {
     private func configuration() {
         self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(getData), for: UIControl.Event.valueChanged)
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        self.getProfile()
         self.hideKeyboardWhenTappedAround()
     }
     func saveAlertSheetShow() {

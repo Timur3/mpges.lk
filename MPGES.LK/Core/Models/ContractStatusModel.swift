@@ -9,10 +9,12 @@
 import UIKit
 
 public struct ContractStatusModel: Decodable {
+    let id: Int
     let statusName: String
     let value: Decimal
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
         case statusName = "statusName"
         case value = "value"
     }

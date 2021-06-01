@@ -14,6 +14,7 @@ func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NST
     if (imageCell != .none) {
         cell.imageView?.image =  UIImage(systemName: imageCell.rawValue)
     }
+    
     cell.textLabel?.text = textLabel
     //cell.description = description
     if (textColor != .black) {
@@ -22,14 +23,13 @@ func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NST
     cell.textLabel?.textAlignment = textAlign
     cell.accessoryType = accessoryType
     cell.isUserInteractionEnabled = isUserInteractionEnabled
-    //cell.separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: UIScreen.main.bounds.width - 50)
-    //cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
-    //cell.layer.masksToBounds = true
-    //cell.layer.cornerRadius = 5
-    //cell.layer.borderWidth = 1
-    //cell.layer.shadowOffset = CGSize(width: -1, height: 1)
-    //let borderColor: UIColor = .green //(stock[indexPath.row] == "inStock") ? .red : .green
-    //cell.layer.borderColor = borderColor.cgColor
+    
+    //cell.textLabel?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+    
+    // skeletonView
+    cell.textLabel?.isSkeletonable = true
+    cell.contentView.isSkeletonable = true
+    cell.isSkeletonable = true
     
     return cell
     

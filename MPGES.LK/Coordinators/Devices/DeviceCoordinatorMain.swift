@@ -11,7 +11,7 @@ class DeviceCoordinatorMain: Coordinator {
 
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    public var contract: ContractModel?
+    public var contractId: Int = 0
 
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -20,7 +20,7 @@ class DeviceCoordinatorMain: Coordinator {
     func start() {
         let deviceTV = DevicesViewController(nibName: "DevicesViewController", bundle: nil)
         deviceTV.delegate = self
-        deviceTV.contractId = contract!.id
+        deviceTV.contractId = contractId
         self.navigationController.pushViewController(deviceTV, animated: true)
     }
   

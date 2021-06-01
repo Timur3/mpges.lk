@@ -68,6 +68,12 @@ public class UserDataService: UserDataProtocol {
     }
     
     func setIsAuth(){
+        debugPrint("true is Auth")
         UserDefaults.standard.set(true, forKey: "isAuth")
+    }
+    
+    func setNotIsAuth() {
+        debugPrint("false is Auth")
+        UserDefaults.standard.set(false, forKey: "isAuth")
     }
 }

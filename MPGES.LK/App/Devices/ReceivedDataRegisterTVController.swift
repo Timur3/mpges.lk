@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SkeletonView
+
 public protocol ReceivedDataTVControllerDelegate: class {
     func setData(model: ResultModel<[ReceivedDataModel]>)
     func getReceivedDataAddNewTemplatePage()
@@ -20,7 +22,7 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     
     public var device: DeviceModel? {
         didSet {
-            refreshReceivedData()
+            getReceivedData()
         }
     }
     
@@ -36,11 +38,30 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
         //ActivityIndicatorViewService.shared.showView(form: self.view)
         super.viewDidLoad()
         configuration()
+        getReceivedData()
     }
     
-    @objc func refreshReceivedData(){
-        ApiServiceWrapper.shared.getReceivedDataByDeviceId(id: device!.id, delegate: self)
-        self.refreshControl?.endRefreshing()
+    private func configuration() {
+        self.refreshControl = UIRefreshControl()
+
+        let sendMeterDataDevice = getPlusUIBarButtonItem(target: self, action: #selector(showMeterDataDevicePage))
+        self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
+        
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        let nib = UINib(nibName: "ReceivedDataTVCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: ReceivedDataTVCell.identifier)
+        self.refreshControl?.addTarget(self, action: #selector(getReceivedData), for: UIControl.Event.valueChanged)
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+    }
+    
+    @objc func getReceivedData() {
+        skeletonShow()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            ApiServiceWrapper.shared.getReceivedDataByDeviceId(id: self.device!.id, delegate: self)
+            self.refreshControl?.endRefreshing()
+        }
     }
     @objc func showMeterDataDevicePage() {
         self.showReceivedDataAddNewTemplateTVPage()
@@ -86,7 +107,7 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     }*/
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "receivedDataCell", for: indexPath) as! ReceivedDataTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReceivedDataTVCell.identifier, for: indexPath) as! ReceivedDataTVCell
         cell.imageView?.image = UIImage.init(systemName: myImage.receivedData.rawValue)
         cell.update(for: receivedDataList[indexPath.section].receivedData[indexPath.row])
         return cell
@@ -106,29 +127,44 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
         return res.sorted(by: { $0.year > $1.year })
     }
 }
+
+extension ReceivedDataRegisterTVController: SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return ReceivedDataTVCell.identifier
+    }
+    
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        return receivedDataList.count == 0 ? 2 : receivedDataList.count
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if receivedDataList.count != 0 {
+            return receivedDataList[section].receivedData.count
+        } else {
+            let monthNumber = Calendar.current.component(.month, from: Date())
+            if section == 0 {
+                return monthNumber
+            } else {
+                return 3
+            }
+        }
+    }
+    func skeletonShow() {
+        // skeletonView
+        self.tableView.isSkeletonable = true
+        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+    }
+    
+    func skeletonStop() {
+        // stop skeltonView
+        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+    }
+}
+
 //MARK: - SEARCH
 extension ReceivedDataRegisterTVController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
-    }
-}
-
-extension ReceivedDataRegisterTVController {
-    private func configuration() {
-        self.refreshControl = UIRefreshControl()
-
-        let sendMeterDataDevice = getPlusUIBarButtonItem(target: self, action: #selector(showMeterDataDevicePage))
-        self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
-        
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        let nib = UINib(nibName: "ReceivedDataTVCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "receivedDataCell")
-        self.refreshControl?.addTarget(self, action: #selector(refreshReceivedData), for: UIControl.Event.valueChanged)
-        
-        refreshReceivedData()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
     }
 }
 
@@ -151,7 +187,7 @@ extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
     func setData(model: ResultModel<[ReceivedDataModel]>) {
         // todo доделать получение данных из realm
         self.receivedDataList =  mapToReceivedDataModelView(receivedData: model.data!)
-        ActivityIndicationService.shared.hideView()
+        skeletonStop()
     }
     
     func getReceivedDataAddNewTemplatePage() {

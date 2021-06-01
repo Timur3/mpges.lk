@@ -71,7 +71,7 @@ class EmailToDeveloperTVController: CenterContentAndCommonTableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if (section == 0) {
-            return "Если у Вас пожелания, замечания или обнаружели ошибки по программе..."
+            return "Если у Вас пожелания, замечания или обнаружили ошибки по программе..."
         } else
         if (section == 1){
             return "Если возникли вопросы по показаниям, либо обнаружили ошибки в расчетах..."

@@ -9,15 +9,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="paymentCell" rowHeight="103" id="7Or-Jo-Olf" customClass="PaymentTVCell" customModule="МП_ГЭС" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="103"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="paymentCell" id="7Or-Jo-Olf" customClass="PaymentTVCell" customModule="МП_ГЭС" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Or-Jo-Olf" id="VEZ-oE-ReK">
-                <rect key="frame" x="0.0" y="0.0" width="344" height="103"/>
+                <rect key="frame" x="0.0" y="0.0" width="344" height="84"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="VWV-G6-Gxy">
-                        <rect key="frame" x="0.0" y="0.0" width="344" height="103"/>
+                        <rect key="frame" x="0.0" y="0.0" width="344" height="84"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zNo-ME-Y0v">
                                 <rect key="frame" x="55" y="12" width="281" height="17"/>
@@ -30,9 +30,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="28.05.2020" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWo-es-4y5">
                                         <rect key="frame" x="70" y="0.0" width="211" height="17"/>
@@ -59,9 +56,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="200000,00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzy-8s-XUc">
                                         <rect key="frame" x="70" y="0.0" width="211" height="17"/>
@@ -78,10 +72,10 @@
                                 </userDefinedRuntimeAttributes>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gd-Vk-Itb">
-                                <rect key="frame" x="55" y="54" width="281" height="37"/>
+                                <rect key="frame" x="55" y="54" width="281" height="18"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Касса:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Mb-0k-oGY">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="37"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="tx3-D3-4NV"/>
                                         </constraints>
@@ -89,11 +83,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label Label Label Label Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b72-G8-vp2">
-                                        <rect key="frame" x="70" y="0.0" width="211" height="37"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label Label Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b72-G8-vp2">
+                                        <rect key="frame" x="70" y="0.0" width="211" height="18"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <userDefinedRuntimeAttributes>
@@ -122,10 +119,10 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="cashBox" destination="b72-G8-vp2" id="Lj3-Pv-qj3"/>
-                <outlet property="dataPay" destination="LWo-es-4y5" id="pQ2-Kx-wfb"/>
+                <outlet property="datePay" destination="LWo-es-4y5" id="pQ2-Kx-wfb"/>
                 <outlet property="sumPay" destination="Mzy-8s-XUc" id="isb-g7-FNV"/>
             </connections>
-            <point key="canvasLocation" x="-144.20289855072465" y="-135.60267857142856"/>
+            <point key="canvasLocation" x="-144.20289855072465" y="-141.96428571428569"/>
         </tableViewCell>
     </objects>
 </document>

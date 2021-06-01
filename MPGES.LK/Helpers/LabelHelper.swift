@@ -20,5 +20,8 @@ func getCustomForContractLabel(text: String) -> UILabel {
     let label = UILabel()
     label.text = text
     label.translatesAutoresizingMaskIntoConstraints = false
+    label.isSkeletonable = true
+    label.skeletonCornerRadius = 5
+    label.linesCornerRadius = 5
     return label
 }

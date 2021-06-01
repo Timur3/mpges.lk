@@ -11,8 +11,7 @@ final class MethodApi {
     
     static let baseUrl = "https://api.mp-ges.ru/v2/"
     static let versionApi = "2"
-    static let baseUrlInitPro = "http://kassa.initpro.ru/lk/check-bill/"
-    
+
     static let authApi = "auth/"
     static let getContracts = "contract/getByUser/"
     static let getListOfContractNumbers = "contract/getListOfContractNumbers/"
@@ -28,9 +27,11 @@ final class MethodApi {
     static let getPaymentsByInvoiceId = "payment/getbyinvoiceid/"
     static let getPaymentsByContractId = "payment/getbyContractid/"
     static let initApplePay = "payment/initApplePay"
+    static let getReceiptUrl = "payment/getReceiptUrl/"
     static let getInvoicesByContractId = "invoice/getbyContractid/"
     static let sendInoicesByUserId = "invoice/sendInvoice/"
     static let sendInoicesByEmail = "invoice/sendInvoice/"
+    static let getInvoicePdf = "invoice/getPdf/"
     static let getCalculationsByInvoiceId = "calculation/getbyinvoiceid/"
     static let getDevicesByContractId = "device/getbyContractid/"
     static let getReceivedData = "receivedData/getbydeviceid/"
@@ -40,12 +41,14 @@ final class MethodApi {
     static let receivedDataDelete = "receivedData/delete/"
     static let createUser = "user/signUp/"
     static let updateUser = "user/update/"
-    static let getUser = "user/"
+    static let getUser = "user/getProfile"
     static let checkEmail = "user/checkbyemail/"
     static let passwordRecovery = "user/passwordrecovery/"
     static let passwordChange = "user/passwordchange/"
     static let passwordReset = "user/passwordReset"
     static let getDeliveryOfInvoice = "deliveryOfInvoice/getall/"
-    static let getDeepLinkforIos = "sberbank/getdeeplinkforios/"
+    static let getDeepLinkforIos = "sberbank/getdeeplink/ios/"
     static let getStateOfPayment = "payment/getState/"
+    static let refreshToken = "auth/refreshtoken/"
+    static let getOfficesMark = "map/"
 }

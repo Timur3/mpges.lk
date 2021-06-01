@@ -44,9 +44,9 @@ extension MainContractsCoordinator: ContractsTVControllerDelegate {
         self.navigationController.present(navContractAddFirstPageTVController, animated: true, completion: nil)
     }
         
-    func navigationDetailsInfoPage(to contract: ContractModel) {
+    func navigationDetailsInfoPage(to contractId: Int) {
         let contractDetailsInfoCoordinator = ContractDetailsInfoCoordinator(navigationController: navigationController)
-        contractDetailsInfoCoordinator.contract = contract
+        contractDetailsInfoCoordinator.contractId = contractId
         childCoordinators.append(contractDetailsInfoCoordinator)
         contractDetailsInfoCoordinator.start()
     }

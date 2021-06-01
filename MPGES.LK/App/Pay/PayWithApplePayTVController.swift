@@ -18,7 +18,6 @@ class PayWithApplePayTVController: CommonTableViewController {
     
     var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
     var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }()
-    //var saveCell: UITableViewCell { getCustomCell(textLabel: "", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
     
     var accountTextField: UITextField = { getCustomTextField(placeholder: "") }()
@@ -33,7 +32,7 @@ class PayWithApplePayTVController: CommonTableViewController {
     }()
     
     var applePayPaymentButton: PKPaymentButton = {
-        let paymentButton = PKPaymentButton(paymentButtonType: .buy, paymentButtonStyle: .whiteOutline)
+        let paymentButton = PKPaymentButton(paymentButtonType: .inStore, paymentButtonStyle: .whiteOutline)
         paymentButton.translatesAutoresizingMaskIntoConstraints = false
         paymentButton.addTarget(self, action: #selector(applePayButtonTapped(sender:)), for: .touchUpInside)
         return paymentButton
@@ -197,15 +196,15 @@ extension PayWithApplePayTVController {
         } else {
             self.showAlert(
                 title: "Ошибка",
-                mesg: "Минимальная сумма платежа 5.00 ₽")
+                mesg: "Минимальная сумма платежа 5.00₽")
         }
     }
     
     func createPaymentRequestForApplePay(sum: NSDecimalNumber) -> PKPaymentRequest {
-        let label = "МП \"ГЭС\""
+        let label = "ООО \"ГЭС\""
         
         let request = PKPaymentRequest()
-        request.merchantIdentifier = "merchant.com.mpges.lk"
+        request.merchantIdentifier = "merchant.com.oooges.lk"
         request.supportedNetworks = [.visa, .masterCard]
         request.supportedCountries = ["RU"]
         request.merchantCapabilities = .capability3DS

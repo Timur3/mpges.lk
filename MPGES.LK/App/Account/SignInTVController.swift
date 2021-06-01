@@ -126,7 +126,7 @@ class SignInTVController: CenterContentAndCommonTableViewController {
             let access = ApiService.Connectivity.isConnectedToInternet
             if access {
                 if isValidEmail(emailTextField.text!) {
-                    let deviceId = String(UIDevice.current.identifierForVendor!.hashValue)
+                    let deviceId = UIDevice.current.identifierForVendor!.uuidString
                     let model = SignInModel(email: emailTextField.text!, password: passwordTextField.text!, deviceId: deviceId)
                     self.delegateUser?.authApi(model: model)
                 } else
@@ -154,7 +154,6 @@ class SignInTVController: CenterContentAndCommonTableViewController {
     }
     
     @objc func geToDemo() {
-        ActivityIndicatorViewForNaviagtionItem.shared.showAI(nav: self.navigationItem)
         let deviceId = String(UIDevice.current.identifierForVendor!.hashValue)
         let model = SignInModel(email: "demo@mp-ges.ru", password: "Qwerty123!", deviceId: deviceId)
         ApiServiceWrapper.shared.authApi(model: model, delegate: self)
@@ -195,6 +194,7 @@ extension SignInTVController: SignInTVControllerUserDelegate {
         }
         if !result.isError {
             userDataService.setToken(token: result.data!.accessToken)
+            userDataService.setRefreshToken(token: result.data!.refreshToken)
             userDataService.setIsAuth()
             
             self.delegate?.goToNextSceneApp()

@@ -23,7 +23,6 @@ class ApiServiceWrapper {
     func authApi(model: SignInModel, delegate: SignInTVControllerUserDelegate) {
         api.requestByModel(model: model, method: MethodApi.authApi, completion: delegate.resultAuthApi(result:))
     }
-    
     //
     func getDeepLinkForIos(number: Int, delegate: PayWithSberbankOnlineTVControllerDelegate) {
         api.requestById(id: number, method: MethodApi.getDeepLinkforIos, completion: delegate.navigationToSberApp(response:))
@@ -105,11 +104,11 @@ class ApiServiceWrapper {
     
     // получение деталей по договору
     func getContractById(id: Int, delegate: ContractDetailsInfoTVControllerUserDelegate) {
-        api.requestById(id: id, method: MethodApi.getContract, completion: delegate.setContractById(contract:))
+        api.requestById(id: id, method: MethodApi.getContract, completion: delegate.setContractById(for:))
     }
     
     func getContractById(delegate: ContractDetailsInfoTVControllerUserDelegate) {
-        api.requestById(id: uds.getCurrentContract()!, method: MethodApi.getContract, completion: delegate.setContractById(contract:))
+        api.requestById(id: uds.getCurrentContract()!, method: MethodApi.getContract, completion: delegate.setContractById(for:))
     }
     
     // получение профиля
@@ -158,10 +157,16 @@ class ApiServiceWrapper {
         }
     }
     
-    func getContractStatus(id: Int, status: UITableViewCell, value: UILabel){
-        api.requestById(id: id, method: MethodApi.getContractStatusById) { (model: ResultModel<ContractStatusModel>) in
-            status.textLabel?.text = model.data!.statusName
-            value.text = formatRusCurrency(model.data!.value)
-        }
+    func getContractStatus(id: Int, delegate: ContractDetailsInfoTVControllerUserDelegate){
+        api.requestById(id: id, method: MethodApi.getContractStatusById, completion: delegate.setContractStatus(for:))
+    }
+    
+    func getReceiptUrl(id: Int, delegate: PaymentsViewControllerUserDelegate) {
+        api.requestById(id: id, method: MethodApi.getReceiptUrl, completion: delegate.navigationPaymentInfoForSafariService(for:))
+    }
+    
+    func getOffices(delegate: OfficesViewControllerDelegate)
+    {
+        api.requestByToken(method: MethodApi.getOfficesMark, completion: delegate.setOffices(for:))
     }
 }

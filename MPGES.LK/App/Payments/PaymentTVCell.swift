@@ -9,7 +9,7 @@
 import UIKit
 
 class PaymentTVCell: UITableViewCell {
-    @IBOutlet weak var dataPay: UILabel!
+    @IBOutlet weak var datePay: UILabel!
     @IBOutlet weak var sumPay: UILabel!
     @IBOutlet weak var cashBox: UILabel!
     
@@ -17,19 +17,17 @@ class PaymentTVCell: UITableViewCell {
     
     func update(for pay: PaymentModel) {
         let sum: Decimal = (pay.summa)
-        dataPay.text = pay.datePay
+        datePay.text = pay.datePay
         sumPay.text = formatRusCurrency(sum)
         cashBox.text = pay.registerOfPayment?.typeOfPayment?.name
-        /*let imgView = UIImageView(image: UIImage(systemName: myImage.dote.rawValue))
-        imgView.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(payCellAction(tapGestureRecognizer:)))
-        imgView.addGestureRecognizer(tapGestureRecognizer)
-        accessoryView = imgView*/
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         // for skeletonView
-        textLabel?.linesCornerRadius = 5
+        datePay.linesCornerRadius = 5
+        sumPay.linesCornerRadius = 5
+        cashBox.linesCornerRadius = 5
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

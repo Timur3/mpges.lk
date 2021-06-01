@@ -9,20 +9,20 @@
 import UIKit
 
 class DeliveryOfInvoiceTableViewCell: UITableViewCell {
-    @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var txtLabel: UILabel!
     
     static let identifier = "deliveryOfInvoiceCell"
     
-    func update(for text: String) {
-        self.txtLabel.text = text
-        self.imgView.image = UIImage(systemName: myImage.mail.rawValue)
+    func update(for model: InvoiceDeliveryMethodModel) {
+        textLabel?.text = model.devileryMethodName
+        detailTextLabel?.text = model.description
+        imageView?.image = UIImage(systemName: myImage.mail.rawValue)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        //self.txtLabel.linesCornerRadius = 5
+        textLabel?.linesCornerRadius = 5
+        detailTextLabel?.linesCornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

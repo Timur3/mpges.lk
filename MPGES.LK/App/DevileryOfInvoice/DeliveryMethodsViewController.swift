@@ -15,7 +15,7 @@ public protocol DeliveryMethodTVControllerDelegate: class {
 }
 
 
-class DeliveryMethodsViewController: UIViewController, SkeletonTableViewDelegate, SkeletonTableViewDataSource {
+class DeliveryMethodsViewController: UIViewController {
     
     public weak var delegate: ContractDetailsInfoTVControllerUserDelegate?
     public var contract: ContractModel?
@@ -29,19 +29,15 @@ class DeliveryMethodsViewController: UIViewController, SkeletonTableViewDelegate
         setUpLayout()
         configuration()
         getData()
+        skeletonShow()
     }
     
     func configuration(){
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         let nib = UINib(nibName: "DeliveryOfInvoiceTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: DeliveryOfInvoiceTableViewCell.identifier)
-        //self.tableView.register(DeliveryHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "headerTable")
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        // skeletonView
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }
     
     func setUpLayout(){
@@ -51,18 +47,6 @@ class DeliveryMethodsViewController: UIViewController, SkeletonTableViewDelegate
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    }
-    
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return 1
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return DeliveryOfInvoiceTableViewCell.identifier
-    }
-           
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -107,6 +91,10 @@ class DeliveryMethodsViewController: UIViewController, SkeletonTableViewDelegate
             temp.append(item)
         }
         deliveryMethodList = temp
+        self.sendDeliveryMethod()
+    }
+    
+    func sendDeliveryMethod() {
         let updDeliveryMethod = UpdateDeliveryMethodModel(contractId: contract!.id, deliveryMethodId: selectedDeliveryMethod!.id)
         ApiServiceWrapper.shared.updateDeliveryMethod(model: updDeliveryMethod, delegate: self)
     }
@@ -118,7 +106,7 @@ class DeliveryMethodsViewController: UIViewController, SkeletonTableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DeliveryOfInvoiceTableViewCell.identifier, for: indexPath) as! DeliveryOfInvoiceTableViewCell
-        cell.update(for: deliveryMethodList[indexPath.row].devileryMethodName)
+        cell.update(for: deliveryMethodList[indexPath.row])
         cell.accessoryType = .none
         if (deliveryMethodList[indexPath.row].selected) { cell.accessoryType = .checkmark }
         
@@ -135,14 +123,16 @@ class DeliveryMethodsViewController: UIViewController, SkeletonTableViewDelegate
 extension DeliveryMethodsViewController: DeliveryMethodTVControllerDelegate {
     
     func resultOfUpdateDeliveryMethod(for resultModel: ResultModel<String>) {
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        let isError = resultModel.isError
-        self.showAlert(
-            title: isError ? "Ошибка!" : "Успешно!",
-            mesg: resultModel.message!) { (UIAlertAction) in
-            if !isError {
-                //self.cancelButton()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let isError = resultModel.isError
+            self.showAlert(
+                title: isError ? "Ошибка!" : "Успешно!",
+                mesg: resultModel.message!) { (UIAlertAction) in
+                if !isError {
+                    //self.cancelButton()
+                }
             }
+            ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
     }
     
@@ -157,7 +147,31 @@ extension DeliveryMethodsViewController: DeliveryMethodTVControllerDelegate {
         }
         deliveryMethodList = temp
         setUpLayout()
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+        skeletonStop()
     }
 }
 
+extension DeliveryMethodsViewController: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
+    
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        return 1
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return DeliveryOfInvoiceTableViewCell.identifier
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func skeletonShow() {
+        // skeletonView
+        self.tableView.isSkeletonable = true
+        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+    }
+    
+    func skeletonStop() {
+        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+    }
+}

@@ -1,5 +1,5 @@
 //
-//  ActivityIndicatorViewService.swift
+//  ActivityIndicatorViewService2.swift
 //  mpges.lk
 //
 //  Created by Timur on 04.02.2020.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ActivityIndicatorViewService1 {
-    public static let shared = ActivityIndicatorViewService1()
+class ActivityIndicatorViewService2 {
+    public static let shared = ActivityIndicatorViewService2()
     
     private var containerView: UIView?
     private var activityIndicator = UIActivityIndicatorView(style: .large)

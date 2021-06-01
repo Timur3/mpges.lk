@@ -21,7 +21,7 @@ class ActivityIndicatorViewForCellService {
             cell.textLabel?.isHidden = true
             cell.detailTextLabel?.isHidden = true
             cell.isUserInteractionEnabled = false
-            cell.addSubview(self.activityIndicator)
+            cell.contentView.addSubview(self.activityIndicator)
         }
     }
     

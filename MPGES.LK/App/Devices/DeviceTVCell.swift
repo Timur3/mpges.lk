@@ -27,7 +27,7 @@ class DeviceTVCell: UITableViewCell {
     var index: IndexPath?
     
     @IBAction func ReceivedDataAddNewAction(_ sender: Any) {
-        delegateCell?.onClick(index: index!.row)
+        delegateCell?.onClick(index: index!.section)
     }
     
     func update(for device: DeviceModel) {

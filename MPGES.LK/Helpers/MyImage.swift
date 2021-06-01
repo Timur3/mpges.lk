@@ -44,4 +44,8 @@ enum myImage: String {
     case gauge = "gauge"
     case xmark = "xmark.circle.fill"
     case checkmark 	= "checkmark.circle.fill"
+    case sberLogo = "sberLogo"
+    case appleLogo = "applelogo"
+    case sberIcon = "sberIcon"
+    case markLogo = "placeMark"
 }

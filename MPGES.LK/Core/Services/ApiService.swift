@@ -31,15 +31,14 @@ class ApiService: ApiServiceProtocol {
         
         AF.request(self.baseURL+method, method: .post, parameters: model, encoder: JSONParameterEncoder.default, interceptor: interceptor)            
             .responseData { response in
-
+                
                 switch response.result {
                 case let .success(value):
                     let myResponse = try! JSONDecoder().decode(T.self, from: value)
-                    DispatchQueue.main.async {
-                        completion(myResponse)
-                    }
+                    completion(myResponse)
                 case let .failure(error):
-                    print(error)
+                    debugPrint("requestByModel")
+                    debugPrint(error)
                 }
             }
     }
@@ -50,7 +49,7 @@ class ApiService: ApiServiceProtocol {
         
         AF.request(self.baseURL+fullMethod, method: .get, interceptor: interceptor)
             .responseData { response in
-
+                
                 switch response.result {
                 case let .success(value):
                     let myResponse = try! JSONDecoder().decode(T.self, from: value)

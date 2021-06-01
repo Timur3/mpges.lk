@@ -13,27 +13,25 @@ class ContractsTableViewCell: UITableViewCell {
     @IBOutlet weak var saldoContract: UILabel!
     @IBOutlet weak var contractAddress: UILabel!
     
+    static let identifier = "contractCell"
     func update(for contract: ContractModel) {
+        imageView?.image = UIImage(systemName: myImage.docText.rawValue)
+        
         let conNum = "\(contract.id)"
         numberContract.text = conNum
         contractAddress.text = contract.primaryAddress
-           DispatchQueue.main.async { [weak self] in
-               guard self != nil else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard self != nil else { return }
             ApiServiceWrapper.shared.loadSaldoContract(id: contract.id, label: self!.saldoContract)
-           }
+        }
     }
     
     override func awakeFromNib() {
-           super.awakeFromNib()
-           // Initialization code
-//        self.layer.masksToBounds = false
-//        self.layer.shadowColor = UIColor.black.cgColor
-//        self.layer.shadowOpacity = 0.5
-//        self.layer.shadowOffset = CGSize(width: -1, height: 1)
-//        self.layer.shadowRadius = 10
-//        self.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
-//        self.layer.shouldRasterize = true
-//        self.layer.rasterizationScale = UIScreen.main.scale
+        super.awakeFromNib()
+        // Initialization code
+        self.numberContract.linesCornerRadius = 5
+        self.contractAddress.linesCornerRadius = 5
+        self.saldoContract.linesCornerRadius = 5
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

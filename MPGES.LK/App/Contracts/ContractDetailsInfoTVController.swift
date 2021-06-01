@@ -23,19 +23,20 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
 
 class ContractDetailsInfoTVController: CommonTableViewController {
     public weak var delegate: ContractDetailsInfoTVControllerDelegate?
+    public var contractId: Int = 0
     
     var accountCell: UITableViewCell = { getCustomCell(textLabel: "Лицевой счет:", imageCell: myImage.tag, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var contractNumberCell: UITableViewCell = { getCustomCell(textLabel: "Номер:", imageCell: myImage.docText, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var contractDateCell: UITableViewCell = { getCustomCell(textLabel: "Дата:", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var contractorCell: UITableViewCell = { getCustomCell(textLabel: "Контрагент:", imageCell: myImage.person, textAlign: .left, accessoryType: .disclosureIndicator) }()
-    
+
     // Отображение баланса
     var contractSaldoCell: UITableViewCell = { getCustomCell(textLabel: "Баланс:", imageCell: myImage.rub, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
-    var saldoSumLabel: UILabel = { getCustomForContractLabel(text: "0.00") }()
-    var contractorLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var contractNumberLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var contractDateLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var accountLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var saldoSumLabel: UILabel = { getCustomForContractLabel(text: "000000.00") }()
+    var contractorLabel: UILabel = { getCustomForContractLabel(text: "Фамилия Имя") }()
+    var contractNumberLabel: UILabel = { getCustomForContractLabel(text: "8600030") }()
+    var contractDateLabel: UILabel = { getCustomForContractLabel(text: "20-02-2021") }()
+    var accountLabel: UILabel = { getCustomForContractLabel(text: "86000300004") }()
     //--
     
     var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Оплатить", imageCell: myImage.creditcard, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
@@ -51,8 +52,16 @@ class ContractDetailsInfoTVController: CommonTableViewController {
                 self.accountLabel.text = self.contractModel!.number
                 self.contractDateLabel.text = self.contractModel!.dateRegister
                 self.contractorLabel.text = self.contractModel!.contractor.name + " " + self.contractModel!.contractor.middleName!.prefix(1) + ". " + self.contractModel!.contractor.family.prefix(1) + "."
-                ApiServiceWrapper.shared.getContractStatus(id: self.contractModel!.id, status: self.contractSaldoCell, value: self.saldoSumLabel)
+                ApiServiceWrapper.shared.getContractStatus(id: self.contractModel!.id, delegate: self)
                 self.tableView.reloadData()
+            }
+        }
+    }
+    public var contractStatusInfoModel: ContractStatusModel? {
+        didSet {
+            DispatchQueue.main.async {
+                self.contractSaldoCell.textLabel?.text = self.contractStatusInfoModel?.statusName
+                self.saldoSumLabel.text = formatRusCurrency(self.contractStatusInfoModel!.value)
             }
         }
     }
@@ -62,22 +71,24 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         super.viewDidLoad()
         setUpLayout()
         configuration()
+        refreshContract()
+        var se
     }
     
     func setUpLayout(){
-        contractSaldoCell.addSubview(saldoSumLabel)
+        contractSaldoCell.contentView.addSubview(saldoSumLabel)
         saldoSumLabel.rightAnchor.constraint(equalTo: contractSaldoCell.rightAnchor, constant: -50).isActive = true
         saldoSumLabel.centerYAnchor.constraint(equalTo: contractSaldoCell.centerYAnchor).isActive = true
-        contractorCell.addSubview(contractorLabel)
+        contractorCell.contentView.addSubview(contractorLabel)
         contractorLabel.rightAnchor.constraint(equalTo: contractorCell.rightAnchor, constant: -50).isActive = true
         contractorLabel.centerYAnchor.constraint(equalTo: contractorCell.centerYAnchor).isActive = true
-        contractDateCell.addSubview(contractDateLabel)
+        contractDateCell.contentView.addSubview(contractDateLabel)
         contractDateLabel.rightAnchor.constraint(equalTo: contractDateCell.rightAnchor, constant: -50).isActive = true
         contractDateLabel.centerYAnchor.constraint(equalTo: contractDateCell.centerYAnchor).isActive = true
-        accountCell.addSubview(accountLabel)
+        accountCell.contentView.addSubview(accountLabel)
         accountLabel.rightAnchor.constraint(equalTo: accountCell.rightAnchor, constant: -50).isActive = true
         accountLabel.centerYAnchor.constraint(equalTo: accountCell.centerYAnchor).isActive = true
-        contractNumberCell.addSubview(contractNumberLabel)
+        contractNumberCell.contentView.addSubview(contractNumberLabel)
         contractNumberLabel.rightAnchor.constraint(equalTo: contractNumberCell.rightAnchor, constant: -50).isActive = true
         contractNumberLabel.centerYAnchor.constraint(equalTo: contractNumberCell.centerYAnchor).isActive = true
     }
@@ -91,20 +102,20 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             
-           /* if !(saldoSumLabel.text!.isEmpty) {
-                let amount = self.saldoSumLabel.text!.removeFormatAndSpace()
-                if amount >= 0.00 {
-                    self.contractSaldoCell.textLabel?.text = "Задолженность:"
-                    self.saldoSumLabel.layer.backgroundColor = UIColor.systemRed.cgColor
-                    self.contractSaldoCell.layer.borderColor = UIColor.systemRed.cgColor
-                } else
-                {
-                    self.contractSaldoCell.textLabel?.text = "Переплата:"
-                    self.saldoSumLabel.layer.backgroundColor = UIColor.systemGreen.cgColor
-                    self.contractSaldoCell.layer.borderColor = UIColor.systemGreen.cgColor
-                }
-                self.contractSaldoCell.layer.borderWidth = 1.0
-            }*/
+            /* if !(saldoSumLabel.text!.isEmpty) {
+             let amount = self.saldoSumLabel.text!.removeFormatAndSpace()
+             if amount >= 0.00 {
+             self.contractSaldoCell.textLabel?.text = "Задолженность:"
+             self.saldoSumLabel.layer.backgroundColor = UIColor.systemRed.cgColor
+             self.contractSaldoCell.layer.borderColor = UIColor.systemRed.cgColor
+             } else
+             {
+             self.contractSaldoCell.textLabel?.text = "Переплата:"
+             self.saldoSumLabel.layer.backgroundColor = UIColor.systemGreen.cgColor
+             self.contractSaldoCell.layer.borderColor = UIColor.systemGreen.cgColor
+             }
+             self.contractSaldoCell.layer.borderWidth = 1.0
+             }*/
             //cell.layer.backgroundColor = UIColor.systemGreen.cgColor
             //cell.layer.borderColor = UIColor.white.cgColor
             //cell.layer.borderWidth = 1.0
@@ -223,20 +234,24 @@ class ContractDetailsInfoTVController: CommonTableViewController {
 }
 
 extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDelegate {
-   
+    
+    func setContractStatus(for model: ResultModel<ContractStatusModel>) {
+        contractStatusInfoModel = model.data
+    }
+    
     func getContractById(id: Int) {
         ApiServiceWrapper.shared.getContractById(id: id, delegate: self)
     }
     
     var sections: [String?] { ["Основная информация", "Состояние лицевого счета", "", "Доставка квитанций"] }
     
-    func setContractById(contract: ResultModel<ContractModel>) {
+    func setContractById(for contract: ResultModel<ContractModel>) {
         contractModel = contract.data
         self.refreshControl?.endRefreshing()
+        skeletonStop()
     }
     
     func getStatePayment(for model: RequestOfPayModel) {
-        ActivityIndicationService.shared.showView(form: self.view)
         ApiServiceWrapper.shared.getStateApplePay(model: model, delegate: self.delegate!)
     }
 }
@@ -245,39 +260,52 @@ extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDe
 extension ContractDetailsInfoTVController {
     
     func alertSheetMethodPayShow() {
-        let alert = UIAlertController(title: "Выбор способа оплаты:", message: nil, preferredStyle: .actionSheet)
-        alert.modalPresentationStyle = .popover
+        let alertController = UIAlertController(title: "Выбор способа оплаты:", message: nil, preferredStyle: .actionSheet)
+        alertController.modalPresentationStyle = .popover
         let actionApplePay = UIAlertAction(title: "Apple Pay", style: .default) {
             (UIAlertAction) in
             self.goToApplePayPage()
         }
-        //let actionOthersBank = UIAlertAction(title: "Банковские карты", style: .default) {//
-        //  (UIAlertAction) in self.delegate?.navigateToPayWithCreditCardPage()
-        //}
+        let appleLogoImage = UIImage(systemName: myImage.appleLogo.rawValue)
+        
+        if let icon = appleLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 32)) {
+            actionApplePay.setValue(icon, forKey: "image")
+            }
+        
         let actionSberBank = UIAlertAction(title: "Сбербанк Онлайн", style: .default) {
             (UIAlertAction) in
             self.goToSberbankOnlinePage()
         }
+        let sberLogoImage = UIImage(named: myImage.sberLogo.rawValue)
+        if let icon = sberLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 29)) {
+            actionSberBank.setValue(icon, forKey: "image")
+            }
+
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        alert.addAction(actionApplePay)
+        alertController.addAction(actionApplePay)
         // alert.addAction(actionOthersBank)
-        alert.addAction(actionSberBank)
-        alert.addAction(actionCancel)
+        alertController.addAction(actionSberBank)
+        alertController.addAction(actionCancel)
         
         if UIDevice.isPad {
-        if let popoverController = alert.popoverPresentationController {
-            popoverController.sourceView = self.tableView
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popoverController.permittedArrowDirections = [];
-          }
+            if let popoverController = alertController.popoverPresentationController {
+                popoverController.sourceView = self.tableView
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = [];
+            }
         }
-        self.present(alert, animated: true, completion: {
+        self.present(alertController, animated: true, completion: {
             print("completion block")
         })
     }
     
     func goToApplePayPage() {
-        let model = BankPayModel(contractId: self.contractModel!.id, contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "", summa: self.saldoSumLabel.text!)
+        var sum = self.saldoSumLabel.text
+        if (self.contractStatusInfoModel?.id == 2) {
+            sum = formatRusCurrency(0.00)
+        }
+        
+        let model = BankPayModel(contractId: self.contractModel!.id, contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "", summa: sum!)
         self.delegate?.navigateToPayWithApplePayPage(model: model, delegate: self)
     }
     
@@ -302,7 +330,24 @@ extension ContractDetailsInfoTVController {
         tableView.dataSource = self
     }
     @objc func refreshContract() {
-        getContractById(id: contractModel!.id)
+        skeletonShow()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.getContractById(id: self.contractId)
+        }
+    }
+    
+    func skeletonShow() {
+        // skeletonView
+        self.accountLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        self.contractorLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        self.contractDateLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        self.contractNumberLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        self.saldoSumLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+    }
+    
+    func skeletonStop() {
+        // stop skeltonView
+        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }
 

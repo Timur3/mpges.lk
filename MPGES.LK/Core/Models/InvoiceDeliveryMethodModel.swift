@@ -9,15 +9,18 @@
 public struct InvoiceDeliveryMethodModel: Decodable{
     var id: Int
     var devileryMethodName: String
+    var description: String?
     var selected: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
+        case description = "description"
         case devileryMethodName = "devileryMethodName"
     }
-    init(id: Int, devileryMethodName: String, selected: Bool) {
+    init(id: Int, devileryMethodName: String, description: String, selected: Bool) {
         self.id = id
         self.devileryMethodName = devileryMethodName
+        self.description = description
     }
     
 }

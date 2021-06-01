@@ -12,7 +12,7 @@ class InvoiceCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     unowned let navigationController: UINavigationController
-    public var contract: ContractModel?
+    public var contractId: Int = 0
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -22,7 +22,7 @@ class InvoiceCoordinator: Coordinator {
         let invoiceTV = InvoicesViewController(nibName: "InvoicesViewController", bundle: nil)
         //InvoicesTableViewController = InvoicesTableViewController()
         invoiceTV.delegate = self
-        invoiceTV.contractId = contract!.id
+        invoiceTV.contractId = contractId
         self.navigationController.pushViewController(invoiceTV, animated: true)
     }
 }

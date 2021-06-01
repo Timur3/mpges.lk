@@ -14,11 +14,12 @@ public protocol MainTabBarViewControllerDelegate: class {
     func navigateToProfilePage()
 }
 
-class MainTabBarViewController: UITabBarController {
+class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     public var email: String = ""
     public weak var delegateUser: MainTabBarViewControllerDelegate?
     
     override func viewDidLoad() {
+        self.delegate = self
         super.viewDidLoad()
     }
 
@@ -28,5 +29,15 @@ class MainTabBarViewController: UITabBarController {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         print("Selected \(viewController.tabBarItem.tag)")
+        if (viewController.tabBarItem.tag == 1)
+        {
+            let v = viewController as! OfficesViewController
+            v.startPosition()
+        }
+    }
+    
+    // UITabBarDelegate
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Selected item")
     }
 }

@@ -8,22 +8,18 @@
 
 import UIKit
 import SkeletonView
-
-public protocol PaymentsViewControllerDelegate: class {
-    func navigationPaymentInfoPage(uuid: String)
-    func navigationPaymentInfoForSafariService(uuid: String)
-}
+import SafariServices
 
 protocol PaymentsViewControllerUserDelegate {
     func setPayments(payments:ResultModel<[PaymentModel]>)
     func getPayments()
     func mapToPaymentsModelView(payments:[PaymentModel]) -> [PaymentsModelVeiw]
+    func navigationPaymentInfoForSafariService(for model: ResultModel<String>)
 }
 
 class PaymentsViewController: UIViewController, UITableViewDelegate, SkeletonTableViewDataSource {
     let tableView = UITableView.init(frame: .zero, style: .insetGrouped)
     
-    public weak var delegate: PaymentsViewControllerDelegate?
     private var tempPayments = [PaymentModel]()
     private var searchBarIsEmpty: Bool {
         guard let str = searchController.searchBar.text else { return false }
@@ -43,7 +39,6 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, SkeletonTab
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Платежи"
-        // Do any additional setup after loading the view.
         configuration()
         setUpLayout()
         getPayments()
@@ -64,9 +59,6 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, SkeletonTab
         self.tableView.refreshControl?.addTarget(self, action: #selector(getPayments), for: UIControl.Event.valueChanged)
         
         self.view.backgroundColor = self.tableView.backgroundColor
-        // skeletonskView
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }
     
     func setUpLayout(){
@@ -80,15 +72,19 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, SkeletonTab
     }
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return 2
+        return (paymentsList.count == 0) ? 2 : paymentsList.count
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let monthNumber = Calendar.current.component(.month, from: Date())
-        if section == 0 {
-            return monthNumber
+        if paymentsList.count != 0 {
+            return paymentsList[section].payments.count
         } else {
-            return 6
+            let monthNumber = Calendar.current.component(.month, from: Date())
+            if section == 0 {
+                return monthNumber
+            } else {
+                return 3
+            }
         }
     }
     
@@ -149,58 +145,72 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, SkeletonTab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         let pay = paymentsList[indexPath.section].payments[indexPath.row]
-        let msg = "Отсутствуют информация по чеку, возможно чек выдали Вам после оплаты на кассе предприятия"
-        if ((pay.uuid) != nil) {
-            self.delegate?.navigationPaymentInfoForSafariService(uuid: pay.uuid!)
+        ApiServiceWrapper.shared.getReceiptUrl(id: pay.id, delegate: self)
+    }
+}
+
+extension PaymentsViewController: PaymentsViewControllerUserDelegate {
+    func navigationPaymentInfoForSafariService(for model: ResultModel<String>) {
+        let isError = model.isError
+        if (!isError) {
+            if let url = URL(string: model.data!) {
+                let config = SFSafariViewController.Configuration()
+                config.entersReaderIfAvailable = true
+                let vc = SFSafariViewController(url: url, configuration: config)
+                self.present(vc, animated: true, completion: nil)
+            }
         }
-        else {
+        else
+        {
+            self.showAlert(
+                title: "Ошибка",
+                mesg: model.message!) { (UIAlertAction) in
+                print(model.message as Any)
+            }
+        }
+    }
+
+@objc func getPayments() {
+    // skeletonskView
+    self.tableView.isSkeletonable = true
+    self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        let access = ApiService.Connectivity.isConnectedToInternet
+        if access {
+            print("refresh")
+            ApiServiceWrapper.shared.getPaymentsByContractId(id: self.contractId, delegate: self)
+        } else {
+            let msg = "Нет соединения с интернетом, попробуйте выполнить запрос позже"
             self.showAlert(
                 title: "Ошибка",
                 mesg: msg) { (UIAlertAction) in
                 print(msg as Any)
             }
         }
+        self.tableView.refreshControl?.endRefreshing()
     }
 }
 
-extension PaymentsViewController: PaymentsViewControllerUserDelegate {
-    @objc func getPayments() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let access = ApiService.Connectivity.isConnectedToInternet
-            if access {
-                print("refresh")
-                ApiServiceWrapper.shared.getPaymentsByContractId(id: self.contractId, delegate: self)
-            } else {
-                let msg = "Нет соединения с интернетом, попробуйте выполнить запрос позже"
-                self.showAlert(
-                    title: "Ошибка",
-                    mesg: msg) { (UIAlertAction) in
-                    print(msg as Any)
-                }
-            }
-            self.tableView.refreshControl?.endRefreshing()
-        }
+func mapToPaymentsModelView(payments: [PaymentModel]) -> [PaymentsModelVeiw] {
+    var res = [PaymentsModelVeiw]()
+    let models = payments.groupBy { $0.payYear() }
+    for mod in models{
+        let payVM = PaymentsModelVeiw(year: mod.key, payments: mod.value as [PaymentModel])
+        res.append(payVM)
     }
-    
-    func mapToPaymentsModelView(payments: [PaymentModel]) -> [PaymentsModelVeiw] {
-        var res = [PaymentsModelVeiw]()
-        let models = payments.groupBy { $0.payYear() }
-        for mod in models{
-            let payVM = PaymentsModelVeiw(year: mod.key, payments: mod.value as [PaymentModel])
-            res.append(payVM)
-        }
-        return res.sorted(by: { $0.year > $1.year })
-    }
-    
-    func setPayments(payments: ResultModel<[PaymentModel]>) {
-        // todo доделать получение данных из realm
-        let model = mapToPaymentsModelView(payments: payments.data!)
-        paymentsList = model
-        // для поиска
-        tempPayments = payments.data!
-        // stop skeltonView
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-    }
+    return res.sorted(by: { $0.year > $1.year })
+}
+
+func setPayments(payments: ResultModel<[PaymentModel]>) {
+    // todo доделать получение данных из realm
+    let model = mapToPaymentsModelView(payments: payments.data!)
+    paymentsList = model
+    // для поиска
+    tempPayments = payments.data!
+    // stop skeltonView
+    self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+}
 }
 // MARK: - SEARCH
 extension PaymentsViewController: UISearchResultsUpdating {

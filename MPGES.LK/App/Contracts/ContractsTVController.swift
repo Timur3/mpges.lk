@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SkeletonView
 
 public protocol ContractsTVControllerDelegate: class {
     func navigationContractAddTVPage(delegate: ContractsTVControllerUserDelegate)
-    func navigationDetailsInfoPage(to contract: ContractModel)
+    func navigationDetailsInfoPage(to contractId: Int)
 }
 
 public protocol ContractsTVControllerUserDelegate: class {
@@ -38,10 +39,35 @@ class ContractsTVController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        ActivityIndicationService.shared.showView(form: self.view)
         self.navigationItem.title = "Мои договоры"
         super.viewDidLoad()
         configuration()
+        getContracts()
+    }
+
+    private func configuration() {
+        self.refreshControl = UIRefreshControl()
+        let addContract = getPlusUIBarButtonItem(target: self, action: #selector(alertSheetContractAddShow))
+        self.navigationItem.rightBarButtonItems = [addContract]
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Введите номер договора"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        let nib = UINib(nibName: "ContractsTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: ContractsTableViewCell.identifier)
+        
+        self.tableView.dataSource = self
+        self.refreshControl?.addTarget(self, action: #selector(getDataContracts), for: UIControl.Event.valueChanged)
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    @objc func getDataContracts() {
+        self.getContracts()
     }
     
     @objc func alertSheetContractAddShow() {
@@ -58,20 +84,17 @@ class ContractsTVController: UITableViewController {
         alert.addAction(actionCancel)
         
         if UIDevice.isPad {
-        if let popoverController = alert.popoverPresentationController {
-            popoverController.barButtonItem = self.navigationItem.rightBarButtonItem
-          }
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.barButtonItem = self.navigationItem.rightBarButtonItem
+            }
         }
         self.present(alert, animated: true, completion: nil)
     }
-   
+    
     func showContractAddTVPage() {
         self.delegate?.navigationContractAddTVPage(delegate: self)
     }
     
-    @objc func refreshDataContract(sender: AnyObject) {
-        self.getContracts()
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -94,14 +117,13 @@ class ContractsTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contractCell", for: indexPath) as! ContractsTableViewCell
-        cell.imageView?.image = UIImage(systemName: myImage.docText.rawValue)
         cell.update(for: contractList[indexPath.section])
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let contract = contractList[indexPath.section]
-        self.delegate?.navigationDetailsInfoPage(to: contract)
+        self.delegate?.navigationDetailsInfoPage(to: contract.id)
     }
     
     // Override to support editing the table view.
@@ -114,8 +136,7 @@ class ContractsTVController: UITableViewController {
     }
     
     func alertSheetOfDelBindingShow(for indexPath: IndexPath){
-        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите удалить договор из списка услуг?", handlerYes: { (UIAlertAction) in
-            ActivityIndicationService.shared.showView(form: self.view)
+        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите исключить договор из списка услуг?", handlerYes: { (UIAlertAction) in
             let model = ContractNumberModel(number: self.contractList[indexPath.section].number)
             ApiServiceWrapper.shared.removeContractBinding(model: model, delegate: self)
         })
@@ -142,45 +163,47 @@ extension ContractsTVController: UISearchResultsUpdating {
 extension ContractsTVController: ContractsTVControllerUserDelegate {
     
     func getContracts() {
-        ApiServiceWrapper.shared.getContracts(delegate: self)
-        self.refreshControl?.endRefreshing()
+        skeletonShow()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            ApiServiceWrapper.shared.getContracts(delegate: self)
+            self.refreshControl?.endRefreshing()
+        }
     }
     
     func resultRemoveContractBinding(result: ResultModel<String>) {
         self.getContracts()
         debugPrint("Success")
     }
+    
     func setContracts(contracts: ResultModel<[ContractModel]>) {
         // todo доделать получение данных из realm
         contractList = contracts.data!
         // для поиска
         tempContractList = contracts.data!
-        
-        ActivityIndicationService.shared.hideView()
+        skeletonStop()
     }
 }
 
-// MARK: - CONFIGURE
-extension ContractsTVController {
+extension ContractsTVController: SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        ContractsTableViewCell.identifier
+    }
     
-    private func configuration() {
-        self.refreshControl = UIRefreshControl()
-        let addContract = getPlusUIBarButtonItem(target: self, action: #selector(alertSheetContractAddShow))
-        self.navigationItem.rightBarButtonItems = [addContract]
-        
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Введите номер договора"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        let nib = UINib(nibName: "ContractsTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "contractCell")
-        self.tableView.dataSource = self
-        self.refreshControl?.addTarget(self, action: #selector(refreshDataContract), for: UIControl.Event.valueChanged)
-        refreshDataContract(sender: self)
-        tableView.delegate = self
-        tableView.dataSource = self
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        return (self.contractList.count == 0) ? 2 : contractList.count
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func skeletonShow(){
+        self.tableView.isSkeletonable = true
+        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+    }
+    
+    func skeletonStop() {
+        // stop skeltonView
+        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }

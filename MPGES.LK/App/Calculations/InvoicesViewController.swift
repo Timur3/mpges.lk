@@ -53,13 +53,11 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, SkeletonTab
         self.tableView.register(nib, forCellReuseIdentifier: "invoiceCell")
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }   
     
     @objc func refreshInvoicesData(sender: AnyObject) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        skeletonShow()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             do {
                 try ApiServiceWrapper.shared.getInvoicesByContractId(id: self.contractId, delegate: self)
             } catch {
@@ -87,16 +85,29 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, SkeletonTab
     }
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return 2
+        return (invoiceList.count == 0) ? 2 : invoiceList.count
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let monthNumber = Calendar.current.component(.month, from: Date())
-        if section == 0 {
-            return monthNumber
+        if invoiceList.count != 0 {
+            return invoiceList[section].invoices.count
         } else {
-            return 6
+            let monthNumber = Calendar.current.component(.month, from: Date())
+            if section == 0 {
+                return monthNumber
+            } else {
+                return 3
+            }
         }
+    }
+    
+    func skeletonShow() {
+        self.tableView.isSkeletonable = true
+        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+    }
+    
+    func skeletonStop() {
+        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
     
     // MARK: - Table view data source
@@ -130,12 +141,13 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, SkeletonTab
         self.indexPath = indexPath
         ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let id = "\(self.invoiceList[indexPath.section].invoices[indexPath.row].id)"
-        self.showPdf(for: "http://lk.mp-ges.ru/Bills/BillsPrintPdfForCash?InvoiceId=" + id)
+        self.showPdf(for: id)
     }
     
-    func showPdf(for urlFileInet: String) {
+    func showPdf(for id: String) {
+        let url = MethodApi.baseUrl + MethodApi.getInvoicePdf + id
         DispatchQueue.main.async {
-            let urlFile = downloadPdf(url: urlFileInet)
+            let urlFile = downloadPdf(url: url)
             self.delegate?.pdfView(for: urlFile, delegate: self)
         }
     }
@@ -164,7 +176,9 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, SkeletonTab
                 self.delegate?.sendDocByEmail(model: model, delegate: self)
             } else { textField?.shake(times: 3, delta: 5)}
         }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel){_ in
+            self.hiddenAI()
+        })
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -174,7 +188,8 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, SkeletonTab
 extension InvoicesViewController: InvoiceCellDelegate {
     func accessoryViewTapping(indexPath: IndexPath) {
         self.indexPath = indexPath
-        
+        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+
         let alert = UIAlertController(title: "Выберите действие", message: nil, preferredStyle: .actionSheet)
         let actionOpenInvoice = UIAlertAction(title: "Скачать PDF-файл", style: .default) {
             (UIAlertAction) in
@@ -184,7 +199,9 @@ extension InvoicesViewController: InvoiceCellDelegate {
         let actionSendInvoice = UIAlertAction(title: "Отправить на email", style: .default) {
             (UIAlertAction) in self.alertShowSendByEmail(indexPath: indexPath)
         }
-        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) {_ in
+            self.hiddenAI()
+        }
         alert.addAction(actionOpenInvoice)
         alert.addAction(actionSendInvoice)
         alert.addAction(actionCancel)
@@ -202,7 +219,8 @@ extension InvoicesViewController: InvoiceCellDelegate {
 
 extension InvoicesViewController: InvoicesViewControllerUserDelegate {
     func hiddenAI() {
-        
+        print("close invoice")
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
     }
     
     func responseSend(result: ResultModel<String>) {
@@ -236,6 +254,6 @@ extension InvoicesViewController: InvoicesViewControllerUserDelegate {
         // todo получение данных из realm
         invoiceList = mapToInvoicesModelView(invoices: invoices.data!)
         print("end load invoices")
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+        skeletonStop()
     }
 }

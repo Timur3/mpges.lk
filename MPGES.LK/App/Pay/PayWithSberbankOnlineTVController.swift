@@ -15,7 +15,9 @@ protocol PayWithSberbankOnlineTVControllerDelegate: class {
 class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewController {
     public weak var delegate: ContractDetailsInfoCoordinator?
     
-    var sections: [String] {["Лицевой счет", "Доставка электронного чека", ""]}
+    var sections: [String] {["", "Лицевой счет", "Доставка электронного чека", ""]}
+    
+    var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.none, textAlign: .left, accessoryType: .none) }()
     
     var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
     var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }()
@@ -24,6 +26,14 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
     
     var accountTextField: UITextField = { getCustomTextField(placeholder: "") }()
     var contactTextField: UITextField = { getCustomTextField(placeholder: "") }()
+    
+    var logoImgView: UIImageView = {
+        let img = UIImageView()
+        img.contentMode = .scaleAspectFit
+        img.image = UIImage(named: myImage.sberIcon.rawValue)
+        img.translatesAutoresizingMaskIntoConstraints = false
+        return img
+    }()
     
     var model: BankPayModel? {
         didSet {
@@ -49,6 +59,17 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
         return sections.count
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (indexPath.section == 0 && indexPath.row == 0) ? CGFloat(100) : UITableView.automaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            cell.backgroundColor = UIColor.clear
+            cell.isUserInteractionEnabled = false
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -56,6 +77,8 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
         case 1:
             return 1
         case 2:
+            return 1
+        case 3:
             return 1
         default:
             fatalError()
@@ -67,18 +90,26 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
         case 0:
             switch indexPath.row {
             case 0:
+                return logoCell
+            default:
+                fatalError()
+            }
+        
+        case 1:
+            switch indexPath.row {
+            case 0:
                 return accountCell
             default:
                 fatalError()
             }
-        case 1:
+        case 2:
             switch indexPath.row {
             case 0:
                 return contactCell
             default:
                 fatalError()
             }
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 return saveCell
@@ -101,7 +132,7 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
         if indexPath.section == 1 && indexPath.row == 0 {
             contactTextField.becomeFirstResponder()
         }
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 3 && indexPath.row == 0 {
             self.getDeepLink()
         }
     }
@@ -124,6 +155,7 @@ extension PayWithSberbankOnlineTVController: PayWithSberbankOnlineTVControllerDe
                     }
             }
         } else {
+            debugPrint(response.data!)
             let url = URL(string: response.data!)
             UIApplication.shared.open(url!) { (result) in
                 if result {
@@ -155,5 +187,11 @@ extension PayWithSberbankOnlineTVController {
         contactCell.addSubview(contactTextField)
         contactTextField.leadingAnchor.constraint(equalTo: contactCell.leadingAnchor, constant: 50).isActive = true
         contactTextField.centerYAnchor.constraint(equalTo: contactCell.centerYAnchor).isActive = true
+        
+        logoCell.addSubview(logoImgView)
+        logoImgView.leadingAnchor.constraint(equalTo: logoCell.leadingAnchor, constant: 5).isActive = true
+        logoImgView.rightAnchor.constraint(equalTo: logoCell.rightAnchor, constant: 5).isActive = true
+        logoImgView.topAnchor.constraint(equalTo: logoCell.topAnchor, constant: 5).isActive = true
+        logoImgView.centerYAnchor.constraint(equalTo: logoCell.centerYAnchor).isActive = true
     }
 }

@@ -48,13 +48,10 @@ class DevicesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
         self.tableView.register(nib, forCellReuseIdentifier: "deviceCell")
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        // skeletonView
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return 1
+        return (deviceList.count == 0) ? 1 : deviceList.count
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,8 +62,20 @@ class DevicesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
         return DeviceTVCell.identifier
     }
     
+    func skeletonShow() {
+        // skeletonView
+        self.tableView.isSkeletonable = true
+        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+    }
+    
+    func skeletonStop() {
+        // stop skeltonView
+        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+    }
+    
     @objc func getDevices(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        skeletonShow()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             ApiServiceWrapper.shared.getDevicesByContractId(id: self.contractId, delegate: self)
             // todo  сохраняем новые данные, предварительно удаляем старые данные
             self.tableView.refreshControl?.endRefreshing()
@@ -87,25 +96,25 @@ class DevicesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return sections.count
+        return deviceList.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return deviceList.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+        return "Дата выпуска: " + deviceList[section].dateOut!
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Всего записей: " + String(deviceList.count)
+        return ""
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell", for: indexPath) as! DeviceTVCell
-        cell.update(for: deviceList[indexPath.row])
+        cell.update(for: deviceList[indexPath.section])
         cell.imageView?.image = UIImage(systemName: myImage.gauge.rawValue)
         cell.delegateCell = self
         cell.index = indexPath
@@ -124,7 +133,7 @@ class DevicesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.delegate?.navigationReceivedDataPage(model: deviceList[indexPath.row])
+        self.delegate?.navigationReceivedDataPage(model: deviceList[indexPath.section])
     }
 }
 
@@ -136,14 +145,11 @@ extension DevicesViewController: UISearchResultsUpdating {
 }
 //MARK: - USER DELEGATE
 extension DevicesViewController: DevicesViewControllerUserDelegate {
-    
-    var sections: [String] { ["Установленные приборы учета"] }
 
     func setDevices(devices: ResultModel<[DeviceModel]>) {
         // todo доделать получение данных из realm
         deviceList = devices.data!
-        // stop skeltonView
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+        skeletonStop()
     }
 }
 //MARK: - RECEIVED DATA ADD NEW DELEGATE

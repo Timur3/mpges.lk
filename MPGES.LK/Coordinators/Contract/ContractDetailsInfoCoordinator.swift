@@ -16,12 +16,12 @@ class ContractDetailsInfoCoordinator: Coordinator {
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    public var contract: ContractModel?
+    public var contractId: Int = 0
     
     func start() {
         let contractDetailsInfo: ContractDetailsInfoTVController = ContractDetailsInfoTVController()
         contractDetailsInfo.delegate = self
-        contractDetailsInfo.contractModel = contract
+        contractDetailsInfo.contractId = contractId
         self.navigationController.pushViewController(contractDetailsInfo, animated: true)
     }
     
@@ -82,21 +82,21 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
     
     func navigationToInvoicePage() {
         let invoiceCoordinator = InvoiceCoordinator(navigationController: navigationController)
-        invoiceCoordinator.contract = contract
+        invoiceCoordinator.contractId = contractId
         childCoordinators.append(invoiceCoordinator)
         invoiceCoordinator.start()
     }
     
     func navigationDevicesPage() {
         let deviceCoordinator = DeviceCoordinatorMain(navigationController: navigationController)
-        deviceCoordinator.contract = contract
+        deviceCoordinator.contractId = contractId
         childCoordinators.append(deviceCoordinator)
         deviceCoordinator.start()
     }
     
     func navigateToPaymentsPage() {
         let paymentCoordinator = PaymentCoordinator(navigationController: navigationController)
-        paymentCoordinator.contract = contract
+        paymentCoordinator.contractId = contractId
         childCoordinators.append(paymentCoordinator)
         paymentCoordinator.start()
     }

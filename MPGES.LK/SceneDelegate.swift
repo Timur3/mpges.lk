@@ -27,6 +27,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         mainCoordinator = MainCoordinator(navigationController: rootNavigationController)
         
         // The start method will actually display the main view
+//        mainCoordinator?.authObserver = UserDefaultsObserver(key: "isAuth")  { old, new in
+//            if !(new as? Bool ?? false) {
+//                DispatchQueue.main.async {
+//                    let firstViewController : FirstTVController = FirstTVController()
+//                    firstViewController.delegate = self.mainCoordinator
+//                    rootNavigationController.isNavigationBarHidden = false
+//                    rootNavigationController.popToRootViewController(animated: true)
+//                }
+//            }
+//        }
+        
         mainCoordinator?.start()
         
         if let windowScene = scene as? UIWindowScene {

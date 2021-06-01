@@ -8,12 +8,17 @@
 
 import UIKit
 
-func getCustomTextField(placeholder: String, keyboardType: UIKeyboardType = .default, isPassword: Bool = false) -> UITextField {
+func getCustomTextField(placeholder: String, text: String = "", keyboardType: UIKeyboardType = .default, isUserInteractionEnabled: Bool = true, isPassword: Bool = false) -> UITextField {
     let textField = UITextField()
     textField.placeholder = placeholder
+    textField.text = text
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.keyboardType = keyboardType
     textField.isSecureTextEntry = isPassword
+    textField.isUserInteractionEnabled = isUserInteractionEnabled
+    //skeletonView
+    textField.skeletonCornerRadius = 5
+    textField.isSkeletonable = true
     return textField
 }
 

@@ -28,19 +28,19 @@ class MainCoordinator: Coordinator {
         
         self.authObserver = UserDefaultsObserver(key: "isAuth")  { old, new in
             if !(new as? Bool ?? false) {
-                DispatchQueue.main.async {
+                //DispatchQueue.main.async {
                     let firstViewController : FirstTVController = FirstTVController()
                     firstViewController.delegate = self
                     self.navigationController.isNavigationBarHidden = false
                     self.navigationController.popToRootViewController(animated: true)
-                }
+                //}
             }
         }
     }
     
     func start() {
         let isAuth = UserDefaults.standard.bool(forKey: "isAuth")
-        ActivityIndicationService.shared.hideView()
+        print(isAuth)
         if !(isAuth) {
             let firstViewController : FirstTVController = FirstTVController()
             firstViewController.delegate = self

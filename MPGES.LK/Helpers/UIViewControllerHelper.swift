@@ -43,6 +43,7 @@ extension UIViewController {
     
     func showActionSheetConfirm(title: String, mesg: String, handlerYes: @escaping (UIAlertAction) -> Void, handlerCancel: ((UIAlertAction) -> Void)? = nil) {
         var alertStyle = UIAlertController.Style.actionSheet
+        
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             alertStyle = UIAlertController.Style.alert
         }
