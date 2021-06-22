@@ -1,21 +1,15 @@
 //
-//  DeliveryMethodsViewController.swift
+//  InvoiceDeliveryMethodsViewController.swift
 //  mpges.lk
 //
-//  Created by Timur on 21.02.2021.
+//  Created by Timur on 20.06.2021.
 //  Copyright © 2021 ChalimovTimur. All rights reserved.
 //
 
 import UIKit
 import SkeletonView
 
-public protocol DeliveryMethodTVControllerDelegate: class {
-    func setData(for deliveryMethod: ResultModel<[InvoiceDeliveryMethodModel]>)
-    func resultOfUpdateDeliveryMethod(for resultModel: ResultModel<String>)
-}
-
-
-class DeliveryMethodsViewController: UIViewController {
+class InvoiceDeliveryMethodsViewController: UIViewController {
     
     weak var delegate: ContractDetailsInfoTVControllerUserDelegate?
     private var selectedDeliveryMethod: InvoiceDeliveryMethodModel?
@@ -36,7 +30,7 @@ class DeliveryMethodsViewController: UIViewController {
     }
     
     func configuration(){
-        let nib = UINib(nibName: "DeliveryOfInvoiceTableViewCell", bundle: nil)
+        let nib = UINib(nibName: "InvoiceDeliveryMethodsTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: InvoiceDeliveryMethodsTableViewCell.identifier)
         
         self.tableView.dataSource = self
@@ -75,7 +69,7 @@ class DeliveryMethodsViewController: UIViewController {
     
     func getData() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            ApiServiceWrapper.shared.getDeliveryOfInvoices(delegate: self)
+            //ApiServiceWrapper.shared.getDeliveryOfInvoices(delegate: self)
         }
     }
     
@@ -110,7 +104,7 @@ class DeliveryMethodsViewController: UIViewController {
     
     func sendDeliveryMethod() {
         let updDeliveryMethod = UpdateDeliveryMethodModel(contractId: contract!.id, deliveryMethodId: selectedDeliveryMethod!.id)
-        ApiServiceWrapper.shared.updateDeliveryMethod(model: updDeliveryMethod, delegate: self)
+        //ApiServiceWrapper.shared.updateDeliveryMethod(model: updDeliveryMethod, delegate: self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -123,7 +117,7 @@ class DeliveryMethodsViewController: UIViewController {
         guard let tableCell = cell,
               let deliveryOfInvoiceViewModel = deliveryOfInvoiceViewModel else { return UITableViewCell() }
         
-        let cellViewModel = deliveryOfInvoiceViewModel.cellViewModel(for: indexPath)        
+        let cellViewModel = deliveryOfInvoiceViewModel.cellViewModel(for: indexPath)
         tableCell.viewModel = cellViewModel
         tableCell.accessoryType = cellViewModel.selected ? .checkmark : .none
         
@@ -137,38 +131,7 @@ class DeliveryMethodsViewController: UIViewController {
     }
 }
 
-extension DeliveryMethodsViewController: DeliveryMethodTVControllerDelegate {
-    
-    func resultOfUpdateDeliveryMethod(for resultModel: ResultModel<String>) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let isError = resultModel.isError
-            self.showAlert(
-                title: isError ? "Ошибка!" : "Успешно!",
-                mesg: resultModel.message!) { (UIAlertAction) in
-                if !isError {
-                    //self.cancelButton()
-                }
-            }
-            ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        }
-    }
-    
-    func setData(for deliveryMethod: ResultModel<[InvoiceDeliveryMethodModel]>) {
-        var temp = [InvoiceDeliveryMethodModel]()
-        for var item in deliveryMethod.data! {
-            if (item.id == self.contract?.invoiceDeliveryMethodId) {
-                item.selected = true
-                selectedDeliveryMethod = item
-            }
-            temp.append(item)
-        }
-        deliveryMethodList = temp
-        setUpLayout()
-        skeletonStop()
-    }
-}
-
-extension DeliveryMethodsViewController: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
+extension InvoiceDeliveryMethodsViewController: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
         return 1

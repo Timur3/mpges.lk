@@ -72,7 +72,6 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         setUpLayout()
         configuration()
         refreshContract()
-        var se
     }
     
     func setUpLayout(){
@@ -208,6 +207,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
+        
         if indexPath.section == 0 && indexPath.row == 0 {
         }
         if indexPath.section == 0 && indexPath.row == 3 {

@@ -14,6 +14,7 @@ class ContractsTableViewCell: UITableViewCell {
     @IBOutlet weak var contractAddress: UILabel!
     
     static let identifier = "contractCell"
+    
     func update(for contract: ContractModel) {
         imageView?.image = UIImage(systemName: myImage.docText.rawValue)
         

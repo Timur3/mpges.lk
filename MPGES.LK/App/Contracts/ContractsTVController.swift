@@ -116,9 +116,10 @@ class ContractsTVController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "contractCell", for: indexPath) as! ContractsTableViewCell
-        cell.update(for: contractList[indexPath.section])
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ContractsTableViewCell.identifier, for: indexPath) as? ContractsTableViewCell
+        guard let tableCell = cell else { return UITableViewCell() }
+        tableCell.update(for: contractList[indexPath.section])
+        return tableCell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

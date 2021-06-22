@@ -8,14 +8,17 @@
 
 import UIKit
 
-class DeliveryOfInvoiceTableViewCell: UITableViewCell {
+class InvoiceDeliveryMethodsTableViewCell: UITableViewCell {
     
-    static let identifier = "deliveryOfInvoiceCell"
+    static let identifier = "invoiceDeliveryMethodsCell"
     
-    func update(for model: InvoiceDeliveryMethodModel) {
-        textLabel?.text = model.devileryMethodName
-        detailTextLabel?.text = model.description
-        imageView?.image = UIImage(systemName: myImage.mail.rawValue)
+    weak var viewModel: TableViewCellViewModelType? {
+        willSet(model) {
+            guard let model = model else { return }
+            textLabel?.text = model.textLabel
+            detailTextLabel?.text = model.detailTextLabel
+            imageView?.image = model.image
+        }
     }
     
     override func awakeFromNib() {

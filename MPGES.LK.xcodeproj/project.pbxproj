@@ -71,8 +71,8 @@
 		2278511123CF949F007F1063 /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278511023CF949F007F1063 /* Shake.swift */; };
 		227C7B6F241696E400232BC9 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C7B6E241696E400232BC9 /* MainTabBarCoordinator.swift */; };
 		227F3513241AB51E001C0500 /* MainContractsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F3512241AB51E001C0500 /* MainContractsCoordinator.swift */; };
-		2284AE70242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284AE6E242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift */; };
-		2284AE71242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2284AE6F242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib */; };
+		2284AE70242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284AE6E242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.swift */; };
+		2284AE71242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2284AE6F242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.xib */; };
 		2284AE73242A56650097E4C2 /* InvoiceDeliveryMethodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284AE72242A56650097E4C2 /* InvoiceDeliveryMethodModel.swift */; };
 		228B8FA0249A9A4200D4E5E2 /* ApplePayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228B8F9F249A9A4200D4E5E2 /* ApplePayModel.swift */; };
 		228C492B243513EF00FDFF21 /* ContractorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C492A243513EF00FDFF21 /* ContractorModel.swift */; };
@@ -145,6 +145,8 @@
 		22F91A92257EB91E00B49C78 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F91A91257EB91E00B49C78 /* SignUpModel.swift */; };
 		22F91A952581100200B49C78 /* TokensModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F91A942581100200B49C78 /* TokensModel.swift */; };
 		392F836325F7E3C500040978 /* TokenRequestInterceptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */; };
+		39377AA1267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */; };
+		39377AA2267FC21E00763627 /* InvoiceDeliveryMethodsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39377AA0267FC21E00763627 /* InvoiceDeliveryMethodsViewController.xib */; };
 		3938D1AA25D0615A00A470C1 /* InvoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938D1A825D0615A00A470C1 /* InvoicesViewController.swift */; };
 		3938D1AB25D0615A00A470C1 /* InvoicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3938D1A925D0615A00A470C1 /* InvoicesViewController.xib */; };
 		394176DF2635F23F00E796B7 /* UIImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394176DE2635F23F00E796B7 /* UIImageHelper.swift */; };
@@ -155,9 +157,13 @@
 		39696D6E2612F1D6004C9401 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 39696D6D2612F1D6004C9401 /* Atomics */; };
 		39696D78261A1A85004C9401 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39696D77261A1A85004C9401 /* GradientView.swift */; };
 		39B23990261A2345000D3345 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */; };
+		39BC47E2267E7A5C00AAD329 /* TableViewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */; };
+		39BC47E8267F274100AAD329 /* DeliveryOfInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC47E7267F274100AAD329 /* DeliveryOfInvoiceViewModel.swift */; };
 		39D18B9B25F79B81000CE4E3 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */; };
 		39F7E67825E2A2A7001B1A47 /* DeliveryMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F7E67625E2A2A7001B1A47 /* DeliveryMethodsViewController.swift */; };
-		39F7E67925E2A2A7001B1A47 /* DeliveryMethodsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F7E67725E2A2A7001B1A47 /* DeliveryMethodsViewController.xib */; };
+		39FC9BFF267F6FC700C67D19 /* DeliveryMethodsViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39FC9BFE267F6FC600C67D19 /* DeliveryMethodsViewController1.xib */; };
+		39FC9C02267F777D00C67D19 /* TableViewCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FC9C01267F777D00C67D19 /* TableViewCellViewModelType.swift */; };
+		39FC9C05267F79C100C67D19 /* TableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FC9C04267F79C100C67D19 /* TableViewCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -228,8 +234,8 @@
 		2278511023CF949F007F1063 /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 		227C7B6E241696E400232BC9 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		227F3512241AB51E001C0500 /* MainContractsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContractsCoordinator.swift; sourceTree = "<group>"; };
-		2284AE6E242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryOfInvoiceTableViewCell.swift; sourceTree = "<group>"; };
-		2284AE6F242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeliveryOfInvoiceTableViewCell.xib; sourceTree = "<group>"; };
+		2284AE6E242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDeliveryMethodsTableViewCell.swift; sourceTree = "<group>"; };
+		2284AE6F242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceDeliveryMethodsTableViewCell.xib; sourceTree = "<group>"; };
 		2284AE72242A56650097E4C2 /* InvoiceDeliveryMethodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDeliveryMethodModel.swift; sourceTree = "<group>"; };
 		228B8F9F249A9A4200D4E5E2 /* ApplePayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayModel.swift; sourceTree = "<group>"; };
 		228C492A243513EF00FDFF21 /* ContractorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractorModel.swift; sourceTree = "<group>"; };
@@ -303,6 +309,8 @@
 		22F91A91257EB91E00B49C78 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		22F91A942581100200B49C78 /* TokensModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensModel.swift; sourceTree = "<group>"; };
 		392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequestInterceptor2.swift; sourceTree = "<group>"; };
+		39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDeliveryMethodsViewController.swift; sourceTree = "<group>"; };
+		39377AA0267FC21E00763627 /* InvoiceDeliveryMethodsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceDeliveryMethodsViewController.xib; sourceTree = "<group>"; };
 		3938D1A825D0615A00A470C1 /* InvoicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesViewController.swift; sourceTree = "<group>"; };
 		3938D1A925D0615A00A470C1 /* InvoicesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoicesViewController.xib; sourceTree = "<group>"; };
 		394176DE2635F23F00E796B7 /* UIImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageHelper.swift; sourceTree = "<group>"; };
@@ -312,9 +320,13 @@
 		3956F26E25D8294800A3A110 /* DevicesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevicesViewController.xib; sourceTree = "<group>"; };
 		39696D77261A1A85004C9401 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModelType.swift; sourceTree = "<group>"; };
+		39BC47E7267F274100AAD329 /* DeliveryOfInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryOfInvoiceViewModel.swift; sourceTree = "<group>"; };
 		39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
 		39F7E67625E2A2A7001B1A47 /* DeliveryMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMethodsViewController.swift; sourceTree = "<group>"; };
-		39F7E67725E2A2A7001B1A47 /* DeliveryMethodsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeliveryMethodsViewController.xib; sourceTree = "<group>"; };
+		39FC9BFE267F6FC600C67D19 /* DeliveryMethodsViewController1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliveryMethodsViewController1.xib; sourceTree = "<group>"; };
+		39FC9C01267F777D00C67D19 /* TableViewCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModelType.swift; sourceTree = "<group>"; };
+		39FC9C04267F79C100C67D19 /* TableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModel.swift; sourceTree = "<group>"; };
 		70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.debug.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -404,10 +416,8 @@
 		2219EE052426A982009C6F0C /* DevileryOfInvoice */ = {
 			isa = PBXGroup;
 			children = (
-				2284AE6E242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift */,
-				2284AE6F242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib */,
 				39F7E67625E2A2A7001B1A47 /* DeliveryMethodsViewController.swift */,
-				39F7E67725E2A2A7001B1A47 /* DeliveryMethodsViewController.xib */,
+				39FC9BFE267F6FC600C67D19 /* DeliveryMethodsViewController1.xib */,
 			);
 			path = DevileryOfInvoice;
 			sourceTree = "<group>";
@@ -486,6 +496,8 @@
 				22E2871B23E4A9F900453CF3 /* ActivityIndicationDelegate.swift */,
 				22F07F0A23DF0E26007BF4A4 /* RouteDelegate.swift */,
 				2202E1172588E6760056F176 /* ApiServiceProtocol.swift */,
+				39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */,
+				39FC9C01267F777D00C67D19 /* TableViewCellViewModelType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -698,6 +710,7 @@
 		22F5DDA823CCE6EF000C3F32 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				39BC47EA267F287500AAD329 /* ViewModel */,
 				22C260172491565500422309 /* Formatters */,
 				22913B2124016AD0000F9677 /* Adapters */,
 				226AA7C923CE24DA003F006A /* Models */,
@@ -710,6 +723,7 @@
 		22F5DDA923CCE7AF000C3F32 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				39377A98267FC08600763627 /* InvoiceDeliveryMethods */,
 				22A2A4BF2480043C005A656A /* Contractor */,
 				22DA8972242E8763002D4D57 /* Pay */,
 				2219EE052426A982009C6F0C /* DevileryOfInvoice */,
@@ -724,12 +738,32 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		39377A98267FC08600763627 /* InvoiceDeliveryMethods */ = {
+			isa = PBXGroup;
+			children = (
+				2284AE6F242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.xib */,
+				2284AE6E242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.swift */,
+				39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */,
+				39377AA0267FC21E00763627 /* InvoiceDeliveryMethodsViewController.xib */,
+			);
+			path = InvoiceDeliveryMethods;
+			sourceTree = "<group>";
+		};
 		39696D79261A1A8A004C9401 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
 				39696D77261A1A85004C9401 /* GradientView.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		39BC47EA267F287500AAD329 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				39BC47E7267F274100AAD329 /* DeliveryOfInvoiceViewModel.swift */,
+				39FC9C04267F79C100C67D19 /* TableViewCellViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5E5FDB0E4D4E9FB466307D27 /* Frameworks */ = {
@@ -819,16 +853,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */,
-				39F7E67925E2A2A7001B1A47 /* DeliveryMethodsViewController.xib in Resources */,
+				39377AA2267FC21E00763627 /* InvoiceDeliveryMethodsViewController.xib in Resources */,
 				22DB7BD02530828D00F70737 /* TableViewCell.xib in Resources */,
 				228E3E8E2421397400402EF6 /* PrototypeTVCell.xib in Resources */,
 				22042A03235E224D0054D4DD /* Assets.xcassets in Resources */,
-				2284AE71242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.xib in Resources */,
+				2284AE71242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.xib in Resources */,
 				22F34F1E241EB07E00889A31 /* ReceivedDataTVCell.xib in Resources */,
 				223F8FAD241A0A8A00CDCF01 /* OfficesViewController.xib in Resources */,
 				22E8CF0A241D59E500CA0F52 /* PaymentTVCell.xib in Resources */,
 				22913B1E23FF0152000F9677 /* MainTabBarViewController.xib in Resources */,
 				3938D1AB25D0615A00A470C1 /* InvoicesViewController.xib in Resources */,
+				39FC9BFF267F6FC700C67D19 /* DeliveryMethodsViewController1.xib in Resources */,
 				22C2EEE7247A679700D116CE /* InvoiceCell.xib in Resources */,
 				220F3E3425B4957800C6625D /* PaymentsViewController.xib in Resources */,
 				2235D7BB241E5F3D007A90DD /* DeviceTVCell.xib in Resources */,
@@ -919,12 +954,14 @@
 				220DC96B2487BFD700756389 /* ContractsTableViewCell.swift in Sources */,
 				22C2EEE6247A679700D116CE /* InvoiceCell.swift in Sources */,
 				220F3E3325B4957800C6625D /* PaymentsViewController.swift in Sources */,
+				39FC9C05267F79C100C67D19 /* TableViewCellViewModel.swift in Sources */,
 				22A3807124478B1B008CCFAC /* TypeOfCalculationModel.swift in Sources */,
 				2253EE2F23CF3335009FD4B5 /* SignInModel.swift in Sources */,
 				228B8FA0249A9A4200D4E5E2 /* ApplePayModel.swift in Sources */,
 				22B2E812247849DE00749CA1 /* AboutTableViewController.swift in Sources */,
 				22F1736723D77DF90065751E /* ReceivedDataRegisterTVController.swift in Sources */,
-				2284AE70242A55660097E4C2 /* DeliveryOfInvoiceTableViewCell.swift in Sources */,
+				39FC9C02267F777D00C67D19 /* TableViewCellViewModelType.swift in Sources */,
+				2284AE70242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.swift in Sources */,
 				224D82BC2590C8D40086F796 /* UserDefaultsObserver.swift in Sources */,
 				221E924625338E2800BD0A0F /* ResultOfPayModel.swift in Sources */,
 				22DABD2E2508040B00A8B79B /* PasswordChangeModel.swift in Sources */,
@@ -957,6 +994,7 @@
 				223F8FC2241A939E00CDCF01 /* ContractDetailsInfoTVController.swift in Sources */,
 				22F91A92257EB91E00B49C78 /* SignUpModel.swift in Sources */,
 				224634F6245BF51E00A412FD /* StatusSaldo.swift in Sources */,
+				39BC47E2267E7A5C00AAD329 /* TableViewViewModelType.swift in Sources */,
 				392F836325F7E3C500040978 /* TokenRequestInterceptor2.swift in Sources */,
 				224A2AB2246584170078A484 /* PayWithSberbankOnlineTVController.swift in Sources */,
 				22A889EF25BF2043005629DF /* ActivityIndicationService.swift in Sources */,
@@ -966,6 +1004,7 @@
 				22EB7582246FB69B0062F8F7 /* BarButtonItemHelper.swift in Sources */,
 				22A380732448C87F008CCFAC /* TariffZoneModel.swift in Sources */,
 				22E8CF10241D5B3E00CA0F52 /* PaymentCoordinator.swift in Sources */,
+				39377AA1267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift in Sources */,
 				22F74D89259A2E830097AC83 /* PasswordResetModel.swift in Sources */,
 				22E8CF02241D3BB500CA0F52 /* ContractDetailsInfoCoordinator.swift in Sources */,
 				39D18B9B25F79B81000CE4E3 /* RefreshTokenModel.swift in Sources */,
@@ -1000,6 +1039,7 @@
 				229A807E24195ECE009933D2 /* ProfileTVController.swift in Sources */,
 				227C7B6F241696E400232BC9 /* MainTabBarCoordinator.swift in Sources */,
 				2260DBD12517CC5700DC6D16 /* ReceivedDataVolumeModel.swift in Sources */,
+				39BC47E8267F274100AAD329 /* DeliveryOfInvoiceViewModel.swift in Sources */,
 				228C492B243513EF00FDFF21 /* ContractorModel.swift in Sources */,
 				22F1736F23DA1DEB0065751E /* CalculationModel.swift in Sources */,
 				39F7E67825E2A2A7001B1A47 /* DeliveryMethodsViewController.swift in Sources */,

@@ -94,7 +94,7 @@ extension OfficesViewController: OfficesViewControllerDelegate {
 
 extension OfficesViewController: YMKMapObjectTapListener {
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-        guard let placemark = mapObject as? YMKMapObject else { return false }
+        guard mapObject is YMKMapObject else { return false }
         
         let model = mapObject.userData as! OfficeMarkModel
         print(model.name)
