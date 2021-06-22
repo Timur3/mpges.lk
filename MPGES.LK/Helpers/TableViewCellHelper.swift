@@ -8,28 +8,29 @@
 
 import UIKit
 
-func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NSTextAlignment, textColor: UIColor = .black, accessoryType: UITableViewCell.AccessoryType) -> UITableViewCell {
+func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NSTextAlignment, textColor: UIColor = .black, accessoryType: UITableViewCell.AccessoryType, isUserInteractionEnabled: Bool = true, style: UITableViewCell.CellStyle = .default) -> UITableViewCell {
     
-    let cell = UITableViewCell()
+    let cell = UITableViewCell(style: style, reuseIdentifier: "")
     if (imageCell != .none) {
         cell.imageView?.image =  UIImage(systemName: imageCell.rawValue)
     }
+    
     cell.textLabel?.text = textLabel
-    cell.textLabel?.textColor = textColor
+    //cell.description = description
+    if (textColor != .black) {
+        cell.textLabel?.textColor = textColor
+    }
     cell.textLabel?.textAlignment = textAlign
     cell.accessoryType = accessoryType
-    return cell
+    cell.isUserInteractionEnabled = isUserInteractionEnabled
     
-}
-
-enum myImage: String {
-    case none = "none"
-    case tag = "tag"
-    case link = "link"
-    case mail = "envelope"
-    case rub = "rublesign.circle"
-    case calc = "text.justify"
-    case person = "person"
-    case calendar = "calendar"
+    //cell.textLabel?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+    
+    // skeletonView
+    cell.textLabel?.isSkeletonable = true
+    cell.contentView.isSkeletonable = true
+    cell.isSkeletonable = true
+    
+    return cell
     
 }

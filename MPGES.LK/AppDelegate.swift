@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import YandexMapKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,28 +23,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tmpDirectory = FileManager.default.temporaryDirectory
         YMKMapKit.setApiKey("e5c12d20-2c1e-4a5c-bea2-8974e8a981aa")
         // TODO: Проверку версии схемы и запуск миграции 
-        
-        
+
+            //Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
+        print("Realm path:", Realm.Configuration.defaultConfiguration.fileURL ?? "no url")
+       
         print(documentsDirectory!)
         print(cacheDirectory!)
         print(tmpDirectory)
+        //guard let isAuth = UserDefaults.standard.bool(forKey: "isAuth"), isAuth != nil else { return true }
+        
+        UserDefaults.standard.register(defaults: ["isAuth" : false])
+        
+        //Thread.sleep(forTimeInterval: 1.0)
         return true
     }
 
     // MARK: UISceneSession Lifecycle
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+           
+           print("Response From TargetApp=======>\(url.absoluteString)")
+           return true
+       }
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {

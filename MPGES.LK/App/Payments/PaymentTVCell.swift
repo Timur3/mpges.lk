@@ -9,26 +9,33 @@
 import UIKit
 
 class PaymentTVCell: UITableViewCell {
-    @IBOutlet weak var dataPay: UILabel!
+    @IBOutlet weak var datePay: UILabel!
     @IBOutlet weak var sumPay: UILabel!
     @IBOutlet weak var cashBox: UILabel!
-        
-    var payment: PaymentModel? {
-        didSet {
-            let sum: Double = (payment?.summa ?? 0.00)
-                
-                dataPay.text = (payment?.datePay ?? "01-01-1970").replacingOccurrences(of: "T00:00:00", with: "")
-                sumPay.text = "\(sum)"
-                cashBox.text = payment?.cash
-            }
+    
+    static let identifier = "paymentCell"
+    
+    func update(for pay: PaymentModel) {
+        let sum: Decimal = (pay.summa)
+        datePay.text = pay.datePay
+        sumPay.text = formatRusCurrency(sum)
+        cashBox.text = pay.registerOfPayment?.typeOfPayment?.name
     }
     override func awakeFromNib() {
-            super.awakeFromNib()
-            // Initialization code
+        super.awakeFromNib()
+        // for skeletonView
+        datePay.linesCornerRadius = 5
+        sumPay.linesCornerRadius = 5
+        cashBox.linesCornerRadius = 5
+        
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
-            super.setSelected(selected, animated: animated)
-        }
-
+        super.setSelected(selected, animated: animated)
+    }
+    
+    @objc func payCellAction(tapGestureRecognizer: UITapGestureRecognizer) {
+        
+    }
+    
 }

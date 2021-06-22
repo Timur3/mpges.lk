@@ -7,43 +7,48 @@
 //
 
 import Foundation
-class MethodApi {
+final class MethodApi {
     
-    let authApi: String
-    let getContracts: String
-    let getContract: String
-    let getContractSaldoById: String
-    let contractBinding: String
-    let removeContractBinding: String
-    let checkContractByNumber: String
-    let getPaymentById: String
-    let getPaymentsByContractId: String
-    let getDevicesByContractId: String
-    let getReceivedData: String
-    let getInvoicesByContractId: String
-    let createUser: String
-    let updateUser: String
-    let getUser: String
-    let checkEmail: String
-    let passwordRecovery: String
-       
-    init() {
-        authApi = "auth/"
-        getContracts = "contract/getByUser/"
-        getContract = "contract/"
-        getContractSaldoById = "contract/getsaldobyid/"
-        contractBinding = "contract/binding/"
-        removeContractBinding = "contract/removeBinding/"
-        checkContractByNumber = "contract/checkByNumber/"
-        getPaymentById = "payment/"
-        getPaymentsByContractId = "payment/getbypackid/"
-        getInvoicesByContractId = "invoice/getbycontractid/"
-        getDevicesByContractId = "device/getbypackid/"
-        getReceivedData = "receivedData/getbydeviceid/"
-        createUser = "user/create/"
-        updateUser = "user/update/"
-        getUser = "user/"
-        checkEmail = "user/checkbyemail/"
-        passwordRecovery = "user/passwordrecovery/"
-    }
+    static let baseUrl = "https://api.mp-ges.ru/v2/"
+    static let versionApi = "2"
+
+    static let authApi = "auth/"
+    static let getContracts = "contract/getByUser/"
+    static let getListOfContractNumbers = "contract/getListOfContractNumbers/"
+    static let getContract = "contract/"
+    static let getContractorById = "contractor/"
+    static let getContractSaldoById = "contract/getSaldobyid/"
+    static let getContractStatusById = "contract/getStatusbyid/"
+    static let contractBinding = "contract/binding/"
+    static let removeContractBinding = "contract/removeBinding/"
+    static let checkContractByNumber = "contract/checkByNumber/"
+    static let updateDeliveryMethod = "contract/updateDeliveryMethod"
+    static let getPaymentById = "payment/"
+    static let getPaymentsByInvoiceId = "payment/getbyinvoiceid/"
+    static let getPaymentsByContractId = "payment/getbyContractid/"
+    static let initApplePay = "payment/initApplePay"
+    static let getReceiptUrl = "payment/getReceiptUrl/"
+    static let getInvoicesByContractId = "invoice/getbyContractid/"
+    static let sendInoicesByUserId = "invoice/sendInvoice/"
+    static let sendInoicesByEmail = "invoice/sendInvoice/"
+    static let getInvoicePdf = "invoice/getPdf/"
+    static let getCalculationsByInvoiceId = "calculation/getbyinvoiceid/"
+    static let getDevicesByContractId = "device/getbyContractid/"
+    static let getReceivedData = "receivedData/getbydeviceid/"
+    static let getTemplateAddNew = "receivedData/getTemplateAddNew/"
+    static let getReceivedDateVolumesForChart = "receivedData/volumesForChartByDeviceId/"
+    static let receivedDataAddNew = "receivedData/addNew/"
+    static let receivedDataDelete = "receivedData/delete/"
+    static let createUser = "user/signUp/"
+    static let updateUser = "user/update/"
+    static let getUser = "user/getProfile"
+    static let checkEmail = "user/checkbyemail/"
+    static let passwordRecovery = "user/passwordrecovery/"
+    static let passwordChange = "user/passwordchange/"
+    static let passwordReset = "user/passwordReset"
+    static let getDeliveryOfInvoice = "deliveryOfInvoice/getall/"
+    static let getDeepLinkforIos = "sberbank/getdeeplink/ios/"
+    static let getStateOfPayment = "payment/getState/"
+    static let refreshToken = "auth/refreshtoken/"
+    static let getOfficesMark = "map/"
 }

@@ -10,30 +10,33 @@ import UIKit
 
 class ContractsTableViewCell: UITableViewCell {
     @IBOutlet weak var numberContract: UILabel!
-       @IBOutlet weak var dateContract: UILabel!
-       @IBOutlet weak var saldoContract: UILabel!
-       @IBOutlet weak var contractorName: UILabel!
-       
-       var contract: ContractModel? {
-           didSet {
-               numberContract.text = contract?.number
-               contractorName.text = contract?.contractorNameSmall
-               dateContract.text = (contract?.dateRegister ?? "01-01-1970").replacingOccurrences(of: "T00:00:00", with: "")
-               DispatchQueue.main.async { [weak self] in
-                   guard self != nil else { return }
-                   ApiServiceAdapter.shared.loadSaldoContract(id: self!.contract!.id, label: self!.saldoContract)
-               }
-           }
-       }
-       
-       override func awakeFromNib() {
-           super.awakeFromNib()
-           // Initialization code
-       }
-
-       override func setSelected(_ selected: Bool, animated: Bool) {
-           super.setSelected(selected, animated: animated)
-
-           // Configure the view for the selected state
-       }
+    @IBOutlet weak var saldoContract: UILabel!
+    @IBOutlet weak var contractAddress: UILabel!
+    
+    static let identifier = "contractCell"
+    
+    func update(for contract: ContractModel) {
+        imageView?.image = UIImage(systemName: myImage.docText.rawValue)
+        
+        let conNum = "\(contract.id)"
+        numberContract.text = conNum
+        contractAddress.text = contract.primaryAddress
+        DispatchQueue.main.async { [weak self] in
+            guard self != nil else { return }
+            ApiServiceWrapper.shared.loadSaldoContract(id: contract.id, label: self!.saldoContract)
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        self.numberContract.linesCornerRadius = 5
+        self.contractAddress.linesCornerRadius = 5
+        self.saldoContract.linesCornerRadius = 5
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
+    }
 }

@@ -10,8 +10,13 @@ import Foundation
 
 protocol UserDataProtocol {
     
+    func setKey<T>(keyName: String, keyValue: T)
+    //func getKey<T>(keyName: String) -> T?
+    func getKey(keyName: String) -> String?
+    
     func setToken(token: String)
     func getToken() -> String?
+    func delToken()
     
     func setCurrentContract(contract: ContractModel)
     func getCurrentContract() -> Int?

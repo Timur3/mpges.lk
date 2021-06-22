@@ -8,11 +8,6 @@
 
 import RealmSwift
 
-public class PaymentsModelRoot: Object, Decodable {
-    var count: Int
-    var data: [PaymentModel]
-}
-
 public class PaymentsModelVeiw  {
     var year: Int = 0
     var payments: [PaymentModel] = []
@@ -25,35 +20,35 @@ public class PaymentsModelVeiw  {
 }
 
 public class PaymentModel: Object, Decodable {
-    @objc dynamic var id: Int
-    @objc dynamic var serviceId: Int
-    @objc dynamic var invoiceId: Int
-    @objc dynamic var meteringId: Int = 0
-    @objc dynamic var registerPaytsId: Int
-    @objc dynamic var cash: String
-    @objc dynamic var packId: Int = 0
-    @objc dynamic var datePay: String
-    @objc dynamic var summa: Double = 0.0
-    @objc dynamic var workerId: Int
-    @objc dynamic var note: String
+    var id: Int
+    var serviceId: Int
+    var invoiceId: Int?
+    var registerPaytsId: Int = 0
+    var registerOfPayment: RegisterOfPayment?
+    var contractId: Int = 0
+    var datePay: String = ""
+    var summa: Decimal = 0.00
+    var workerId: Int = 0
+    var note: String?
+    var uuid: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case serviceId = "serviceId"
         case invoiceId = "invoiceId"
-        case meteringId = "meteringId"
         case registerPaytsId = "registerPaytsId"
-        case cash = "cash"
-        case packId = "packId"
+        case registerOfPayment = "registerOfPayment"
+        case contractId = "contractId"
         case datePay = "datePay"
         case summa = "summa"
         case workerId = "workerId"
         case note = "note"
+        case uuid = "uuid"
     }
        
-    @objc open override class func primaryKey() -> String? {
-        return "id"
-    }
+    //@objc open override class func primaryKey() -> String? {
+     //   return "id"
+    //}
     func payYear() -> Int {
         return getYear(dateStr: datePay)
     }

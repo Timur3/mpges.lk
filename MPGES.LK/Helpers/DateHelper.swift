@@ -10,7 +10,7 @@ import Foundation
 
 func UnixTimeToDateTime(unixtime: Int, fullFormat: Bool = false) -> String {
     let date = NSDate(timeIntervalSince1970: Double(unixtime))
-        
+    
     let dayTimePeriodFormatter = DateFormatter()
     if (fullFormat) {
         dayTimePeriodFormatter.dateFormat = "dd.MM.yyyy hh:mm"
@@ -21,32 +21,36 @@ func UnixTimeToDateTime(unixtime: Int, fullFormat: Bool = false) -> String {
     return dateString
 }
 
-func DateNormal(dateStr: String) -> String {
-    let dateFmt = DateFormatter()
-    dateFmt.timeZone = NSTimeZone.default
-    dateFmt.dateFormat =  "yyyy-MM-dd"
-    let date = dateFmt.date(from: dateStr.replacingOccurrences(of: "T00:00:00", with: ""))
-    
-    let dayTimePeriodFormatter = DateFormatter()
-    dayTimePeriodFormatter.dateFormat = "dd.MM.yyyy"
-    let dateString = dayTimePeriodFormatter.string(from: date!)
-    return dateString
+extension String {
+   /* func dateNormal() -> String {
+        let dateFmt = DateFormatter()
+        dateFmt.timeZone = NSTimeZone.default
+        dateFmt.dateFormat =  "yyyy-MM-dd"
+        let date = dateFmt.date(from: self.replacingOccurrences(of: "T00:00:00", with: ""))
+        
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "dd.MM.yyyy"
+        let dateString = dayTimePeriodFormatter.string(from: date!)
+        return dateString
+    }*/
 }
 
-func getYear(dateStr: String)->Int {
+func getYear(dateStr: String) -> Int {
     let dateFmt = DateFormatter()
     dateFmt.timeZone = NSTimeZone.default
-    dateFmt.dateFormat =  "yyyy-MM-dd"
-    let date = dateFmt.date(from: dateStr.replacingOccurrences(of: "T00:00:00", with: ""))
+    dateFmt.dateFormat =  "dd.MM.yyyy"
+    let date = dateFmt.date(from: dateStr)
     return Calendar.current.component(.year, from: date!)
 }
 
-func getCurrentYear()->Int {
+func getCurrentYear() -> Int {
     return Calendar.current.component(.year, from: Date())
 }
 
-extension String {
-    func normalDate() {
-        self.replacingOccurrences(of: "T00:00:00", with: "")
-    }
+func formatRusDate(for date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "ru_RU")
+    formatter.dateStyle = .short
+    
+    return formatter.string(from: date)
 }

@@ -10,23 +10,24 @@ import UIKit
 
 class ReceivedDataTVCell: UITableViewCell {
     
-    @IBOutlet weak var tariffZoneName: UILabel!
-    @IBOutlet weak var receivedDataDate: UILabel!
+    @IBOutlet weak var receivedDataDateLabel: UILabel!
+    @IBOutlet weak var tariffZoneLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var receivedDataType: UILabel!
     
-    var receivedData: ReceivedDataModel? {
-        didSet {
-            tariffZoneName.text = receivedData?.tariffZone
-            valueLabel.text = "\(receivedData?.value ?? 0) кВт/час"
-            receivedDataType.text = receivedData?.typeOfReceivedData
-            receivedDataDate.text = receivedData?.date.replacingOccurrences(of: "T00:00:00", with: "")
-        }
+    static let identifier = "receivedDataCell"
+    
+    func update(for receivedData: ReceivedDataModel) {
+        receivedDataDateLabel.text = receivedData.date
+        valueLabel.text = "\(receivedData.value) кВт/час"
+        tariffZoneLabel.text = receivedData.tariffZone.typeOfTariffZone.name
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.receivedDataDateLabel.linesCornerRadius = 5
+        self.valueLabel.linesCornerRadius = 5
+        self.tariffZoneLabel.linesCornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

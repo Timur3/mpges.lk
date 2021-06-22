@@ -8,49 +8,31 @@
 
 import Foundation
 
-public struct ContractModelRoot: Decodable {
-    var count: Int
-    var data: [ContractModel]
-}
-
 public struct ContractNumberModel: Encodable {
     var number: String
 }
 
 public struct ContractModel: Decodable {
     var id : Int
-    var userProfileId: Int
     var codeBinding: String?
     var contractTypeId: Int
+    var typeOfContract: TypeOfContractModel
     var number: String
     var dateRegister: String
     var providerId: Int
     var contractorId: Int
-    var contractorNameSmall: String
+    var contractor: ContractorModel
     var dateStart: String?
     var dateEnd: String?
     var allowSending: Bool
     var note: String?
     var statusId: Int
-    var createBy: String?
-    var createDate: String
     var jkuId: String?
     var numberEls: String?
     var includedInEpd: Bool
-    
-    /*enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case userProfileId = "userProfileId"
-        case codeBinding = "codeBinding"
-        case contractTypeId = "contractTypeId"
-        case number = "number"
-        case dateRegister = "dateRegister"
-        case providerId = "providerId"
-        case contractorId = "contractorId"
-        case contractorNameSmall = "contractorNameSmall"
-        case workerId = "workerId"
-        case note = "note"
-    }*/
+    var invoiceDeliveryMethodId: Int
+    var invoiceDeliveryMethod: InvoiceDeliveryMethodModel
+    var primaryAddress: String?
 }
 
 public struct ContractBindingModel: Encodable {
@@ -58,3 +40,17 @@ public struct ContractBindingModel: Encodable {
     let code: String
 }
 
+public struct ListOfContractNumbersRoot: Decodable {
+    let count: Int    
+    let data: [String]
+    enum CodingKeys: String, CodingKey {
+        case count = "count"
+        case data = "data"
+    }
+}
+
+public struct UpdateDeliveryMethodModel: Encodable
+{
+    let contractId: Int
+    let deliveryMethodId: Int
+}

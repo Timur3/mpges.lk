@@ -9,33 +9,67 @@
 import Foundation
 import Alamofire
 
-class ApiService {
+class ApiService: ApiServiceProtocol {
+    
     static let shared = ApiService()
     let baseURL: String
     let vershionApi: String
-    
-    var userData = UserDataService()
-    let options = Options()
+    let interceptor = TokenRequestInterceptor()
     
     init() {
-        baseURL = options.baseUrl
-        vershionApi = options.versionApi
+        baseURL = MethodApi.baseUrl
+        vershionApi = MethodApi.versionApi
     }
-
-    func requestByModel<T: Decodable, M: Encodable>(model: M, requestMethod: HTTPMethod = .post, method: String, completion: @escaping (T) -> Void) {
+    
+    class Connectivity {
+        class var isConnectedToInternet: Bool {
+            return NetworkReachabilityManager()?.isReachable ?? false
+        }
+    }
+    
+    func requestByModel<T: Decodable, M: Encodable>(model: M, requestMethod: MyHTTPMethod = .post, method: String, completion: @escaping (T) -> Void) {
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + (userData.getToken() ?? "")
-        ]
-        DispatchQueue.global().async {
-        AF.request(self.baseURL+method,
-               method: requestMethod,
-               parameters: model,
-               encoder: JSONParameterEncoder.default, headers: headers)
-            
+        AF.request(self.baseURL+method, method: .post, parameters: model, encoder: JSONParameterEncoder.default, interceptor: interceptor)            
             .responseData { response in
-                debugPrint("print reponse")
-                debugPrint(response)
+                
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
+                    completion(myResponse)
+                case let .failure(error):
+                    debugPrint("requestByModel")
+                    debugPrint(error)
+                }
+            }
+    }
+    
+    func requestById<T: Decodable>(id: Int, method: String, completion: @escaping(T) -> Void) {
+        
+        let fullMethod = method + String(id)
+        
+        AF.request(self.baseURL+fullMethod, method: .get, interceptor: interceptor)
+            .responseData { response in
+                
+                switch response.result {
+                case let .success(value):
+                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
+                    DispatchQueue.main.async {
+                        completion(myResponse)
+                    }
+                case let .failure(error):
+                    print("error")
+                    print(error)
+                }
+            }
+        
+    }
+    
+    func requestByToken<T: Decodable>(method: String, completion: @escaping(T) -> Void) {
+        
+        let fullMethod = method
+        AF.request(self.baseURL+fullMethod, method: .get, interceptor: interceptor)
+            .responseData { response in
+                
                 switch response.result {
                 case let .success(value):
                     let myResponse = try! JSONDecoder().decode(T.self, from: value)
@@ -46,76 +80,6 @@ class ApiService {
                     print(error)
                 }
             }
-        }
-    }
-    
-    func requestById<T: Decodable>(id: Int, method: String, completion: @escaping(T) -> Void) {
         
-        let fullMethod = method + String(id)
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + (userData.getToken() ?? "")
-        ]
-        DispatchQueue.global().async {
-        AF.request(self.baseURL+fullMethod,
-               method: .get,
-               headers: headers)
-            .responseData { response in
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
-                        DispatchQueue.main.async {
-                            completion(myResponse)
-                        }
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
     }
-    
-    func requestByToken<T: Decodable>(method: String, completion: @escaping(T) -> Void) {
-        
-        let fullMethod = method
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + (userData.getToken() ?? "")
-        ]
-        DispatchQueue.global().async {
-        AF.request(self.baseURL+fullMethod,
-               method: .get,
-               headers: headers)
-            .responseData { response in
-                switch response.result {
-                case let .success(value):
-                    let myResponse = try! JSONDecoder().decode(T.self, from: value)
-                        DispatchQueue.main.async {
-                            completion(myResponse)
-                        }
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    // MARK: - load saldo by contract id
-    
-    func loadTextInLabel(method: String, id: Int, label: UILabel) {
-          
-          let fullMethod = method + String(id)
-          let headers: HTTPHeaders = [
-              "Authorization": "Bearer " + (userData.getToken() ?? "")
-          ]
-           DispatchQueue.main.async {
-            
-               AF.request(self.baseURL+fullMethod,
-                             method: .get,
-                             headers: headers)
-                .responseString {
-                   response in
-                    guard let strData = response.data,
-                        let text = String(data: strData, encoding: .utf8) else { return }
-                    label.text = text
-               }
-           }
-       }
 }

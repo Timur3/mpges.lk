@@ -8,51 +8,28 @@
 
 import Foundation
 
-public struct UserModelRoot: Decodable {
-    var count: Int
-    var data: [UserModel]
-}
-
 public struct UserEmailModel: Encodable {
     var email: String
 }
 
 public struct UserModel: Decodable, Encodable {
-    
-    let Id: Int
-    var Name: String
-//    let Password: String
-//    let PasswordHash: String
-    var Email: String
-    var Mobile: String
-    let IsOnline: Bool
-    let Confirmed: Bool
-    let CreateDate: String
-    let RoleId: Int
+    let id: Int
+    var name: String
+    var email: String
+    var mobile: String?
+
     
     enum CodingKeys: String, CodingKey {
-        case Id = "id"
-        case Name = "name"
-//        case Password = "password"
-//        case PasswordHash = "passwordHash"
-        case Email = "email"
-        case Mobile = "mobile"
-        case IsOnline = "isOnline"
-        case Confirmed = "confirmed"
-        case CreateDate = "createDate"
-        case RoleId = "roleId"
+        case id = "id"
+        case name = "name"
+        case email = "email"
+        case mobile = "mobile"
     }
     
-    init(Id: Int, Name: String,Password: String,PasswordHash: String,Email: String,Mobile: String,IsOnline: Bool,Confirmed: Bool,CreateDate: String, RoleId: Int) {
-            self.Id = Id
-            self.Name = Name
-//            self.Password = Password
-//            self.PasswordHash = PasswordHash
-            self.Email = Email
-            self.Mobile = Mobile
-            self.IsOnline = IsOnline
-            self.Confirmed = Confirmed
-            self.CreateDate = CreateDate
-            self.RoleId = RoleId        
-       }
+    init(id: Int, name: String, email: String, mobile: String) {
+        self.id = id
+        self.name = name
+        self.email = email
+        self.mobile = mobile
+    }
 }

@@ -8,11 +8,6 @@
 
 import RealmSwift
 
-public class ReceivedDataModelRoot: Object, Decodable {
-    var count: Int
-    var data: [ReceivedDataModel]
-}
-
 public class ReceivedDataModelVeiw  {
     var year: Int = 0
     var receivedData: [ReceivedDataModel] = []
@@ -28,11 +23,11 @@ public class ReceivedDataModel: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var meteringId: Int
     @objc dynamic var tariffZoneId: Int
-    @objc dynamic var tariffZone: String
+    var tariffZone: TariffZoneModel
     @objc dynamic var date: String
     @objc dynamic var value: Int
     @objc dynamic var volume: Int
-    @objc dynamic var monthAverage: Int
+    var monthAverage: Double
     @objc dynamic var sredneSut: Double
     @objc dynamic var sredneYear: Double
     @objc dynamic var meterCircle: Bool

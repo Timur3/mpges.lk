@@ -11,7 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-     var loginCoordinator: FirstCoordinator?
+    var mainCoordinator: MainCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -24,10 +24,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //rootNavigationController.navigationBar.prefersLargeTitles = true
         // Initialise the first coordinator with the main navigation controller
         
-        loginCoordinator = FirstCoordinator(navigationController: rootNavigationController)
+        mainCoordinator = MainCoordinator(navigationController: rootNavigationController)
         
         // The start method will actually display the main view
-        loginCoordinator?.start()
+//        mainCoordinator?.authObserver = UserDefaultsObserver(key: "isAuth")  { old, new in
+//            if !(new as? Bool ?? false) {
+//                DispatchQueue.main.async {
+//                    let firstViewController : FirstTVController = FirstTVController()
+//                    firstViewController.delegate = self.mainCoordinator
+//                    rootNavigationController.isNavigationBarHidden = false
+//                    rootNavigationController.popToRootViewController(animated: true)
+//                }
+//            }
+//        }
+        
+        mainCoordinator?.start()
         
         if let windowScene = scene as? UIWindowScene {
         let window = UIWindow(windowScene: windowScene)
@@ -45,8 +56,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        // Вызывается, когда сцена перешла из неактивного состояния в активное.
+        // Используйте этот метод для перезапуска всех задач, которые были приостановлены (или еще не запущены), когда сцена была неактивна.
+        print("sceneDidBecomeActive")
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

@@ -8,21 +8,44 @@
 
 import Foundation
 
-public struct InvoiceModelRoot: Decodable {
-    var count: Int
-    var data: [InvoiceModel]
+public struct InvoiceModel: Decodable {
+    let id: Int
+    let contractId: Int
+    let date: String
+    let monthId: Int
+    let month: MonthModel?
+    var year: Int
+    var statusSaldoId: Int
+    var statusSaldo: StatusSaldoModel
+    var saldo: Decimal
+    var debet: Decimal
+    var credit: Decimal
+    var balanceEndOfPeriod: Double?
+    var isClose: Bool
 }
 
-public struct InvoiceModel: Decodable {
-    var id: Int
-    var contractId: Int
-    var date: String
-    var month: Int
-    var year: Int
-    var statusSaldoId: Int?
-    var statusSaldoName: String
-    var saldo: Double
-    var debet: Double
-    var credit: Double
-    var isClose: Bool
+public class InvoiceModelVeiw  {
+    var year: Int = 0
+    var invoices: [InvoiceModel] = []
+    
+    init(year: Int, invoices: [InvoiceModel])
+    {
+        self.year = year
+        self.invoices = invoices
+    }
+}
+
+public class InvoiceDetailsModelView {
+    var calc: [CalculationModel]
+    var pay: [PaymentModel]
+    
+    init(calc: [CalculationModel], pay: [PaymentModel]) {
+        self.calc = calc
+        self.pay = pay
+    }
+}
+
+public struct SendInvoiceModel: Encodable {
+    var email: String
+    var invoiceId: Int
 }
