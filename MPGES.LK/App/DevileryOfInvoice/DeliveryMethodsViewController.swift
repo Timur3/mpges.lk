@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import SkeletonView
 
-public protocol DeliveryMethodTVControllerDelegate: class {
+public protocol DeliveryMethodTVControllerDelegate: AnyObject {
     func setData(for deliveryMethod: ResultModel<[InvoiceDeliveryMethodModel]>)
     func resultOfUpdateDeliveryMethod(for resultModel: ResultModel<String>)
 }
 
 
-class DeliveryMethodsViewController: UIViewController {
+class DeliveryMethodsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     weak var delegate: ContractDetailsInfoTVControllerUserDelegate?
     private var selectedDeliveryMethod: InvoiceDeliveryMethodModel?
@@ -164,31 +163,5 @@ extension DeliveryMethodsViewController: DeliveryMethodTVControllerDelegate {
         }
         deliveryMethodList = temp
         setUpLayout()
-        skeletonStop()
-    }
-}
-
-extension DeliveryMethodsViewController: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
-    
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return 1
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return InvoiceDeliveryMethodsTableViewCell.identifier
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func skeletonShow1() {
-        // skeletonView
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
-    
-    func skeletonStop() {
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }

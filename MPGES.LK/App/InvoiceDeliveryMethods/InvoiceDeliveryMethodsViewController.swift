@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SkeletonView
 
-class InvoiceDeliveryMethodsViewController: UIViewController {
+class InvoiceDeliveryMethodsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     weak var delegate: ContractDetailsInfoTVControllerUserDelegate?
     private var selectedDeliveryMethod: InvoiceDeliveryMethodModel?
@@ -128,30 +127,5 @@ class InvoiceDeliveryMethodsViewController: UIViewController {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
-    }
-}
-
-extension InvoiceDeliveryMethodsViewController: SkeletonTableViewDelegate, SkeletonTableViewDataSource {
-    
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return 1
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return InvoiceDeliveryMethodsTableViewCell.identifier
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func skeletonShow1() {
-        // skeletonView
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
-    
-    func skeletonStop() {
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }

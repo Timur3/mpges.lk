@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import SkeletonView
 
-public protocol ContractsTVControllerDelegate: class {
+public protocol ContractsTVControllerDelegate: AnyObject {
     func navigationContractAddTVPage(delegate: ContractsTVControllerUserDelegate)
     func navigationDetailsInfoPage(to contractId: Int)
 }
 
-public protocol ContractsTVControllerUserDelegate: class {
+public protocol ContractsTVControllerUserDelegate: AnyObject {
     func getContracts()
     func setContracts(contracts: ResultModel<[ContractModel]>)
     func resultRemoveContractBinding(result: ResultModel<String>)
@@ -164,7 +163,6 @@ extension ContractsTVController: UISearchResultsUpdating {
 extension ContractsTVController: ContractsTVControllerUserDelegate {
     
     func getContracts() {
-        skeletonShow()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             ApiServiceWrapper.shared.getContracts(delegate: self)
             self.refreshControl?.endRefreshing()
@@ -181,30 +179,5 @@ extension ContractsTVController: ContractsTVControllerUserDelegate {
         contractList = contracts.data!
         // для поиска
         tempContractList = contracts.data!
-        skeletonStop()
-    }
-}
-
-extension ContractsTVController: SkeletonTableViewDataSource {
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        ContractsTableViewCell.identifier
-    }
-    
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return (self.contractList.count == 0) ? 2 : contractList.count
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func skeletonShow(){
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
-    
-    func skeletonStop() {
-        // stop skeltonView
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }

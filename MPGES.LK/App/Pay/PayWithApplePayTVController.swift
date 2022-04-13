@@ -188,7 +188,7 @@ extension PayWithApplePayTVController {
     func purchase() {
         let amount = removeFormatAndSpace(for: self.summaTextField.text!)
         if amount > 4.99 {
-        let paymentRequest = createPaymentRequestForApplePay(sum: NSDecimalNumber(decimal: amount))
+            let paymentRequest = createPaymentRequestForApplePay(sum: NSDecimalNumber(decimal: Decimal(amount)))
         if let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest) {
                 controller.delegate = self
                 present(controller, animated: true, completion: nil)

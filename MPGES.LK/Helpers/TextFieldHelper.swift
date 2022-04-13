@@ -16,9 +16,6 @@ func getCustomTextField(placeholder: String, text: String = "", keyboardType: UI
     textField.keyboardType = keyboardType
     textField.isSecureTextEntry = isPassword
     textField.isUserInteractionEnabled = isUserInteractionEnabled
-    //skeletonView
-    textField.skeletonCornerRadius = 5
-    textField.isSkeletonable = true
     return textField
 }
 

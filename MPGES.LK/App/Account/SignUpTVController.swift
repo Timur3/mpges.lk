@@ -7,7 +7,7 @@
 //
 
 import UIKit
-public protocol SignUpTVControllerUserDelegate: class {
+public protocol SignUpTVControllerUserDelegate: AnyObject {
     func signUp(user: SingUpModel)
     func resultOfCreateUser(result: ResultModel<String>)
 }

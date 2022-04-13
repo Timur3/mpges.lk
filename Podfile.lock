@@ -1,52 +1,23 @@
 PODS:
-  - Alamofire (5.2.1)
-  - Charts (3.5.0):
-    - Charts/Core (= 3.5.0)
-  - Charts/Core (3.5.0)
-  - Realm (5.5.0):
-    - Realm/Headers (= 5.5.0)
-  - Realm/Headers (5.5.0)
-  - RealmSwift (5.5.0):
-    - Realm (= 5.5.0)
-  - SkeletonView (1.13.0)
-  - SwiftKeychainWrapper (3.4.0)
-  - SwiftyJSON (5.0.0)
-  - YandexMapKit (3.5.0):
-    - YandexRuntime (= 3.5.0)
-  - YandexRuntime (3.5.0)
+  - YandexMobileMetrica (4.0.0):
+    - YandexMobileMetrica/Static (= 4.0.0)
+  - YandexMobileMetrica/Static (4.0.0):
+    - YandexMobileMetrica/Static/Core (= 4.0.0)
+    - YandexMobileMetrica/Static/Crashes (= 4.0.0)
+  - YandexMobileMetrica/Static/Core (4.0.0)
+  - YandexMobileMetrica/Static/Crashes (4.0.0):
+    - YandexMobileMetrica/Static/Core
 
 DEPENDENCIES:
-  - Alamofire
-  - Charts
-  - RealmSwift (~> 5.2)
-  - SkeletonView
-  - SwiftKeychainWrapper
-  - SwiftyJSON
-  - YandexMapKit
+  - YandexMobileMetrica (= 4.0.0)
 
 SPEC REPOS:
   trunk:
-    - Alamofire
-    - Charts
-    - Realm
-    - RealmSwift
-    - SkeletonView
-    - SwiftKeychainWrapper
-    - SwiftyJSON
-    - YandexMapKit
-    - YandexRuntime
+    - YandexMobileMetrica
 
 SPEC CHECKSUMS:
-  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
-  Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
-  Realm: fb399d76f44042e5cdfc630f33828fdb4d077345
-  RealmSwift: 3b7e62356207ef16d34de4e55d475163bd2062bb
-  SkeletonView: 2b14cb767a7da384d17d5d7e1db0d55a6cf9566a
-  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
-  YandexMapKit: ecd4b78de34a35df63d066ac299e6fd0fe46d1ba
-  YandexRuntime: 2d55244d06267106cf9b00c25a1e63f72a73b6fd
+  YandexMobileMetrica: 85ba4c1a6839985d58bf45ec7f915e433525b094
 
-PODFILE CHECKSUM: df566368c3c912c473368d81e1a74db201a958cd
+PODFILE CHECKSUM: 0627bb7a842c1233e71700a21a63fad8078d2209
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

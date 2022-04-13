@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PasswordChangeTVControllerDelegate: class {
+protocol PasswordChangeTVControllerDelegate: AnyObject {
     func requestForChange(model: PasswordChangeModel)
     func responseOfChange(result: ResultModel<String>)
 }

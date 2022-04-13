@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol TableViewCellViewModelType: class {
+protocol TableViewCellViewModelType: AnyObject {
     var textLabel: String { get  }
     var detailTextLabel: String { get  }
     var image: UIImage { get }

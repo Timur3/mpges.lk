@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol MainTabBarViewControllerDelegate: class {
+public protocol MainTabBarViewControllerDelegate: AnyObject {
     func navigateToContractsPage()
     func navigateToOfficesPage()
     func navigateToProfilePage()
@@ -32,7 +32,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if (viewController.tabBarItem.tag == 1)
         {
             let v = viewController as! OfficesViewController
-            v.startPosition()
+            //v.startPosition()
         }
     }
     

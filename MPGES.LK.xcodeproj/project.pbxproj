@@ -50,7 +50,6 @@
 		225DFEA4247D850C0007A3DB /* BankPayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225DFEA3247D850C0007A3DB /* BankPayModel.swift */; };
 		2260DBD12517CC5700DC6D16 /* ReceivedDataVolumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260DBD02517CC5600DC6D16 /* ReceivedDataVolumeModel.swift */; };
 		226572D7240BE601005DBFA6 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226572D6240BE601005DBFA6 /* ProfileCoordinator.swift */; };
-		226572DF240C1A62005DBFA6 /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */; };
 		22669EF9247930900091A950 /* CommonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22669EF8247930900091A950 /* CommonTableViewController.swift */; };
 		2267EFF723E8A6090097BEB0 /* ActivityIndicatorViewService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2267EFF623E8A6090097BEB0 /* ActivityIndicatorViewService2.swift */; };
 		2269014A244E273D00DB21F2 /* PasswordChangeTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22690148244E273D00DB21F2 /* PasswordChangeTVController.swift */; };
@@ -152,22 +151,41 @@
 		394176DF2635F23F00E796B7 /* UIImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394176DE2635F23F00E796B7 /* UIImageHelper.swift */; };
 		394176E6263808D200E796B7 /* OfficeMarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394176E5263808D200E796B7 /* OfficeMarkModel.swift */; };
 		39465BC025F7E55700D7B70F /* TokenRequestInterceptor3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39465BBF25F7E55700D7B70F /* TokenRequestInterceptor3.swift */; };
+		39499ED426DC904E0060171C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 39499ED326DC904E0060171C /* Alamofire */; };
 		3956F26F25D8294800A3A110 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956F26D25D8294800A3A110 /* DevicesViewController.swift */; };
 		3956F27025D8294800A3A110 /* DevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3956F26E25D8294800A3A110 /* DevicesViewController.xib */; };
+		3962A83026DCD8220028277D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3962A82F26DCD8220028277D /* SwiftyJSON */; };
+		3962A83326DCD9320028277D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3962A83226DCD9320028277D /* Realm */; };
+		3962A83526DCD9320028277D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3962A83426DCD9320028277D /* RealmSwift */; };
+		3962A83826DCD94A0028277D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 3962A83726DCD94A0028277D /* SwiftKeychainWrapper */; };
 		39696D6E2612F1D6004C9401 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 39696D6D2612F1D6004C9401 /* Atomics */; };
 		39696D78261A1A85004C9401 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39696D77261A1A85004C9401 /* GradientView.swift */; };
 		39B23990261A2345000D3345 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */; };
 		39BC47E2267E7A5C00AAD329 /* TableViewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */; };
 		39BC47E8267F274100AAD329 /* DeliveryOfInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC47E7267F274100AAD329 /* DeliveryOfInvoiceViewModel.swift */; };
 		39D18B9B25F79B81000CE4E3 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */; };
+		39E4A2E226DD29C200EE1DF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E4A2E126DD29C200EE1DF8 /* MapKit.framework */; };
 		39F7E67825E2A2A7001B1A47 /* DeliveryMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F7E67625E2A2A7001B1A47 /* DeliveryMethodsViewController.swift */; };
 		39FC9BFF267F6FC700C67D19 /* DeliveryMethodsViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39FC9BFE267F6FC600C67D19 /* DeliveryMethodsViewController1.xib */; };
 		39FC9C02267F777D00C67D19 /* TableViewCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FC9C01267F777D00C67D19 /* TableViewCellViewModelType.swift */; };
 		39FC9C05267F79C100C67D19 /* TableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FC9C04267F79C100C67D19 /* TableViewCellViewModel.swift */; };
+		746C9E114F1B74E1B53ACA8B /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B3A0D1FF0B638EC1DBB966 /* Pods_mpges_lk.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3942796526DD232D001BE111 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		0B27E50C44215D2371686D40 /* Pods-mpges.lk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.release.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.release.xcconfig"; sourceTree = "<group>"; };
 		2200A9F3259A2195000A1F74 /* PasswordResetTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetTVController.swift; sourceTree = "<group>"; };
 		2202E1142587CE700056F176 /* DecimalHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalHelper.swift; sourceTree = "<group>"; };
 		2202E1172588E6760056F176 /* ApiServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceProtocol.swift; sourceTree = "<group>"; };
@@ -308,6 +326,7 @@
 		22F74D88259A2E830097AC83 /* PasswordResetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetModel.swift; sourceTree = "<group>"; };
 		22F91A91257EB91E00B49C78 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		22F91A942581100200B49C78 /* TokensModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensModel.swift; sourceTree = "<group>"; };
+		3389704144DDC7F4CABD77F1 /* Pods-mpges.lk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.debug.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.debug.xcconfig"; sourceTree = "<group>"; };
 		392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequestInterceptor2.swift; sourceTree = "<group>"; };
 		39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDeliveryMethodsViewController.swift; sourceTree = "<group>"; };
 		39377AA0267FC21E00763627 /* InvoiceDeliveryMethodsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceDeliveryMethodsViewController.xib; sourceTree = "<group>"; };
@@ -323,12 +342,13 @@
 		39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModelType.swift; sourceTree = "<group>"; };
 		39BC47E7267F274100AAD329 /* DeliveryOfInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryOfInvoiceViewModel.swift; sourceTree = "<group>"; };
 		39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
+		39E4A2E126DD29C200EE1DF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		39F7E67625E2A2A7001B1A47 /* DeliveryMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMethodsViewController.swift; sourceTree = "<group>"; };
 		39FC9BFE267F6FC600C67D19 /* DeliveryMethodsViewController1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliveryMethodsViewController1.xib; sourceTree = "<group>"; };
 		39FC9C01267F777D00C67D19 /* TableViewCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModelType.swift; sourceTree = "<group>"; };
 		39FC9C04267F79C100C67D19 /* TableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModel.swift; sourceTree = "<group>"; };
-		70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.debug.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.debug.xcconfig"; sourceTree = "<group>"; };
+		92B3A0D1FF0B638EC1DBB966 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2DDC84ECE803260BA7E7310 /* Pods-mpges.lk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.release.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,9 +356,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3962A83326DCD9320028277D /* Realm in Frameworks */,
 				39696D6E2612F1D6004C9401 /* Atomics in Frameworks */,
+				3962A83526DCD9320028277D /* RealmSwift in Frameworks */,
+				39499ED426DC904E0060171C /* Alamofire in Frameworks */,
+				39E4A2E226DD29C200EE1DF8 /* MapKit.framework in Frameworks */,
 				22AF9ACF246145BC00FBB45F /* PassKit.framework in Frameworks */,
-				226572DF240C1A62005DBFA6 /* Pods_mpges_lk.framework in Frameworks */,
+				3962A83026DCD8220028277D /* SwiftyJSON in Frameworks */,
+				3962A83826DCD94A0028277D /* SwiftKeychainWrapper in Frameworks */,
+				746C9E114F1B74E1B53ACA8B /* Pods_mpges_lk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,8 +376,8 @@
 			children = (
 				220429F5235E22460054D4DD /* mpges.lk */,
 				220429F4235E22460054D4DD /* Products */,
-				BA77AB06EDE1428D2A79D9E3 /* Pods */,
 				5E5FDB0E4D4E9FB466307D27 /* Frameworks */,
+				6173BCF1E12EF137F40773C8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -769,17 +795,18 @@
 		5E5FDB0E4D4E9FB466307D27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39E4A2E126DD29C200EE1DF8 /* MapKit.framework */,
 				22AF9ACE246145BC00FBB45F /* PassKit.framework */,
-				70F7B11DCB5523E831235362 /* Pods_mpges_lk.framework */,
+				92B3A0D1FF0B638EC1DBB966 /* Pods_mpges_lk.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BA77AB06EDE1428D2A79D9E3 /* Pods */ = {
+		6173BCF1E12EF137F40773C8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */,
-				0B27E50C44215D2371686D40 /* Pods-mpges.lk.release.xcconfig */,
+				3389704144DDC7F4CABD77F1 /* Pods-mpges.lk.debug.xcconfig */,
+				A2DDC84ECE803260BA7E7310 /* Pods-mpges.lk.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -791,12 +818,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22042A0A235E224D0054D4DD /* Build configuration list for PBXNativeTarget "mpges.lk" */;
 			buildPhases = (
-				AF762B380121D3AE6C387348 /* [CP] Check Pods Manifest.lock */,
+				467BE33BF230145AEA80B5C4 /* [CP] Check Pods Manifest.lock */,
 				220429EF235E22460054D4DD /* Sources */,
 				220429F0235E22460054D4DD /* Frameworks */,
 				220429F1235E22460054D4DD /* Resources */,
-				3525EC9DFF41762D27B35893 /* [CP] Embed Pods Frameworks */,
-				2CFBF504D8304EB27B109F79 /* [CP] Copy Pods Resources */,
+				3942796526DD232D001BE111 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -805,6 +831,11 @@
 			name = mpges.lk;
 			packageProductDependencies = (
 				39696D6D2612F1D6004C9401 /* Atomics */,
+				39499ED326DC904E0060171C /* Alamofire */,
+				3962A82F26DCD8220028277D /* SwiftyJSON */,
+				3962A83226DCD9320028277D /* Realm */,
+				3962A83426DCD9320028277D /* RealmSwift */,
+				3962A83726DCD94A0028277D /* SwiftKeychainWrapper */,
 			);
 			productName = mpges.lk;
 			productReference = 220429F3235E22460054D4DD /* МП ГЭС.app */;
@@ -837,6 +868,10 @@
 			mainGroup = 220429EA235E22460054D4DD;
 			packageReferences = (
 				39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */,
+				39499ED226DC904E0060171C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				3962A82E26DCD8220028277D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				3962A83126DCD9320028277D /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				3962A83626DCD94A0028277D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = 220429F4235E22460054D4DD /* Products */;
 			projectDirPath = "";
@@ -876,41 +911,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2CFBF504D8304EB27B109F79 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3525EC9DFF41762D27B35893 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF762B380121D3AE6C387348 /* [CP] Check Pods Manifest.lock */ = {
+		467BE33BF230145AEA80B5C4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1213,7 +1214,7 @@
 		};
 		22042A0B235E224D0054D4DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0DB7E107EB38889B8235222 /* Pods-mpges.lk.debug.xcconfig */;
+			baseConfigurationReference = 3389704144DDC7F4CABD77F1 /* Pods-mpges.lk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "mpges.lk/МП ГЭС.entitlements";
@@ -1222,7 +1223,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 8P5Z32Z62F;
 				INFOPLIST_FILE = mpges.lk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1239,7 +1240,7 @@
 		};
 		22042A0C235E224D0054D4DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B27E50C44215D2371686D40 /* Pods-mpges.lk.release.xcconfig */;
+			baseConfigurationReference = A2DDC84ECE803260BA7E7310 /* Pods-mpges.lk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "mpges.lk/МП ГЭС.entitlements";
@@ -1248,7 +1249,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 8P5Z32Z62F;
 				INFOPLIST_FILE = mpges.lk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1287,6 +1288,38 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		39499ED226DC904E0060171C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.3;
+			};
+		};
+		3962A82E26DCD8220028277D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		3962A83126DCD9320028277D /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.25.0;
+			};
+		};
+		3962A83626DCD94A0028277D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
 		39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-atomics.git";
@@ -1298,6 +1331,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		39499ED326DC904E0060171C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39499ED226DC904E0060171C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		3962A82F26DCD8220028277D /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3962A82E26DCD8220028277D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		3962A83226DCD9320028277D /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3962A83126DCD9320028277D /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		3962A83426DCD9320028277D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3962A83126DCD9320028277D /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		3962A83726DCD94A0028277D /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3962A83626DCD94A0028277D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
 		39696D6D2612F1D6004C9401 /* Atomics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */;

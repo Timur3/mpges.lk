@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SkeletonView
 
-public protocol ReceivedDataTVControllerDelegate: class {
+public protocol ReceivedDataTVControllerDelegate: AnyObject {
     func setData(model: ResultModel<[ReceivedDataModel]>)
     func getReceivedDataAddNewTemplatePage()
     func resultOfDelete(result: ResultModel<String>)
@@ -57,7 +56,6 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     }
     
     @objc func getReceivedData() {
-        skeletonShow()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             ApiServiceWrapper.shared.getReceivedDataByDeviceId(id: self.device!.id, delegate: self)
             self.refreshControl?.endRefreshing()
@@ -128,39 +126,6 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     }
 }
 
-extension ReceivedDataRegisterTVController: SkeletonTableViewDataSource {
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return ReceivedDataTVCell.identifier
-    }
-    
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return receivedDataList.count == 0 ? 2 : receivedDataList.count
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if receivedDataList.count != 0 {
-            return receivedDataList[section].receivedData.count
-        } else {
-            let monthNumber = Calendar.current.component(.month, from: Date())
-            if section == 0 {
-                return monthNumber
-            } else {
-                return 3
-            }
-        }
-    }
-    func skeletonShow() {
-        // skeletonView
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
-    
-    func skeletonStop() {
-        // stop skeltonView
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-    }
-}
-
 //MARK: - SEARCH
 extension ReceivedDataRegisterTVController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
@@ -187,7 +152,6 @@ extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
     func setData(model: ResultModel<[ReceivedDataModel]>) {
         // todo доделать получение данных из realm
         self.receivedDataList =  mapToReceivedDataModelView(receivedData: model.data!)
-        skeletonStop()
     }
     
     func getReceivedDataAddNewTemplatePage() {

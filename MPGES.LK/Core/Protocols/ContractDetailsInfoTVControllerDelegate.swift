@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol ContractDetailsInfoTVControllerUserDelegate: class {
+protocol ContractDetailsInfoTVControllerUserDelegate: AnyObject {
     var sections: [String?] { get }
     func setContractById(for contract: ResultModel<ContractModel>)
     func getContractById(id: Int)

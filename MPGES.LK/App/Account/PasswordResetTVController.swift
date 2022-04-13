@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PasswordResetTVControllerDelegate: class {
+protocol PasswordResetTVControllerDelegate: AnyObject {
     func requestForReset(model: PasswordResetModel)
     func responseOfReset(result: ResultModel<String>)
 }

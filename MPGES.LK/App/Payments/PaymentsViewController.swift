@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SkeletonView
 import SafariServices
 
 protocol PaymentsViewControllerUserDelegate {
@@ -17,7 +16,7 @@ protocol PaymentsViewControllerUserDelegate {
     func navigationPaymentInfoForSafariService(for model: ResultModel<String>)
 }
 
-class PaymentsViewController: UIViewController, UITableViewDelegate, SkeletonTableViewDataSource {
+class PaymentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let tableView = UITableView.init(frame: .zero, style: .insetGrouped)
     
     private var tempPayments = [PaymentModel]()
@@ -74,24 +73,6 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, SkeletonTab
     func numSections(in collectionSkeletonView: UITableView) -> Int {
         return (paymentsList.count == 0) ? 2 : paymentsList.count
     }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if paymentsList.count != 0 {
-            return paymentsList[section].payments.count
-        } else {
-            let monthNumber = Calendar.current.component(.month, from: Date())
-            if section == 0 {
-                return monthNumber
-            } else {
-                return 3
-            }
-        }
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return PaymentTVCell.identifier
-    }
-    
     
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         print("did End Displaying Header View")
@@ -171,10 +152,6 @@ extension PaymentsViewController: PaymentsViewControllerUserDelegate {
     }
 
 @objc func getPayments() {
-    // skeletonskView
-    self.tableView.isSkeletonable = true
-    self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         let access = ApiService.Connectivity.isConnectedToInternet
         if access {
@@ -208,8 +185,6 @@ func setPayments(payments: ResultModel<[PaymentModel]>) {
     paymentsList = model
     // для поиска
     tempPayments = payments.data!
-    // stop skeltonView
-    self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
 }
 }
 // MARK: - SEARCH
@@ -222,7 +197,7 @@ extension PaymentsViewController: UISearchResultsUpdating {
     private func filterContent(_ searchText: String)
     {
         paymentsList = mapToPaymentsModelView(payments: tempPayments.filter({ (payList: PaymentModel) -> Bool in
-            return payList.summa >= Decimal(string: searchText) ?? 0.00
+            return payList.summa >= Double(searchText) ?? 0.00
         }))
         print("поиск в платежах")
     }

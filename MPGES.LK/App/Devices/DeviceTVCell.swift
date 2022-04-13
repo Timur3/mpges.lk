@@ -41,20 +41,6 @@ class DeviceTVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // for skeletonView
-        self.imageView?.isSkeletonable = true
-        deviceNumber.lastLineFillPercent = 50
-        deviceNumber.linesCornerRadius = 5
-        modelNameDevice.lastLineFillPercent = 50
-        modelNameDevice.linesCornerRadius = 5
-        addressSetDevice.lastLineFillPercent = 50
-        addressSetDevice.linesCornerRadius = 5
-        deviceDateOut.lastLineFillPercent = 50
-        deviceDateOut.linesCornerRadius = 5
-        deviceDateCalibration.lastLineFillPercent = 50
-        deviceDateCalibration.linesCornerRadius = 5
-        deviceDateNextCalibration.lastLineFillPercent = 50
-        deviceDateNextCalibration.linesCornerRadius = 5
         
         receivedDataAddNewButton.layer.cornerRadius = 8.0
         receivedDataAddNewButton.layer.borderWidth = 1.0

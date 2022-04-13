@@ -31,10 +31,6 @@ class InvoiceCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        textLabel?.linesCornerRadius = 5
-        detailTextLabel?.linesCornerRadius = 5
-        imageView?.isSkeletonable = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

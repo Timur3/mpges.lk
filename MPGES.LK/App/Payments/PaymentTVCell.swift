@@ -16,18 +16,13 @@ class PaymentTVCell: UITableViewCell {
     static let identifier = "paymentCell"
     
     func update(for pay: PaymentModel) {
-        let sum: Decimal = (pay.summa)
+        let sum: Double = (pay.summa)
         datePay.text = pay.datePay
         sumPay.text = formatRusCurrency(sum)
         cashBox.text = pay.registerOfPayment?.typeOfPayment?.name
     }
     override func awakeFromNib() {
-        super.awakeFromNib()
-        // for skeletonView
-        datePay.linesCornerRadius = 5
-        sumPay.linesCornerRadius = 5
-        cashBox.linesCornerRadius = 5
-        
+        super.awakeFromNib()        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

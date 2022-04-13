@@ -8,11 +8,15 @@
 
 import UIKit
 import CoreData
-import YandexMapKit
+//import YandexMobileMetrica
+//import YandexMapsMobile
 import RealmSwift
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var notificationCenter = UNUserNotificationCenter.current()
     
     var window: UIWindow?
     
@@ -21,8 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
         let tmpDirectory = FileManager.default.temporaryDirectory
-        YMKMapKit.setApiKey("e5c12d20-2c1e-4a5c-bea2-8974e8a981aa")
-        // TODO: Проверку версии схемы и запуск миграции 
+        
+        //YMKMapKit.setApiKey("e5c12d20-2c1e-4a5c-bea2-8974e8a981aa")
+       // let configuration = YMMYandexMetricaConfiguration.init(apiKey: "47a8865a-7b96-4625-bac4-41bff2301cd6")
+            //YMMYandexMetrica.activate(with: configuration!)
+        // TODO: Проверку версии схемы и запуск миграции
 
             //Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
         print("Realm path:", Realm.Configuration.defaultConfiguration.fileURL ?? "no url")
@@ -31,11 +38,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(cacheDirectory!)
         print(tmpDirectory)
         //guard let isAuth = UserDefaults.standard.bool(forKey: "isAuth"), isAuth != nil else { return true }
-        
+        requestAuthorization()
         UserDefaults.standard.register(defaults: ["isAuth" : false])
         
         //Thread.sleep(forTimeInterval: 1.0)
         return true
+    }
+    
+    func requestAuthorization() {
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (access, error) in
+            debugPrint(access)
+            
+            guard access else { return }
+            self.getNotificationSettings()
+        }
+    }
+    
+    func getNotificationSettings() {
+        notificationCenter.getNotificationSettings { (settings) in
+            debugPrint(settings)
+        }
+    }
+    
+    func scheduleNotification(notificationType: String) {
+        let content = UNMutableNotificationContent()
+        content.title = notificationType
+        content.body = "ООО ГЭС"
+        content.sound = UNNotificationSound.default
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let identifire = "local identificator"
+        //let
     }
 
     // MARK: UISceneSession Lifecycle

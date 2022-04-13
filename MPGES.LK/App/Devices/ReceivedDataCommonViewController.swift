@@ -37,13 +37,13 @@ class ReceivedDataCommonViewController: UIViewController {
         return viewController
     }()
     
-    private lazy var receivedDataChartViewController: ReceivedDataChartViewController = {
-        var viewController = ReceivedDataChartViewController()
-        viewController.delegate = delegate
-        viewController.device = device
-        self.add(asChildViewController: viewController)
-        return viewController
-    }()
+//    private lazy var receivedDataChartViewController: ReceivedDataChartViewController = {
+//        var viewController = ReceivedDataChartViewController()
+//        viewController.delegate = delegate
+//        viewController.device = device
+//        self.add(asChildViewController: viewController)
+//        return viewController
+//    }()
     
 }
 
@@ -73,12 +73,12 @@ extension ReceivedDataCommonViewController {
     @objc func segmentSwicht(){
         if segment.selectedSegmentIndex == 0 {
             navigationItem.title = "Показания"
-            remove(asChildViewController: receivedDataChartViewController)
+            //remove(asChildViewController: receivedDataChartViewController)
             add(asChildViewController: receivedDataRegisterTVController)
         } else {
             navigationItem.title = "График объемов"
             remove(asChildViewController: receivedDataRegisterTVController)
-            add(asChildViewController: receivedDataChartViewController)
+            //add(asChildViewController: receivedDataChartViewController)
         }
     }
     

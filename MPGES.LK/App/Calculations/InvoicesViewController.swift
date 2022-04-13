@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import SkeletonView
 
-protocol InvoicesViewControllerDelegate: class {
+protocol InvoicesViewControllerDelegate: AnyObject {
     func pdfView(for urlToPdfFile: URL, delegate: InvoicesViewControllerUserDelegate)
     func sendDocByEmail(model: SendInvoiceModel, delegate: InvoicesViewControllerUserDelegate)
 }
 
-protocol InvoicesViewControllerUserDelegate: class {
+protocol InvoicesViewControllerUserDelegate: AnyObject {
     var sections: [String] { get }
     func setInvoices(invoices: ResultModel<[InvoiceModel]>)
     func responseSend(result: ResultModel<String>)
@@ -22,7 +21,7 @@ protocol InvoicesViewControllerUserDelegate: class {
 }
 
 
-class InvoicesViewController: UIViewController, UITableViewDelegate, SkeletonTableViewDataSource {
+class InvoicesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let tableView = UITableView.init(frame: .zero, style: .insetGrouped)
     private var indexPath: IndexPath?
     
@@ -56,7 +55,6 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, SkeletonTab
     }   
     
     @objc func refreshInvoicesData(sender: AnyObject) {
-        skeletonShow()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             do {
                 try ApiServiceWrapper.shared.getInvoicesByContractId(id: self.contractId, delegate: self)
@@ -80,34 +78,8 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, SkeletonTab
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return InvoiceCell.identifier
-    }
-    
     func numSections(in collectionSkeletonView: UITableView) -> Int {
         return (invoiceList.count == 0) ? 2 : invoiceList.count
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if invoiceList.count != 0 {
-            return invoiceList[section].invoices.count
-        } else {
-            let monthNumber = Calendar.current.component(.month, from: Date())
-            if section == 0 {
-                return monthNumber
-            } else {
-                return 3
-            }
-        }
-    }
-    
-    func skeletonShow() {
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
-    
-    func skeletonStop() {
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
     
     // MARK: - Table view data source
@@ -254,6 +226,5 @@ extension InvoicesViewController: InvoicesViewControllerUserDelegate {
         // todo получение данных из realm
         invoiceList = mapToInvoicesModelView(invoices: invoices.data!)
         print("end load invoices")
-        skeletonStop()
     }
 }

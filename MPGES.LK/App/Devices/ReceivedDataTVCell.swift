@@ -24,10 +24,6 @@ class ReceivedDataTVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        self.receivedDataDateLabel.linesCornerRadius = 5
-        self.valueLabel.linesCornerRadius = 5
-        self.tariffZoneLabel.linesCornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

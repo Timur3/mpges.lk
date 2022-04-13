@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol EmailToDeveloperTVControllerDelegate1: class {
+protocol EmailToDeveloperTVControllerDelegate1: AnyObject {
     func sendMail(model: ContractBindingModel)
     func resultSendMail(result: ResultModel<String>)
 }

@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import SkeletonView
 
-protocol DevicesViewControllerUserDelegate: class {
+protocol DevicesViewControllerUserDelegate: AnyObject {
     func setDevices(devices:ResultModel<[DeviceModel]>)
 }
 
-class DevicesViewController: UIViewController, UITableViewDelegate, SkeletonTableViewDataSource {
+class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let tableView = UITableView.init(frame: .zero, style: .insetGrouped)
     
     private var searchController = UISearchController(searchResultsController: nil)
@@ -58,23 +57,7 @@ class DevicesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
         return 1
     }
     
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return DeviceTVCell.identifier
-    }
-    
-    func skeletonShow() {
-        // skeletonView
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
-    
-    func skeletonStop() {
-        // stop skeltonView
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-    }
-    
     @objc func getDevices(){
-        skeletonShow()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             ApiServiceWrapper.shared.getDevicesByContractId(id: self.contractId, delegate: self)
             // todo  сохраняем новые данные, предварительно удаляем старые данные
@@ -149,7 +132,6 @@ extension DevicesViewController: DevicesViewControllerUserDelegate {
     func setDevices(devices: ResultModel<[DeviceModel]>) {
         // todo доделать получение данных из realm
         deviceList = devices.data!
-        skeletonStop()
     }
 }
 //MARK: - RECEIVED DATA ADD NEW DELEGATE

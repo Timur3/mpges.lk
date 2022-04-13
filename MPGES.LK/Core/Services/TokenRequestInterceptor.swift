@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import Atomics
+import UIKit
 
 
 public class TokenRequestInterceptor: RequestInterceptor {

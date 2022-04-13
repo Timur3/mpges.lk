@@ -7,7 +7,7 @@
 //
 
 import UIKit
-protocol ContractAddTVControllerUserDelegate: class {
+protocol ContractAddTVControllerUserDelegate: AnyObject {
     func checkContractByNumber(model: ContractNumberModel)
     func resultCheckContract(result: ResultModel<String>)
     func goToBinding(model: ContractBindingModel)

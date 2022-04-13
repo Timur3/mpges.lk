@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ContractDetailsInfoTVControllerDelegate: class {
+protocol ContractDetailsInfoTVControllerDelegate: AnyObject {
     func navigateToBackPage()
     func navigateToPaymentsPage()
     func navigationToInvoicePage()
@@ -18,7 +18,7 @@ protocol ContractDetailsInfoTVControllerDelegate: class {
     func navigateToPayWithCreditCardPage()
     func navigateToPayWithSberbankOnlinePage(model: BankPayModel)
     func navigateToPayWithApplePayPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
-    func navigationToResultOfPayment(for model: ResultModel<Decimal>)
+    func navigationToResultOfPayment(for model: ResultModel<Double>)
 }
 
 class ContractDetailsInfoTVController: CommonTableViewController {
@@ -248,7 +248,6 @@ extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDe
     func setContractById(for contract: ResultModel<ContractModel>) {
         contractModel = contract.data
         self.refreshControl?.endRefreshing()
-        skeletonStop()
     }
     
     func getStatePayment(for model: RequestOfPayModel) {
@@ -330,24 +329,9 @@ extension ContractDetailsInfoTVController {
         tableView.dataSource = self
     }
     @objc func refreshContract() {
-        skeletonShow()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.getContractById(id: self.contractId)
         }
-    }
-    
-    func skeletonShow() {
-        // skeletonView
-        self.accountLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-        self.contractorLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-        self.contractDateLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-        self.contractNumberLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-        self.saldoSumLabel.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
-    
-    func skeletonStop() {
-        // stop skeltonView
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }
 

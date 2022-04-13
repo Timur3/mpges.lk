@@ -38,7 +38,7 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
         setUpLayout()
     }
     
-    var resultPay: ResultModel<Decimal>? {
+    var resultPay: ResultModel<Double>? {
         didSet {
             DispatchQueue.main.async {
                 self.summaCell.textLabel?.text = formatRusCurrency(self.resultPay!.data!)

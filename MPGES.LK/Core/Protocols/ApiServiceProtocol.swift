@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ApiServiceProtocol: class {
+protocol ApiServiceProtocol: AnyObject {
     
     func requestByModel<T: Decodable, M: Encodable>(model: M, requestMethod: MyHTTPMethod, method: String, completion: @escaping (T) -> Void)
     func requestById<T: Decodable>(id: Int, method: String, completion: @escaping(T) -> Void)

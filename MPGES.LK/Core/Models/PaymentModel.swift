@@ -5,7 +5,7 @@
 //  Created by Timur on 16.01.2020.
 //  Copyright © 2020 ChalimovTimur. All rights reserved.
 //
-
+import Foundation
 import RealmSwift
 
 public class PaymentsModelVeiw  {
@@ -20,22 +20,20 @@ public class PaymentsModelVeiw  {
 }
 
 public class PaymentModel: Object, Decodable {
-    var id: Int
-    var serviceId: Int
-    var invoiceId: Int?
-    var registerPaytsId: Int = 0
-    var registerOfPayment: RegisterOfPayment?
-    var contractId: Int = 0
-    var datePay: String = ""
-    var summa: Decimal = 0.00
-    var workerId: Int = 0
-    var note: String?
-    var uuid: String?
+    @objc var id: Int
+    @objc var serviceId: Int
+    @objc var registerPaytsId: Int = 0
+    @objc var registerOfPayment: RegisterOfPayment?
+    @objc var contractId: Int = 0
+    @objc var datePay: String = ""
+    @objc var summa: Double = 0.00
+    @objc var workerId: Int = 0
+    @objc var note: String?
+    @objc  var uuid: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case serviceId = "serviceId"
-        case invoiceId = "invoiceId"
         case registerPaytsId = "registerPaytsId"
         case registerOfPayment = "registerOfPayment"
         case contractId = "contractId"

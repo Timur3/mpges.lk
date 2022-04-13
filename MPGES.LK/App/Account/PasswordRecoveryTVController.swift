@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol PasswordRecoveryTVControllerUserDelegate: class {
+public protocol PasswordRecoveryTVControllerUserDelegate: AnyObject {
     func goToRecoveryPassword()
     func resultOfCheckEmail(result: ResultModel<String>)
     func resultOfPasswordRecovery(result: ResultModel<String>)

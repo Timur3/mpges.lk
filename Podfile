@@ -6,12 +6,5 @@ target 'mpges.lk' do
   use_frameworks!
 
   # Pods for mpges.lk
-   pod 'Alamofire'
-   pod 'SwiftyJSON'
-   pod 'RealmSwift', '~> 5.2'
-   pod 'SwiftKeychainWrapper'
-   pod 'YandexMapKit'
-   pod 'Charts' 
-   pod 'SkeletonView'
-
+	pod 'YandexMobileMetrica', '4.0.0'
 end

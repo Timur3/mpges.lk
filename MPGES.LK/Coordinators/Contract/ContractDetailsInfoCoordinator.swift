@@ -105,7 +105,7 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
         
     }
         
-    func navigationToResultOfPayment(for model: ResultModel<Decimal>) {
+    func navigationToResultOfPayment(for model: ResultModel<Double>) {
         let resultOfPay: ResultOfPaymentTableViewController = ResultOfPaymentTableViewController()
         //resultOfPay.delegate = self
         resultOfPay.resultPay = model

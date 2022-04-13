@@ -26,11 +26,6 @@ func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NST
     
     //cell.textLabel?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
     
-    // skeletonView
-    cell.textLabel?.isSkeletonable = true
-    cell.contentView.isSkeletonable = true
-    cell.isSkeletonable = true
-    
     return cell
     
 }

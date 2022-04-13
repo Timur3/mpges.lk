@@ -7,7 +7,7 @@
 //
 
 import UIKit
-protocol PayWithSberbankOnlineTVControllerDelegate: class {
+protocol PayWithSberbankOnlineTVControllerDelegate: AnyObject {
     func getDeepLink()
     func navigationToSberApp(response: ResultModel<String>)
 }

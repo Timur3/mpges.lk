@@ -30,9 +30,6 @@ class ContractsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.numberContract.linesCornerRadius = 5
-        self.contractAddress.linesCornerRadius = 5
-        self.saldoContract.linesCornerRadius = 5
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

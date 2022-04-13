@@ -14,7 +14,7 @@ public struct ReceivedDataAddNewTemplateModel: Encodable, Decodable {
     let previousDate: String
     let previousReceivedData: Int
     var receivedData: Int?
-    let tariffValue: Decimal
+    let tariffValue: Double
     var date: String
     let deviceId: Int
     let razryad: Int

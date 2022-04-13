@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 
 public class TokenRequestInterceptor2: RequestInterceptor {

@@ -17,11 +17,11 @@ func formatRusCurrency(_ string: String) -> String {
     //formatter.decimalSeparator = "."
     return formatter.string(for: f)!
 }
-func formatRusCurrency(_ number: Decimal) -> String {
+func formatRusCurrency(_ number: Double) -> String {
     return formatRusCurrency("\(number)")
 }
 
-func removeFormatAndSpace(for string: String) -> Decimal {
+func removeFormatAndSpace(for string: String) -> Double {
     let text = string.replacingOccurrences(of: "₽", with: "").replacingOccurrences(of: ".", with: ",")
     let trimmedString = text.components(separatedBy: .whitespaces).joined()
     
@@ -31,7 +31,7 @@ func removeFormatAndSpace(for string: String) -> Decimal {
     formatter.numberStyle = .decimal
     
     if let number = formatter.number(from: trimmedString) {
-        let amount = number.decimalValue
+        let amount = number.doubleValue
         return amount
     }
     return 0.00

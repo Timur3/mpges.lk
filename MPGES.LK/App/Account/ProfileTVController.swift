@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ProfileTVControllerDelegate: class {
+protocol ProfileTVControllerDelegate: AnyObject {
     func navigateToFirstPage()
     func navigationChangePasswordPage()
     func navigationEmailToDeveloperPage()
@@ -16,7 +16,7 @@ protocol ProfileTVControllerDelegate: class {
     func navigationToMailSend()
 }
 
-protocol ProfileTVControllerUserDelegate: class {
+protocol ProfileTVControllerUserDelegate: AnyObject {
     func getProfile()
     func setProfile(profile: ResultModel<UserModel>)
     func saveProfile(profile: UserModel)
@@ -60,15 +60,7 @@ class ProfileTVController: CommonTableViewController {
     
     @objc func getData()
     {
-        //skeletonView
-        showSkeleton()
         self.getProfile()
-    }
-    
-    func showSkeleton(){
-        self.emailTextField.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-        self.nameTextField.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-        self.mobileTextField.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }
     
     func setUpLayout(){
@@ -192,8 +184,6 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
     
     func setProfile(profile: ResultModel<UserModel>) {
         user = profile.data
-        // stop skeletonView
-        self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }
 

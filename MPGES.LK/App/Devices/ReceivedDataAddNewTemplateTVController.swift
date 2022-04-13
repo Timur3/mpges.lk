@@ -224,8 +224,8 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     @objc func inputReceivedDataTFAction(){
         receivedDataCell.layer.borderColor = .none
         receivedDataCell.layer.borderWidth = 0
-        guard let v1 = Decimal(string: (previousReceivedDataCell.textLabel?.text)!) else { return }
-        guard let v2 = Decimal(string: receivedDataTF.text!) else { return }
+        guard let v1 = Double((previousReceivedDataCell.textLabel?.text)!) else { return }
+        guard let v2 = Double(receivedDataTF.text!) else { return }
         let volume = v2 - v1
         let itog = volume * self.model!.tariffValue
         calcCell.textLabel?.text = formatRusCurrency(itog)
