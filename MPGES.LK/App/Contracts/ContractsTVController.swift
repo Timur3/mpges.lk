@@ -55,11 +55,9 @@ class ContractsTVController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         let nib = UINib(nibName: "ContractsTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: ContractsTableViewCell.identifier)
-        
-        self.tableView.dataSource = self
+        tableView.register(nib, forCellReuseIdentifier: ContractsTableViewCell.identifier)
         self.refreshControl?.addTarget(self, action: #selector(getDataContracts), for: UIControl.Event.valueChanged)
         tableView.delegate = self
         tableView.dataSource = self

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TableViewCellViewModel: TableViewCellViewModelType {
+class TableViewCellViewModel1: TableViewCellViewModelType {
     
     private var deliveryOfInvoice: InvoiceDeliveryMethodModel
     

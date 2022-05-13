@@ -36,6 +36,15 @@ class ContractDetailsInfoCoordinator: Coordinator {
 }
 
 extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegate {
+    func navigateToPayWithTinkoffPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate) {
+        let payWithTinkoffTVController : PayWithTinkoffViewController = PayWithTinkoffViewController()
+        payWithTinkoffTVController.contractDelegate = delegate
+        payWithTinkoffTVController.model = model
+        let navPayWithTinkoffTVController: UINavigationController = UINavigationController(rootViewController: payWithTinkoffTVController)
+        navPayWithTinkoffTVController.modalPresentationStyle = .fullScreen
+        self.navigationController.present(navPayWithTinkoffTVController, animated: true, completion: nil)
+    }
+    
     
     func navigateToPayWithApplePayPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate) {
         let payWithApplePayTVController : PayWithApplePayTVController = PayWithApplePayTVController()
@@ -70,7 +79,7 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
     
     // Ппереход на страницу способы доставки квитанций
     func navigationInvoiceDevileryMethodPage(for contract: ContractModel, delegate: ContractDetailsInfoTVControllerUserDelegate) {
-        let devileryOfInvoiceTV = InvoiceDeliveryMethodsViewController(nibName: "InvoiceDeliveryMethodsViewController", bundle: nil)
+        let devileryOfInvoiceTV = InvoiceDeliveryMethodsViewController()
         devileryOfInvoiceTV.contract = contract
         devileryOfInvoiceTV.delegate = delegate
         self.navigationController.pushViewController(devileryOfInvoiceTV, animated: true)

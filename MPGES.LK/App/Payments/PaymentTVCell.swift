@@ -12,9 +12,7 @@ class PaymentTVCell: UITableViewCell {
     @IBOutlet weak var datePay: UILabel!
     @IBOutlet weak var sumPay: UILabel!
     @IBOutlet weak var cashBox: UILabel!
-    
-    static let identifier = "paymentCell"
-    
+
     func update(for pay: PaymentModel) {
         let sum: Double = (pay.summa)
         datePay.text = pay.datePay

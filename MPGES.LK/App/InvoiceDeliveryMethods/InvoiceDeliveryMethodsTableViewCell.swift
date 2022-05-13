@@ -10,15 +10,10 @@ import UIKit
 
 class InvoiceDeliveryMethodsTableViewCell: UITableViewCell {
     
-    static let identifier = "invoiceDeliveryMethodsCell"
-    
-    weak var viewModel: TableViewCellViewModelType? {
-        willSet(model) {
-            guard let model = model else { return }
-            textLabel?.text = model.textLabel
-            detailTextLabel?.text = model.detailTextLabel
-            imageView?.image = model.image
-        }
+    func update(_ model: InvoiceDeliveryMethodModel) {
+        textLabel?.text = model.devileryMethodName
+        detailTextLabel?.text = model.description
+        imageView?.image = UIImage(systemName: myImage.mail.rawValue)
     }
     
     override func awakeFromNib() {
@@ -26,6 +21,15 @@ class InvoiceDeliveryMethodsTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        detailTextLabel?.numberOfLines = 2
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

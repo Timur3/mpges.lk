@@ -10,24 +10,26 @@ import Foundation
 
 
 public class UserDataService: UserDataProtocol {
+        
+    static let shared = UserDataService()
     
     func setKey<T>(keyName: String, keyValue: T) {
         UserDefaults.standard.set(keyValue, forKey: keyName)
     }
     
-    func delToken() {
-        UserDefaults.standard.set("", forKey: "accessToken")
-        UserDefaults.standard.set("", forKey: "refreshToken")
-        UserDefaults.standard.set(false, forKey: "isAuth")
-    }
-    
-    static let shared = UserDataService()
-    
     func getKey(keyName: String) -> String? {
         return UserDefaults.standard.string(forKey: keyName)
     }
     
-    func setToken(token: String) {
+    func setEmail(_ email: String) {
+        UserDefaults.standard.set(email, forKey: "email")
+    }
+    
+    func getEmail() -> String? {
+        return UserDefaults.standard.string(forKey: "email")
+    }
+    
+    func setToken(_ token: String) {
         UserDefaults.standard.set(token, forKey: "accessToken")
     }
     
@@ -35,8 +37,7 @@ public class UserDataService: UserDataProtocol {
            return UserDefaults.standard.string(forKey: "accessToken")
     }
     
-    
-    func setRefreshToken(token: String) {
+    func setRefreshToken(_ token: String) {
         UserDefaults.standard.set(token, forKey: "refreshToken")
     }
     
@@ -44,7 +45,7 @@ public class UserDataService: UserDataProtocol {
            return UserDefaults.standard.string(forKey: "refreshToken")
     }
     
-    func setCurrentContract(contract: ContractModel) {
+    func setCurrentContract(_ contract: ContractModel) {
         UserDefaults.standard.set(contract.id, forKey: "currentContract")
     }
     
@@ -52,12 +53,19 @@ public class UserDataService: UserDataProtocol {
        return UserDefaults.standard.integer(forKey: "currentContract")
     }
     
-    func setCurrentInvoice(invoice: InvoiceModel) {
+    func setCurrentInvoice(_ invoice: InvoiceModel) {
         UserDefaults.standard.set(invoice.id, forKey: "currentInvoice")
     }
     
     func getCurrentInvoice() -> Int? {
         return UserDefaults.standard.integer(forKey: "currentInvoice")
+    }
+    
+    
+    func delToken() {
+        UserDefaults.standard.set("", forKey: "accessToken")
+        UserDefaults.standard.set("", forKey: "refreshToken")
+        UserDefaults.standard.set(false, forKey: "isAuth")
     }
     
     func delData() {

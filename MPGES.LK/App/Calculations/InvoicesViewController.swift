@@ -22,8 +22,16 @@ protocol InvoicesViewControllerUserDelegate: AnyObject {
 
 
 class InvoicesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let tableView = UITableView.init(frame: .zero, style: .insetGrouped)
     private var indexPath: IndexPath?
+    
+    public lazy var invoiceTableView: UITableView = {
+        var table = UITableView.init(frame: .zero, style: .insetGrouped)
+        table.register(InvoiceCell.self, forCellReuseIdentifier: InvoiceCell.identifier)
+        table.dataSource = self
+        table.delegate = self
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
     
     public var contractId: Int = 0
     public weak var delegate: InvoicesViewControllerDelegate?
@@ -31,7 +39,7 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, UITableView
     var invoiceList = [InvoiceModelVeiw]() {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.invoiceTableView.reloadData()
             }
         }
     }
@@ -45,14 +53,9 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func configuration(){
-        self.tableView.refreshControl = UIRefreshControl()
-        self.tableView.refreshControl?.addTarget(self, action: #selector(refreshInvoicesData), for: UIControl.Event.valueChanged)
-        
-        let nib = UINib(nibName: "InvoiceCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "invoiceCell")
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-    }   
+        self.invoiceTableView.refreshControl = UIRefreshControl()
+        self.invoiceTableView.refreshControl?.addTarget(self, action: #selector(refreshInvoicesData), for: UIControl.Event.valueChanged)
+    }
     
     @objc func refreshInvoicesData(sender: AnyObject) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -62,20 +65,21 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, UITableView
                 self.showAlert(
                     title: "Ошибка!",
                     mesg: "Неизвестная ошибка, напишите в тех. поддержку") { (UIAlertAction) in
-                    self.cancelAction()
-                }
+                        self.cancelAction()
+                    }
             }
-            self.tableView.refreshControl?.endRefreshing()
+            self.invoiceTableView.refreshControl?.endRefreshing()
         }
     }
     
     func setUpLayout(){
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        view.addSubview(invoiceTableView)
+        NSLayoutConstraint.activate([
+            invoiceTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            invoiceTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            invoiceTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 0),
+            invoiceTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+        ])
     }
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
@@ -111,7 +115,7 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
-        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        ActivityIndicatorViewForCellService.shared.showAI(cell: self.invoiceTableView.cellForRow(at: self.indexPath!)!)
         let id = "\(self.invoiceList[indexPath.section].invoices[indexPath.row].id)"
         self.showPdf(for: id)
     }
@@ -126,7 +130,7 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: InvoiceCell.identifier, for: indexPath) as! InvoiceCell
         cell.indexPath = indexPath
         cell.delegateCell = self
         cell.update(for: invoiceList[indexPath.section].invoices[indexPath.row])
@@ -160,8 +164,8 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, UITableView
 extension InvoicesViewController: InvoiceCellDelegate {
     func accessoryViewTapping(indexPath: IndexPath) {
         self.indexPath = indexPath
-        ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-
+        ActivityIndicatorViewForCellService.shared.showAI(cell: self.invoiceTableView.cellForRow(at: self.indexPath!)!)
+        
         let alert = UIAlertController(title: "Выберите действие", message: nil, preferredStyle: .actionSheet)
         let actionOpenInvoice = UIAlertAction(title: "Скачать PDF-файл", style: .default) {
             (UIAlertAction) in
@@ -180,7 +184,7 @@ extension InvoicesViewController: InvoiceCellDelegate {
         
         if UIDevice.isPad {
             if let popoverController = alert.popoverPresentationController {
-                popoverController.sourceView = self.tableView
+                popoverController.sourceView = self.invoiceTableView
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
                 popoverController.permittedArrowDirections = [];
             }
@@ -192,19 +196,19 @@ extension InvoicesViewController: InvoiceCellDelegate {
 extension InvoicesViewController: InvoicesViewControllerUserDelegate {
     func hiddenAI() {
         print("close invoice")
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.invoiceTableView.cellForRow(at: self.indexPath!)!)
     }
     
     func responseSend(result: ResultModel<String>) {
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.invoiceTableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         self.showAlert(
             title: isError ? "Ошибка!" : "Успешно!",
             mesg: result.message!) { (UIAlertAction) in
-            if !isError {
-                self.cancelAction()
+                if !isError {
+                    self.cancelAction()
+                }
             }
-        }
     }
     
     func mapToInvoicesModelView(invoices: [InvoiceModel]) -> [InvoiceModelVeiw] {

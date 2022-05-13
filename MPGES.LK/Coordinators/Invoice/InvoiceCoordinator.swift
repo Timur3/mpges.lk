@@ -19,8 +19,7 @@ class InvoiceCoordinator: Coordinator {
     }
     
     func start() {
-        let invoiceTV = InvoicesViewController(nibName: "InvoicesViewController", bundle: nil)
-        //InvoicesTableViewController = InvoicesTableViewController()
+        let invoiceTV: InvoicesViewController = InvoicesViewController()
         invoiceTV.delegate = self
         invoiceTV.contractId = contractId
         self.navigationController.pushViewController(invoiceTV, animated: true)

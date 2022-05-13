@@ -47,7 +47,7 @@ class ApiServiceWrapper {
     func removeContractBinding(model: ContractNumberModel, delegate: ContractsTVControllerUserDelegate) {
         api.requestByModel(model: model, method: MethodApi.removeContractBinding, completion: delegate.resultRemoveContractBinding(result:))
     }
-    func updateDeliveryMethod(model: UpdateDeliveryMethodModel, delegate: DeliveryMethodTVControllerDelegate) {
+    func updateDeliveryMethod(model: UpdateDeliveryMethodModel, delegate: InvoiceDeliveryMethodTVControllerDelegate) {
         api.requestByModel(model: model, method: MethodApi.updateDeliveryMethod, completion: delegate.resultOfUpdateDeliveryMethod(for:))
     }
     
@@ -145,7 +145,7 @@ class ApiServiceWrapper {
     }
     
     // получение способов доставки
-    func getDeliveryOfInvoices(delegate: DeliveryMethodTVControllerDelegate) {
+    func getDeliveryOfInvoices(delegate: InvoiceDeliveryMethodTVControllerDelegate) {
         api.requestByToken(method: MethodApi.getDeliveryOfInvoice, completion: delegate.setData(for:))
     }
     

@@ -18,7 +18,7 @@ class PaymentCoordinator: Coordinator {
     }
     
     func start() {
-        let paymentTV = PaymentsViewController(nibName: "PaymentsViewController", bundle: nil) //: PaymentsTVController = PaymentsTVController()
+        let paymentTV: PaymentsViewController = PaymentsViewController()
         paymentTV.contractId = contractId
         self.navigationController.pushViewController(paymentTV, animated: true)
     }

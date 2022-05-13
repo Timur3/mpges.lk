@@ -13,9 +13,7 @@ class ReceivedDataTVCell: UITableViewCell {
     @IBOutlet weak var receivedDataDateLabel: UILabel!
     @IBOutlet weak var tariffZoneLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
-    
-    static let identifier = "receivedDataCell"
-    
+
     func update(for receivedData: ReceivedDataModel) {
         receivedDataDateLabel.text = receivedData.date
         valueLabel.text = "\(receivedData.value) кВт/час"

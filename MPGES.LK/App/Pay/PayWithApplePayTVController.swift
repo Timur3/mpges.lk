@@ -20,16 +20,9 @@ class PayWithApplePayTVController: CommonTableViewController {
     var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }()
     var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
     
-    var accountTextField: UITextField = { getCustomTextField(placeholder: "") }()
+    var accountTextField: UITextField = { getCustomTextField(placeholder: "", keyboardType: .decimalPad) }()
     var contactTextField: UITextField = { getCustomTextField(placeholder: "") }()
-    var summaTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = ""
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.keyboardType = .decimalPad
-        //textField.
-        return textField
-    }()
+    var summaTextField: UITextField = { getCustomTextField(placeholder: "", keyboardType: .decimalPad) }()
     
     var applePayPaymentButton: PKPaymentButton = {
         let paymentButton = PKPaymentButton(paymentButtonType: .inStore, paymentButtonStyle: .whiteOutline)
@@ -201,16 +194,15 @@ extension PayWithApplePayTVController {
     }
     
     func createPaymentRequestForApplePay(sum: NSDecimalNumber) -> PKPaymentRequest {
-        let label = "ООО \"ГЭС\""
+        let label = AppConfig.shared.orgName
         
         let request = PKPaymentRequest()
-        request.merchantIdentifier = "merchant.com.oooges.lk"
-        request.supportedNetworks = [.visa, .masterCard]
+        request.merchantIdentifier = AppConfig.shared.merchantID
+        request.supportedNetworks = [.visa, .masterCard, .mir]
         request.supportedCountries = ["RU"]
         request.merchantCapabilities = .capability3DS
         request.countryCode = "RU"
         request.currencyCode = "RUB"
-        //request.billingContact =
         request.paymentSummaryItems = [PKPaymentSummaryItem(label: label, amount: sum)]
         return request
     }

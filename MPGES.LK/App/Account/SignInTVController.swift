@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol SignInTVControllerUserDelegate: class {
+public protocol SignInTVControllerUserDelegate: AnyObject {
     func authApi(model: SignInModel)
     func resultAuthApi(result: ResultModel<TokensModel>)
 }
@@ -169,7 +169,7 @@ extension SignInTVController {
         self.hideKeyboardWhenTappedAround()
         delegateUser = self
         //-- заполняем email
-        self.emailTextField.text = userDataService.getKey(keyName: "email")
+        self.emailTextField.text = userDataService.getEmail()
         self.passwordTextField.text = userDataService.getKey(keyName: "dwp")
     }
 }
@@ -181,7 +181,7 @@ extension SignInTVController: SignInTVControllerUserDelegate {
         if (self.indexPath != nil) {
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
-        userDataService.setKey(keyName: "email", keyValue: model.email)
+        userDataService.setEmail(model.email.lowercased())
         userDataService.setKey(keyName: "dwp", keyValue: model.password)
         debugPrint(model.password)
         ApiServiceWrapper.shared.authApi(model: model, delegate: self)
@@ -193,8 +193,8 @@ extension SignInTVController: SignInTVControllerUserDelegate {
             ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
         if !result.isError {
-            userDataService.setToken(token: result.data!.accessToken)
-            userDataService.setRefreshToken(token: result.data!.refreshToken)
+            userDataService.setToken(result.data!.accessToken)
+            userDataService.setRefreshToken(result.data!.refreshToken)
             userDataService.setIsAuth()
             
             self.delegate?.goToNextSceneApp()

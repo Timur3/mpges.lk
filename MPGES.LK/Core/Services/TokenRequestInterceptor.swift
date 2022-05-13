@@ -81,8 +81,8 @@ public class TokenRequestInterceptor: RequestInterceptor {
                             case let .success(value):
                                 let myResponse = try! JSONDecoder().decode(ResultModel<TokensModel>.self, from: value)
                                 if (!myResponse.isError) {
-                                    self.userDataService.setToken(token: myResponse.data!.accessToken)
-                                    self.userDataService.setRefreshToken(token: myResponse.data!.refreshToken)
+                                    self.userDataService.setToken(myResponse.data!.accessToken)
+                                    self.userDataService.setRefreshToken(myResponse.data!.refreshToken)
                                     self.userDataService.setIsAuth()
                                 } else {
                                     self.userDataService.delToken()

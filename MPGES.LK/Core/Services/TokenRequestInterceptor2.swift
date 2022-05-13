@@ -64,8 +64,8 @@ public class TokenRequestInterceptor2: RequestInterceptor {
                 let model = RefreshTokenModel(refreshToken: refToken, deviceId: device.uuidString)
                 
                 refreshToken(model: model) { (response: ResultModel<TokensModel>) in
-                    self.userDataService.setToken(token: response.data?.accessToken ?? "")
-                    self.userDataService.setRefreshToken(token: response.data?.refreshToken ?? "")
+                    self.userDataService.setToken(response.data?.accessToken ?? "")
+                    self.userDataService.setRefreshToken(response.data?.refreshToken ?? "")
                     self.userDataService.setIsAuth()
                 }
                 completion(.retry)

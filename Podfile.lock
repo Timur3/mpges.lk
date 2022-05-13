@@ -1,4 +1,7 @@
 PODS:
+  - TinkoffASDKCore (2.7.0)
+  - TinkoffASDKUI (2.7.0):
+    - TinkoffASDKCore
   - YandexMobileMetrica (4.0.0):
     - YandexMobileMetrica/Static (= 4.0.0)
   - YandexMobileMetrica/Static (4.0.0):
@@ -9,15 +12,21 @@ PODS:
     - YandexMobileMetrica/Static/Core
 
 DEPENDENCIES:
+  - TinkoffASDKCore (= 2.7.0)
+  - TinkoffASDKUI (= 2.7.0)
   - YandexMobileMetrica (= 4.0.0)
 
 SPEC REPOS:
   trunk:
+    - TinkoffASDKCore
+    - TinkoffASDKUI
     - YandexMobileMetrica
 
 SPEC CHECKSUMS:
+  TinkoffASDKCore: 096e25f7190ca4f0588291f82711f379d3eec2a4
+  TinkoffASDKUI: 22f02844f40bd51cd2b5f9a488310981519f372b
   YandexMobileMetrica: 85ba4c1a6839985d58bf45ec7f915e433525b094
 
-PODFILE CHECKSUM: 0627bb7a842c1233e71700a21a63fad8078d2209
+PODFILE CHECKSUM: 22d7b4f656fd247bea465959afab587fa76f40b7
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

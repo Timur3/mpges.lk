@@ -20,9 +20,7 @@ class DeviceTVCell: UITableViewCell {
     @IBOutlet var deviceDateCalibration: UILabel!
     @IBOutlet var deviceDateNextCalibration: UILabel!
     @IBOutlet var receivedDataAddNewButton: UIButton!
-    
-    static let identifier = "deviceCell"
-    
+
     var delegateCell: ReceivedDataAddNewDelegate?
     var index: IndexPath?
     

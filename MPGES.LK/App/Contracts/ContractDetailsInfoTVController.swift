@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import TinkoffASDKCore
+import TinkoffASDKUI
 
 protocol ContractDetailsInfoTVControllerDelegate: AnyObject {
     func navigateToBackPage()
@@ -18,6 +20,7 @@ protocol ContractDetailsInfoTVControllerDelegate: AnyObject {
     func navigateToPayWithCreditCardPage()
     func navigateToPayWithSberbankOnlinePage(model: BankPayModel)
     func navigateToPayWithApplePayPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
+    func navigateToPayWithTinkoffPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
     func navigationToResultOfPayment(for model: ResultModel<Double>)
 }
 
@@ -29,7 +32,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     var contractNumberCell: UITableViewCell = { getCustomCell(textLabel: "Номер:", imageCell: myImage.docText, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var contractDateCell: UITableViewCell = { getCustomCell(textLabel: "Дата:", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var contractorCell: UITableViewCell = { getCustomCell(textLabel: "Контрагент:", imageCell: myImage.person, textAlign: .left, accessoryType: .disclosureIndicator) }()
-
+    
     // Отображение баланса
     var contractSaldoCell: UITableViewCell = { getCustomCell(textLabel: "Баланс:", imageCell: myImage.rub, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var saldoSumLabel: UILabel = { getCustomForContractLabel(text: "000000.00") }()
@@ -150,7 +153,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        
+            
         case 0:
             switch indexPath.row {
             case 0:
@@ -269,7 +272,7 @@ extension ContractDetailsInfoTVController {
         
         if let icon = appleLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 32)) {
             actionApplePay.setValue(icon, forKey: "image")
-            }
+        }
         
         let actionSberBank = UIAlertAction(title: "Сбербанк Онлайн", style: .default) {
             (UIAlertAction) in
@@ -278,12 +281,23 @@ extension ContractDetailsInfoTVController {
         let sberLogoImage = UIImage(named: myImage.sberLogo.rawValue)
         if let icon = sberLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 29)) {
             actionSberBank.setValue(icon, forKey: "image")
-            }
-
+        }
+        
+        let actionOthersBank = UIAlertAction(title: "Оплата картой", style: .default) {
+            (UIAlertAction) in
+            self.paymentOthersBank()
+        }
+        
+        /*let bankLogoImage = UIImage(systemName: "creditcard")
+         if let icon = bankLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 29)) {
+         actionOthersBank.setValue(icon, forKey: "image")
+         }*/
+        
+        
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alertController.addAction(actionApplePay)
-        // alert.addAction(actionOthersBank)
         alertController.addAction(actionSberBank)
+        alertController.addAction(actionOthersBank)
         alertController.addAction(actionCancel)
         
         if UIDevice.isPad {
@@ -299,20 +313,28 @@ extension ContractDetailsInfoTVController {
     }
     
     func goToApplePayPage() {
-        var sum = self.saldoSumLabel.text
-        if (self.contractStatusInfoModel?.id == 2) {
-            sum = formatRusCurrency(0.00)
-        }
-        
-        let model = BankPayModel(contractId: self.contractModel!.id, contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "", summa: sum!)
+        let model = getBankPayModel()
         self.delegate?.navigateToPayWithApplePayPage(model: model, delegate: self)
+    }
+    
+    func paymentOthersBank() {
+        let model = getBankPayModel()
+        self.delegate?.navigateToPayWithTinkoffPage(model: model, delegate: self)
     }
     
     func goToSberbankOnlinePage()
     {
-        let model = BankPayModel(
-            contractId: self.contractModel!.id, contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getKey(keyName: "email") ?? "", summa: self.saldoSumLabel.text!)
+        let model = getBankPayModel()
         self.delegate?.navigateToPayWithSberbankOnlinePage(model: model)
+    }
+    
+    private func getBankPayModel() -> BankPayModel {
+        var sum = self.saldoSumLabel.text
+        if (self.contractStatusInfoModel?.id == 2) {
+            sum = formatRusCurrency(0.00)
+        }
+        return BankPayModel(
+            contractId: self.contractModel!.id, contractNumber: self.contractModel!.number, emailOrMobile: UserDataService.shared.getEmail() ?? "", summa: sum!)
     }
     
     private func configuration() {

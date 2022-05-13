@@ -7,4 +7,6 @@ target 'mpges.lk' do
 
   # Pods for mpges.lk
 	pod 'YandexMobileMetrica', '4.0.0'
+	pod 'TinkoffASDKCore', '2.7.0'
+	pod 'TinkoffASDKUI', '2.7.0'
 end

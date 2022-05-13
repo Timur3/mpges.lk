@@ -17,7 +17,17 @@ protocol PaymentsViewControllerUserDelegate {
 }
 
 class PaymentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let tableView = UITableView.init(frame: .zero, style: .insetGrouped)
+    private lazy var paymentTableView: UITableView = {
+        var table = UITableView.init(frame: .zero, style: .insetGrouped)
+        let nib = UINib(nibName: PaymentTVCell.identifier, bundle: nil)
+        table.register(nib, forCellReuseIdentifier: PaymentTVCell.identifier)
+        
+        table.dataSource = self
+        table.delegate = self
+        table.refreshControl = UIRefreshControl()
+        table.refreshControl?.addTarget(self, action: #selector(getPayments), for: UIControl.Event.valueChanged)
+        return table
+    }()
     
     private var tempPayments = [PaymentModel]()
     private var searchBarIsEmpty: Bool {
@@ -30,7 +40,7 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, UITableView
     var paymentsList = [PaymentsModelVeiw]() {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.paymentTableView.reloadData()
             }
         }
     }
@@ -48,26 +58,18 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, UITableView
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Введите сумму для поиска"
         definesPresentationContext = true
+        navigationItem.searchController = searchController
         
-        let nib = UINib(nibName: "PaymentTVCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "paymentCell")
-        
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.refreshControl = UIRefreshControl()
-        self.tableView.refreshControl?.addTarget(self, action: #selector(getPayments), for: UIControl.Event.valueChanged)
-        
-        self.view.backgroundColor = self.tableView.backgroundColor
+        self.view.backgroundColor = self.paymentTableView.backgroundColor
     }
     
     func setUpLayout(){
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        navigationItem.searchController = searchController
+        view.addSubview(paymentTableView)
+        paymentTableView.translatesAutoresizingMaskIntoConstraints = false
+        paymentTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        paymentTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        paymentTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        paymentTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
@@ -124,7 +126,7 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
+        paymentTableView.deselectRow(at: indexPath, animated: true)
         let pay = paymentsList[indexPath.section].payments[indexPath.row]
         ApiServiceWrapper.shared.getReceiptUrl(id: pay.id, delegate: self)
     }
@@ -146,46 +148,46 @@ extension PaymentsViewController: PaymentsViewControllerUserDelegate {
             self.showAlert(
                 title: "Ошибка",
                 mesg: model.message!) { (UIAlertAction) in
-                print(model.message as Any)
-            }
+                    print(model.message as Any)
+                }
         }
     }
-
-@objc func getPayments() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-        let access = ApiService.Connectivity.isConnectedToInternet
-        if access {
-            print("refresh")
-            ApiServiceWrapper.shared.getPaymentsByContractId(id: self.contractId, delegate: self)
-        } else {
-            let msg = "Нет соединения с интернетом, попробуйте выполнить запрос позже"
-            self.showAlert(
-                title: "Ошибка",
-                mesg: msg) { (UIAlertAction) in
-                print(msg as Any)
+    
+    @objc func getPayments() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let access = ApiService.Connectivity.isConnectedToInternet
+            if access {
+                print("refresh")
+                ApiServiceWrapper.shared.getPaymentsByContractId(id: self.contractId, delegate: self)
+            } else {
+                let msg = "Нет соединения с интернетом, попробуйте выполнить запрос позже"
+                self.showAlert(
+                    title: "Ошибка",
+                    mesg: msg) { (UIAlertAction) in
+                        print(msg as Any)
+                    }
             }
+            self.paymentTableView.refreshControl?.endRefreshing()
         }
-        self.tableView.refreshControl?.endRefreshing()
     }
-}
-
-func mapToPaymentsModelView(payments: [PaymentModel]) -> [PaymentsModelVeiw] {
-    var res = [PaymentsModelVeiw]()
-    let models = payments.groupBy { $0.payYear() }
-    for mod in models{
-        let payVM = PaymentsModelVeiw(year: mod.key, payments: mod.value as [PaymentModel])
-        res.append(payVM)
+    
+    func mapToPaymentsModelView(payments: [PaymentModel]) -> [PaymentsModelVeiw] {
+        var res = [PaymentsModelVeiw]()
+        let models = payments.groupBy { $0.payYear() }
+        for mod in models{
+            let payVM = PaymentsModelVeiw(year: mod.key, payments: mod.value as [PaymentModel])
+            res.append(payVM)
+        }
+        return res.sorted(by: { $0.year > $1.year })
     }
-    return res.sorted(by: { $0.year > $1.year })
-}
-
-func setPayments(payments: ResultModel<[PaymentModel]>) {
-    // todo доделать получение данных из realm
-    let model = mapToPaymentsModelView(payments: payments.data!)
-    paymentsList = model
-    // для поиска
-    tempPayments = payments.data!
-}
+    
+    func setPayments(payments: ResultModel<[PaymentModel]>) {
+        // todo доделать получение данных из realm
+        let model = mapToPaymentsModelView(payments: payments.data!)
+        paymentsList = model
+        // для поиска
+        tempPayments = payments.data!
+    }
 }
 // MARK: - SEARCH
 extension PaymentsViewController: UISearchResultsUpdating {

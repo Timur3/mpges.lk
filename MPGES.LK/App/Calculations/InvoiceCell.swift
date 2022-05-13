@@ -15,7 +15,6 @@ protocol InvoiceCellDelegate {
 class InvoiceCell: UITableViewCell {
     public var delegateCell: InvoiceCellDelegate?
     public var indexPath: IndexPath?
-    static let identifier = "invoiceCell"
 
     func update(for invoice: InvoiceModel) {
         textLabel!.text = invoice.month?.name
@@ -32,7 +31,16 @@ class InvoiceCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        self.accessoryType = .detailButton
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-public protocol ReceivedDataAddNewTemplateTVControllerDelegate: class {
+public protocol ReceivedDataAddNewTemplateTVControllerDelegate: AnyObject {
     func resultOfSending(result: ResultModel<String>)
 }
 
