@@ -63,11 +63,7 @@ class FirstTVController: CenterContentAndCommonTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch section {
-        case 0:
-            return 1
-        case 1:
-            return 1
-        case 2:
+        case 0, 1, 2:
             return 1
         default:
             fatalError()

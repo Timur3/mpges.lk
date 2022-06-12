@@ -11,7 +11,7 @@ import UIKit
 
 enum ShakeDirection: Int {
     case horizontal = 0, vertical
-};
+}
 
 extension UITextField {
     func shake(times: Int, delta: CGFloat) {

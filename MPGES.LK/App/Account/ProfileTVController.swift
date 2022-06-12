@@ -24,10 +24,11 @@ protocol ProfileTVControllerUserDelegate: AnyObject {
 }
 
 class ProfileTVController: CommonTableViewController {
-    var sections: [String] {["Мои данные", "О программе", "Прочее"]}
+    var sections: [String] {["Мои данные", "О программе", "Прочее", ""]}
     
     public weak var delegate: ProfileTVControllerDelegate?
     
+    var deleteAccountCell: UITableViewCell { getCustomCell(textLabel: "Удалить аккаунт", imageCell: myImage.deleted, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
     var exitCell: UITableViewCell { getCustomCell(textLabel: "Выйти", imageCell: myImage.power, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
     var passChange: UITableViewCell { getCustomCell(textLabel: "Изменить пароль", imageCell: myImage.edit, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
     let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
@@ -86,10 +87,10 @@ class ProfileTVController: CommonTableViewController {
         switch section {
         case 0:
             return 4
-        case 1:
+        case 1, 2:
             return 2
-        case 2:
-            return 2
+        case 3:
+            return 1
         default:
             fatalError()
         }
@@ -128,6 +129,13 @@ class ProfileTVController: CommonTableViewController {
             default:
                 fatalError()
             }
+        case 3:
+            switch indexPath.row {
+            case 0:
+                return deleteAccountCell
+            default:
+                fatalError()
+            }
         default:
             fatalError()
         }
@@ -162,6 +170,9 @@ class ProfileTVController: CommonTableViewController {
         }
         if indexPath.section == 2 && indexPath.row == 1 {
             alertSheetExitShow()
+        }
+        if indexPath.section == 3 && indexPath.row == 0 {
+            alertSheetDeletedAccountShow()
         }
     }
 }
@@ -210,6 +221,13 @@ extension ProfileTVController {
     func alertSheetExitShow(){
         self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", handlerYes: { (UIAlertAction) in
             UserDataService.shared.delToken()
+            self.delegate?.navigateToFirstPage()
+        })
+    }
+    
+    func alertSheetDeletedAccountShow(){
+        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите удалить учетную запись, без возможности восстановления?", handlerYes: { (UIAlertAction) in
+            //UserDataService.shared.delToken()
             self.delegate?.navigateToFirstPage()
         })
     }
