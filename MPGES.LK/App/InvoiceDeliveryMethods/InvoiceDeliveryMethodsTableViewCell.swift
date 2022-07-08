@@ -8,12 +8,19 @@
 
 import UIKit
 
+enum deliveryType: Int {
+    case address = 1
+    case email = 2
+    case lk = 3
+    case office = 4
+}
+
 class InvoiceDeliveryMethodsTableViewCell: UITableViewCell {
     
     func update(_ model: InvoiceDeliveryMethodModel) {
         textLabel?.text = model.devileryMethodName
-        detailTextLabel?.text = model.description
-        imageView?.image = UIImage(systemName: myImage.mail.rawValue)
+        detailTextLabel?.text = model.description        
+        imageView?.image = UIImage(systemName: getImage(model.id))
     }
     
     override func awakeFromNib() {

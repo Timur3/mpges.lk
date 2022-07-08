@@ -156,9 +156,11 @@
 		39696D78261A1A85004C9401 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39696D77261A1A85004C9401 /* GradientView.swift */; };
 		3982A0822829A60900276286 /* ButtonPayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */; };
 		3982A0842829A71500276286 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0832829A71500276286 /* UIView+Extension.swift */; };
-		3982A08C282AE00300276286 /* OfficesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3982A08B282AE00300276286 /* OfficesViewController.xib */; };
 		3982A08E282AE02100276286 /* DevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3982A08D282AE02100276286 /* DevicesViewController.xib */; };
 		3982A090282AE4FD00276286 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A08F282AE4FD00276286 /* PaymentTableViewCell.swift */; };
+		398A64DA28759E3100C5A99E /* OfficesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398A64D928759E3100C5A99E /* OfficesViewController.xib */; };
+		398A64DD28759F3600C5A99E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A64DB28759F3600C5A99E /* MapViewController.swift */; };
+		398A64DE28759F3600C5A99E /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398A64DC28759F3600C5A99E /* MapViewController.xib */; };
 		39B23990261A2345000D3345 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */; };
 		39BC47E2267E7A5C00AAD329 /* TableViewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */; };
 		39CF85C92824D925005BDCA8 /* PaymentConfigurationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */; };
@@ -332,9 +334,11 @@
 		39696D77261A1A85004C9401 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPayTableViewCell.swift; sourceTree = "<group>"; };
 		3982A0832829A71500276286 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		3982A08B282AE00300276286 /* OfficesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficesViewController.xib; sourceTree = "<group>"; };
 		3982A08D282AE02100276286 /* DevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DevicesViewController.xib; sourceTree = "<group>"; };
 		3982A08F282AE4FD00276286 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
+		398A64D928759E3100C5A99E /* OfficesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OfficesViewController.xib; sourceTree = "<group>"; };
+		398A64DB28759F3600C5A99E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		398A64DC28759F3600C5A99E /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModelType.swift; sourceTree = "<group>"; };
 		39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfigurationFactory.swift; sourceTree = "<group>"; };
@@ -702,8 +706,10 @@
 		22E2870923E0C15E00453CF3 /* Offices */ = {
 			isa = PBXGroup;
 			children = (
-				3982A08B282AE00300276286 /* OfficesViewController.xib */,
 				223F8FAA241A0A8A00CDCF01 /* OfficesViewController.swift */,
+				398A64D928759E3100C5A99E /* OfficesViewController.xib */,
+				398A64DB28759F3600C5A99E /* MapViewController.swift */,
+				398A64DC28759F3600C5A99E /* MapViewController.xib */,
 			);
 			path = Offices;
 			sourceTree = "<group>";
@@ -874,7 +880,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3982A08C282AE00300276286 /* OfficesViewController.xib in Resources */,
+				398A64DA28759E3100C5A99E /* OfficesViewController.xib in Resources */,
+				398A64DE28759F3600C5A99E /* MapViewController.xib in Resources */,
 				22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */,
 				22DB7BD02530828D00F70737 /* TableViewCell.xib in Resources */,
 				228E3E8E2421397400402EF6 /* PrototypeTVCell.xib in Resources */,
@@ -1029,6 +1036,7 @@
 				2269014A244E273D00DB21F2 /* PasswordChangeTVController.swift in Sources */,
 				22F6C27723D4DE440042E740 /* AddressUnitModel.swift in Sources */,
 				2278511123CF949F007F1063 /* Shake.swift in Sources */,
+				398A64DD28759F3600C5A99E /* MapViewController.swift in Sources */,
 				220DC85A2464314F00A216B1 /* RequestBankModel.swift in Sources */,
 				22E2870423E0598A00453CF3 /* ButtonHelper.swift in Sources */,
 				223FDF8523D08A600029E547 /* DeviceModel.swift in Sources */,

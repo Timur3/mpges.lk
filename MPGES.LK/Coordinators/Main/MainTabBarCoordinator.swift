@@ -36,7 +36,7 @@ class MainTabBarCoordinator: Coordinator {
         //contractsNC.viewControllers = [contractsVC]
         
         // MARK: - Offices
-        let officesVC = OfficesViewController(nibName: "OfficesViewController", bundle: nil)
+        let officesVC = MapViewController(nibName: "MapViewController", bundle: nil)
         
         officesVC.tabBarItem = UITabBarItem(title: "Офисы", image: UIImage(systemName: "mappin.and.ellipse"), tag: 1)
         

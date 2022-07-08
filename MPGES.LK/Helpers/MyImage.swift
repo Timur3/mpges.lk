@@ -8,6 +8,22 @@
 
 import Foundation
 
+// For delivery type
+func getImage(_ id: Int) -> String {
+    guard let type = deliveryType(rawValue: id) else { return myImage.mail.rawValue }
+    
+    switch type {
+    case deliveryType.address:
+        return "mail"
+    case deliveryType.email:
+        return "at"
+    case deliveryType.lk:
+        return "network"
+    case deliveryType.office:
+        return "figure.walk"
+    }
+}
+
 enum myImage: String {
     case none = "none"
     case tag = "tag"

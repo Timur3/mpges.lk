@@ -31,7 +31,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         print("Selected \(viewController.tabBarItem.tag)")
         if (viewController.tabBarItem.tag == 1)
         {
-            let v = viewController as! OfficesViewController
+            let v = viewController as! MapViewController
             //v.startPosition()
         }
     }

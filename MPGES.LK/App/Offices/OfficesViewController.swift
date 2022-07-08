@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 protocol OfficesViewControllerDelegate: AnyObject {
     func setOffices(for model: ResultModel<[OfficeMarkModel]>)
@@ -21,36 +22,47 @@ class OfficesViewController: UIViewController, MKMapViewDelegate {
     
     //func onObjectUpdated(with view: MKUserLocationView, event: MKObjectEvent) {}
     
-    @IBOutlet weak var mapView: MKMapView!
+    private lazy var mapView: MKMapView = {
+        let map = MKMapView()
+        return map
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         //self.title = "Офисы"
         // Do any additional setup after loading the view.
-        //createMap()
+        createMap()
         //getOffices()
-        let startPoint = CLLocation(latitude: 61.008456, longitude: 69.020479)
+        
+    }
+    
+    private func setup() {
+        view.addSubview(mapView)
+        
+        NSLayoutConstraint.activate([
+            mapView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            mapView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            mapView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+            
+        ])
     }
     
     override func show(_ vc: UIViewController, sender: Any?) {
         print("show")
     }
-//
-//    func createMap() {
-//        let mapKit = MKMapKit.sharedInstance()
-//
-//        let userLocationLayer = mapKit.createUserLocationLayer(with: mapView.mapWindow)
-//
-//        mapView.mapWindow.map.isRotateGesturesEnabled = false
-//
-//        userLocationLayer.setVisibleWithOn(true)
-//        userLocationLayer.isHeadingEnabled = true
-//
-//        userLocationLayer.setObjectListenerWith(self)
-//
-//        startPosition()
-//    }
+
+    func createMap(regionRadius: CLLocationDistance = 1000) {
+        let initialLocation = CLLocation(latitude: 61.008456, longitude: 69.020479)
+        let coordinateRegion = MKCoordinateRegion(
+            center: initialLocation.coordinate,
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius)
+        
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
 //
 //    func startPosition() {
 //        mapView.mapWindow.map.move(

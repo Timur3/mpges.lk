@@ -46,16 +46,21 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     var paymentsOfContract: UITableViewCell { getCustomCell(textLabel: "Платежи", imageCell: myImage.rub, textAlign: .left, accessoryType: .disclosureIndicator) }
     var calculationsOfContract: UITableViewCell { getCustomCell(textLabel: "Начисления", imageCell: myImage.calc, textAlign: .left, accessoryType: .disclosureIndicator) }
     var devicesOfContract: UITableViewCell { getCustomCell(textLabel: "Приборы учета", imageCell: myImage.gauge, textAlign: .left, accessoryType: .disclosureIndicator) }
-    var mailOfContract: UITableViewCell { getCustomCell(textLabel: (contractModel?.invoiceDeliveryMethod.devileryMethodName ?? "..."), imageCell: myImage.mail, textAlign: .left, accessoryType: .disclosureIndicator)}
+    var mailOfContract: UITableViewCell { getCustomCell(textLabel: (contractModel?.invoiceDeliveryMethod.devileryMethodName ?? "..."), imageCell: myImage.none, textAlign: .left, accessoryType: .disclosureIndicator, customImage: getImage(contractModel?.invoiceDeliveryMethodId ?? 0))}
     
     public var contractModel: ContractModel? {
         didSet {
             DispatchQueue.main.async {
-                self.contractNumberLabel.text = "\(self.contractModel!.id)"
-                self.accountLabel.text = self.contractModel!.number
-                self.contractDateLabel.text = self.contractModel!.dateRegister
-                self.contractorLabel.text = self.contractModel!.contractor.name + " " + self.contractModel!.contractor.middleName!.prefix(1) + ". " + self.contractModel!.contractor.family.prefix(1) + "."
-                ApiServiceWrapper.shared.getContractStatus(id: self.contractModel!.id, delegate: self)
+                guard let contractModel = self.contractModel else { return }
+                
+                self.contractNumberLabel.text = "\(contractModel.id)"
+                self.accountLabel.text = contractModel.number
+                self.contractDateLabel.text = contractModel.dateRegister
+                self.contractorLabel.text =
+                ("\(contractModel.contractor.name) \(contractModel.contractor.middleName?.prefix(1) ?? "_"). \(contractModel.contractor.family.prefix(1)).")
+                ApiServiceWrapper.shared.getContractStatus(id: contractModel.id, delegate: self)
+                //self.mailOfContract.imageView?.image = UIImage(systemName: getImage(contractModel.invoiceDeliveryMethodId))
+                
                 self.tableView.reloadData()
             }
         }
@@ -78,20 +83,21 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     }
     
     func setUpLayout(){
+        let inset: CGFloat = 50
         contractSaldoCell.contentView.addSubview(saldoSumLabel)
-        saldoSumLabel.rightAnchor.constraint(equalTo: contractSaldoCell.rightAnchor, constant: -50).isActive = true
+        saldoSumLabel.rightAnchor.constraint(equalTo: contractSaldoCell.rightAnchor, constant: -inset).isActive = true
         saldoSumLabel.centerYAnchor.constraint(equalTo: contractSaldoCell.centerYAnchor).isActive = true
         contractorCell.contentView.addSubview(contractorLabel)
-        contractorLabel.rightAnchor.constraint(equalTo: contractorCell.rightAnchor, constant: -50).isActive = true
+        contractorLabel.rightAnchor.constraint(equalTo: contractorCell.rightAnchor, constant: -inset).isActive = true
         contractorLabel.centerYAnchor.constraint(equalTo: contractorCell.centerYAnchor).isActive = true
         contractDateCell.contentView.addSubview(contractDateLabel)
-        contractDateLabel.rightAnchor.constraint(equalTo: contractDateCell.rightAnchor, constant: -50).isActive = true
+        contractDateLabel.rightAnchor.constraint(equalTo: contractDateCell.rightAnchor, constant: -inset).isActive = true
         contractDateLabel.centerYAnchor.constraint(equalTo: contractDateCell.centerYAnchor).isActive = true
         accountCell.contentView.addSubview(accountLabel)
-        accountLabel.rightAnchor.constraint(equalTo: accountCell.rightAnchor, constant: -50).isActive = true
+        accountLabel.rightAnchor.constraint(equalTo: accountCell.rightAnchor, constant: -inset).isActive = true
         accountLabel.centerYAnchor.constraint(equalTo: accountCell.centerYAnchor).isActive = true
         contractNumberCell.contentView.addSubview(contractNumberLabel)
-        contractNumberLabel.rightAnchor.constraint(equalTo: contractNumberCell.rightAnchor, constant: -50).isActive = true
+        contractNumberLabel.rightAnchor.constraint(equalTo: contractNumberCell.rightAnchor, constant: -inset).isActive = true
         contractNumberLabel.centerYAnchor.constraint(equalTo: contractNumberCell.centerYAnchor).isActive = true
     }
     

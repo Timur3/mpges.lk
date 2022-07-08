@@ -7,7 +7,7 @@
 //
 
 import UIKit
-protocol ReceivedDataAddNewTemplateTVControllerOneStepDelegate: class {
+protocol ReceivedDataAddNewTemplateTVControllerOneStepDelegate: AnyObject {
     func setData(model: ResultModel<[ReceivedDataAddNewTemplateModel]>)
 }
 
@@ -43,11 +43,7 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTable
         configuration()
         setUpLayout()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
+
     func setUpLayout(){
         ReceivedDataDateCell.addSubview(datePicker)
         datePicker.leadingAnchor.constraint(equalTo: ReceivedDataDateCell.leadingAnchor, constant: 50).isActive = true
