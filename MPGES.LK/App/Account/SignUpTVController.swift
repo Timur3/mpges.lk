@@ -39,7 +39,7 @@ class SignUpTVController: CommonTableViewController {
     var user: UserModel?
     
     override func viewDidLoad() {
-        self.navigationItem.title = "Новый пользователь"
+        self.navigationItem.title = NSLocalizedString("title.signUp", comment: "Новый пользователь")
         super.viewDidLoad()
         configuration()
         setUpLayout()

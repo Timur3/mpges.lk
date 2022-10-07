@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  mpges.lk
+
+  Created by Timur on 15.07.2022.
+  Copyright © 2022 ChalimovTimur. All rights reserved.
+*/
+
+//title
+"title.main" = "Main";
+"title.signUp" = "Sign up";
+"title.signIn" = "Sign in";
+"title.paymentByCard" = "Payment by card";
+"title.paymentCardList" = "Saved cards";
+"title.cardAdd" = "Card Add";
+
+//button
+"button.signIn" = "Sign in";
+"button.signUp" = "Sign up";

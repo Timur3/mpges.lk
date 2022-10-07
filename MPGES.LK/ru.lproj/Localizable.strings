@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  mpges.lk
+
+  Created by Timur on 15.07.2022.
+  Copyright © 2022 ChalimovTimur. All rights reserved.
+*/
+
+//title
+"title.main" = "Личный кабинет";
+"title.signUp" = "Новый пользователь";
+"title.signIn" = "Войти";
+"title.paymentByCard" = "Оплата картой";
+"title.paymentCardList" = "Список карт";
+"title.cardAdd" = "Добавить карту";
+
+//button
+"button.signIn" = "Войти";
+"button.sgnUp" = "Зарегистрироваться";

@@ -52,7 +52,7 @@ class PayWithTinkoffViewController: CommonTableViewController {
         }
     }
     override func viewDidLoad() {
-        self.navigationItem.title = "Оплата картой"
+        self.navigationItem.title = NSLocalizedString("title.paymentByCard", comment: "Оплата картой")
         super.viewDidLoad()
         configuration()
         setUpLayout()
@@ -62,10 +62,46 @@ class PayWithTinkoffViewController: CommonTableViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(ButtonPayTableViewCell.self, forCellReuseIdentifier: ButtonPayTableViewCell.identifier)
+        // close button
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
+        // card button
+        let cardBtn = getCustomUIBarButtonItem(image: "creditcard.fill", target: self, action: #selector(showCards))
+        self.navigationItem.leftBarButtonItems = [cardBtn]
+        
         self.summaTextField.addTarget(self, action: #selector(inputSummaTFAction), for: .editingDidEnd)
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    @objc func showCards() {
+        let credentional = AcquiringSdkCredential(terminalKey: AppConfig.shared.paymentTerminalKey,
+                                                  publicKey: AppConfig.shared.paymentPublicKey)
+        
+        let acquiringSDKConfiguration = AcquiringSdkConfiguration(credential: credentional, server: .prod)
+        acquiringSDKConfiguration.logger = AcquiringLoggerDefault()
+        
+        guard let customerKey = UserDataService.shared.getEmail() else { return }
+        let cardListViewConfigration = AcquiringViewConfiguration()
+        cardListViewConfigration.viewTitle = NSLocalizedString("title.paymentCardList", comment: "Список карт")
+        
+        if AppConfig.shared.acquiringSDK {
+            cardListViewConfigration.alertViewHelper = self
+        }
+        
+        if let sdk = try? AcquiringUISDK(configuration: acquiringSDKConfiguration) {
+            
+            sdk.setupCardListDataProvider(for: customerKey)
+            
+            // открыть экран сиска карт
+            sdk.presentCardList(on: self, customerKey: customerKey, configuration: cardListViewConfigration)
+            // или открыть экран добавлени карты
+            // addCardView(sdk, customerKey, cardListViewConfigration)
+            
+            sdk.addCardNeedSetCheckTypeHandler = {
+                AppConfig.shared.addCardChekType
+            }
+        }
+        
     }
     
     func setUpLayout(){
@@ -176,19 +212,18 @@ extension PayWithTinkoffViewController {
         
         let acquiringSDKConfiguration = AcquiringSdkConfiguration(credential: credentional)
         acquiringSDKConfiguration.logger = AcquiringLoggerDefault()
-        acquiringSDKConfiguration.fpsEnabled = true
+        acquiringSDKConfiguration.fpsEnabled = false
         
         guard let paymentData = createPaymentData() else { return }
-        if let sdk = try? AcquiringUISDK(configuration: acquiringSDKConfiguration,
-                                         style: TinkoffASDKUI.DefaultStyle()) {
-            sdk.presentPaymentView(on: self,
-                                   acquiringPaymentStageConfiguration: .init(
-                                    paymentStage: .`init`(paymentData: paymentData)
-                                   ),
+        if let sdk = try? AcquiringUISDK(configuration: acquiringSDKConfiguration, style: TinkoffASDKUI.DefaultStyle()) {
+            /*sdk.presentPaymentView(on: self, acquiringPaymentStageConfiguration: .init(
+                paymentStage: .`init`(paymentData: paymentData)
+            ),
                                    configuration: acquiringViewConfiguration(),
                                    tinkoffPayDelegate: nil) { [weak self] response in
+                
                 self?.responseReviewing(response)
-            }
+            }*/
         }
         
     }
@@ -198,43 +233,43 @@ extension PayWithTinkoffViewController {
             var message = NSLocalizedString("text.paymentStatusAmount", comment: "Покупка на сумму")
             message.append(" \(Utils.formatAmount(result.amount)) ")
             
-            /* if result.status == .cancelled {
-             message.append(NSLocalizedString("text.paymentStatusCancel", comment: "отменена"))
-             } else {
-             message.append(" ")
-             message.append(NSLocalizedString("text.paymentStatusSuccess", comment: "paymentStatusSuccess"))
-             message.append("\npaymentId = \(result.paymentId)")
-             }
-             
-             if AppSetting.shared.acquiring {
-             sdk.presentAlertView(on: self, title: message, icon: result.status == .cancelled ? .error : .success)
-             } else {*/
-            let alertView = UIAlertController(title: "Tinkoff Acquaring", message: message, preferredStyle: .alert)
-            alertView.addAction(UIAlertAction(title: "ОК", style: .default, handler: nil))
-            present(alertView, animated: true, completion: nil)
-            //}
+            if result.status == .cancelled {
+                message.append(NSLocalizedString("text.paymentStatusCancel", comment: "отменена"))
+            } else {
+                message.append(" ")
+                message.append(NSLocalizedString("text.paymentStatusSuccess", comment: "paymentStatusSuccess"))
+                message.append("\npaymentId = \(result.paymentId)")
+            }
+            
+            if AppConfig.shared.acquiringSDK {
+                sdk.presentAlertView(on: self, title: message, icon: result.status == .cancelled ? .error : .success)
+            } else {
+                let alertView = UIAlertController(title: "Tinkoff Acquaring", message: message, preferredStyle: .alert)
+                alertView.addAction(UIAlertAction(title: "ОК", style: .default, handler: nil))
+                present(alertView, animated: true, completion: nil)
+            }
             
         case let .failure(error):
-            /*if AppSetting.shared.acquiring {
-             sdk.presentAlertView(on: self, title: error.localizedDescription, icon: .error)
-             } else {*/
-            let alertView = UIAlertController(title: "Tinkoff Acquaring", message: error.localizedDescription, preferredStyle: .alert)
-            alertView.addAction(UIAlertAction(title: "ОК", style: .default, handler: nil))
-            present(alertView, animated: true, completion: nil)
-            //}
+            if AppConfig.shared.acquiringSDK {
+                sdk.presentAlertView(on: self, title: error.localizedDescription, icon: .error)
+            } else {
+                let alertView = UIAlertController(title: "Tinkoff Acquaring", message: error.localizedDescription, preferredStyle: .alert)
+                alertView.addAction(UIAlertAction(title: "ОК", style: .default, handler: nil))
+                present(alertView, animated: true, completion: nil)
+            }
         }
     }
     
     private func createPaymentData() -> PaymentInitData? {
-        guard let model = model else { return nil }
+        guard model != nil else { return nil }
         let customerEmail = UserDataService.shared.getEmail()
-        let summaPay: NSDecimalNumber = NSDecimalNumber(value: removeFormatAndSpace(for: model.summa))
+        let summaPay: NSDecimalNumber = NSDecimalNumber(value: removeFormatAndSpace(for: summaTextField.text ?? "500,00 ₽"))
         let randomOrderId = String(Int64(arc4random()))
         var paymentData = PaymentInitData(amount: summaPay, orderId: randomOrderId, customerKey: customerEmail)
         paymentData.description = "Краткое описние товара"
         
         var receiptItems: [Item] = []
-        let item = Item(amount: 1,
+        let item = Item(amount: summaPay.int64Value * 100,
                         price: summaPay.int64Value * 100,
                         name: "Потребленная электроэнергия",
                         tax: .vat20)
@@ -243,7 +278,7 @@ extension PayWithTinkoffViewController {
         paymentData.receipt = Receipt(shopCode: nil,
                                       email: customerEmail,
                                       taxation: .osn,
-                                      phone: "+79876543210",
+                                      phone: "",
                                       items: receiptItems,
                                       agentData: nil,
                                       supplierInfo: nil,
@@ -257,7 +292,7 @@ extension PayWithTinkoffViewController {
         
         let title = NSAttributedString(string: "Оплата",
                                        attributes: [.font: UIFont.boldSystemFont(ofSize: 22)])
-        let amountTitle = NSAttributedString(string: "на сумму " + (model?.summa ?? "0.00 ₽"),
+        let amountTitle = NSAttributedString(string: "на сумму " + (summaTextField.text ?? "500,00 ₽"),
                                              attributes: [.font: UIFont.systemFont(ofSize: 17)])
         let detailsFieldTitle = NSAttributedString(string: "Потребленная электроэнергия",
                                                    attributes: [
@@ -270,26 +305,24 @@ extension PayWithTinkoffViewController {
     
     private func presentPaymentView(paymentData: PaymentInitData, viewConfigration: AcquiringViewConfiguration) {
         /*sdk.presentPaymentView(on: self,
-         acquiringPaymentStageConfiguration: .init(
-         paymentStage: .`init`(paymentData: paymentData)
-         ),
-         configuration: viewConfigration,
-         tinkoffPayDelegate: nil) { [weak self] response in
-         self?.responseReviewing(response)
-         }*/
+                               acquiringPaymentStageConfiguration: .init(
+                                from: .`init`(paymentData: paymentData)
+                               ),
+                               configuration: viewConfigration,
+                               tinkoffPayDelegate: nil) { [weak self] response in
+            self?.responseReviewing(response)
+        }*/
     }
-    
-    func goToPayCardList(){
-        let credentional = AcquiringSdkCredential(terminalKey: AppConfig.shared.paymentTerminalKeyDEMO, publicKey: AppConfig.shared.paymentPublicKey)
+}
+
+//MARK: - AcquiringAlertViewProtocol
+extension PayWithTinkoffViewController: AcquiringAlertViewProtocol {
+    func presentAlertView(_ title: String?, message: String?, dismissCompletion: (() -> Void)?) -> UIViewController? {
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "ок", style: .default, handler: { _ in
+            dismissCompletion?()
+        }))
         
-        let acquiringSDKConfiguration = AcquiringSdkConfiguration(credential: credentional, server: .test)
-        //let acquiringUISDKConfiguration = AcquiringUISDKConfiguration(fpsEnabled: true)
-        acquiringSDKConfiguration.logger = AcquiringLoggerDefault()
-        
-        if let sdk = try? AcquiringUISDK.init(configuration: acquiringSDKConfiguration) {
-            
-            sdk.presentCardList(on: self, customerKey: UserDataService.shared.getEmail()!, configuration: acquiringViewConfiguration())
-        }
+        return alertView
     }
-    
 }

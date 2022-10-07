@@ -15,9 +15,9 @@ class FirstTVController: CenterContentAndCommonTableViewController {
     var sections: [String?] {[nil, nil, nil]}
     
     var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.none, textAlign: .left, accessoryType: .none) }()
-    var inputCell: UITableViewCell { getCustomCell(textLabel: "Войти", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
+    var inputCell: UITableViewCell { getCustomCell(textLabel: NSLocalizedString("button.signIn", comment: "Войти"), imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
-    var signUpCell: UITableViewCell { getCustomCell(textLabel: "Регистрация", imageCell: .none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
+    var signUpCell: UITableViewCell { getCustomCell(textLabel: NSLocalizedString("button.signUp", comment: "Зарегистрироваться"), imageCell: .none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
     
     var logoImgView: UIImageView = {
         let img = UIImageView()
@@ -28,7 +28,7 @@ class FirstTVController: CenterContentAndCommonTableViewController {
     }()
     
     override func viewDidLoad() {
-        self.navigationItem.title = "Главная"
+        self.navigationItem.title = NSLocalizedString("title.main", comment: "Главная")
         super.viewDidLoad()
         configuration()
         setUpLayout()

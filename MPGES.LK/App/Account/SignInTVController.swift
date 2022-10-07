@@ -22,7 +22,7 @@ class SignInTVController: CenterContentAndCommonTableViewController {
     
     var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
     var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
-    var inputCell: UITableViewCell { getCustomCell(textLabel: "Войти", imageCell: myImage.none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
+    var inputCell: UITableViewCell { getCustomCell(textLabel: NSLocalizedString("button.signIn", comment: "Войти"), imageCell: myImage.none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     var passwordRecoveryCell: UITableViewCell { getCustomCell(textLabel: "Забыли пароль", imageCell: myImage.none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
     
     var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com") }()
@@ -37,7 +37,7 @@ class SignInTVController: CenterContentAndCommonTableViewController {
         }
     }
     override func viewDidLoad() {
-        self.navigationItem.title = "Войти"
+        self.navigationItem.title = NSLocalizedString("title.signIn", comment: "Войти")
         super.viewDidLoad()
         configuration()
         setUpLayout()
