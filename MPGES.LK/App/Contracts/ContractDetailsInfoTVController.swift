@@ -35,11 +35,11 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     
     // Отображение баланса
     var contractSaldoCell: UITableViewCell = { getCustomCell(textLabel: "Баланс:", imageCell: myImage.rub, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
-    var saldoSumLabel: UILabel = { getCustomForContractLabel(text: "000000.00") }()
-    var contractorLabel: UILabel = { getCustomForContractLabel(text: "Фамилия Имя") }()
-    var contractNumberLabel: UILabel = { getCustomForContractLabel(text: "8600030") }()
-    var contractDateLabel: UILabel = { getCustomForContractLabel(text: "20-02-2021") }()
-    var accountLabel: UILabel = { getCustomForContractLabel(text: "86000300004") }()
+    var saldoSumLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var contractorLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var contractNumberLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var contractDateLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var accountLabel: UILabel = { getCustomForContractLabel(text: "...") }()
     //--
     
     var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Оплатить", imageCell: myImage.creditcard, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
@@ -52,16 +52,13 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         didSet {
             DispatchQueue.main.async {
                 guard let contractModel = self.contractModel else { return }
-                
                 self.contractNumberLabel.text = "\(contractModel.id)"
                 self.accountLabel.text = contractModel.number
                 self.contractDateLabel.text = contractModel.dateRegister
-                self.contractorLabel.text =
-                ("\(contractModel.contractor.name) \(contractModel.contractor.middleName?.prefix(1) ?? "_"). \(contractModel.contractor.family.prefix(1)).")
+                self.contractorLabel.text = ("\(contractModel.contractor.name) \(contractModel.contractor.middleName?.prefix(1) ?? "_"). \(contractModel.contractor.family.prefix(1)).")
                 ApiServiceWrapper.shared.getContractStatus(id: contractModel.id, delegate: self)
-                //self.mailOfContract.imageView?.image = UIImage(systemName: getImage(contractModel.invoiceDeliveryMethodId))
-                
                 self.tableView.reloadData()
+                //self.hideLoadingIndicator()
             }
         }
     }
@@ -77,6 +74,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     override func viewDidLoad() {
         navigationItem.title = "Договор"
         super.viewDidLoad()
+        self.showLoadingIndicator()
         setUpLayout()
         configuration()
         refreshContract()
@@ -326,6 +324,7 @@ extension ContractDetailsInfoTVController {
     func paymentOthersBank() {
         let model = getBankPayModel()
         self.delegate?.navigateToPayWithTinkoffPage(model: model, delegate: self)
+        //self.delegate?.navigateToPayWithCreditCardPage()
     }
     
     func goToSberbankOnlinePage()

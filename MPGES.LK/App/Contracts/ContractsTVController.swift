@@ -72,9 +72,9 @@ class ContractsTVController: UITableViewController {
         let actionAddExistContract = UIAlertAction(title: "Добавить существующий договор", style: .default) {
             (UIAlertAction) in self.showContractAddTVPage()
         }
-        //let actionNewContract = UIAlertAction(title: "Заключить новый договор", style: .default) {
-        //  (UIAlertAction) in self.showNewContractPage()
-        //}
+        let actionNewContract = UIAlertAction(title: "Заключить новый договор", style: .default) {
+            (UIAlertAction) in self.showNewContractPage()
+        }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alert.addAction(actionAddExistContract)
         //alert.addAction(actionNewContract)
@@ -90,6 +90,9 @@ class ContractsTVController: UITableViewController {
     
     func showContractAddTVPage() {
         self.delegate?.navigationContractAddTVPage(delegate: self)
+    }
+    func showNewContractPage() {
+        //self.view.addSubview(LoadingIndicatorViewController().view)
     }
     
     override func didReceiveMemoryWarning() {

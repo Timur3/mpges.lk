@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "acquiringsdk_ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Tinkoff/AcquiringSdk_IOS.git",
+      "state" : {
+        "revision" : "c874250ec3a2ce749586702ec7efbbf910fd2b84",
+        "version" : "2.11.0"
+      }
+    },
+    {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
@@ -14,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-cocoa",
       "state" : {
-        "revision" : "7a3e25994d4d917efe30fa4496775d3f024b71b6",
-        "version" : "10.13.0"
+        "revision" : "ae4278abe1fcdcd616b410e098a744c1cc73e0bd",
+        "version" : "10.31.0"
       }
     },
     {
@@ -23,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core",
       "state" : {
-        "revision" : "9a7d09994e85b7eda8e3553b444bcfef6ec3f9ea",
-        "version" : "11.3.0"
+        "revision" : "b86d2107fec4246b55af24a3b11e00275575f808",
+        "version" : "12.9.0"
       }
     },
     {

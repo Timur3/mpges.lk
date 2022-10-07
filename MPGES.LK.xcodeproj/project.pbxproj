@@ -139,6 +139,9 @@
 		22F74D89259A2E830097AC83 /* PasswordResetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F74D88259A2E830097AC83 /* PasswordResetModel.swift */; };
 		22F91A92257EB91E00B49C78 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F91A91257EB91E00B49C78 /* SignUpModel.swift */; };
 		22F91A952581100200B49C78 /* TokensModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F91A942581100200B49C78 /* TokensModel.swift */; };
+		390206B228817FE300EBC0AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 390206B428817FE300EBC0AD /* Localizable.strings */; };
+		390CDA3E288C5D4F0065BBAF /* CardsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CDA3D288C5D4F0065BBAF /* CardsTVController.swift */; };
+		39171B402878455400535BEE /* LoadingIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39171B3F2878455400535BEE /* LoadingIndicatorViewController.swift */; };
 		392F836325F7E3C500040978 /* TokenRequestInterceptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */; };
 		39377AA1267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */; };
 		3938D1AA25D0615A00A470C1 /* InvoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938D1A825D0615A00A470C1 /* InvoicesViewController.swift */; };
@@ -154,6 +157,8 @@
 		3962A83826DCD94A0028277D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 3962A83726DCD94A0028277D /* SwiftKeychainWrapper */; };
 		39696D6E2612F1D6004C9401 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 39696D6D2612F1D6004C9401 /* Atomics */; };
 		39696D78261A1A85004C9401 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39696D77261A1A85004C9401 /* GradientView.swift */; };
+		397ED7CB28F04C4600F59B4C /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */; };
+		397ED7CD28F04C4600F59B4C /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */; };
 		3982A0822829A60900276286 /* ButtonPayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */; };
 		3982A0842829A71500276286 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0832829A71500276286 /* UIView+Extension.swift */; };
 		3982A08E282AE02100276286 /* DevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3982A08D282AE02100276286 /* DevicesViewController.xib */; };
@@ -162,6 +167,7 @@
 		398A64DD28759F3600C5A99E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A64DB28759F3600C5A99E /* MapViewController.swift */; };
 		398A64DE28759F3600C5A99E /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398A64DC28759F3600C5A99E /* MapViewController.xib */; };
 		39B23990261A2345000D3345 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */; };
+		39B55534288C670A000F9DFB /* CardAddTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B55533288C670A000F9DFB /* CardAddTVController.swift */; };
 		39BC47E2267E7A5C00AAD329 /* TableViewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */; };
 		39CF85C92824D925005BDCA8 /* PaymentConfigurationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */; };
 		39D18B9B25F79B81000CE4E3 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */; };
@@ -169,7 +175,6 @@
 		39F6BB6E2825A05100CB96C1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6BB6D2825A05100CB96C1 /* Utils.swift */; };
 		39F6BB702825A44100CB96C1 /* PayWithTinkoffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6BB6F2825A44100CB96C1 /* PayWithTinkoffViewController.swift */; };
 		39FC9C02267F777D00C67D19 /* TableViewCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FC9C01267F777D00C67D19 /* TableViewCellViewModelType.swift */; };
-		746C9E114F1B74E1B53ACA8B /* Pods_mpges_lk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B3A0D1FF0B638EC1DBB966 /* Pods_mpges_lk.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -322,7 +327,10 @@
 		22F74D88259A2E830097AC83 /* PasswordResetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetModel.swift; sourceTree = "<group>"; };
 		22F91A91257EB91E00B49C78 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		22F91A942581100200B49C78 /* TokensModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensModel.swift; sourceTree = "<group>"; };
-		3389704144DDC7F4CABD77F1 /* Pods-mpges.lk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.debug.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.debug.xcconfig"; sourceTree = "<group>"; };
+		390206B328817FE300EBC0AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		390206B528817FE400EBC0AD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		390CDA3D288C5D4F0065BBAF /* CardsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsTVController.swift; sourceTree = "<group>"; };
+		39171B3F2878455400535BEE /* LoadingIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorViewController.swift; sourceTree = "<group>"; };
 		392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequestInterceptor2.swift; sourceTree = "<group>"; };
 		39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDeliveryMethodsViewController.swift; sourceTree = "<group>"; };
 		3938D1A825D0615A00A470C1 /* InvoicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesViewController.swift; sourceTree = "<group>"; };
@@ -340,6 +348,7 @@
 		398A64DB28759F3600C5A99E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		398A64DC28759F3600C5A99E /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		39B55533288C670A000F9DFB /* CardAddTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddTVController.swift; sourceTree = "<group>"; };
 		39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModelType.swift; sourceTree = "<group>"; };
 		39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfigurationFactory.swift; sourceTree = "<group>"; };
 		39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
@@ -347,8 +356,6 @@
 		39F6BB6D2825A05100CB96C1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		39F6BB6F2825A44100CB96C1 /* PayWithTinkoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithTinkoffViewController.swift; sourceTree = "<group>"; };
 		39FC9C01267F777D00C67D19 /* TableViewCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModelType.swift; sourceTree = "<group>"; };
-		92B3A0D1FF0B638EC1DBB966 /* Pods_mpges_lk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpges_lk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2DDC84ECE803260BA7E7310 /* Pods-mpges.lk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpges.lk.release.xcconfig"; path = "Target Support Files/Pods-mpges.lk/Pods-mpges.lk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,13 +365,14 @@
 			files = (
 				3962A83326DCD9320028277D /* Realm in Frameworks */,
 				39696D6E2612F1D6004C9401 /* Atomics in Frameworks */,
+				397ED7CB28F04C4600F59B4C /* TinkoffASDKCore in Frameworks */,
 				3962A83526DCD9320028277D /* RealmSwift in Frameworks */,
 				39499ED426DC904E0060171C /* Alamofire in Frameworks */,
 				39E4A2E226DD29C200EE1DF8 /* MapKit.framework in Frameworks */,
 				22AF9ACF246145BC00FBB45F /* PassKit.framework in Frameworks */,
 				3962A83026DCD8220028277D /* SwiftyJSON in Frameworks */,
+				397ED7CD28F04C4600F59B4C /* TinkoffASDKUI in Frameworks */,
 				3962A83826DCD94A0028277D /* SwiftKeychainWrapper in Frameworks */,
-				746C9E114F1B74E1B53ACA8B /* Pods_mpges_lk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +415,7 @@
 				22042A07235E224D0054D4DD /* Info.plist */,
 				220429FF235E22460054D4DD /* mpges_lk.xcdatamodeld */,
 				394806222823F0EA007687EC /* AppConfig.swift */,
+				390206B428817FE300EBC0AD /* Localizable.strings */,
 			);
 			path = mpges.lk;
 			sourceTree = "<group>";
@@ -745,6 +754,7 @@
 		22F5DDA923CCE7AF000C3F32 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				390CDA3C288C5CB60065BBAF /* Card */,
 				39377A98267FC08600763627 /* InvoiceDeliveryMethods */,
 				22A2A4BF2480043C005A656A /* Contractor */,
 				22DA8972242E8763002D4D57 /* Pay */,
@@ -755,8 +765,18 @@
 				22042A11235F602F0054D4DD /* Account */,
 				2278511823CF9B4E007F1063 /* Devices */,
 				2278511523CF9763007F1063 /* Calculations */,
+				39171B3F2878455400535BEE /* LoadingIndicatorViewController.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		390CDA3C288C5CB60065BBAF /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				390CDA3D288C5D4F0065BBAF /* CardsTVController.swift */,
+				39B55533288C670A000F9DFB /* CardAddTVController.swift */,
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 		39377A98267FC08600763627 /* InvoiceDeliveryMethods */ = {
@@ -789,7 +809,6 @@
 			children = (
 				39E4A2E126DD29C200EE1DF8 /* MapKit.framework */,
 				22AF9ACE246145BC00FBB45F /* PassKit.framework */,
-				92B3A0D1FF0B638EC1DBB966 /* Pods_mpges_lk.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -797,8 +816,6 @@
 		6173BCF1E12EF137F40773C8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3389704144DDC7F4CABD77F1 /* Pods-mpges.lk.debug.xcconfig */,
-				A2DDC84ECE803260BA7E7310 /* Pods-mpges.lk.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -810,12 +827,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22042A0A235E224D0054D4DD /* Build configuration list for PBXNativeTarget "mpges.lk" */;
 			buildPhases = (
-				467BE33BF230145AEA80B5C4 /* [CP] Check Pods Manifest.lock */,
 				220429EF235E22460054D4DD /* Sources */,
 				220429F0235E22460054D4DD /* Frameworks */,
 				220429F1235E22460054D4DD /* Resources */,
 				3942796526DD232D001BE111 /* Embed Frameworks */,
-				5D03A88BA6D4D0C105882EFA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -829,6 +844,8 @@
 				3962A83226DCD9320028277D /* Realm */,
 				3962A83426DCD9320028277D /* RealmSwift */,
 				3962A83726DCD94A0028277D /* SwiftKeychainWrapper */,
+				397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */,
+				397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */,
 			);
 			productName = mpges.lk;
 			productReference = 220429F3235E22460054D4DD /* МП ГЭС.app */;
@@ -860,11 +877,12 @@
 			);
 			mainGroup = 220429EA235E22460054D4DD;
 			packageReferences = (
-				39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */,
+				39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics.git" */,
 				39499ED226DC904E0060171C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				3962A82E26DCD8220028277D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				3962A83126DCD9320028277D /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				3962A83626DCD94A0028277D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS.git" */,
 			);
 			productRefGroup = 220429F4235E22460054D4DD /* Products */;
 			projectDirPath = "";
@@ -883,6 +901,7 @@
 				398A64DA28759E3100C5A99E /* OfficesViewController.xib in Resources */,
 				398A64DE28759F3600C5A99E /* MapViewController.xib in Resources */,
 				22042A06235E224D0054D4DD /* LaunchScreen.storyboard in Resources */,
+				390206B228817FE300EBC0AD /* Localizable.strings in Resources */,
 				22DB7BD02530828D00F70737 /* TableViewCell.xib in Resources */,
 				228E3E8E2421397400402EF6 /* PrototypeTVCell.xib in Resources */,
 				22042A03235E224D0054D4DD /* Assets.xcassets in Resources */,
@@ -897,48 +916,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		467BE33BF230145AEA80B5C4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mpges.lk-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5D03A88BA6D4D0C105882EFA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mpges.lk/Pods-mpges.lk-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		220429EF235E22460054D4DD /* Sources */ = {
@@ -982,6 +959,7 @@
 				223F8FB0241A350700CDCF01 /* ContractsTVController.swift in Sources */,
 				22A074BD258A334E00C7B041 /* TokenRequestInterceptor.swift in Sources */,
 				22F34F18241E936C00889A31 /* DeviceCoordinatorMain.swift in Sources */,
+				39B55534288C670A000F9DFB /* CardAddTVController.swift in Sources */,
 				223875202435119500D3B56D /* TypeOfContractModel.swift in Sources */,
 				2238E3752455B51B009EDC83 /* ReceivedDataAddNewTemplateTVControllerOneStep.swift in Sources */,
 				39465BC025F7E55700D7B70F /* TokenRequestInterceptor3.swift in Sources */,
@@ -998,6 +976,7 @@
 				22F17C3E244C974600A41B44 /* ReceivedDataAddNewTemplateModel.swift in Sources */,
 				223F8FC2241A939E00CDCF01 /* ContractDetailsInfoTVController.swift in Sources */,
 				39CF85C92824D925005BDCA8 /* PaymentConfigurationFactory.swift in Sources */,
+				390CDA3E288C5D4F0065BBAF /* CardsTVController.swift in Sources */,
 				22F91A92257EB91E00B49C78 /* SignUpModel.swift in Sources */,
 				224634F6245BF51E00A412FD /* StatusSaldo.swift in Sources */,
 				39BC47E2267E7A5C00AAD329 /* TableViewViewModelType.swift in Sources */,
@@ -1068,6 +1047,7 @@
 				394176DF2635F23F00E796B7 /* UIImageHelper.swift in Sources */,
 				22669EF9247930900091A950 /* CommonTableViewController.swift in Sources */,
 				227771CC240B84C10035FC43 /* EmailPredicate.swift in Sources */,
+				39171B402878455400535BEE /* LoadingIndicatorViewController.swift in Sources */,
 				2202E1182588E6760056F176 /* ApiServiceProtocol.swift in Sources */,
 				229093902583BB6B00AF9E17 /* ResultModel.swift in Sources */,
 				22DB7BCF2530828D00F70737 /* TableViewCell.swift in Sources */,
@@ -1099,6 +1079,15 @@
 				220FF5AB2527855D00EA038D /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		390206B428817FE300EBC0AD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				390206B328817FE300EBC0AD /* en */,
+				390206B528817FE400EBC0AD /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1224,7 +1213,6 @@
 		};
 		22042A0B235E224D0054D4DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3389704144DDC7F4CABD77F1 /* Pods-mpges.lk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "mpges.lk/МП ГЭС.entitlements";
@@ -1250,7 +1238,6 @@
 		};
 		22042A0C235E224D0054D4DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2DDC84ECE803260BA7E7310 /* Pods-mpges.lk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "mpges.lk/МП ГЭС.entitlements";
@@ -1330,12 +1317,20 @@
 				minimumVersion = 4.0.1;
 			};
 		};
-		39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */ = {
+		39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-atomics.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.0.3;
+			};
+		};
+		397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Tinkoff/AcquiringSdk_IOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1368,8 +1363,18 @@
 		};
 		39696D6D2612F1D6004C9401 /* Atomics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */;
+			package = 39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics.git" */;
 			productName = Atomics;
+		};
+		397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS.git" */;
+			productName = TinkoffASDKCore;
+		};
+		397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS.git" */;
+			productName = TinkoffASDKUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 
