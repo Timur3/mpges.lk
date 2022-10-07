@@ -15,7 +15,7 @@ class PayWithCreditCardViewController: UITableViewController {
     var sections: [String] {["Лицевой счет", "Реквизиты банковской карты", "Доставка электронного чека",""]}
     var indexPath: IndexPath?
     
-    var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
+    var selectedCardCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.creditcard, textAlign: .left, accessoryType: .disclosureIndicator) }()
     var cardNumberCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.edit, textAlign: .left, accessoryType: .none) }()
     var cardNameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
     var cardDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
@@ -33,7 +33,7 @@ class PayWithCreditCardViewController: UITableViewController {
     var cardNumberLabel: UILabel = { getCustomForCardLabel(text: "Номер") }()
     var cardNameLabel: UILabel = { getCustomForCardLabel(text: "Владелец") }()
     var cardDateLabel: UILabel = { getCustomForCardLabel(text: "Действительна до") }()
-    var cardCodeLabel: UILabel = { getCustomForCardLabel(text: "CVC/CVV code") }()
+    var cardCodeLabel: UILabel = { getCustomForCardLabel(text: "CVC/CVV") }()
 
     var user: UserModel? {
         didSet {
@@ -44,7 +44,7 @@ class PayWithCreditCardViewController: UITableViewController {
         }
     }
     override func viewDidLoad() {
-        self.navigationItem.title = "Оплата банк. картой"
+        self.navigationItem.title = NSLocalizedString("title.paymentByCard", comment: "Оплата картой")
         super.viewDidLoad()
         configuration()
         setUpLayout()
@@ -90,7 +90,7 @@ class PayWithCreditCardViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                return accountCell
+                return selectedCardCell
             default:
                 fatalError()
             }
@@ -133,6 +133,9 @@ class PayWithCreditCardViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
+        if indexPath.section == 0 && indexPath.row == 0 {
+            showCards()
+        }
         if indexPath.section == 1 && indexPath.row == 0 {
             cardNumberTextField.becomeFirstResponder()
         }
@@ -210,6 +213,12 @@ extension PayWithCreditCardViewController {
         
         self.hideKeyboardWhenTappedAround()
     }
+    @objc func showCards() {
+        print("список карт")
+        // Переход на страницу список карт
+        let cardsTVController = CardsTVController()
+        self.navigationController?.pushViewController(cardsTVController, animated: true)
+    }
     
     func updateTableViewContentInset() {
         let viewHeight: CGFloat = view.frame.size.height
@@ -220,9 +229,9 @@ extension PayWithCreditCardViewController {
     
     func setUpLayout(){
         
-        accountCell.addSubview(accountTextField)
-        accountTextField.leadingAnchor.constraint(equalTo: accountCell.leadingAnchor, constant: 50).isActive = true
-        accountTextField.centerYAnchor.constraint(equalTo: accountCell.centerYAnchor).isActive = true
+        selectedCardCell.addSubview(accountTextField)
+        accountTextField.leadingAnchor.constraint(equalTo: selectedCardCell.leadingAnchor, constant: 50).isActive = true
+        accountTextField.centerYAnchor.constraint(equalTo: selectedCardCell.centerYAnchor).isActive = true
         
         cardNumberCell.addSubview(cardNumberLabel)
         cardNumberCell.addSubview(cardNumberTextField)

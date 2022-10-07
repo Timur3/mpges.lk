@@ -14,13 +14,13 @@ func getImage(_ id: Int) -> String {
     
     switch type {
     case deliveryType.address:
-        return "mail"
+        return myImage.mail.rawValue
     case deliveryType.email:
-        return "at"
+        return myImage.at.rawValue
     case deliveryType.lk:
-        return "network"
+        return myImage.network.rawValue
     case deliveryType.office:
-        return "figure.walk"
+        return myImage.figureWalk.rawValue
     }
 }
 
@@ -28,7 +28,8 @@ enum myImage: String {
     case none = "none"
     case tag = "tag"
     case link = "link"
-    case mail = "envelope"
+    case mail = "mail"
+    case envelope = "envelope"
     case rub = "rublesign.circle"
     case rubSquare = "rublesign.square"
     case calc = "text.justify"
@@ -51,8 +52,8 @@ enum myImage: String {
     case lock = "lock"
     case lockOpen = "lock.open"
     case trayUp = "tray.and.arrow.up"
-    case close = "multiply"
-    case plus = "plus"
+    case close = "multiply.circle.fill"
+    case plus = "plus.circle.fill"
     case dote = "ellipsis"
     case shared = "square.and.arrow.up"
     case deleted = "trash"
@@ -64,4 +65,7 @@ enum myImage: String {
     case appleLogo = "applelogo"
     case sberIcon = "sberIcon"
     case markLogo = "placeMark"
+    case at = "at"
+    case network = "network"
+    case figureWalk = "figure.walk"
 }
