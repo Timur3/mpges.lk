@@ -45,7 +45,7 @@ class PayWithApplePayTVController: CommonTableViewController {
         }
     }
     override func viewDidLoad() {
-        self.navigationItem.title = "Оплата Apple Pay"
+        self.navigationItem.title = "Оплата ApplePay"
         super.viewDidLoad()
         configuration()
         setUpLayout()
@@ -225,7 +225,7 @@ extension PayWithApplePayTVController: PKPaymentAuthorizationViewControllerDeleg
         let model = ApplePayModel(encryptedPaymentData: pd, amount: sum, contractId: self.model!.contractId)
         
         self.requestModel = RequestOfPayModel(id: 0, summa: sum)
-        ApiService.shared.requestByModel(model: model, method: "payment/initApplePay") { (response: ResultModel<String>) in
+        ApiService.shared.requestByModel(model: model, method: MethodApi.initApplePay) { (response: ResultModel<String>) in
             if (!response.isError) {
                 self.requestModel?.id = Int(response.data!)!
                 completion(PKPaymentAuthorizationResult(status: .success, errors: nil))

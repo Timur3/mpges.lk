@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import TinkoffASDKCore
+
 final class AppConfig {
     
     static var shared = AppConfig()
@@ -35,4 +37,10 @@ final class AppConfig {
     /// Lever to switch to real or fake price.
     /// Fake price uses for testing payment functionality in development environment.
     let shouldUseProductRealPrice = true
+    
+    /// Использовать AlertView системный или из Acquiring SDK
+    let acquiringSDK = false
+    
+    /// Тип проверки при сохранеия карты
+    let addCardChekType: PaymentCardCheckType = .no
 }

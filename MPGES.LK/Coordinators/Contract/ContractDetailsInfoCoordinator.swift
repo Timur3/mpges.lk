@@ -67,6 +67,7 @@ extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegat
         let payWithCreditCardPageTVController : PayWithCreditCardViewController = PayWithCreditCardViewController()
         payWithCreditCardPageTVController.delegate = self
         let navPayWithCreditCardPageTVController: UINavigationController = UINavigationController(rootViewController: payWithCreditCardPageTVController)
+        navPayWithCreditCardPageTVController.modalPresentationStyle = .fullScreen
         self.navigationController.present(navPayWithCreditCardPageTVController, animated: true, completion: nil)
     }
     

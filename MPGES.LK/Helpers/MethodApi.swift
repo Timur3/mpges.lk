@@ -26,7 +26,7 @@ final class MethodApi {
     static let getPaymentById = "payment/"
     static let getPaymentsByInvoiceId = "payment/getbyinvoiceid/"
     static let getPaymentsByContractId = "payment/getbyContractid/"
-    static let initApplePay = "payment/initApplePay"
+    static let initApplePay = "payment/initPay/ios"
     static let getReceiptUrl = "payment/getReceiptUrl/"
     static let getInvoicesByContractId = "invoice/getbyContractid/"
     static let sendInoicesByUserId = "invoice/sendInvoice/"
