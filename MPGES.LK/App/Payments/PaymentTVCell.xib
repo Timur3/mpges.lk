@@ -36,14 +36,8 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esD-hx-nMJ">
                                 <rect key="frame" x="55" y="33" width="283.5" height="17"/>
@@ -62,14 +56,8 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gd-Vk-Itb">
                                 <rect key="frame" x="55" y="54" width="283.5" height="18"/>
@@ -88,20 +76,11 @@
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </stackView>
                         </subviews>
                         <directionalEdgeInsets key="directionalLayoutMargins" top="12" leading="55" bottom="12" trailing="8"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                        </userDefinedRuntimeAttributes>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -110,13 +89,7 @@
                     <constraint firstAttribute="trailing" secondItem="VWV-G6-Gxy" secondAttribute="trailing" id="5Fm-p2-j64"/>
                     <constraint firstItem="VWV-G6-Gxy" firstAttribute="top" secondItem="VEZ-oE-ReK" secondAttribute="top" id="oW0-57-UY8"/>
                 </constraints>
-                <userDefinedRuntimeAttributes>
-                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="cashBox" destination="b72-G8-vp2" id="Lj3-Pv-qj3"/>
                 <outlet property="datePay" destination="LWo-es-4y5" id="pQ2-Kx-wfb"/>

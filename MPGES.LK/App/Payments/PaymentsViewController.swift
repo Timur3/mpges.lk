@@ -72,10 +72,6 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, UITableView
         paymentTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return (paymentsList.count == 0) ? 2 : paymentsList.count
-    }
-    
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         print("did End Displaying Header View")
     }

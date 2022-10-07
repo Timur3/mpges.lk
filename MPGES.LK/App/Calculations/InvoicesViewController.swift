@@ -82,10 +82,6 @@ class InvoicesViewController: UIViewController, UITableViewDelegate, UITableView
         ])
     }
     
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return (invoiceList.count == 0) ? 2 : invoiceList.count
-    }
-    
     // MARK: - Table view data source
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

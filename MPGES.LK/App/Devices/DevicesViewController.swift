@@ -49,14 +49,6 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.delegate = self
     }
     
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return (deviceList.count == 0) ? 1 : deviceList.count
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
     @objc func getDevices(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             ApiServiceWrapper.shared.getDevicesByContractId(id: self.contractId, delegate: self)
