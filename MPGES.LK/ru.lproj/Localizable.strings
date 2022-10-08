@@ -13,6 +13,7 @@
 "title.paymentByCard" = "Оплата картой";
 "title.paymentCardList" = "Список карт";
 "title.cardAdd" = "Добавить карту";
+"title.myContracts" = "Мои договора";
 
 //button
 "button.signIn" = "Войти";

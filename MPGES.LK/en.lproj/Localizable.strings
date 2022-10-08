@@ -13,6 +13,7 @@
 "title.paymentByCard" = "Payment by card";
 "title.paymentCardList" = "Saved cards";
 "title.cardAdd" = "Card Add";
+"title.myContracts" = "Contracts";
 
 //button
 "button.signIn" = "Sign in";

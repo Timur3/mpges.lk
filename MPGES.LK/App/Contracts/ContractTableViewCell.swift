@@ -1,5 +1,5 @@
 //
-//  ContractsTableViewCell.swift
+//  ContractTableViewCell.swift
 //  mpges.lk
 //
 //  Created by Timur on 12.03.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContractsTableViewCell: UITableViewCell {
+class ContractTableViewCell: UITableViewCell {
     @IBOutlet weak var numberContract: UILabel!
     @IBOutlet weak var saldoContract: UILabel!
     @IBOutlet weak var contractAddress: UILabel!

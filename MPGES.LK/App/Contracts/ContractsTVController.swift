@@ -19,7 +19,7 @@ public protocol ContractsTVControllerUserDelegate: AnyObject {
     func resultRemoveContractBinding(result: ResultModel<String>)
 }
 
-class ContractsTVController: UITableViewController {
+class ContractsTVController: CommonViewController {
     public weak var mainCoordinator: MainCoordinator?
     public weak var delegate: ContractsTVControllerDelegate?
     private var searchController = UISearchController(searchResultsController: nil)
@@ -29,23 +29,35 @@ class ContractsTVController: UITableViewController {
         return str.isEmpty
     }
     
+    private lazy var contractTable: UITableView = {
+        let tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        let nib = UINib(nibName: ContractTableViewCell.identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: ContractTableViewCell.identifier)
+        tableView.isUserInteractionEnabled = true
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dataSource = self
+        tableView.delegate = self
+        return tableView
+    }()
+    
     private var contractList = [ContractModel]() {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.contractTable.reloadData()
+                self.hideLoadingIndicator()
             }
         }
     }
     
     override func viewDidLoad() {
-        self.navigationItem.title = "Мои договоры"
+        self.navigationItem.title = NSLocalizedString("title.myContracts", comment: "Мои договора")
         super.viewDidLoad()
         configuration()
         getContracts()
     }
-
+    
     private func configuration() {
-        self.refreshControl = UIRefreshControl()
+        self.contractTable.refreshControl = UIRefreshControl()
         let addContract = getPlusUIBarButtonItem(target: self, action: #selector(alertSheetContractAddShow))
         self.navigationItem.rightBarButtonItems = [addContract]
         
@@ -55,12 +67,15 @@ class ContractsTVController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        let nib = UINib(nibName: "ContractsTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: ContractsTableViewCell.identifier)
-        self.refreshControl?.addTarget(self, action: #selector(getDataContracts), for: UIControl.Event.valueChanged)
-        tableView.delegate = self
-        tableView.dataSource = self
+        self.contractTable.refreshControl?.addTarget(self, action: #selector(getDataContracts), for: UIControl.Event.valueChanged)
+        
+        view.addSubview(contractTable)
+        NSLayoutConstraint.activate([
+            contractTable.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            contractTable.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            contractTable.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            contractTable.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        ])
     }
     
     @objc func getDataContracts() {
@@ -100,35 +115,36 @@ class ContractsTVController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return contractList.count
+    func alertSheetOfDelBindingShow(for indexPath: IndexPath){
+        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите исключить договор из списка услуг?", handlerYes: { (UIAlertAction) in
+            let model = ContractNumberModel(number: self.contractList[indexPath.section].number)
+            ApiServiceWrapper.shared.removeContractBinding(model: model, delegate: self)
+        })
     }
+}
+
+//MARK: - UITableViewDelegate
+
+extension ContractsTVController: UITableViewDelegate {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Договор заключен: " + contractList[section].dateRegister
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ContractsTableViewCell.identifier, for: indexPath) as? ContractsTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ContractTableViewCell.identifier, for: indexPath) as? ContractTableViewCell
         guard let tableCell = cell else { return UITableViewCell() }
         tableCell.update(for: contractList[indexPath.section])
         return tableCell
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let contract = contractList[indexPath.section]
         self.delegate?.navigationDetailsInfoPage(to: contract.id)
     }
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             alertSheetOfDelBindingShow(for: indexPath)
         } else if editingStyle == .insert {
@@ -136,11 +152,23 @@ class ContractsTVController: UITableViewController {
         }
     }
     
-    func alertSheetOfDelBindingShow(for indexPath: IndexPath){
-        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите исключить договор из списка услуг?", handlerYes: { (UIAlertAction) in
-            let model = ContractNumberModel(number: self.contractList[indexPath.section].number)
-            ApiServiceWrapper.shared.removeContractBinding(model: model, delegate: self)
-        })
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+}
+
+//MARK: - UITableViewDataSource
+extension ContractsTVController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return contractList.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return 1
     }
 }
 // MARK: - SEARCH
@@ -160,13 +188,13 @@ extension ContractsTVController: UISearchResultsUpdating {
 }
 
 // MARK: - USER DELEGATE
-
 extension ContractsTVController: ContractsTVControllerUserDelegate {
     
     func getContracts() {
+        self.showLoadingIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             ApiServiceWrapper.shared.getContracts(delegate: self)
-            self.refreshControl?.endRefreshing()
+            self.contractTable.refreshControl?.endRefreshing()
         }
     }
     

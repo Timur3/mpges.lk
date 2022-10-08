@@ -18,8 +18,8 @@
 		220BF2BF253A0FBD00812330 /* UIDeviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220BF2BE253A0FBD00812330 /* UIDeviceHelper.swift */; };
 		220DC85A2464314F00A216B1 /* RequestBankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC8592464314F00A216B1 /* RequestBankModel.swift */; };
 		220DC85C2464317400A216B1 /* ResponseBankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC85B2464317400A216B1 /* ResponseBankModel.swift */; };
-		220DC96B2487BFD700756389 /* ContractsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC9692487BFD700756389 /* ContractsTableViewCell.swift */; };
-		220DC96C2487BFD700756389 /* ContractsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220DC96A2487BFD700756389 /* ContractsTableViewCell.xib */; };
+		220DC96B2487BFD700756389 /* ContractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC9692487BFD700756389 /* ContractTableViewCell.swift */; };
+		220DC96C2487BFD700756389 /* ContractTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220DC96A2487BFD700756389 /* ContractTableViewCell.xib */; };
 		220DEF00258922A80059EDD0 /* MyHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DEEFF258922A80059EDD0 /* MyHTTPMethod.swift */; };
 		220F3E3325B4957800C6625D /* PaymentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F3E3125B4957800C6625D /* PaymentsViewController.swift */; };
 		2217F5022403D117006654F9 /* TextFieldHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217F5012403D117006654F9 /* TextFieldHelper.swift */; };
@@ -171,6 +171,8 @@
 		39BC47E2267E7A5C00AAD329 /* TableViewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */; };
 		39CF85C92824D925005BDCA8 /* PaymentConfigurationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */; };
 		39D18B9B25F79B81000CE4E3 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */; };
+		39E3E48628F1B59A000CC84F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E3E48528F1B59A000CC84F /* UIViewController+Extension.swift */; };
+		39E3E48828F1E274000CC84F /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E3E48728F1E274000CC84F /* CommonViewController.swift */; };
 		39E4A2E226DD29C200EE1DF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E4A2E126DD29C200EE1DF8 /* MapKit.framework */; };
 		39F6BB6E2825A05100CB96C1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6BB6D2825A05100CB96C1 /* Utils.swift */; };
 		39F6BB702825A44100CB96C1 /* PayWithTinkoffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6BB6F2825A44100CB96C1 /* PayWithTinkoffViewController.swift */; };
@@ -204,8 +206,8 @@
 		220BF2BE253A0FBD00812330 /* UIDeviceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceHelper.swift; sourceTree = "<group>"; };
 		220DC8592464314F00A216B1 /* RequestBankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBankModel.swift; sourceTree = "<group>"; };
 		220DC85B2464317400A216B1 /* ResponseBankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBankModel.swift; sourceTree = "<group>"; };
-		220DC9692487BFD700756389 /* ContractsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractsTableViewCell.swift; sourceTree = "<group>"; };
-		220DC96A2487BFD700756389 /* ContractsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContractsTableViewCell.xib; sourceTree = "<group>"; };
+		220DC9692487BFD700756389 /* ContractTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractTableViewCell.swift; sourceTree = "<group>"; };
+		220DC96A2487BFD700756389 /* ContractTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContractTableViewCell.xib; sourceTree = "<group>"; };
 		220DEEFF258922A80059EDD0 /* MyHTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHTTPMethod.swift; sourceTree = "<group>"; };
 		220F3E3125B4957800C6625D /* PaymentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsViewController.swift; sourceTree = "<group>"; };
 		220FF5AB2527855D00EA038D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -352,6 +354,8 @@
 		39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModelType.swift; sourceTree = "<group>"; };
 		39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfigurationFactory.swift; sourceTree = "<group>"; };
 		39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
+		39E3E48528F1B59A000CC84F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		39E3E48728F1E274000CC84F /* CommonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
 		39E4A2E126DD29C200EE1DF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		39F6BB6D2825A05100CB96C1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		39F6BB6F2825A44100CB96C1 /* PayWithTinkoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithTinkoffViewController.swift; sourceTree = "<group>"; };
@@ -488,8 +492,8 @@
 		223FDF7E23D030130029E547 /* Contracts */ = {
 			isa = PBXGroup;
 			children = (
-				220DC9692487BFD700756389 /* ContractsTableViewCell.swift */,
-				220DC96A2487BFD700756389 /* ContractsTableViewCell.xib */,
+				220DC9692487BFD700756389 /* ContractTableViewCell.swift */,
+				220DC96A2487BFD700756389 /* ContractTableViewCell.xib */,
 				223F8FAE241A350700CDCF01 /* ContractsTVController.swift */,
 				223F8FC0241A939E00CDCF01 /* ContractDetailsInfoTVController.swift */,
 				22A38074244B4093008CCFAC /* ContractAddTVController.swift */,
@@ -661,6 +665,8 @@
 				22DB7BCD2530828D00F70737 /* TableViewCell.swift */,
 				22DB7BCE2530828D00F70737 /* TableViewCell.xib */,
 				3982A0832829A71500276286 /* UIView+Extension.swift */,
+				39E3E48528F1B59A000CC84F /* UIViewController+Extension.swift */,
+				39E3E48728F1E274000CC84F /* CommonViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -877,12 +883,12 @@
 			);
 			mainGroup = 220429EA235E22460054D4DD;
 			packageReferences = (
-				39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics.git" */,
+				39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */,
 				39499ED226DC904E0060171C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				3962A82E26DCD8220028277D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				3962A83126DCD9320028277D /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				3962A83626DCD94A0028277D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
-				397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS.git" */,
+				397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS" */,
 			);
 			productRefGroup = 220429F4235E22460054D4DD /* Products */;
 			projectDirPath = "";
@@ -911,7 +917,7 @@
 				22913B1E23FF0152000F9677 /* MainTabBarViewController.xib in Resources */,
 				2235D7BB241E5F3D007A90DD /* DeviceTVCell.xib in Resources */,
 				22721F1D2472E3D7006F72C0 /* Storyboard.storyboard in Resources */,
-				220DC96C2487BFD700756389 /* ContractsTableViewCell.xib in Resources */,
+				220DC96C2487BFD700756389 /* ContractTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,7 +940,7 @@
 				224D82B9258FBB2B0086F796 /* UINavigationControllerHelper.swift in Sources */,
 				2269849E24115C5B00EF8ED7 /* ArrayHelper.swift in Sources */,
 				2235D7BA241E5F3D007A90DD /* DeviceTVCell.swift in Sources */,
-				220DC96B2487BFD700756389 /* ContractsTableViewCell.swift in Sources */,
+				220DC96B2487BFD700756389 /* ContractTableViewCell.swift in Sources */,
 				22C2EEE6247A679700D116CE /* InvoiceCell.swift in Sources */,
 				220F3E3325B4957800C6625D /* PaymentsViewController.swift in Sources */,
 				22A3807124478B1B008CCFAC /* TypeOfCalculationModel.swift in Sources */,
@@ -955,6 +961,7 @@
 				226E5AF323F824B6008CFD37 /* UserModel.swift in Sources */,
 				22EDFD8A245D4A4600732E85 /* EmailToDeveloperTVController.swift in Sources */,
 				2208AFD224F9772D00E386D8 /* LinksOfBuildingToDevicesModel.swift in Sources */,
+				39E3E48628F1B59A000CC84F /* UIViewController+Extension.swift in Sources */,
 				226F34E42429166D00B6261E /* MyImage.swift in Sources */,
 				223F8FB0241A350700CDCF01 /* ContractsTVController.swift in Sources */,
 				22A074BD258A334E00C7B041 /* TokenRequestInterceptor.swift in Sources */,
@@ -964,6 +971,7 @@
 				2238E3752455B51B009EDC83 /* ReceivedDataAddNewTemplateTVControllerOneStep.swift in Sources */,
 				39465BC025F7E55700D7B70F /* TokenRequestInterceptor3.swift in Sources */,
 				226AA7CD23CE30F7003F006A /* UserDataService.swift in Sources */,
+				39E3E48828F1E274000CC84F /* CommonViewController.swift in Sources */,
 				22913B1D23FF0152000F9677 /* MainTabBarViewController.swift in Sources */,
 				225DFEA4247D850C0007A3DB /* BankPayModel.swift in Sources */,
 				39696D78261A1A85004C9401 /* GradientView.swift in Sources */,
@@ -1317,7 +1325,7 @@
 				minimumVersion = 4.0.1;
 			};
 		};
-		39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics.git" */ = {
+		39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-atomics.git";
 			requirement = {
@@ -1325,7 +1333,7 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS.git" */ = {
+		397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Tinkoff/AcquiringSdk_IOS.git";
 			requirement = {
@@ -1363,17 +1371,17 @@
 		};
 		39696D6D2612F1D6004C9401 /* Atomics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics.git" */;
+			package = 39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */;
 			productName = Atomics;
 		};
 		397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS.git" */;
+			package = 397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS" */;
 			productName = TinkoffASDKCore;
 		};
 		397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS.git" */;
+			package = 397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS" */;
 			productName = TinkoffASDKUI;
 		};
 /* End XCSwiftPackageProductDependency section */

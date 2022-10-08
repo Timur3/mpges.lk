@@ -10,23 +10,6 @@ import UIKit
 
 class CommonTableViewController: UITableViewController {
     public var indexPath: IndexPath?
-    fileprivate var indicatorView: UIView?
-    
-    func showLoadingIndicator() {
-        indicatorView = UIView(frame: self.view.bounds)
-        indicatorView?.backgroundColor = UIColor.init(_colorLiteralRed: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.center = indicatorView!.center
-        indicator.startAnimating()
-        indicatorView?.addSubview(indicator)
-        self.navigationController?.view.addSubview(indicatorView!)
-    }
-    
-    func hideLoadingIndicator() {
-        indicatorView?.removeFromSuperview()
-        indicatorView = nil
-    }
     
     override func viewDidLoad() {
         self.hideKeyboardWhenTappedAround()

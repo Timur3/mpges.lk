@@ -74,7 +74,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     override func viewDidLoad() {
         navigationItem.title = "Договор"
         super.viewDidLoad()
-        self.showLoadingIndicator()
+        //self.showLoadingIndicator()
         setUpLayout()
         configuration()
         refreshContract()
