@@ -16,7 +16,8 @@ protocol PaymentsViewControllerUserDelegate {
     func navigationPaymentInfoForSafariService(for model: ResultModel<String>)
 }
 
-class PaymentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PaymentsViewController: CommonViewController {
+    
     private lazy var paymentTableView: UITableView = {
         var table = UITableView.init(frame: .zero, style: .insetGrouped)
         let nib = UINib(nibName: PaymentTVCell.identifier, bundle: nil)
@@ -41,6 +42,7 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, UITableView
         didSet {
             DispatchQueue.main.async {
                 self.paymentTableView.reloadData()
+                self.hideLoadingIndicator()
             }
         }
     }
@@ -59,8 +61,6 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, UITableView
         searchController.searchBar.placeholder = "Введите сумму для поиска"
         definesPresentationContext = true
         navigationItem.searchController = searchController
-        
-        self.view.backgroundColor = self.paymentTableView.backgroundColor
     }
     
     func setUpLayout(){
@@ -71,13 +71,13 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, UITableView
         paymentTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         paymentTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
+}
+
+//MARK: - UITableViewDelegate
+extension PaymentsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         print("did End Displaying Header View")
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        print("scroll")
     }
     
     func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
@@ -88,8 +88,10 @@ class PaymentsViewController: UIViewController, UITableViewDelegate, UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: - Table view data source
+}
+
+//MARK: - UITableViewDataSource
+extension PaymentsViewController: UITableViewDataSource {
     // Override to support conditional editing of the table view.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
@@ -150,6 +152,7 @@ extension PaymentsViewController: PaymentsViewControllerUserDelegate {
     }
     
     @objc func getPayments() {
+        self.showLoadingIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let access = ApiService.Connectivity.isConnectedToInternet
             if access {

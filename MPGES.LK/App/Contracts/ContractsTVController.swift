@@ -124,7 +124,6 @@ class ContractsTVController: CommonViewController {
 }
 
 //MARK: - UITableViewDelegate
-
 extension ContractsTVController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
