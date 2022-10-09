@@ -22,7 +22,8 @@ class PaymentsViewController: CommonViewController {
         var table = UITableView.init(frame: .zero, style: .insetGrouped)
         let nib = UINib(nibName: PaymentTVCell.identifier, bundle: nil)
         table.register(nib, forCellReuseIdentifier: PaymentTVCell.identifier)
-        
+        table.isUserInteractionEnabled = true
+        table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
         table.delegate = self
         table.refreshControl = UIRefreshControl()
@@ -49,7 +50,7 @@ class PaymentsViewController: CommonViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Платежи"
+        navigationItem.title = NSLocalizedString("title.payments", comment: "Платежи")
         configuration()
         setUpLayout()
         getPayments()
@@ -59,17 +60,18 @@ class PaymentsViewController: CommonViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Введите сумму для поиска"
-        definesPresentationContext = true
         navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     func setUpLayout(){
         view.addSubview(paymentTableView)
-        paymentTableView.translatesAutoresizingMaskIntoConstraints = false
-        paymentTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        paymentTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        paymentTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        paymentTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            paymentTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            paymentTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            paymentTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            paymentTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        ])
     }
 }
 
@@ -86,19 +88,16 @@ extension PaymentsViewController: UITableViewDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
 //MARK: - UITableViewDataSource
 extension PaymentsViewController: UITableViewDataSource {
-    // Override to support conditional editing of the table view.
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return false
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return paymentsList.count
     }
     

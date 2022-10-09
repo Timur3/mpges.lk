@@ -20,15 +20,12 @@ func getCustomCell(textLabel: String, imageCell: myImage = .none, textAlign: NST
     }
     
     cell.textLabel?.text = textLabel
-    //cell.description = description
     if (textColor != .black) {
         cell.textLabel?.textColor = textColor
     }
     cell.textLabel?.textAlignment = textAlign
     cell.accessoryType = accessoryType
     cell.isUserInteractionEnabled = isUserInteractionEnabled
-    
-    //cell.textLabel?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
     
     return cell
     

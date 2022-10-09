@@ -24,9 +24,19 @@ protocol ContractDetailsInfoTVControllerDelegate: AnyObject {
     func navigationToResultOfPayment(for model: ResultModel<Double>)
 }
 
-class ContractDetailsInfoTVController: CommonTableViewController {
+class ContractDetailsInfoTVController: CommonViewController, UITableViewDelegate, UITableViewDataSource {
     public weak var delegate: ContractDetailsInfoTVControllerDelegate?
     public var contractId: Int = 0
+    private var indexPath: IndexPath?
+    
+    private lazy var contractDetailsTable: UITableView = {
+        let table = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        table.isUserInteractionEnabled = true
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.dataSource = self
+        table.delegate = self
+        return table
+    }()
     
     var accountCell: UITableViewCell = { getCustomCell(textLabel: "Лицевой счет:", imageCell: myImage.tag, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var contractNumberCell: UITableViewCell = { getCustomCell(textLabel: "Номер:", imageCell: myImage.docText, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
@@ -57,8 +67,8 @@ class ContractDetailsInfoTVController: CommonTableViewController {
                 self.contractDateLabel.text = contractModel.dateRegister
                 self.contractorLabel.text = ("\(contractModel.contractor.name) \(contractModel.contractor.middleName?.prefix(1) ?? "_"). \(contractModel.contractor.family.prefix(1)).")
                 ApiServiceWrapper.shared.getContractStatus(id: contractModel.id, delegate: self)
-                self.tableView.reloadData()
-                //self.hideLoadingIndicator()
+                self.contractDetailsTable.reloadData()
+                self.hideLoadingIndicator()
             }
         }
     }
@@ -74,14 +84,20 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     override func viewDidLoad() {
         navigationItem.title = "Договор"
         super.viewDidLoad()
-        //self.showLoadingIndicator()
         setUpLayout()
         configuration()
-        refreshContract()
+        getContract()
     }
     
     func setUpLayout(){
         let inset: CGFloat = 50
+        view.addSubview(contractDetailsTable)
+        NSLayoutConstraint.activate([
+            contractDetailsTable.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            contractDetailsTable.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            contractDetailsTable.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            contractDetailsTable.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        ])
         contractSaldoCell.contentView.addSubview(saldoSumLabel)
         saldoSumLabel.rightAnchor.constraint(equalTo: contractSaldoCell.rightAnchor, constant: -inset).isActive = true
         saldoSumLabel.centerYAnchor.constraint(equalTo: contractSaldoCell.centerYAnchor).isActive = true
@@ -101,11 +117,11 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             
             /* if !(saldoSumLabel.text!.isEmpty) {
@@ -128,17 +144,17 @@ class ContractDetailsInfoTVController: CommonTableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
     
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         if indexPath.section == 1 && indexPath.row == 2 {
             self.delegate?.navigationToContractorInfoPage(for: contractModel!.contractor)
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
@@ -155,7 +171,7 @@ class ContractDetailsInfoTVController: CommonTableViewController {
     }
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
             
         case 0:
@@ -202,16 +218,17 @@ class ContractDetailsInfoTVController: CommonTableViewController {
             fatalError()
         }
     }
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
     }
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
         
@@ -254,7 +271,7 @@ extension ContractDetailsInfoTVController: ContractDetailsInfoTVControllerUserDe
     
     func setContractById(for contract: ResultModel<ContractModel>) {
         contractModel = contract.data
-        self.refreshControl?.endRefreshing()
+        self.contractDetailsTable.refreshControl?.endRefreshing()
     }
     
     func getStatePayment(for model: RequestOfPayModel) {
@@ -306,7 +323,7 @@ extension ContractDetailsInfoTVController {
         
         if UIDevice.isPad {
             if let popoverController = alertController.popoverPresentationController {
-                popoverController.sourceView = self.tableView
+                popoverController.sourceView = self.contractDetailsTable
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
                 popoverController.permittedArrowDirections = [];
             }
@@ -343,19 +360,14 @@ extension ContractDetailsInfoTVController {
     }
     
     private func configuration() {
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshContract), for: UIControl.Event.valueChanged)
-        
+        self.contractDetailsTable.refreshControl = UIRefreshControl()
+        self.contractDetailsTable.refreshControl?.addTarget(self, action: #selector(getContract), for: UIControl.Event.valueChanged)
         definesPresentationContext = true
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        let nib = UINib(nibName: "ContractsTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "contractCell")
-        self.tableView.dataSource = self
-        
-        tableView.delegate = self
-        tableView.dataSource = self
     }
-    @objc func refreshContract() {
+    
+    @objc func getContract() {
+        self.showLoadingIndicator()
+        self.saldoSumLabel.text = formatRusCurrency(0.00)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.getContractById(id: self.contractId)
         }

@@ -19,6 +19,7 @@ func getCustomForCardLabel(text: String) -> UILabel {
 func getCustomForContractLabel(text: String) -> UILabel {
     let label = UILabel()
     label.text = text
+    //label.font = UIFont.boldSystemFont(ofSize: 15)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
 }

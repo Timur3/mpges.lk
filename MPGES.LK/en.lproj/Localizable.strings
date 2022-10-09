@@ -14,6 +14,7 @@
 "title.paymentCardList" = "Saved cards";
 "title.cardAdd" = "Card Add";
 "title.myContracts" = "Contracts";
+"title.payments" = "Payments";
 
 //button
 "button.signIn" = "Sign in";

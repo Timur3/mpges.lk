@@ -7,14 +7,15 @@
 */
 
 //title
-"title.main" = "Личный кабинет";
+"title.main" = "Главная";
 "title.signUp" = "Новый пользователь";
 "title.signIn" = "Войти";
 "title.paymentByCard" = "Оплата картой";
 "title.paymentCardList" = "Список карт";
 "title.cardAdd" = "Добавить карту";
 "title.myContracts" = "Мои договора";
+"title.payments" = "Платежи";
 
 //button
 "button.signIn" = "Войти";
-"button.sgnUp" = "Зарегистрироваться";
+"button.signUp" = "Зарегистрироваться";

@@ -30,14 +30,14 @@ class ContractsTVController: CommonViewController {
     }
     
     private lazy var contractTable: UITableView = {
-        let tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        let table = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         let nib = UINib(nibName: ContractTableViewCell.identifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: ContractTableViewCell.identifier)
-        tableView.isUserInteractionEnabled = true
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dataSource = self
-        tableView.delegate = self
-        return tableView
+        table.register(nib, forCellReuseIdentifier: ContractTableViewCell.identifier)
+        table.isUserInteractionEnabled = true
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.dataSource = self
+        table.delegate = self
+        return table
     }()
     
     private var contractList = [ContractModel]() {
@@ -106,6 +106,7 @@ class ContractsTVController: CommonViewController {
     func showContractAddTVPage() {
         self.delegate?.navigationContractAddTVPage(delegate: self)
     }
+    
     func showNewContractPage() {
         //self.view.addSubview(LoadingIndicatorViewController().view)
     }
@@ -142,7 +143,6 @@ extension ContractsTVController: UITableViewDelegate {
         self.delegate?.navigationDetailsInfoPage(to: contract.id)
     }
     
-    // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             alertSheetOfDelBindingShow(for: indexPath)
@@ -161,12 +161,10 @@ extension ContractsTVController: UITableViewDelegate {
 extension ContractsTVController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return contractList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
     }
 }

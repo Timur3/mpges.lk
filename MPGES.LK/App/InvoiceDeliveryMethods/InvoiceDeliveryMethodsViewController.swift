@@ -13,15 +13,16 @@ public protocol InvoiceDeliveryMethodTVControllerDelegate: AnyObject {
     func resultOfUpdateDeliveryMethod(for resultModel: ResultModel<String>)
 }
 
-class InvoiceDeliveryMethodsViewController: UIViewController, UITableViewDataSource {
+class InvoiceDeliveryMethodsViewController: CommonViewController {
     
     weak var delegate: ContractDetailsInfoTVControllerUserDelegate?
     private var selectedDeliveryMethod: InvoiceDeliveryMethodModel?
     
     private lazy var InvoiceDeliveryMethodsTable: UITableView = {
         var table = UITableView(frame: .zero, style: .insetGrouped)
-        table.translatesAutoresizingMaskIntoConstraints = false
         table.register(InvoiceDeliveryMethodsTableViewCell.self, forCellReuseIdentifier: InvoiceDeliveryMethodsTableViewCell.identifier)
+        table.isUserInteractionEnabled = true
+        table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
         table.delegate = self
         return table
@@ -31,6 +32,7 @@ class InvoiceDeliveryMethodsViewController: UIViewController, UITableViewDataSou
         didSet {
             DispatchQueue.main.async {
                 self.InvoiceDeliveryMethodsTable.reloadData()
+                self.hideLoadingIndicator()
             }
         }
     }
@@ -41,9 +43,8 @@ class InvoiceDeliveryMethodsViewController: UIViewController, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Доставка квитанций"
-        getData()
         setUpLayout()
-        //bindingData()
+        getData()
     }
     
     func setUpLayout(){
@@ -55,35 +56,22 @@ class InvoiceDeliveryMethodsViewController: UIViewController, UITableViewDataSou
             InvoiceDeliveryMethodsTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
     }
-    
-    func bindingData() {
-        //deliveryOfInvoiceViewModel = DeliveryOfInvoiceViewModel()
-       /* guard let data = deliveryOfInvoiceViewModel?.deliveryOfInvoices else { return }
-        var temp = [InvoiceDeliveryMethodModel]()
-        for var item in data {
-            if (item.id == self.contract?.invoiceDeliveryMethodId) {
-                item.selected = true
-                selectedDeliveryMethod = item
-            }
-            temp.append(item)
-        }
-        deliveryMethodList = temp*/
-        setUpLayout()
-    }
-    
+        
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         delegate?.getContractById(id: contract!.id)
     }
     
     func getData() {
-        DispatchQueue.main.async {
+        self.showLoadingIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             ApiServiceWrapper.shared.getDeliveryOfInvoices(delegate: self)
         }
     }
+}
+// MARK: - Table view data source
+extension InvoiceDeliveryMethodsViewController: UITableViewDataSource {
     
-    // MARK: - Table view data source
-   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
@@ -113,7 +101,7 @@ class InvoiceDeliveryMethodsViewController: UIViewController, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InvoiceDeliveryMethodsTableViewCell.identifier, for: indexPath) as! InvoiceDeliveryMethodsTableViewCell
         //guard let tableCell = cell,
-         //     let deliveryOfInvoiceViewModel = deliveryOfInvoiceViewModel else { return UITableViewCell() }
+        //     let deliveryOfInvoiceViewModel = deliveryOfInvoiceViewModel else { return UITableViewCell() }
         
         //let cellViewModel = deliveryOfInvoiceViewModel.cellViewModel(for: indexPath)
         //tableCell.viewModel = cellViewModel

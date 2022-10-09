@@ -12,8 +12,18 @@ protocol DevicesViewControllerUserDelegate: AnyObject {
     func setDevices(devices:ResultModel<[DeviceModel]>)
 }
 
-class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let tableView = UITableView.init(frame: .zero, style: .insetGrouped)
+class DevicesViewController: CommonViewController {
+    
+    private lazy var devicesTableView: UITableView = {
+        var table = UITableView.init(frame: .zero, style: .insetGrouped)
+        let nib = UINib(nibName: DeviceTVCell.identifier, bundle: nil)
+        table.register(nib, forCellReuseIdentifier: DeviceTVCell.identifier)
+        table.isUserInteractionEnabled = true
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.dataSource = self
+        table.delegate = self
+        return table
+    }()
     
     private var searchController = UISearchController(searchResultsController: nil)
     public weak var delegate: DeviceCoordinatorMain?
@@ -22,7 +32,8 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
     var deviceList = [DeviceModel]() {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.devicesTableView.reloadData()
+                self.hideLoadingIndicator()
             }
         }
     }
@@ -34,53 +45,53 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
         setUpLayout()
         getDevices()
     }
+    
     private func configuration() {
+        devicesTableView.refreshControl = UIRefreshControl()
+        devicesTableView.refreshControl?.addTarget(self, action: #selector(getDevices), for: UIControl.Event.valueChanged)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Номер прибора учета"
+        navigationItem.searchController = searchController
         definesPresentationContext = true
-        
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(getDevices), for: UIControl.Event.valueChanged)
-        
-        let nib = UINib(nibName: "DeviceTVCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "deviceCell")
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
     }
     
     @objc func getDevices(){
+        self.showLoadingIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             ApiServiceWrapper.shared.getDevicesByContractId(id: self.contractId, delegate: self)
             // todo  сохраняем новые данные, предварительно удаляем старые данные
-            self.tableView.refreshControl?.endRefreshing()
+            self.devicesTableView.refreshControl?.endRefreshing()
         }
     }
     
     func setUpLayout(){
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        navigationItem.searchController = searchController
+        view.addSubview(devicesTableView)
+        NSLayoutConstraint.activate([
+            devicesTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            devicesTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            devicesTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            devicesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        ])
     }
-    
-    // MARK: - Table view data source
+}
+
+//MARK: - UITableViewDataSource
+extension DevicesViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return deviceList.count
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
     }
+}
+//MARK: - UITableViewDelegate
+extension DevicesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Дата выпуска: " + deviceList[section].dateOut!
+        return "Дата выпуска: " + (deviceList[section].dateOut ?? "01.01.1900")
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -88,7 +99,7 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell", for: indexPath) as! DeviceTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: DeviceTVCell.identifier, for: indexPath) as! DeviceTVCell
         cell.update(for: deviceList[indexPath.section])
         cell.imageView?.image = UIImage(systemName: myImage.gauge.rawValue)
         cell.delegateCell = self
@@ -96,13 +107,10 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
 
-    // Override to support conditional editing of the table view.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return false
     }
     
-    // Override to support rearranging the table view.
     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
     }
     

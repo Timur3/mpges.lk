@@ -141,7 +141,6 @@
 		22F91A952581100200B49C78 /* TokensModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F91A942581100200B49C78 /* TokensModel.swift */; };
 		390206B228817FE300EBC0AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 390206B428817FE300EBC0AD /* Localizable.strings */; };
 		390CDA3E288C5D4F0065BBAF /* CardsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CDA3D288C5D4F0065BBAF /* CardsTVController.swift */; };
-		39171B402878455400535BEE /* LoadingIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39171B3F2878455400535BEE /* LoadingIndicatorViewController.swift */; };
 		392F836325F7E3C500040978 /* TokenRequestInterceptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */; };
 		39377AA1267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */; };
 		3938D1AA25D0615A00A470C1 /* InvoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938D1A825D0615A00A470C1 /* InvoicesViewController.swift */; };
@@ -162,7 +161,6 @@
 		3982A0822829A60900276286 /* ButtonPayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */; };
 		3982A0842829A71500276286 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0832829A71500276286 /* UIView+Extension.swift */; };
 		3982A08E282AE02100276286 /* DevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3982A08D282AE02100276286 /* DevicesViewController.xib */; };
-		3982A090282AE4FD00276286 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A08F282AE4FD00276286 /* PaymentTableViewCell.swift */; };
 		398A64DA28759E3100C5A99E /* OfficesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398A64D928759E3100C5A99E /* OfficesViewController.xib */; };
 		398A64DD28759F3600C5A99E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A64DB28759F3600C5A99E /* MapViewController.swift */; };
 		398A64DE28759F3600C5A99E /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398A64DC28759F3600C5A99E /* MapViewController.xib */; };
@@ -332,7 +330,6 @@
 		390206B328817FE300EBC0AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		390206B528817FE400EBC0AD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		390CDA3D288C5D4F0065BBAF /* CardsTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsTVController.swift; sourceTree = "<group>"; };
-		39171B3F2878455400535BEE /* LoadingIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorViewController.swift; sourceTree = "<group>"; };
 		392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequestInterceptor2.swift; sourceTree = "<group>"; };
 		39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDeliveryMethodsViewController.swift; sourceTree = "<group>"; };
 		3938D1A825D0615A00A470C1 /* InvoicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesViewController.swift; sourceTree = "<group>"; };
@@ -345,7 +342,6 @@
 		3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPayTableViewCell.swift; sourceTree = "<group>"; };
 		3982A0832829A71500276286 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3982A08D282AE02100276286 /* DevicesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DevicesViewController.xib; sourceTree = "<group>"; };
-		3982A08F282AE4FD00276286 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		398A64D928759E3100C5A99E /* OfficesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OfficesViewController.xib; sourceTree = "<group>"; };
 		398A64DB28759F3600C5A99E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		398A64DC28759F3600C5A99E /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
@@ -594,7 +590,6 @@
 				22E8CF07241D59E500CA0F52 /* PaymentTVCell.swift */,
 				22E8CF08241D59E500CA0F52 /* PaymentTVCell.xib */,
 				220F3E3125B4957800C6625D /* PaymentsViewController.swift */,
-				3982A08F282AE4FD00276286 /* PaymentTableViewCell.swift */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -771,7 +766,6 @@
 				22042A11235F602F0054D4DD /* Account */,
 				2278511823CF9B4E007F1063 /* Devices */,
 				2278511523CF9763007F1063 /* Calculations */,
-				39171B3F2878455400535BEE /* LoadingIndicatorViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1003,7 +997,6 @@
 				39D18B9B25F79B81000CE4E3 /* RefreshTokenModel.swift in Sources */,
 				39F6BB6E2825A05100CB96C1 /* Utils.swift in Sources */,
 				226AA7CF23CE310E003F006A /* UserDataProtocol.swift in Sources */,
-				3982A090282AE4FD00276286 /* PaymentTableViewCell.swift in Sources */,
 				223E97F32469D7C600CD96F7 /* RegisterOfPayment.swift in Sources */,
 				3938D1AA25D0615A00A470C1 /* InvoicesViewController.swift in Sources */,
 				22BD867024763C2E0064DAC3 /* PDFViewController-copy.swift in Sources */,
@@ -1055,7 +1048,6 @@
 				394176DF2635F23F00E796B7 /* UIImageHelper.swift in Sources */,
 				22669EF9247930900091A950 /* CommonTableViewController.swift in Sources */,
 				227771CC240B84C10035FC43 /* EmailPredicate.swift in Sources */,
-				39171B402878455400535BEE /* LoadingIndicatorViewController.swift in Sources */,
 				2202E1182588E6760056F176 /* ApiServiceProtocol.swift in Sources */,
 				229093902583BB6B00AF9E17 /* ResultModel.swift in Sources */,
 				22DB7BCF2530828D00F70737 /* TableViewCell.swift in Sources */,
