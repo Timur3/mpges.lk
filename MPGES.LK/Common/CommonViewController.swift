@@ -36,4 +36,18 @@ class CommonViewController: UIViewController {
         indicatorView?.removeFromSuperview()
         indicatorView = nil
     }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc func cancelButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

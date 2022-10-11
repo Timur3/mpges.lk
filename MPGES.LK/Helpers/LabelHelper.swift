@@ -16,7 +16,7 @@ func getCustomForCardLabel(text: String) -> UILabel {
     return label
 }
 
-func getCustomForContractLabel(text: String) -> UILabel {
+func getCustomLabel(text: String) -> UILabel {
     let label = UILabel()
     label.text = text
     //label.font = UIFont.boldSystemFont(ofSize: 15)

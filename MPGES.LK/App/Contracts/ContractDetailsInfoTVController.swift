@@ -45,11 +45,11 @@ class ContractDetailsInfoTVController: CommonViewController, UITableViewDelegate
     
     // Отображение баланса
     var contractSaldoCell: UITableViewCell = { getCustomCell(textLabel: "Баланс:", imageCell: myImage.rub, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
-    var saldoSumLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var contractorLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var contractNumberLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var contractDateLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var accountLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var saldoSumLabel: UILabel = { getCustomLabel(text: "...") }()
+    var contractorLabel: UILabel = { getCustomLabel(text: "...") }()
+    var contractNumberLabel: UILabel = { getCustomLabel(text: "...") }()
+    var contractDateLabel: UILabel = { getCustomLabel(text: "...") }()
+    var accountLabel: UILabel = { getCustomLabel(text: "...") }()
     //--
     
     var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Оплатить", imageCell: myImage.creditcard, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }

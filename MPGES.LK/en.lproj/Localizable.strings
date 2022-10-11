@@ -15,6 +15,8 @@
 "title.cardAdd" = "Card Add";
 "title.myContracts" = "Contracts";
 "title.payments" = "Payments";
+"title.more" = "More";
+"title.deletedAccount" = "Deleted account";
 
 //button
 "button.signIn" = "Sign in";

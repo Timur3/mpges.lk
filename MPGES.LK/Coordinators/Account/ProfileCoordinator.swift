@@ -20,6 +20,7 @@ class ProfileCoordinator: Coordinator {
     func start() {
         let profileVC: ProfileTVController = ProfileTVController()
         profileVC.tabBarItem = UITabBarItem(title: "Больше", image: UIImage(systemName: "ellipsis.circle"), tag: 2)
+        profileVC.navigationItem.title = NSLocalizedString("title.more", comment: "Больше")
         profileVC.delegate = self
         self.navigationController.pushViewController(profileVC, animated: true)
     }
@@ -60,5 +61,13 @@ extension ProfileCoordinator: ProfileTVControllerDelegate {
     
     func navigationToMailSend() {
         
+    }
+    
+    func navigationToPageEnterCode() {
+        let pageEnterCodeVC : PageEnterCodeTVController = PageEnterCodeTVController()
+        pageEnterCodeVC.navigationItem.title = NSLocalizedString("title.deletedAccount", comment: "Удаление")
+        pageEnterCodeVC.delegateProfile = self
+        let navPageEnterCodeVC: UINavigationController = UINavigationController(rootViewController: pageEnterCodeVC)
+        self.navigationController.present(navPageEnterCodeVC, animated: true, completion: nil)
     }
 }

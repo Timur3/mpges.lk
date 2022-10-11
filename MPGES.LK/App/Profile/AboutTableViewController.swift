@@ -20,7 +20,6 @@ class AboutTableViewController: CommonTableViewController {
         self.navigationItem.title = "О программе"
         super.viewDidLoad()
         configuration()
-        //developerCell.te = "Ведущий инженер-программист"
     }
     
     // MARK: - Table view data source

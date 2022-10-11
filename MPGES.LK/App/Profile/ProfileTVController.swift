@@ -14,6 +14,7 @@ protocol ProfileTVControllerDelegate: AnyObject {
     func navigationEmailToDeveloperPage()
     func navigationAboutPage()
     func navigationToMailSend()
+    func navigationToPageEnterCode()
 }
 
 protocol ProfileTVControllerUserDelegate: AnyObject {
@@ -23,10 +24,20 @@ protocol ProfileTVControllerUserDelegate: AnyObject {
     func resultOfSaveProfile(result: ResultModel<String>)
 }
 
-class ProfileTVController: CommonTableViewController {
+class ProfileTVController: CommonViewController, UITableViewDelegate, UITableViewDataSource {
     var sections: [String] {["Мои данные", "О программе", "Прочее", ""]}
     
     public weak var delegate: ProfileTVControllerDelegate?
+    private var indexPath: IndexPath?
+    
+    private lazy var profileTable: UITableView = {
+        let table = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        table.isUserInteractionEnabled = true
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.dataSource = self
+        table.delegate = self
+        return table
+    }()
     
     var deleteAccountCell: UITableViewCell { getCustomCell(textLabel: "Удалить аккаунт", imageCell: myImage.deleted, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
     var exitCell: UITableViewCell { getCustomCell(textLabel: "Выйти", imageCell: myImage.power, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
@@ -39,7 +50,7 @@ class ProfileTVController: CommonTableViewController {
     var emailToDeveloperCell: UITableViewCell { getCustomCell(textLabel: "Обратная связь", imageCell: myImage.envelope, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
     
     var nameTextField: UITextField = { getCustomTextField(placeholder: "Введите ваше имя", text: "Фамилия имя отчество") }()
-    var emailTextField: UITextField = { getCustomTextField(placeholder: "Электронная почта", text: "Электронная почта", isUserInteractionEnabled: false) }()    
+    var emailTextField: UITextField = { getCustomTextField(placeholder: "Электронная почта", text: "Электронная почта", isUserInteractionEnabled: false) }()
     var mobileTextField: UITextField = { getCustomTextField(placeholder: "Ваш сотовый", text: "Ваш сотовый", keyboardType: .numberPad) }()
     
     var user: UserModel? {
@@ -48,11 +59,12 @@ class ProfileTVController: CommonTableViewController {
                 self.emailTextField.text = self.user?.email
                 self.nameTextField.text = self.user?.name
                 self.mobileTextField.text = self.user?.mobile
+                self.profileTable.reloadData()
+                self.hideLoadingIndicator()
             }
         }
     }
     override func viewDidLoad() {
-        self.navigationItem.title = "Больше"
         super.viewDidLoad()
         configuration()
         setUpLayout()
@@ -65,6 +77,13 @@ class ProfileTVController: CommonTableViewController {
     }
     
     func setUpLayout(){
+        view.addSubview(profileTable)
+        NSLayoutConstraint.activate([
+            profileTable.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            profileTable.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            profileTable.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            profileTable.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        ])
         nameCell.contentView.addSubview(nameTextField)
         nameTextField.leadingAnchor.constraint(equalTo: nameCell.leadingAnchor, constant: 50).isActive = true
         nameTextField.centerYAnchor.constraint(equalTo: nameCell.centerYAnchor).isActive = true
@@ -77,12 +96,12 @@ class ProfileTVController: CommonTableViewController {
     }
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return sections.count
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
@@ -96,7 +115,7 @@ class ProfileTVController: CommonTableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -141,11 +160,11 @@ class ProfileTVController: CommonTableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         sections[section]
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
         
@@ -156,7 +175,7 @@ class ProfileTVController: CommonTableViewController {
             mobileTextField.becomeFirstResponder()
         }
         if indexPath.section == 0 && indexPath.row == 3 {
-            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+            ActivityIndicatorViewForCellService.shared.showAI(cell: self.profileTable.cellForRow(at: self.indexPath!)!)
             saveAlertSheetShow()
         }
         if indexPath.section == 1 && indexPath.row == 0 {
@@ -179,9 +198,10 @@ class ProfileTVController: CommonTableViewController {
 
 extension ProfileTVController: ProfileTVControllerUserDelegate {
     func getProfile() {
+        self.showLoadingIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             ApiServiceWrapper.shared.getProfileById(delegate: self)
-            self.refreshControl?.endRefreshing()
+            self.profileTable.refreshControl?.endRefreshing()
         }
     }
     
@@ -196,23 +216,28 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
     func setProfile(profile: ResultModel<UserModel>) {
         user = profile.data
     }
+    
+    func hiddenAI(){
+        guard let index = self.indexPath else { return }
+        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.profileTable.cellForRow(at: index)!)
+        ActivityIndicationService.shared.hideView()
+    }
 }
 
 //MARK: - CONFIGURE
 extension ProfileTVController {
     private func configuration() {
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(getData), for: UIControl.Event.valueChanged)
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+        self.profileTable.refreshControl = UIRefreshControl()
+        self.profileTable.refreshControl?.addTarget(self, action: #selector(getData), for: UIControl.Event.valueChanged)
         self.hideKeyboardWhenTappedAround()
     }
     func saveAlertSheetShow() {
         self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы подтверждаете операцию?", handlerYes: { (UIAlertAction) in
-                self.user?.name = self.nameTextField.text!
-                self.user?.email = self.emailTextField.text!
-                self.user?.mobile = self.mobileTextField.text!
-                // save
-                self.saveProfile(profile: self.user!)
+            self.user?.name = self.nameTextField.text!
+            self.user?.email = self.emailTextField.text!
+            self.user?.mobile = self.mobileTextField.text!
+            // save
+            self.saveProfile(profile: self.user!)
         }){ (UIAlertAction) in
             self.hiddenAI()
         }
@@ -226,9 +251,7 @@ extension ProfileTVController {
     }
     
     func alertSheetDeletedAccountShow(){
-        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите удалить учетную запись, без возможности восстановления?", handlerYes: { (UIAlertAction) in
-            //UserDataService.shared.delToken()
-            self.delegate?.navigateToFirstPage()
-        })
+        self.delegate?.navigationToPageEnterCode()
+        //self.delegate?.navigateToFirstPage()
     }
 }

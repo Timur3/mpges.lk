@@ -35,12 +35,12 @@ class ContractorInfoTVController: CommonTableViewController {
         }
     }
     
-    var nameLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var familyLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var middleNameLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var dateOfBirthLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var passportLabel: UILabel = { getCustomForContractLabel(text: "...") }()
-    var kemVydanLabel: UILabel = { getCustomForContractLabel(text: "...") }()
+    var nameLabel: UILabel = { getCustomLabel(text: "...") }()
+    var familyLabel: UILabel = { getCustomLabel(text: "...") }()
+    var middleNameLabel: UILabel = { getCustomLabel(text: "...") }()
+    var dateOfBirthLabel: UILabel = { getCustomLabel(text: "...") }()
+    var passportLabel: UILabel = { getCustomLabel(text: "...") }()
+    var kemVydanLabel: UILabel = { getCustomLabel(text: "...") }()
     
     override func viewDidLoad() {
         self.navigationItem.title = "Информация"

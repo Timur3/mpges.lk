@@ -92,7 +92,7 @@ class ContractsTVController: CommonViewController {
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alert.addAction(actionAddExistContract)
-        //alert.addAction(actionNewContract)
+        alert.addAction(actionNewContract)
         alert.addAction(actionCancel)
         
         if UIDevice.isPad {

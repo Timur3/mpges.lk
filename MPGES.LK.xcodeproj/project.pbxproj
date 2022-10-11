@@ -171,6 +171,7 @@
 		39D18B9B25F79B81000CE4E3 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */; };
 		39E3E48628F1B59A000CC84F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E3E48528F1B59A000CC84F /* UIViewController+Extension.swift */; };
 		39E3E48828F1E274000CC84F /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E3E48728F1E274000CC84F /* CommonViewController.swift */; };
+		39E3E48B28F48CFE000CC84F /* PageEnterCodeTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E3E48A28F48CF7000CC84F /* PageEnterCodeTVController.swift */; };
 		39E4A2E226DD29C200EE1DF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E4A2E126DD29C200EE1DF8 /* MapKit.framework */; };
 		39F6BB6E2825A05100CB96C1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6BB6D2825A05100CB96C1 /* Utils.swift */; };
 		39F6BB702825A44100CB96C1 /* PayWithTinkoffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6BB6F2825A44100CB96C1 /* PayWithTinkoffViewController.swift */; };
@@ -352,6 +353,7 @@
 		39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
 		39E3E48528F1B59A000CC84F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		39E3E48728F1E274000CC84F /* CommonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
+		39E3E48A28F48CF7000CC84F /* PageEnterCodeTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageEnterCodeTVController.swift; sourceTree = "<group>"; };
 		39E4A2E126DD29C200EE1DF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		39F6BB6D2825A05100CB96C1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		39F6BB6F2825A44100CB96C1 /* PayWithTinkoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithTinkoffViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				228E3E8A2421392D00402EF6 /* Common */,
 				226E5AF423F9BFFB008CFD37 /* Coordinators */,
 				22F5DDA923CCE7AF000C3F32 /* App */,
+				39E3E48A28F48CF7000CC84F /* PageEnterCodeTVController.swift */,
 				22F5DDA823CCE6EF000C3F32 /* Core */,
 				223FDF7D23D02FC30029E547 /* Helpers */,
 				220429F6235E22460054D4DD /* AppDelegate.swift */,
@@ -424,15 +427,11 @@
 			isa = PBXGroup;
 			children = (
 				22EB757F246D8AE90062F8F7 /* FirstTVController.swift */,
-				229A807D24195ECE009933D2 /* ProfileTVController.swift */,
 				22B7F472244CD12000E84EC5 /* SignUpTVController.swift */,
-				22690148244E273D00DB21F2 /* PasswordChangeTVController.swift */,
 				22CEA24B244B8D7100F83C8E /* PasswordRecoveryTVController.swift */,
 				2200A9F3259A2195000A1F74 /* PasswordResetTVController.swift */,
 				22EF4B972451E65D00DBF46B /* SignInTVController.swift */,
-				22EDFD88245D4A4600732E85 /* EmailToDeveloperTVController.swift */,
-				22B2E811247849DD00749CA1 /* AboutTableViewController.swift */,
-				22C6A03D2529E0E300623593 /* EmailToDeveloperTVController copy.swift */,
+				22690148244E273D00DB21F2 /* PasswordChangeTVController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -755,6 +754,7 @@
 		22F5DDA923CCE7AF000C3F32 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				39E3E48928F48A44000CC84F /* Profile */,
 				390CDA3C288C5CB60065BBAF /* Card */,
 				39377A98267FC08600763627 /* InvoiceDeliveryMethods */,
 				22A2A4BF2480043C005A656A /* Contractor */,
@@ -802,6 +802,17 @@
 				39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */,
 			);
 			path = PaymentConfiguration;
+			sourceTree = "<group>";
+		};
+		39E3E48928F48A44000CC84F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				229A807D24195ECE009933D2 /* ProfileTVController.swift */,
+				22B2E811247849DD00749CA1 /* AboutTableViewController.swift */,
+				22C6A03D2529E0E300623593 /* EmailToDeveloperTVController copy.swift */,
+				22EDFD88245D4A4600732E85 /* EmailToDeveloperTVController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		5E5FDB0E4D4E9FB466307D27 /* Frameworks */ = {
@@ -1006,6 +1017,7 @@
 				220DEF00258922A80059EDD0 /* MyHTTPMethod.swift in Sources */,
 				22EE5174246032F50075B6BE /* PayWithCreditCardViewController.swift in Sources */,
 				22F1736B23DA124F0065751E /* ReceivedDataTVCell.swift in Sources */,
+				39E3E48B28F48CFE000CC84F /* PageEnterCodeTVController.swift in Sources */,
 				2291CD3023DE190E0029FCD1 /* MethodApi.swift in Sources */,
 				227F3513241AB51E001C0500 /* MainContractsCoordinator.swift in Sources */,
 				22C6A03E2529E0E300623593 /* EmailToDeveloperTVController copy.swift in Sources */,
