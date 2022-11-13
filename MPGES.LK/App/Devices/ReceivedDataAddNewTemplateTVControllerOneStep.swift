@@ -27,7 +27,7 @@ class ReceivedDataAddNewTemplateTVControllerOneStep: CenterContentAndCommonTable
     
     var sections: [String] {["Дата показаний", ""]}
     
-    var ReceivedDataDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
+    var ReceivedDataDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Продолжить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
     var dateTextField: UITextField = {

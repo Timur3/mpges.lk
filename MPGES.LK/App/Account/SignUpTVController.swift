@@ -20,12 +20,12 @@ class SignUpTVController: CommonTableViewController {
     
     let infoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .left, accessoryType: .none) }()
     // ФИО
-    let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
+    let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.person, textAlign: .left, accessoryType: .none) }()
     // Контакты
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
-    var mobileCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.phone, textAlign: .left, accessoryType: .none) }()
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.mail, textAlign: .left, accessoryType: .none) }()
+    var mobileCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.phone, textAlign: .left, accessoryType: .none) }()
     // Пароль
-    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
+    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
     //var confirmPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
     // Кнопка
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Зарегистрировать", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
@@ -183,7 +183,7 @@ extension SignUpTVController: SignUpTVControllerUserDelegate {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         self.showAlert(
-            title: isError ? "Ошибка!" : "Успешно!",
+            title: isError ? "Ошибка" : "Успешно",
             mesg: result.message!) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()

@@ -1,5 +1,5 @@
 //
-//  UIDevicHelper.swift
+//  UIDevice+Extension.swift
 //  mpges.lk
 //
 //  Created by Timur on 16.10.2020.
@@ -16,12 +16,5 @@ extension UIDevice {
     
     class var isPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
-    }
-}
-
-extension Data {
-    var hexString: String {
-        let hexString = map { String(format: "%02.2hhx", $0) }.joined()
-        return hexString
     }
 }

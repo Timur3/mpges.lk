@@ -1,5 +1,5 @@
 //
-//  ArrayHelper.swift
+//  Sequence+Extension.swift
 //  mpges.lk
 //
 //  Created by Timur on 05.03.2020.

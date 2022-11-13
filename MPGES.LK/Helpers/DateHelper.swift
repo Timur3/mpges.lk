@@ -21,20 +21,6 @@ func UnixTimeToDateTime(unixtime: Int, fullFormat: Bool = false) -> String {
     return dateString
 }
 
-extension String {
-   /* func dateNormal() -> String {
-        let dateFmt = DateFormatter()
-        dateFmt.timeZone = NSTimeZone.default
-        dateFmt.dateFormat =  "yyyy-MM-dd"
-        let date = dateFmt.date(from: self.replacingOccurrences(of: "T00:00:00", with: ""))
-        
-        let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "dd.MM.yyyy"
-        let dateString = dayTimePeriodFormatter.string(from: date!)
-        return dateString
-    }*/
-}
-
 func getYear(dateStr: String) -> Int {
     let dateFmt = DateFormatter()
     dateFmt.timeZone = NSTimeZone.default

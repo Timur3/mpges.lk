@@ -20,7 +20,7 @@ class PasswordRecoveryTVController: CenterContentAndCommonTableViewController {
     
     var sections: [String] {["Email указанный при регистрации", ""]}
     
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.paperplane, textAlign: .left, accessoryType: .none) }()
     var submitCell: UITableViewCell { getCustomCell(textLabel: "Продолжить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
     var emailTextField: UITextField = {
@@ -105,7 +105,8 @@ class PasswordRecoveryTVController: CenterContentAndCommonTableViewController {
     }
     
     @objc func submitAction() {
-        let model = UserEmailModel(email: emailTextField.text!)
+        guard let email = emailTextField.text?.lowercased() else { return }
+        let model = UserEmailModel(email: email)
         ApiServiceWrapper.shared.passwordRecovery(model: model, delegate: self)
     }
 }
@@ -132,9 +133,7 @@ extension PasswordRecoveryTVController: PasswordRecoveryTVControllerUserDelegate
         if (!isError){
             self.mainCoordinator?.navigationPasswordResetPage(navigationController: self.navigationController!)
         } else {
-            self.showAlert(
-                title: "Ошибка",
-                mesg: result.message!)
+            showToast(message: result.message ?? "Неизвестная ошибка")
         }
     }
 }

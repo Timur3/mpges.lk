@@ -21,12 +21,12 @@ class PageEnterCodeTVController: CommonTableViewController {
     
     // ФИО
     let currentEmailCell: UITableViewCell = { getCustomCell(textLabel: "",
-                                                            imageCell: myImage.at,
+                                                            imageCell: AppImage.at,
                                                                textAlign: .left, accessoryType: .none) }()
     var emailLabel: UILabel = { getCustomLabel(
                                     text: UserDataService.shared.getKey(keyName: "email") ?? "") }()
     // Код
-    var codeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
+    var codeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
     var getCodeCell: UITableViewCell = { getCustomCell(textLabel: "Запросить код", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }()
     var codeTextField: UITextField = { getCustomTextField(placeholder: "XXXXXX", isPassword: true) }()
     
@@ -71,7 +71,7 @@ class PageEnterCodeTVController: CommonTableViewController {
         codeCell.addSubview(getCodeButton)
         getCodeButton.centerYAnchor.constraint(equalTo: codeCell.centerYAnchor).isActive = true
         //getCodeButton.leadingAnchor.constraint(equalTo: codeCell.leadingAnchor, constant: 100).isActive = true
-        getCodeButton.trailingAnchor.constraint(equalTo: codeCell.trailingAnchor, constant: -5).isActive = true
+        getCodeButton.trailingAnchor.constraint(equalTo: codeCell.trailingAnchor, constant: -25).isActive = true
         
     }
     // MARK: - Table view data source

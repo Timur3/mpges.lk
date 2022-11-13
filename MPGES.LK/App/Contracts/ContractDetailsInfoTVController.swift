@@ -38,13 +38,13 @@ class ContractDetailsInfoTVController: CommonViewController, UITableViewDelegate
         return table
     }()
     
-    var accountCell: UITableViewCell = { getCustomCell(textLabel: "Лицевой счет:", imageCell: myImage.tag, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
-    var contractNumberCell: UITableViewCell = { getCustomCell(textLabel: "Номер:", imageCell: myImage.docText, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
-    var contractDateCell: UITableViewCell = { getCustomCell(textLabel: "Дата:", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
-    var contractorCell: UITableViewCell = { getCustomCell(textLabel: "Контрагент:", imageCell: myImage.person, textAlign: .left, accessoryType: .disclosureIndicator) }()
+    var accountCell: UITableViewCell = { getCustomCell(textLabel: "Лицевой счет:", imageCell: AppImage.tag, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: true) }()
+    var contractNumberCell: UITableViewCell = { getCustomCell(textLabel: "Номер:", imageCell: AppImage.docText, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
+    var contractDateCell: UITableViewCell = { getCustomCell(textLabel: "Дата:", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
+    var contractorCell: UITableViewCell = { getCustomCell(textLabel: "Контрагент:", imageCell: AppImage.person, textAlign: .left, accessoryType: .disclosureIndicator) }()
     
     // Отображение баланса
-    var contractSaldoCell: UITableViewCell = { getCustomCell(textLabel: "Баланс:", imageCell: myImage.rub, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
+    var contractSaldoCell: UITableViewCell = { getCustomCell(textLabel: "Баланс:", imageCell: AppImage.rub, textAlign: .left, accessoryType: .none, isUserInteractionEnabled: false) }()
     var saldoSumLabel: UILabel = { getCustomLabel(text: "...") }()
     var contractorLabel: UILabel = { getCustomLabel(text: "...") }()
     var contractNumberLabel: UILabel = { getCustomLabel(text: "...") }()
@@ -52,11 +52,11 @@ class ContractDetailsInfoTVController: CommonViewController, UITableViewDelegate
     var accountLabel: UILabel = { getCustomLabel(text: "...") }()
     //--
     
-    var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Оплатить", imageCell: myImage.creditcard, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    var paymentsOfContract: UITableViewCell { getCustomCell(textLabel: "Платежи", imageCell: myImage.rub, textAlign: .left, accessoryType: .disclosureIndicator) }
-    var calculationsOfContract: UITableViewCell { getCustomCell(textLabel: "Начисления", imageCell: myImage.calc, textAlign: .left, accessoryType: .disclosureIndicator) }
-    var devicesOfContract: UITableViewCell { getCustomCell(textLabel: "Приборы учета", imageCell: myImage.gauge, textAlign: .left, accessoryType: .disclosureIndicator) }
-    var mailOfContract: UITableViewCell { getCustomCell(textLabel: (contractModel?.invoiceDeliveryMethod.devileryMethodName ?? "..."), imageCell: myImage.none, textAlign: .left, accessoryType: .disclosureIndicator, customImage: getImage(contractModel?.invoiceDeliveryMethodId ?? 0))}
+    var makeAPayment: UITableViewCell { getCustomCell(textLabel: "Оплатить", imageCell: AppImage.creditcard, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
+    var paymentsOfContract: UITableViewCell { getCustomCell(textLabel: "Платежи", imageCell: AppImage.rub, textAlign: .left, accessoryType: .disclosureIndicator) }
+    var calculationsOfContract: UITableViewCell { getCustomCell(textLabel: "Начисления", imageCell: AppImage.calc, textAlign: .left, accessoryType: .disclosureIndicator) }
+    var devicesOfContract: UITableViewCell { getCustomCell(textLabel: "Приборы учета", imageCell: AppImage.gauge, textAlign: .left, accessoryType: .disclosureIndicator) }
+    var mailOfContract: UITableViewCell { getCustomCell(textLabel: (contractModel?.invoiceDeliveryMethod.devileryMethodName ?? "..."), imageCell: AppImage.none, textAlign: .left, accessoryType: .disclosureIndicator, customImage: getImage(contractModel?.invoiceDeliveryMethodId ?? 0))}
     
     public var contractModel: ContractModel? {
         didSet {
@@ -232,7 +232,10 @@ class ContractDetailsInfoTVController: CommonViewController, UITableViewDelegate
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
         
-        if indexPath.section == 0 && indexPath.row == 0 {
+        // tap account cell
+        if indexPath.section == 0 && indexPath.row == 2 {
+            UIPasteboard.general.string = accountLabel.text
+            showToast(message: "ЛС скопирован")
         }
         if indexPath.section == 0 && indexPath.row == 3 {
             self.delegate?.navigationToContractorInfoPage(for: self.contractModel!.contractor)
@@ -289,7 +292,7 @@ extension ContractDetailsInfoTVController {
             (UIAlertAction) in
             self.goToApplePayPage()
         }
-        let appleLogoImage = UIImage(systemName: myImage.appleLogo.rawValue)
+        let appleLogoImage = UIImage(systemName: AppImage.appleLogo.rawValue)
         
         if let icon = appleLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 32)) {
             actionApplePay.setValue(icon, forKey: "image")
@@ -299,7 +302,7 @@ extension ContractDetailsInfoTVController {
             (UIAlertAction) in
             self.goToSberbankOnlinePage()
         }
-        let sberLogoImage = UIImage(named: myImage.sberLogo.rawValue)
+        let sberLogoImage = UIImage(named: AppImage.sberLogo.rawValue)
         if let icon = sberLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 29)) {
             actionSberBank.setValue(icon, forKey: "image")
         }

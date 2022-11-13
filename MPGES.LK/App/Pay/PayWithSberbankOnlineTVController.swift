@@ -17,12 +17,12 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
     
     var sections: [String] {["", "Лицевой счет", "Доставка электронного чека", ""]}
     
-    var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.none, textAlign: .left, accessoryType: .none) }()
+    var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.none, textAlign: .left, accessoryType: .none) }()
     
-    var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
-    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }()
+    var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.tag, textAlign: .left, accessoryType: .none, selectionStyle: .none) }()
+    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.rub, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Подтвердить платеж", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
-    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
+    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.mail, textAlign: .left, accessoryType: .none) }()
     
     var accountTextField: UITextField = { getCustomTextField(placeholder: "") }()
     var contactTextField: UITextField = { getCustomTextField(placeholder: "") }()
@@ -30,7 +30,7 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
     var logoImgView: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFit
-        img.image = UIImage(named: myImage.sberIcon.rawValue)
+        img.image = UIImage(named: AppImage.sberIcon.rawValue)
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
     }()
@@ -129,7 +129,7 @@ class PayWithSberbankOnlineTVController: CenterContentAndCommonTableViewControll
         tableView.deselectRow(at: indexPath, animated: true)
         self.indexPath = indexPath
         
-        if indexPath.section == 1 && indexPath.row == 0 {
+        if indexPath.section == 2 && indexPath.row == 0 {
             contactTextField.becomeFirstResponder()
         }
         if indexPath.section == 3 && indexPath.row == 0 {
@@ -148,7 +148,7 @@ extension PayWithSberbankOnlineTVController: PayWithSberbankOnlineTVControllerDe
         let isError = response.isError
         if isError {
             self.showAlert(
-                title: isError ? "Ошибка!" : "Успешно!",
+                title: isError ? "Ошибка" : "Успешно",
                 mesg: response.message!) { (UIAlertAction) in
                     if isError {
                         self.cancelButton()
@@ -176,9 +176,21 @@ extension PayWithSberbankOnlineTVController {
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
         self.hideKeyboardWhenTappedAround()
+        
+        let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        imgView.image = UIImage(systemName: AppImage.docCopy.rawValue)
+        imgView.isUserInteractionEnabled = true
+        imgView.gestureRecognizers = [UITapGestureRecognizer(target: self, action: #selector(getCopiedText))]
+        accountCell.accessoryView = imgView
     }
     
-    func setUpLayout(){
+    @objc private func getCopiedText() {
+        print(#function)
+        UIPasteboard.general.string = accountTextField.text
+        self.showToast(message: "ЛС скопирован")
+    }
+    
+    private func setUpLayout(){
         
         accountCell.addSubview(accountTextField)
         accountTextField.leadingAnchor.constraint(equalTo: accountCell.leadingAnchor, constant: 50).isActive = true

@@ -19,7 +19,7 @@ func getCustomUIBarButtonItem(image: String, target: AnyObject, action: Selector
 
 func getCloseUIBarButtonItem(target: AnyObject, action: Selector) -> UIBarButtonItem {
     
-    let barBtn = UIBarButtonItem(image: UIImage(systemName: myImage.close.rawValue),
+    let barBtn = UIBarButtonItem(image: UIImage(systemName: AppImage.close.rawValue),
                                  style: .plain,
                                  target: target,
                                  action: action)
@@ -28,10 +28,18 @@ func getCloseUIBarButtonItem(target: AnyObject, action: Selector) -> UIBarButton
 
 func getPlusUIBarButtonItem(target: AnyObject, action: Selector) -> UIBarButtonItem {
     
-    let barBtn = UIBarButtonItem(image: UIImage(systemName: myImage.plus.rawValue),
+    let barBtn = UIBarButtonItem(image: UIImage(systemName: AppImage.plus.rawValue),
                                  style: .plain,
                                  target: target,
                                  action: action)
     return barBtn
 }
 
+func getLigthButton(target: AnyObject, action: Selector) -> UIBarButtonItem {
+    
+    let barBtn = UIBarButtonItem(image: UIImage(systemName: AppImage.ligthOff.rawValue),
+                                 style: .plain,
+                                 target: target,
+                                 action: action)
+    return barBtn
+}

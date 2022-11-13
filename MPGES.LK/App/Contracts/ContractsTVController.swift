@@ -92,7 +92,7 @@ class ContractsTVController: CommonViewController {
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alert.addAction(actionAddExistContract)
-        alert.addAction(actionNewContract)
+        //alert.addAction(actionNewContract)
         alert.addAction(actionCancel)
         
         if UIDevice.isPad {
@@ -117,7 +117,7 @@ class ContractsTVController: CommonViewController {
     }
     
     func alertSheetOfDelBindingShow(for indexPath: IndexPath){
-        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите исключить договор из списка услуг?", handlerYes: { (UIAlertAction) in
+        self.showActionSheetConfirm(title: "Внимание!", message: "Вы действительно хотите исключить договор из списка услуг?", handlerYes: { (UIAlertAction) in
             let model = ContractNumberModel(number: self.contractList[indexPath.section].number)
             ApiServiceWrapper.shared.removeContractBinding(model: model, delegate: self)
         })
@@ -196,8 +196,8 @@ extension ContractsTVController: ContractsTVControllerUserDelegate {
     }
     
     func resultRemoveContractBinding(result: ResultModel<String>) {
+        showToast(message: "Договор отвязан")
         self.getContracts()
-        debugPrint("Success")
     }
     
     func setContracts(contracts: ResultModel<[ContractModel]>) {

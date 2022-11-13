@@ -15,13 +15,13 @@ class PayWithCreditCardViewController: UITableViewController {
     var sections: [String] {["Лицевой счет", "Реквизиты банковской карты", "Доставка электронного чека",""]}
     var indexPath: IndexPath?
     
-    var selectedCardCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.creditcard, textAlign: .left, accessoryType: .disclosureIndicator) }()
-    var cardNumberCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.edit, textAlign: .left, accessoryType: .none) }()
-    var cardNameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
-    var cardDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
-    var cardCodeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
+    var selectedCardCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.creditcard, textAlign: .left, accessoryType: .disclosureIndicator) }()
+    var cardNumberCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.edit, textAlign: .left, accessoryType: .none) }()
+    var cardNameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.person, textAlign: .left, accessoryType: .none) }()
+    var cardDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none) }()
+    var cardCodeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Подтвердить платеж", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
-    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
+    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.paperplane, textAlign: .left, accessoryType: .none) }()
     
     var accountTextField: UITextField = { getCustomTextField(placeholder: "Например: 860001000001") }()
     var cardNumberTextField: UITextField = { getCustomTextField(placeholder: "0000 0000 0000 0000") }()
@@ -182,7 +182,7 @@ extension PayWithCreditCardViewController: ContractAddTVControllerUserDelegate {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         self.showAlert(
-            title: isError ? "Ошибка!" : "Успешно!",
+            title: isError ? "Ошибка" : "Успешно",
             mesg: result.message!) { (UIAlertAction) in
                 if !isError {
                     self.cancelButton()

@@ -16,9 +16,9 @@ class PayWithApplePayTVController: CommonTableViewController {
     
     var sections: [String] {["Лицевой счет", "Сумма к оплате", "Доставка электронного чека"]}
     
-    var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
-    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }()
-    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
+    var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.tag, textAlign: .left, accessoryType: .none) }()
+    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.rub, textAlign: .left, accessoryType: .none) }()
+    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.mail, textAlign: .left, accessoryType: .none) }()
     
     var accountTextField: UITextField = { getCustomTextField(placeholder: "", keyboardType: .decimalPad) }()
     var contactTextField: UITextField = { getCustomTextField(placeholder: "") }()

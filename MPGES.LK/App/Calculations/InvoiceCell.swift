@@ -19,9 +19,9 @@ class InvoiceCell: UITableViewCell {
     func update(for invoice: InvoiceModel) {
         textLabel!.text = invoice.month?.name
         detailTextLabel?.text = "Начислено: " + formatRusCurrency(invoice.debet)
-        imageView?.image = UIImage(systemName: myImage.textPlus.rawValue)
+        imageView?.image = UIImage(systemName: AppImage.textPlus.rawValue)
         
-        let imgView = UIImageView(image: UIImage(systemName: myImage.dote.rawValue))
+        let imgView = UIImageView(image: UIImage(systemName: AppImage.dote.rawValue))
         imgView.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(alertShowInvoiceAction(tapGestureRecognizer:)))
         imgView.addGestureRecognizer(tapGestureRecognizer)

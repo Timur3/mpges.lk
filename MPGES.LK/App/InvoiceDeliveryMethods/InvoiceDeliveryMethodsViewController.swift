@@ -56,7 +56,7 @@ class InvoiceDeliveryMethodsViewController: CommonViewController {
             InvoiceDeliveryMethodsTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
     }
-        
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         delegate?.getContractById(id: contract!.id)
@@ -73,19 +73,20 @@ class InvoiceDeliveryMethodsViewController: CommonViewController {
 extension InvoiceDeliveryMethodsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.indexPath = indexPath
-        //ActivityIndicatorViewForCellService.shared.showAI(cell: self.InvoiceDeliveryMethodsTable.cellForRow(at: indexPath)!)
-        
-        deliveryMethodList[indexPath.row].selected = deliveryMethodList[indexPath.row].selected ? true : true
-        selectedDeliveryMethod = deliveryMethodList[indexPath.row]
-        var temp = [InvoiceDeliveryMethodModel]()
-        for var item in deliveryMethodList {
-            if (item.id != selectedDeliveryMethod!.id) { item.selected = false }
-            temp.append(item)
+        self.showLoadingIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+            tableView.deselectRow(at: indexPath, animated: true)
+            self.indexPath = indexPath
+            deliveryMethodList[indexPath.row].selected = deliveryMethodList[indexPath.row].selected ? true : true
+            selectedDeliveryMethod = deliveryMethodList[indexPath.row]
+            var temp = [InvoiceDeliveryMethodModel]()
+            for var item in deliveryMethodList {
+                if (item.id != selectedDeliveryMethod!.id) { item.selected = false }
+                temp.append(item)
+            }
+            deliveryMethodList = temp
+            self.sendDeliveryMethod()
         }
-        deliveryMethodList = temp
-        self.sendDeliveryMethod()
     }
     
     func sendDeliveryMethod() {
@@ -100,12 +101,6 @@ extension InvoiceDeliveryMethodsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InvoiceDeliveryMethodsTableViewCell.identifier, for: indexPath) as! InvoiceDeliveryMethodsTableViewCell
-        //guard let tableCell = cell,
-        //     let deliveryOfInvoiceViewModel = deliveryOfInvoiceViewModel else { return UITableViewCell() }
-        
-        //let cellViewModel = deliveryOfInvoiceViewModel.cellViewModel(for: indexPath)
-        //tableCell.viewModel = cellViewModel
-        //tableCell.accessoryType = cellViewModel.selected ? .checkmark : .none
         cell.update(deliveryMethodList[indexPath.row])
         cell.accessoryType = deliveryMethodList[indexPath.row].selected ? .checkmark : .none
         return cell
@@ -130,16 +125,11 @@ extension InvoiceDeliveryMethodsViewController: UITableViewDelegate {
 extension InvoiceDeliveryMethodsViewController: InvoiceDeliveryMethodTVControllerDelegate {
     
     func resultOfUpdateDeliveryMethod(for resultModel: ResultModel<String>) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let isError = resultModel.isError
-            self.showAlert(
-                title: isError ? "Ошибка!" : "Успешно!",
-                mesg: resultModel.message!) { (UIAlertAction) in
-                    if !isError {
-                        //self.cancelButton()
-                    }
-                }
-            //ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.InvoiceDeliveryMethodsTable.cellForRow(at: self.indexPath!)!)
+        let isError = resultModel.isError
+        if isError {
+            self.showAlert(title: "Ошибка", mesg: resultModel.message!)
+        } else {
+            self.showToast(message: "Успешно")
         }
     }
     

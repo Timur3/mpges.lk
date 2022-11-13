@@ -1,5 +1,5 @@
 //
-//  MyImage.swift
+//  AppImage.swift
 //  mpges.lk
 //
 //  Created by Timur on 23.03.2020.
@@ -10,21 +10,21 @@ import Foundation
 
 // For delivery type
 func getImage(_ id: Int) -> String {
-    guard let type = deliveryType(rawValue: id) else { return myImage.mail.rawValue }
+    guard let type = deliveryType(rawValue: id) else { return AppImage.mail.rawValue }
     
     switch type {
     case deliveryType.address:
-        return myImage.mail.rawValue
+        return AppImage.mail.rawValue
     case deliveryType.email:
-        return myImage.at.rawValue
+        return AppImage.at.rawValue
     case deliveryType.lk:
-        return myImage.network.rawValue
+        return AppImage.network.rawValue
     case deliveryType.office:
-        return myImage.figureWalk.rawValue
+        return AppImage.figureWalk.rawValue
     }
 }
 
-enum myImage: String {
+enum AppImage: String {
     case none = "none"
     case tag = "tag"
     case link = "link"
@@ -68,4 +68,6 @@ enum myImage: String {
     case at = "at"
     case network = "network"
     case figureWalk = "figure.walk"
+    case ligthOn = "flashlight.on.fill"
+    case ligthOff = "flashlight.off.fill"
 }

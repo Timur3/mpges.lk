@@ -39,15 +39,15 @@ class ProfileTVController: CommonViewController, UITableViewDelegate, UITableVie
         return table
     }()
     
-    var deleteAccountCell: UITableViewCell { getCustomCell(textLabel: "Удалить аккаунт", imageCell: myImage.deleted, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
-    var exitCell: UITableViewCell { getCustomCell(textLabel: "Выйти", imageCell: myImage.power, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
-    var passChange: UITableViewCell { getCustomCell(textLabel: "Изменить пароль", imageCell: myImage.edit, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.at, textAlign: .left, accessoryType: .none) }()
-    var mobileCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.phone, textAlign: .left, accessoryType: .none) }()
-    var saveCell: UITableViewCell { getCustomCell(textLabel: "Сохранить изменения", imageCell: myImage.save, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    var aboutCell: UITableViewCell { getCustomCell(textLabel: "Разработчик", imageCell: myImage.person, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
-    var emailToDeveloperCell: UITableViewCell { getCustomCell(textLabel: "Обратная связь", imageCell: myImage.envelope, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
+    var deleteAccountCell: UITableViewCell { getCustomCell(textLabel: "Удалить аккаунт", imageCell: AppImage.deleted, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
+    var exitCell: UITableViewCell { getCustomCell(textLabel: "Выйти", imageCell: AppImage.power, textAlign: .left, textColor: .systemRed, accessoryType: .none) }
+    var passChange: UITableViewCell { getCustomCell(textLabel: "Изменить пароль", imageCell: AppImage.edit, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
+    let nameCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.person, textAlign: .left, accessoryType: .none) }()
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.at, textAlign: .left, accessoryType: .none) }()
+    var mobileCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.phone, textAlign: .left, accessoryType: .none) }()
+    var saveCell: UITableViewCell { getCustomCell(textLabel: "Сохранить изменения", imageCell: AppImage.save, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
+    var aboutCell: UITableViewCell { getCustomCell(textLabel: "Разработчик", imageCell: AppImage.person, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
+    var emailToDeveloperCell: UITableViewCell { getCustomCell(textLabel: "Обратная связь", imageCell: AppImage.envelope, textAlign: .left, textColor: .systemBlue, accessoryType: .none) }
     
     var nameTextField: UITextField = { getCustomTextField(placeholder: "Введите ваше имя", text: "Фамилия имя отчество") }()
     var emailTextField: UITextField = { getCustomTextField(placeholder: "Электронная почта", text: "Электронная почта", isUserInteractionEnabled: false) }()
@@ -209,7 +209,7 @@ extension ProfileTVController: ProfileTVControllerUserDelegate {
         ApiServiceWrapper.shared.updateUser(model: profile, delegate: self)
     }
     func resultOfSaveProfile(result: ResultModel<String>) {
-        self.showAlert(title: result.isError ? "Ошибка!" : "Успешно!", mesg: result.message!)
+        self.showAlert(title: result.isError ? "Ошибка" : "Успешно", mesg: result.message!)
         self.hiddenAI()
     }
     
@@ -232,7 +232,7 @@ extension ProfileTVController {
         self.hideKeyboardWhenTappedAround()
     }
     func saveAlertSheetShow() {
-        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы подтверждаете операцию?", handlerYes: { (UIAlertAction) in
+        self.showActionSheetConfirm(title: "Внимание!", message: "Вы подтверждаете операцию?", handlerYes: { (UIAlertAction) in
             self.user?.name = self.nameTextField.text!
             self.user?.email = self.emailTextField.text!
             self.user?.mobile = self.mobileTextField.text!
@@ -244,7 +244,7 @@ extension ProfileTVController {
     }
     
     func alertSheetExitShow(){
-        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите выйти из программы?", handlerYes: { (UIAlertAction) in
+        self.showActionSheetConfirm(title: "Внимание!", message: "Вы действительно хотите выйти из программы?", handlerYes: { (UIAlertAction) in
             UserDataService.shared.delToken()
             self.delegate?.navigateToFirstPage()
         })

@@ -106,7 +106,7 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReceivedDataTVCell.identifier, for: indexPath) as! ReceivedDataTVCell
-        cell.imageView?.image = UIImage.init(systemName: myImage.receivedData.rawValue)
+        cell.imageView?.image = UIImage.init(systemName: AppImage.receivedData.rawValue)
         cell.update(for: receivedDataList[indexPath.section].receivedData[indexPath.row])
         return cell
     }
@@ -137,7 +137,7 @@ extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
     func resultOfDelete(result: ResultModel<String>) {
         let isError = result.isError
         self.showAlert(
-            title: isError ? "Ошибка!" : "Успешно!",
+            title: isError ? "Ошибка" : "Успешно",
             mesg: result.message!) {
                 (UIAlertAction) in
                 if !isError {

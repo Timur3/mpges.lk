@@ -20,10 +20,10 @@ class SignInTVController: CenterContentAndCommonTableViewController {
     public weak var delegate: MainCoordinator?
     public weak var delegateUser: SignInTVControllerUserDelegate?
     
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
-    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
-    var inputCell: UITableViewCell { getCustomCell(textLabel: NSLocalizedString("button.signIn", comment: "Войти"), imageCell: myImage.none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
-    var passwordRecoveryCell: UITableViewCell { getCustomCell(textLabel: "Забыли пароль", imageCell: myImage.none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.mail, textAlign: .left, accessoryType: .none) }()
+    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
+    var inputCell: UITableViewCell { getCustomCell(textLabel: NSLocalizedString("button.signIn", comment: "Войти"), imageCell: AppImage.none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
+    var passwordRecoveryCell: UITableViewCell { getCustomCell(textLabel: "Забыли пароль", imageCell: AppImage.none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
     
     var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com") }()
     var passwordTextField: UITextField = { getCustomTextField(placeholder: "Ваш пароль", isPassword: true) }()
@@ -175,7 +175,6 @@ extension SignInTVController {
 extension SignInTVController: SignInTVControllerUserDelegate {
     
     func authApi(model: SignInModel) {
-        self.showToast(message: "Успешно!", font: .systemFont(ofSize: 12.0))
         if (self.indexPath != nil) {
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
@@ -191,6 +190,7 @@ extension SignInTVController: SignInTVControllerUserDelegate {
             ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
         if !result.isError {
+            showToast(message: "Успешно")
             userDataService.setToken(result.data!.accessToken)
             userDataService.setRefreshToken(result.data!.refreshToken)
             userDataService.setIsAuth()
@@ -198,7 +198,6 @@ extension SignInTVController: SignInTVControllerUserDelegate {
             self.delegate?.goToNextSceneApp()
             navigationController?.isNavigationBarHidden = true
         } else {
-            //self.showT(msg: "Успешно!", seconds: 2)
             self.showAlert(title: "Ошибка", mesg: result.message!) { (UIAlertAction) in
                 print(result.message as Any)
             }

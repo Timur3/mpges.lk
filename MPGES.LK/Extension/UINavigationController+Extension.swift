@@ -1,5 +1,5 @@
 //
-//  UINavigationControllerHelper.swift
+//  UINavigationController+Extension.swift
 //  mpges.lk
 //
 //  Created by Timur on 20.12.2020.

@@ -19,9 +19,9 @@ class PayWithTinkoffViewController: CommonTableViewController {
     
     var sections: [String] {["Лицевой счет", "Сумма к оплате", "Доставка электронного чека", ""]}
     
-    var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
-    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.rub, textAlign: .left, accessoryType: .none) }()
-    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.mail, textAlign: .left, accessoryType: .none) }()
+    var accountCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.tag, textAlign: .left, accessoryType: .none) }()
+    var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.rub, textAlign: .left, accessoryType: .none) }()
+    var contactCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.mail, textAlign: .left, accessoryType: .none) }()
     
     private lazy var buttonPayCell: ButtonPayTableViewCell = {
         var cell = ButtonPayTableViewCell()
@@ -216,14 +216,14 @@ extension PayWithTinkoffViewController {
         
         guard let paymentData = createPaymentData() else { return }
         if let sdk = try? AcquiringUISDK(configuration: acquiringSDKConfiguration, style: TinkoffASDKUI.DefaultStyle()) {
-            /*sdk.presentPaymentView(on: self, acquiringPaymentStageConfiguration: .init(
+            sdk.presentPaymentView(on: self, acquiringPaymentStageConfiguration: .init(
                 paymentStage: .`init`(paymentData: paymentData)
             ),
                                    configuration: acquiringViewConfiguration(),
                                    tinkoffPayDelegate: nil) { [weak self] response in
                 
                 self?.responseReviewing(response)
-            }*/
+            }
         }
         
     }
@@ -266,7 +266,7 @@ extension PayWithTinkoffViewController {
         let summaPay: NSDecimalNumber = NSDecimalNumber(value: removeFormatAndSpace(for: summaTextField.text ?? "500,00 ₽"))
         let randomOrderId = String(Int64(arc4random()))
         var paymentData = PaymentInitData(amount: summaPay, orderId: randomOrderId, customerKey: customerEmail)
-        paymentData.description = "Краткое описние товара"
+        paymentData.description = "Потребленная элетроэнергия"
         
         var receiptItems: [Item] = []
         let item = Item(amount: summaPay.int64Value * 100,

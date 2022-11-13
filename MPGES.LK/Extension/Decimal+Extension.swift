@@ -1,5 +1,5 @@
 //
-//  DecimalHelper.swift
+//  Decimal+Extension.swift
 //  mpges.lk
 //
 //  Created by Timur on 14.12.2020.

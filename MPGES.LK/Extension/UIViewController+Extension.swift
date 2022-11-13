@@ -1,5 +1,5 @@
 //
-//  UIViewControllerHelper.swift
+//  UIViewController+Extension.swift
 //  mpges.lk
 //
 //  Created by Timur on 19.12.2020.
@@ -36,19 +36,18 @@ extension UIViewController {
         let alert = UIAlertController(title: title, message: mesg, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ок", style: .default, handler: handler)
         
-        alert.addAction(action)
-        
+        alert.addAction(action)        
         self.present(alert, animated: true, completion: nil)
     }
     
-    func showActionSheetConfirm(title: String, mesg: String, handlerYes: @escaping (UIAlertAction) -> Void, handlerCancel: ((UIAlertAction) -> Void)? = nil) {
+    func showActionSheetConfirm(title: String, message: String, handlerYes: @escaping (UIAlertAction) -> Void, handlerCancel: ((UIAlertAction) -> Void)? = nil) {
         var alertStyle = UIAlertController.Style.actionSheet
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             alertStyle = UIAlertController.Style.alert
         }
         
-        let alertConfirm = UIAlertController(title: title, message: mesg, preferredStyle: alertStyle)
+        let alertConfirm = UIAlertController(title: title, message: message, preferredStyle: alertStyle)
         let actionYes = UIAlertAction(title: "Да", style: .default, handler: handlerYes)
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: handlerCancel)
         alertConfirm.addAction(actionYes)
@@ -57,10 +56,9 @@ extension UIViewController {
         self.present(alertConfirm, animated: true, completion: nil)
     }
     
-    func showToast(message : String, font: UIFont) {
-        
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+    func showToast(message : String, font: UIFont = .systemFont(ofSize: 13)) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-150, width: 150, height: 40))
+        toastLabel.backgroundColor = UIColor.systemGray.withAlphaComponent(1)
         toastLabel.textColor = UIColor.white
         toastLabel.font = font
         toastLabel.textAlignment = .center;
@@ -68,7 +66,7 @@ extension UIViewController {
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10;
         toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
+        UIApplication.shared.keyWindow?.addSubview(toastLabel)
         UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
         }, completion: {(isCompleted) in
@@ -76,8 +74,8 @@ extension UIViewController {
         })
     }
     
-    func showT(msg: String, seconds: Double) {
-        let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+    func showT(message: String, seconds: Double) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.view.backgroundColor = .black
         alert.view.alpha = 0.6
         alert.view.layer.cornerRadius = 15

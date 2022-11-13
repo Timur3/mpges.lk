@@ -12,14 +12,14 @@ class ContractorInfoTVController: CommonTableViewController {
     
     var sections: [String] {["Основные данные", "Паспортные данные", "Прочее"]}
     
-    var nameCell: UITableViewCell = { getCustomCell(textLabel: "Имя:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
-    var familyCell: UITableViewCell = { getCustomCell(textLabel: "Фамилия:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
-    var middleNameCell: UITableViewCell = { getCustomCell(textLabel: "Отчество:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "Email:", imageCell: myImage.paperplane, textAlign: .left, accessoryType: .none) }()
-    var dateOfBirthCell: UITableViewCell = { getCustomCell(textLabel: "Дата рождения:", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
-    var passportSeriaAndNumberCell: UITableViewCell = { getCustomCell(textLabel: "Серия/Номер:", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
-    var kemVydanCell: UITableViewCell = { getCustomCell(textLabel: "Выдан:", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
-    var typeOfContractorCell: UITableViewCell = { getCustomCell(textLabel: "Тип:", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
+    var nameCell: UITableViewCell = { getCustomCell(textLabel: "Имя:", imageCell: AppImage.person, textAlign: .left, accessoryType: .none) }()
+    var familyCell: UITableViewCell = { getCustomCell(textLabel: "Фамилия:", imageCell: AppImage.person, textAlign: .left, accessoryType: .none) }()
+    var middleNameCell: UITableViewCell = { getCustomCell(textLabel: "Отчество:", imageCell: AppImage.person, textAlign: .left, accessoryType: .none) }()
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "Email:", imageCell: AppImage.paperplane, textAlign: .left, accessoryType: .none) }()
+    var dateOfBirthCell: UITableViewCell = { getCustomCell(textLabel: "Дата рождения:", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none) }()
+    var passportSeriaAndNumberCell: UITableViewCell = { getCustomCell(textLabel: "Серия/Номер:", imageCell: AppImage.docText, textAlign: .left, accessoryType: .none) }()
+    var kemVydanCell: UITableViewCell = { getCustomCell(textLabel: "Выдан:", imageCell: AppImage.docText, textAlign: .left, accessoryType: .none) }()
+    var typeOfContractorCell: UITableViewCell = { getCustomCell(textLabel: "Тип:", imageCell: AppImage.person, textAlign: .left, accessoryType: .none) }()
     
     var contractor: ContractorModel? {
         didSet {

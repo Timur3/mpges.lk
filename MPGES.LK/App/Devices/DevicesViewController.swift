@@ -101,7 +101,7 @@ extension DevicesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DeviceTVCell.identifier, for: indexPath) as! DeviceTVCell
         cell.update(for: deviceList[indexPath.section])
-        cell.imageView?.image = UIImage(systemName: myImage.gauge.rawValue)
+        cell.imageView?.image = UIImage(systemName: AppImage.gauge.rawValue)
         cell.delegateCell = self
         cell.index = indexPath
         return cell

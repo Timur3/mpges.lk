@@ -13,7 +13,7 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
     
     var sections: [String] {["", "Сумма платежа", "Статус платежа", "Детали ошибки", ""]}
     
-    var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.none, textAlign: .left, accessoryType: .none) }()
+    var logoCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.none, textAlign: .left, accessoryType: .none) }()
     var closeCell: UITableViewCell = { getCustomCell(textLabel: "Готово", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }()
     var summaCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .center, accessoryType: .none) }()
     var statusCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .center, accessoryType: .none, style: .value1) }()
@@ -22,7 +22,7 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
     var statusImgView: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFit
-        img.image = UIImage(systemName: myImage.xmark.rawValue)
+        img.image = UIImage(systemName: AppImage.xmark.rawValue)
         img.tintColor = .systemRed
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
@@ -45,7 +45,7 @@ class ResultOfPaymentTableViewController: CenterContentAndCommonTableViewControl
                 self.statusCell.detailTextLabel?.text = formatRusDate(for: Date())
                 if !(self.resultPay!.isError) {
                     self.statusCell.textLabel?.text = "Успешно"
-                    self.statusImgView.image = UIImage(systemName: myImage.checkmark.rawValue)
+                    self.statusImgView.image = UIImage(systemName: AppImage.checkmark.rawValue)
                     self.statusImgView.tintColor = .systemGreen
                 } else {
                     self.statusCell.textLabel?.text = "Отклонено"

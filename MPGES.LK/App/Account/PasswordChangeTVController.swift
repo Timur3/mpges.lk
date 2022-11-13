@@ -20,10 +20,10 @@ class PasswordChangeTVController: CommonTableViewController {
     public weak var delegateProfile: ProfileCoordinator?
     
     // ФИО
-    let currentPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lockOpen, textAlign: .left, accessoryType: .none) }()
+    let currentPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lockOpen, textAlign: .left, accessoryType: .none) }()
     // Пароль
-    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
-    var confirmPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.lock, textAlign: .left, accessoryType: .none) }()
+    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
+    var confirmPasswordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
     // Кнопка
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Сохранить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     

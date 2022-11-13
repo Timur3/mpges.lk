@@ -1,5 +1,5 @@
 //
-//  UIImageHelper.swift
+//  UIImage+Extension.swift
 //  mpges.lk
 //
 //  Created by Timur on 25.04.2021.

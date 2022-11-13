@@ -19,8 +19,8 @@ class ContractAddTVController: CenterContentAndCommonTableViewController {
     
     var sections: [String] {["Лицевой счет", "Код подтверждения", ""]}
     
-    var numberCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.tag, textAlign: .left, accessoryType: .none) }()
-    var codeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.edit, textAlign: .left, accessoryType: .none) }()
+    var numberCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.tag, textAlign: .left, accessoryType: .none) }()
+    var codeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.edit, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Сохранить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
     var numberTextField: UITextField = {
@@ -158,12 +158,13 @@ extension ContractAddTVController: ContractAddTVControllerUserDelegate {
     func resultToBinding(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
-        self.showAlert(
-            title: isError ? "Ошибка!" : "Успешно!",
-            mesg: result.message!) { (UIAlertAction) in
-                if !isError {
-                    self.cancelButton()
-                }
+        if isError {
+            self.showAlert(
+                title: "Ошибка",
+                mesg: result.message!)
+        } else {
+            showToast(message: result.message ?? "Успешно")
+            self.cancelButton()
         }
     }
 }

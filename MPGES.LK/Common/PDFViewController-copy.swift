@@ -61,7 +61,7 @@ extension PDFViewController1 {
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.leftBarButtonItems = [cancelBtn]
-        let sharedBtn = getCustomUIBarButtonItem(image: myImage.shared.rawValue, target: self, action: #selector(shareButton))
+        let sharedBtn = getCustomUIBarButtonItem(image: AppImage.shared.rawValue, target: self, action: #selector(shareButton))
         self.navigationItem.rightBarButtonItems = [sharedBtn]
     }
     

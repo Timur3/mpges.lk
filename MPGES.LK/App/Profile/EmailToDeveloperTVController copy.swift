@@ -18,9 +18,9 @@ class EmailToDeveloperTVController1: CommonTableViewController {
     
     public weak var delegate: ProfileCoordinator?
     
-    let subjectCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.person, textAlign: .left, accessoryType: .none) }()
-    var bodyMailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.textPlus, textAlign: .left, accessoryType: .none) }()
+    let subjectCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.docText, textAlign: .left, accessoryType: .none) }()
+    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.person, textAlign: .left, accessoryType: .none) }()
+    var bodyMailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.textPlus, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Направить", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
     var subjectMailTextField: UITextField = { getCustomTextField(placeholder: "Заголовок") }()
@@ -144,7 +144,7 @@ class EmailToDeveloperTVController1: CommonTableViewController {
     }
     
     func alertSheetSendMailShow() {
-        self.showActionSheetConfirm(title: "Внимание!", mesg: "Вы действительно хотите направить обращение?", handlerYes: { (UIAlertAction) in
+        self.showActionSheetConfirm(title: "Внимание!", message: "Вы действительно хотите направить обращение?", handlerYes: { (UIAlertAction) in
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
             print("send mail")
             //sendMail()

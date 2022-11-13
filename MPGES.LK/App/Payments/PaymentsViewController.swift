@@ -117,7 +117,7 @@ extension PaymentsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: PaymentTVCell.identifier, for: indexPath) as! PaymentTVCell
         
         cell.update(for: paymentsList[indexPath.section].payments[indexPath.row])
-        cell.imageView?.image = UIImage(systemName: myImage.rub.rawValue)
+        cell.imageView?.image = UIImage(systemName: AppImage.rub.rawValue)
         
         return cell
     }

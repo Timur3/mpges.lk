@@ -67,7 +67,7 @@ class InvoicesViewController: CommonViewController {
             } catch {
                 self.hideLoadingIndicator()
                 self.showAlert(
-                    title: "Ошибка!",
+                    title: "Ошибка",
                     mesg: "Неизвестная ошибка, напишите в тех. поддержку") { (UIAlertAction) in
                         self.cancelAction()
                     }
@@ -203,7 +203,7 @@ extension InvoicesViewController: InvoicesViewControllerUserDelegate {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.invoiceTableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         self.showAlert(
-            title: isError ? "Ошибка!" : "Успешно!",
+            title: isError ? "Ошибка" : "Успешно",
             mesg: result.message!) { (UIAlertAction) in
                 if !isError {
                     self.cancelAction()
