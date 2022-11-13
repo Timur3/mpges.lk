@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+
 public protocol ReceivedDataAddNewTemplateTVControllerDelegate: AnyObject {
     func resultOfSending(result: ResultModel<String>)
 }
@@ -25,15 +27,15 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     private var isFilledAll: Bool = false
     
     var sections: [String] {["Тарифная зона", "Предыдущие показания", "Текущие показания", "Примерный расчет, с учетом всех тарифных зон", ""]}
-    var tariffZoneCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
-    var previousDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
-    var previousReceivedDataCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
-    var deviceRazryadCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.calendar, textAlign: .left, accessoryType: .none) }()
-    var tariffValueCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var tariffZoneCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none) }()
+    var previousDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none) }()
+    var previousReceivedDataCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.docText, textAlign: .left, accessoryType: .none) }()
+    var deviceRazryadCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none) }()
+    var tariffValueCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.docText, textAlign: .left, accessoryType: .none) }()
     
-    var receivedDataCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var receivedDataCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.docText, textAlign: .left, accessoryType: .none) }()
     
-    var calcCell: UITableViewCell = { getCustomCell(textLabel: formatRusCurrency(0), imageCell: myImage.docText, textAlign: .left, accessoryType: .none) }()
+    var calcCell: UITableViewCell = { getCustomCell(textLabel: formatRusCurrency(0), imageCell: AppImage.docText, textAlign: .left, accessoryType: .none) }()
     var saveCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }()
     
     var receivedDataTF: UITextField = { getCustomTextField(placeholder: "Введите показания", keyboardType: .numberPad) }()
@@ -177,7 +179,7 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
                     print("send server")
                     let modelOfSend = createModelOfSend(model: self.mainModel!)
                     ApiServiceWrapper.shared.sendReceivedData(model: modelOfSend, delegate: self)
-                } else {                    
+                } else {
                     bindingTemplate()
                 }
             } else {
@@ -230,13 +232,41 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
         let itog = volume * self.model!.tariffValue
         calcCell.textLabel?.text = formatRusCurrency(itog)
     }
+    
+    @objc func lightToggle() {
+        guard let device: AVCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video) else {
+            print(#function)
+            showTorchNotSupported()
+            return }
+        
+        if (device.hasTorch && device.isTorchAvailable){
+            do {
+                try device.lockForConfiguration()
+                if (device.torchMode == .on) {
+                    device.torchMode = .off
+                } else {
+                    do {
+                        try device.setTorchModeOn(level: 1.0)
+                    } catch {
+                        showTorchNotSupported()
+                    }
+                }
+                device.unlockForConfiguration()
+            } catch {
+                showTorchNotSupported()
+            }
+        }
+    }
+    private func showTorchNotSupported() {
+        self.showToast(message: "Фонарик не доступен", font: .systemFont(ofSize: 13))
+    }
 }
 //MARK: - DELEGATE
 extension ReceivedDataAddNewTemplateTVController: ReceivedDataAddNewTemplateTVControllerDelegate {
     func resultOfSending(result: ResultModel<String>) {
         let isError = result.isError
         self.showAlert(
-            title: isError ? "Ошибка!" : "Успешно!",
+            title: isError ? "Ошибка" : "Успешно",
             mesg: result.message!) { (UIAlertAction) in self.cancelButton() }
     }
 }
@@ -246,7 +276,8 @@ extension ReceivedDataAddNewTemplateTVController {
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
-        self.navigationItem.rightBarButtonItems = [cancelBtn]
+        let ligthButton = getLigthButton(target: self, action: #selector(lightToggle))
+        self.navigationItem.rightBarButtonItems = [cancelBtn, ligthButton]
         self.hideKeyboardWhenTappedAround()
         self.receivedDataTF.addTarget(self, action: #selector(inputReceivedDataTFAction), for: .editingChanged)
     }
