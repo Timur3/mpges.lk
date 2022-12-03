@@ -26,7 +26,7 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     let datePicker = UIDatePicker()
     private var isFilledAll: Bool = false
     
-    var sections: [String] {["Тарифная зона", "Предыдущие показания", "Текущие показания", "Примерный расчет, с учетом всех тарифных зон", ""]}
+    var sections: [String] {["Тарифная зона", "Предыдущие показания", "Текущие показания", " Итого", ""]}
     var tariffZoneCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none) }()
     var previousDateCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.calendar, textAlign: .left, accessoryType: .none) }()
     var previousReceivedDataCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.docText, textAlign: .left, accessoryType: .none) }()

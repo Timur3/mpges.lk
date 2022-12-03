@@ -106,7 +106,7 @@ class PasswordRecoveryTVController: CenterContentAndCommonTableViewController {
     
     @objc func submitAction() {
         guard let email = emailTextField.text?.lowercased() else { return }
-        let model = UserEmailModel(email: email)
+        let model = EmailModel(email: email)
         ApiServiceWrapper.shared.passwordRecovery(model: model, delegate: self)
     }
 }
@@ -131,7 +131,8 @@ extension PasswordRecoveryTVController: PasswordRecoveryTVControllerUserDelegate
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         if (!isError){
-            self.mainCoordinator?.navigationPasswordResetPage(navigationController: self.navigationController!)
+            guard let email = emailTextField.text?.lowercased() else { return }
+            self.mainCoordinator?.navigationPasswordResetPage(navigationController: self.navigationController!, email: email)
         } else {
             showToast(message: result.message ?? "Неизвестная ошибка")
         }

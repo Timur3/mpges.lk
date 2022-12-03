@@ -88,9 +88,9 @@ extension MainCoordinator: MainCoordinatorDelegate {
         self.navigationController.present(navRecoveryPasswordViewController, animated: true, completion: nil)
     }
     
-    func navigationPasswordResetPage(navigationController: UINavigationController) {
+    func navigationPasswordResetPage(navigationController: UINavigationController, email: String) {
         let passwordResetVC : PasswordResetTVController = PasswordResetTVController()
-        passwordResetVC.email = "timon2006tevriz@mail.ru"
+        passwordResetVC.email = email
         navigationController.pushViewController(passwordResetVC, animated: true)
     }   
     

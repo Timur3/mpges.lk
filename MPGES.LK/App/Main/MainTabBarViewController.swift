@@ -21,6 +21,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         self.delegate = self
         super.viewDidLoad()
+        self.tabBar.backgroundColor = .systemBackground.withAlphaComponent(0.6)
     }
 
     override func viewWillAppear(_ animated: Bool) {

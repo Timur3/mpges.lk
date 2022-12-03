@@ -9,6 +9,7 @@
 import Foundation
 
 public struct ReceivedDataVolumeModel: Decodable {
-    var volume: Double
-    var date:   String
+    var date: String
+    var unixDate: Int
+    var volume: Int
 }

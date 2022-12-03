@@ -9,26 +9,25 @@
 import UIKit
 
 protocol PageEnterCodeTVControllerDelegate: AnyObject {
-    func requestForChange(model: PasswordChangeModel)
-    func responseOfChange(result: ResultModel<String>)
+    func responseAfterSendingCode(result: ResultModel<String>)
+    func responseOfDeleteUser(result: ResultModel<String>)
 }
 
 class PageEnterCodeTVController: CommonTableViewController {
     
     var sections: [String] {["Email", "Код подтверждения", ""]}
-    
+    public var email: String?
     public weak var delegateProfile: ProfileCoordinator?
     
     // ФИО
     let currentEmailCell: UITableViewCell = { getCustomCell(textLabel: "",
                                                             imageCell: AppImage.at,
-                                                               textAlign: .left, accessoryType: .none) }()
-    var emailLabel: UILabel = { getCustomLabel(
-                                    text: UserDataService.shared.getKey(keyName: "email") ?? "") }()
+                                                            textAlign: .left, accessoryType: .none) }()
+    var emailLabel: UILabel = { getCustomLabel(text: "_" ) }()
     // Код
     var codeCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
     var getCodeCell: UITableViewCell = { getCustomCell(textLabel: "Запросить код", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }()
-    var codeTextField: UITextField = { getCustomTextField(placeholder: "XXXXXX", isPassword: true) }()
+    var codeTextField: UITextField = { getCustomTextField(placeholder: "XXXXXX", isPassword: false) }()
     
     // Кнопка
     var saveCell: UITableViewCell = { getCustomCell(textLabel: "Удалить", imageCell: .none, textAlign: .center, textColor: .systemRed, accessoryType: .none, isUserInteractionEnabled: true, selectionStyle: .blue) }()
@@ -51,10 +50,13 @@ class PageEnterCodeTVController: CommonTableViewController {
         super.viewDidLoad()
         configuration()
         setUpLayout()
+        emailLabel.text = email
     }
     
     @objc func tapButton() {
-        self.showAlert(title: "Информация", mesg: "На указанный Вами email адрес направили письмо с КОДОМ ПОДТВЕРЖДЕНИЯ. Код действителен в течение 3-х МИНУТ")
+        buttonDisabled()
+        let model = EmailModel(email: emailLabel.text ?? "")
+        ApiServiceWrapper.shared.getCodeForDeleteUser(model: model, delegate: self)
         print(#function)
     }
     
@@ -66,11 +68,9 @@ class PageEnterCodeTVController: CommonTableViewController {
         // Пароль
         codeCell.addSubview(codeTextField)
         codeTextField.leadingAnchor.constraint(equalTo: codeCell.leadingAnchor, constant: inset).isActive = true
-        //codeTextField.trailingAnchor.constraint(equalTo: codeCell.trailingAnchor, constant: -100).isActive = true
         codeTextField.centerYAnchor.constraint(equalTo: codeCell.centerYAnchor).isActive = true
         codeCell.addSubview(getCodeButton)
         getCodeButton.centerYAnchor.constraint(equalTo: codeCell.centerYAnchor).isActive = true
-        //getCodeButton.leadingAnchor.constraint(equalTo: codeCell.leadingAnchor, constant: 100).isActive = true
         getCodeButton.trailingAnchor.constraint(equalTo: codeCell.trailingAnchor, constant: -25).isActive = true
         
     }
@@ -130,41 +130,34 @@ class PageEnterCodeTVController: CommonTableViewController {
         if indexPath.section == 1 && indexPath.row == 0 {
             codeTextField.becomeFirstResponder()
         }
-        if indexPath.section == 1 && indexPath.row == 1 {
-            //confirmPasswordTextField.becomeFirstResponder()
-        }
         if indexPath.section == 2 && indexPath.row == 0 {
-            ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-            changePassword()
+            print(#function)
+            guard let code = codeTextField.text else { return }
+            if code.count > 0 {
+                ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
+                userDelete()
+            } else {
+                self.showAlert(title: "Ошибка", mesg: "Введите код подтверждения") { _ in
+                    self.hiddenAI()
+                }
+            }
         }
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if indexPath.section == 2 && indexPath.row == 0 {
-            return nil
-        }
-        return indexPath
+    func userDelete() {
+        guard let email = email?.lowercased() else { return }
+        let model = OtpVerificationModel(email: email, code: codeTextField.text ?? "")
+        ApiServiceWrapper.shared.userDelete(model: model, delegate: self)
     }
     
-    func changePassword() {
-       // if (self.isValidData())
-       // {
-            //let model = PasswordChangeModel( currentPassword: self.currentPasswordTextField.text!, newPassword: self.passwordTextField.text!)
-            //self.requestForChange(model: model)
-       // } else
-      //  {
-            self.hiddenAI()
-      //  }
+    private func buttonEnabled() {
+        getCodeButton.isEnabled = true
+        getCodeButton.alpha = 1.0
     }
     
-    func isValidData()->Bool {
-        let result: Bool = true
-        if !((self.codeTextField.text) != nil)
-        {
-            self.showAlert(title: "Ошибка", mesg: "Новый пароль и пароль подтверждения не совпадают")
-            return false
-        }
-        return result
+    private func buttonDisabled() {
+        getCodeButton.isEnabled = false
+        getCodeButton.alpha = 0.5
     }
 }
 
@@ -181,23 +174,32 @@ extension PageEnterCodeTVController {
 }
 
 extension PageEnterCodeTVController: PageEnterCodeTVControllerDelegate {
-    func requestForChange(model: PasswordChangeModel) {
-        //ApiServiceWrapper.shared.passwordChange(model: model, delegate: self)
+    func responseAfterSendingCode(result: ResultModel<String>) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30) { [weak self] in
+            self?.buttonEnabled()
+        }
+        
+        if !result.isError {
+            showToast(message: "Успешно")
+        } else {
+            self.showAlert(
+                title: "Ошибка",
+                mesg: result.message!)
+        }
     }
     
-    func responseOfChange(result: ResultModel<String>) {
+    func responseOfDeleteUser(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         
         self.showAlert(
             title: isError ? "Ошибка" : "Успешно",
             mesg: result.message!) { (UIAlertAction) in
-            if !isError {
-                self.cancelButton()
-                self.delegateProfile?.navigateToFirstPage()
+                if !isError {
+                    self.cancelButton()
+                    self.delegateProfile?.navigateToFirstPage()
+                }
             }
-        }
     }
-    
-    
 }

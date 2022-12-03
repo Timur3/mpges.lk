@@ -8,11 +8,11 @@
 
 import Foundation
 
-public struct UserEmailModel: Encodable {
+struct EmailModel: Encodable {
     var email: String
 }
 
-public struct UserModel: Decodable, Encodable {
+struct UserModel: Decodable, Encodable {
     let id: Int
     var name: String
     var email: String

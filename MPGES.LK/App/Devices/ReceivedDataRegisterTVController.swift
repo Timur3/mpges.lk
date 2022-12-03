@@ -14,9 +14,9 @@ public protocol ReceivedDataTVControllerDelegate: AnyObject {
     func resultOfDelete(result: ResultModel<String>)
 }
 
-class ReceivedDataRegisterTVController: CommonTableViewController {
+class ReceivedDataRegisterTVController: CommonViewController {
     let searchController = UISearchController(searchResultsController: nil)
-    
+    private var indexPath: IndexPath?
     public weak var delegate: DeviceCoordinatorMain?
     
     public var device: DeviceModel? {
@@ -25,90 +25,61 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
         }
     }
     
+    private lazy var receivedDataTableView: UITableView = {
+        var table = UITableView.init(frame: .zero, style: .insetGrouped)
+        let nib = UINib(nibName: ReceivedDataTVCell.identifier, bundle: nil)
+        table.register(nib, forCellReuseIdentifier: ReceivedDataTVCell.identifier)
+        table.isUserInteractionEnabled = true
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.dataSource = self
+        table.delegate = self
+        table.refreshControl = UIRefreshControl()
+        table.refreshControl?.addTarget(self, action: #selector(getReceivedData), for: UIControl.Event.valueChanged)
+        return table
+    }()
     var receivedDataList: [ReceivedDataModelVeiw] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.receivedDataTableView.reloadData()
+                self.hideLoadingIndicator()
             }
         }
     }
     
     override func viewDidLoad() {
-        //ActivityIndicatorViewService.shared.showView(form: self.view)
         super.viewDidLoad()
         configuration()
         getReceivedData()
+        setUpLayout()
     }
     
     private func configuration() {
-        self.refreshControl = UIRefreshControl()
-
         let sendMeterDataDevice = getPlusUIBarButtonItem(target: self, action: #selector(showMeterDataDevicePage))
         self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
-        
-        self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
-        let nib = UINib(nibName: "ReceivedDataTVCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: ReceivedDataTVCell.identifier)
-        self.refreshControl?.addTarget(self, action: #selector(getReceivedData), for: UIControl.Event.valueChanged)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+
+        receivedDataTableView.delegate = self
+        receivedDataTableView.dataSource = self
+    }
+    
+    private func setUpLayout(){
+        view.addSubview(receivedDataTableView)
+        NSLayoutConstraint.activate([
+            receivedDataTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            receivedDataTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            receivedDataTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            receivedDataTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        ])
     }
     
     @objc func getReceivedData() {
+        self.showLoadingIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             ApiServiceWrapper.shared.getReceivedDataByDeviceId(id: self.device!.id, delegate: self)
-            self.refreshControl?.endRefreshing()
+            self.receivedDataTableView.refreshControl?.endRefreshing()
         }
     }
     @objc func showMeterDataDevicePage() {
         self.showReceivedDataAddNewTemplateTVPage()
-    }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return receivedDataList.count
-    }
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let count = receivedDataList[section].receivedData.count
-        let volume = receivedDataList[section].receivedData.map({$0.volume}).reduce(0, +)
-        let msg = "Всего записей: \(count)\nобъем потребления: \(volume) кВт/ч"
-        return "\(receivedDataList[section].year)" + " год\n\(msg)"
-    }
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return receivedDataList[section].receivedData.count
-    }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        self.indexPath = indexPath
-        if editingStyle == .delete {
-            let id = receivedDataList[indexPath.section].receivedData[indexPath.row].id
-            ApiServiceWrapper.shared.receivedDataDelete(id: id, delegate: self)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
-    
-   /* override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let modifyAction = UIContextualAction(style: .normal, title:  "Удалить", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in success(true)
-              //self.tableView.deleteRows(at: [indexPath], with: .fade)
-          })
-        modifyAction.image = UIImage(systemName: myImage.delete.rawValue)
-        modifyAction.backgroundColor = .purple
-        return UISwipeActionsConfiguration(actions: [modifyAction])
-    }*/
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ReceivedDataTVCell.identifier, for: indexPath) as! ReceivedDataTVCell
-        cell.imageView?.image = UIImage.init(systemName: AppImage.receivedData.rawValue)
-        cell.update(for: receivedDataList[indexPath.section].receivedData[indexPath.row])
-        return cell
     }
     
     func showReceivedDataAddNewTemplateTVPage() {
@@ -123,6 +94,64 @@ class ReceivedDataRegisterTVController: CommonTableViewController {
             res.append(receivedDataVM)
         }
         return res.sorted(by: { $0.year > $1.year })
+    }
+}
+
+//MARK: - UITableViewDelegate
+extension ReceivedDataRegisterTVController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        print("did End Displaying Header View")
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+        print("did End Displaying Footer View")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
+
+//MARK: - UITableViewDataSource
+extension ReceivedDataRegisterTVController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return receivedDataList.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let count = receivedDataList[section].receivedData.count
+        let volume = receivedDataList[section].receivedData.map({$0.volume}).reduce(0, +)
+        let msg = "Всего записей: \(count)\nобъем потребления: \(volume) кВт/ч"
+        return "\(receivedDataList[section].year)" + " год\n\(msg)"
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return receivedDataList[section].receivedData.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        self.indexPath = indexPath
+        if editingStyle == .delete {
+            let id = receivedDataList[indexPath.section].receivedData[indexPath.row].id
+            ApiServiceWrapper.shared.receivedDataDelete(id: id, delegate: self)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReceivedDataTVCell.identifier, for: indexPath) as! ReceivedDataTVCell
+        cell.imageView?.image = UIImage.init(systemName: AppImage.receivedData.rawValue)
+        cell.update(for: receivedDataList[indexPath.section].receivedData[indexPath.row])
+        return cell
     }
 }
 
@@ -142,8 +171,8 @@ extension ReceivedDataRegisterTVController: ReceivedDataTVControllerDelegate {
                 (UIAlertAction) in
                 if !isError {
                     self.receivedDataList[self.indexPath!.section].receivedData.remove(at: self.indexPath!.row)
-                    self.tableView.deleteRows(at: [self.indexPath!], with: .automatic)
-                    self.tableView.reloadData()
+                    self.receivedDataTableView.deleteRows(at: [self.indexPath!], with: .automatic)
+                    self.receivedDataTableView.reloadData()
                 }
         }
     }

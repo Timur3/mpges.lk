@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReceivedDataCommonViewController: UIViewController {
+class ReceivedDataCommonViewController: CommonViewController {
     
     public weak var delegate: DeviceCoordinatorMain?
     public var device: DeviceModel?
@@ -26,10 +26,13 @@ class ReceivedDataCommonViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print(#function)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.hideLoadingIndicator()
+        }
     }
     
     private lazy var receivedDataRegisterTVController: ReceivedDataRegisterTVController = {
-        //ActivityIndicationService.shared.showView(form: self.view)
         var viewController = ReceivedDataRegisterTVController()
         viewController.delegate = delegate
         viewController.device = device
@@ -37,14 +40,13 @@ class ReceivedDataCommonViewController: UIViewController {
         return viewController
     }()
     
-//    private lazy var receivedDataChartViewController: ReceivedDataChartViewController = {
-//        var viewController = ReceivedDataChartViewController()
-//        viewController.delegate = delegate
-//        viewController.device = device
-//        self.add(asChildViewController: viewController)
-//        return viewController
-//    }()
-    
+    private lazy var receivedDataChartViewController: ReceivedDataChartViewController = {
+        var viewController = ReceivedDataChartViewController()
+        viewController.delegate = delegate
+        viewController.device = device
+        self.add(asChildViewController: viewController)
+        return viewController
+    }()
 }
 
 extension ReceivedDataCommonViewController {
@@ -57,12 +59,13 @@ extension ReceivedDataCommonViewController {
     }
     
     private func configuration() {
+        self.showLoadingIndicator()
         let sendMeterDataDevice = getPlusUIBarButtonItem(target: self, action: #selector(showMeterDataDevicePage))
         self.navigationItem.rightBarButtonItems = [sendMeterDataDevice]
         
         segment.addTarget(self, action: #selector(segmentSwicht), for: UIControl.Event.valueChanged)
         segment.selectedSegmentIndex = 0
-        self.navigationItem.titleView = segment        
+        self.navigationItem.titleView = segment
         
         let window = UIWindow(frame: self.view.bounds)
         containerView.frame = window.frame
@@ -73,12 +76,12 @@ extension ReceivedDataCommonViewController {
     @objc func segmentSwicht(){
         if segment.selectedSegmentIndex == 0 {
             navigationItem.title = "Показания"
-            //remove(asChildViewController: receivedDataChartViewController)
+            remove(asChildViewController: receivedDataChartViewController)
             add(asChildViewController: receivedDataRegisterTVController)
         } else {
             navigationItem.title = "График объемов"
             remove(asChildViewController: receivedDataRegisterTVController)
-            //add(asChildViewController: receivedDataChartViewController)
+            add(asChildViewController: receivedDataChartViewController)
         }
     }
     

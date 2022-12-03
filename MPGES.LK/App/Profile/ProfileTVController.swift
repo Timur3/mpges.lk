@@ -14,7 +14,7 @@ protocol ProfileTVControllerDelegate: AnyObject {
     func navigationEmailToDeveloperPage()
     func navigationAboutPage()
     func navigationToMailSend()
-    func navigationToPageEnterCode()
+    func navigationToPageEnterCode(email: String)
 }
 
 protocol ProfileTVControllerUserDelegate: AnyObject {
@@ -251,7 +251,8 @@ extension ProfileTVController {
     }
     
     func alertSheetDeletedAccountShow(){
-        self.delegate?.navigationToPageEnterCode()
+        guard let email = emailTextField.text?.lowercased() else { return }
+        self.delegate?.navigationToPageEnterCode(email: email)
         //self.delegate?.navigateToFirstPage()
     }
 }

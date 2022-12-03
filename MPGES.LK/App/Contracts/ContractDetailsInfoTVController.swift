@@ -294,7 +294,7 @@ extension ContractDetailsInfoTVController {
         }
         let appleLogoImage = UIImage(systemName: AppImage.appleLogo.rawValue)
         
-        if let icon = appleLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 32)) {
+        if let icon = appleLogoImage?.imageWithSize(scaledToSize: CGSize(width: 28, height: 32)) {
             actionApplePay.setValue(icon, forKey: "image")
         }
         
@@ -321,7 +321,7 @@ extension ContractDetailsInfoTVController {
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alertController.addAction(actionApplePay)
         alertController.addAction(actionSberBank)
-        alertController.addAction(actionOthersBank)
+        //alertController.addAction(actionOthersBank)
         alertController.addAction(actionCancel)
         
         if UIDevice.isPad {

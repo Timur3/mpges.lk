@@ -63,10 +63,11 @@ extension ProfileCoordinator: ProfileTVControllerDelegate {
         
     }
     
-    func navigationToPageEnterCode() {
+    func navigationToPageEnterCode(email: String) {
         let pageEnterCodeVC : PageEnterCodeTVController = PageEnterCodeTVController()
         pageEnterCodeVC.navigationItem.title = NSLocalizedString("title.deletedAccount", comment: "Удаление")
         pageEnterCodeVC.delegateProfile = self
+        pageEnterCodeVC.email = email
         let navPageEnterCodeVC: UINavigationController = UINavigationController(rootViewController: pageEnterCodeVC)
         self.navigationController.present(navPageEnterCodeVC, animated: true, completion: nil)
     }

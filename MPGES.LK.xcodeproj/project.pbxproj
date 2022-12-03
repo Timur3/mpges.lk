@@ -78,7 +78,6 @@
 		229093902583BB6B00AF9E17 /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290938F2583BB6B00AF9E17 /* ResultModel.swift */; };
 		22913B1523FDB7EE000F9677 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22913B1423FDB7EE000F9677 /* SceneDelegate.swift */; };
 		22913B1D23FF0152000F9677 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22913B1B23FF0152000F9677 /* MainTabBarViewController.swift */; };
-		22913B1E23FF0152000F9677 /* MainTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22913B1C23FF0152000F9677 /* MainTabBarViewController.xib */; };
 		2291CD3023DE190E0029FCD1 /* MethodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291CD2F23DE190E0029FCD1 /* MethodApi.swift */; };
 		2291CD3223DEC0070029FCD1 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291CD3123DEC0070029FCD1 /* DataProviderProtocol.swift */; };
 		2298463A23EF281100DA93BF /* CalculationsTVControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298463923EF281000DA93BF /* CalculationsTVControllerDelegate.swift */; };
@@ -155,6 +154,10 @@
 		3962A83826DCD94A0028277D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 3962A83726DCD94A0028277D /* SwiftKeychainWrapper */; };
 		39696D6E2612F1D6004C9401 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 39696D6D2612F1D6004C9401 /* Atomics */; };
 		39696D78261A1A85004C9401 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39696D77261A1A85004C9401 /* GradientView.swift */; };
+		3972BC5329216FD100F69C47 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 3972BC5229216FD100F69C47 /* Charts */; };
+		3972BC572923FBDC00F69C47 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3972BC562923FBDC00F69C47 /* CustomTabBar.swift */; };
+		3972BC602929227300F69C47 /* XYMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3972BC5F2929227300F69C47 /* XYMarkerView.swift */; };
+		3972BC632929229D00F69C47 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3972BC622929229D00F69C47 /* BalloonMarker.swift */; };
 		397ED7CB28F04C4600F59B4C /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */; };
 		397ED7CD28F04C4600F59B4C /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */; };
 		3982A0822829A60900276286 /* ButtonPayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */; };
@@ -168,6 +171,8 @@
 		398A64DE28759F3600C5A99E /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398A64DC28759F3600C5A99E /* MapViewController.xib */; };
 		39B23990261A2345000D3345 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */; };
 		39B55534288C670A000F9DFB /* CardAddTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B55533288C670A000F9DFB /* CardAddTVController.swift */; };
+		39BA7300292A8A76000BA4C5 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA72FF292A8A76000BA4C5 /* IndicatorView.swift */; };
+		39BA7302292BFF57000BA4C5 /* OtpVerificationModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA7301292BFF57000BA4C5 /* OtpVerificationModel .swift */; };
 		39BC47E2267E7A5C00AAD329 /* TableViewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */; };
 		39CF85C92824D925005BDCA8 /* PaymentConfigurationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */; };
 		39D18B9B25F79B81000CE4E3 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */; };
@@ -267,7 +272,6 @@
 		2290938F2583BB6B00AF9E17 /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
 		22913B1423FDB7EE000F9677 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		22913B1B23FF0152000F9677 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
-		22913B1C23FF0152000F9677 /* MainTabBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTabBarViewController.xib; sourceTree = "<group>"; };
 		2291CD2F23DE190E0029FCD1 /* MethodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodApi.swift; sourceTree = "<group>"; };
 		2291CD3123DEC0070029FCD1 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
 		2298463923EF281000DA93BF /* CalculationsTVControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationsTVControllerDelegate.swift; sourceTree = "<group>"; };
@@ -340,6 +344,9 @@
 		394806222823F0EA007687EC /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		3956F26D25D8294800A3A110 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
 		39696D77261A1A85004C9401 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		3972BC562923FBDC00F69C47 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		3972BC5F2929227300F69C47 /* XYMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYMarkerView.swift; sourceTree = "<group>"; };
+		3972BC622929229D00F69C47 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPayTableViewCell.swift; sourceTree = "<group>"; };
 		3982A0832829A71500276286 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		398A602A291CBF44008680B5 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -351,6 +358,8 @@
 		398A64DC28759F3600C5A99E /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		39B55533288C670A000F9DFB /* CardAddTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddTVController.swift; sourceTree = "<group>"; };
+		39BA72FF292A8A76000BA4C5 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
+		39BA7301292BFF57000BA4C5 /* OtpVerificationModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OtpVerificationModel .swift"; sourceTree = "<group>"; };
 		39BC47E1267E7A5C00AAD329 /* TableViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModelType.swift; sourceTree = "<group>"; };
 		39CF85C82824D925005BDCA8 /* PaymentConfigurationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfigurationFactory.swift; sourceTree = "<group>"; };
 		39D18B9A25F79B81000CE4E3 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
@@ -372,6 +381,7 @@
 				397ED7CB28F04C4600F59B4C /* TinkoffASDKCore in Frameworks */,
 				3962A83526DCD9320028277D /* RealmSwift in Frameworks */,
 				39499ED426DC904E0060171C /* Alamofire in Frameworks */,
+				3972BC5329216FD100F69C47 /* Charts in Frameworks */,
 				39E4A2E226DD29C200EE1DF8 /* MapKit.framework in Frameworks */,
 				22AF9ACF246145BC00FBB45F /* PassKit.framework in Frameworks */,
 				3962A83026DCD8220028277D /* SwiftyJSON in Frameworks */,
@@ -404,6 +414,7 @@
 		220429F5235E22460054D4DD /* mpges.lk */ = {
 			isa = PBXGroup;
 			children = (
+				3972BC552923FB1500F69C47 /* CustomTabBar */,
 				398A6029291CBE61008680B5 /* Extension */,
 				22EE5171245FE0DA0075B6BE /* МП ГЭС.entitlements */,
 				39696D79261A1A8A004C9401 /* CustomView */,
@@ -560,6 +571,7 @@
 				2290938F2583BB6B00AF9E17 /* ResultModel.swift */,
 				22F74D88259A2E830097AC83 /* PasswordResetModel.swift */,
 				394176E5263808D200E796B7 /* OfficeMarkModel.swift */,
+				39BA7301292BFF57000BA4C5 /* OtpVerificationModel .swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -652,7 +664,6 @@
 				2219FDAD248EABDF00058832 /* CenterContentAndCommonTableViewController.swift */,
 				22DB7BCD2530828D00F70737 /* TableViewCell.swift */,
 				22DB7BCE2530828D00F70737 /* TableViewCell.xib */,
-				3982A0832829A71500276286 /* UIView+Extension.swift */,
 				39E3E48728F1E274000CC84F /* CommonViewController.swift */,
 			);
 			path = Common;
@@ -662,7 +673,6 @@
 			isa = PBXGroup;
 			children = (
 				22913B1B23FF0152000F9677 /* MainTabBarViewController.swift */,
-				22913B1C23FF0152000F9677 /* MainTabBarViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -686,7 +696,9 @@
 		22C260172491565500422309 /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
+				3972BC5F2929227300F69C47 /* XYMarkerView.swift */,
 				22C260182491568B00422309 /* DateValuFormatter.swift */,
+				3972BC622929229D00F69C47 /* BalloonMarker.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -786,13 +798,23 @@
 			isa = PBXGroup;
 			children = (
 				39696D77261A1A85004C9401 /* GradientView.swift */,
+				39BA72FF292A8A76000BA4C5 /* IndicatorView.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		3972BC552923FB1500F69C47 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				3972BC562923FBDC00F69C47 /* CustomTabBar.swift */,
+			);
+			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
 		398A6029291CBE61008680B5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				3982A0832829A71500276286 /* UIView+Extension.swift */,
 				398A6030291CF473008680B5 /* UIViewController+Extension.swift */,
 				224D82B8258FBB2B0086F796 /* UINavigationController+Extension.swift */,
 				394176DE2635F23F00E796B7 /* UIImage+Extension.swift */,
@@ -868,6 +890,7 @@
 				3962A83726DCD94A0028277D /* SwiftKeychainWrapper */,
 				397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */,
 				397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */,
+				3972BC5229216FD100F69C47 /* Charts */,
 			);
 			productName = mpges.lk;
 			productReference = 220429F3235E22460054D4DD /* МП ГЭС.app */;
@@ -905,6 +928,7 @@
 				3962A83126DCD9320028277D /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				3962A83626DCD94A0028277D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS" */,
+				3972BC5129216FD000F69C47 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 220429F4235E22460054D4DD /* Products */;
 			projectDirPath = "";
@@ -929,7 +953,6 @@
 				22042A03235E224D0054D4DD /* Assets.xcassets in Resources */,
 				22F34F1E241EB07E00889A31 /* ReceivedDataTVCell.xib in Resources */,
 				22E8CF0A241D59E500CA0F52 /* PaymentTVCell.xib in Resources */,
-				22913B1E23FF0152000F9677 /* MainTabBarViewController.xib in Resources */,
 				2235D7BB241E5F3D007A90DD /* DeviceTVCell.xib in Resources */,
 				22721F1D2472E3D7006F72C0 /* Storyboard.storyboard in Resources */,
 				220DC96C2487BFD700756389 /* ContractTableViewCell.xib in Resources */,
@@ -952,6 +975,7 @@
 				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
 				223FDF8B23D093180029E547 /* InvoiceModel.swift in Sources */,
 				2217F5022403D117006654F9 /* TextFieldHelper.swift in Sources */,
+				3972BC632929229D00F69C47 /* BalloonMarker.swift in Sources */,
 				224D82B9258FBB2B0086F796 /* UINavigationController+Extension.swift in Sources */,
 				2269849E24115C5B00EF8ED7 /* Sequence+Extension.swift in Sources */,
 				2235D7BA241E5F3D007A90DD /* DeviceTVCell.swift in Sources */,
@@ -991,6 +1015,7 @@
 				22913B1D23FF0152000F9677 /* MainTabBarViewController.swift in Sources */,
 				225DFEA4247D850C0007A3DB /* BankPayModel.swift in Sources */,
 				39696D78261A1A85004C9401 /* GradientView.swift in Sources */,
+				39BA7300292A8A76000BA4C5 /* IndicatorView.swift in Sources */,
 				226A8B3C23D43901009B3B67 /* ApiServiceWrapper.swift in Sources */,
 				22F07F0D23DF4E50007BF4A4 /* DataProviderService.swift in Sources */,
 				22042A01235E22460054D4DD /* mpges_lk.xcdatamodeld in Sources */,
@@ -1058,6 +1083,7 @@
 				229B245C23FC637C005AEC0F /* MainCoordinator.swift in Sources */,
 				22F1682623E6B2F3003FA1EE /* TableViewCellHelper.swift in Sources */,
 				22BC8332248EB9320061182E /* ReceivedDataChartViewController.swift in Sources */,
+				39BA7302292BFF57000BA4C5 /* OtpVerificationModel .swift in Sources */,
 				22B7F474244CD12000E84EC5 /* SignUpTVController.swift in Sources */,
 				2291CD3223DEC0070029FCD1 /* DataProviderProtocol.swift in Sources */,
 				22E8CF09241D59E500CA0F52 /* PaymentTVCell.swift in Sources */,
@@ -1079,6 +1105,7 @@
 				223FDF8723D0928C0029E547 /* PaymentModel.swift in Sources */,
 				22EE516F245FD75F0075B6BE /* ContractorInfoTVController.swift in Sources */,
 				2200A9F4259A2195000A1F74 /* PasswordResetTVController.swift in Sources */,
+				3972BC572923FBDC00F69C47 /* CustomTabBar.swift in Sources */,
 				22913B1523FDB7EE000F9677 /* SceneDelegate.swift in Sources */,
 				223E97F52469D7FD00CD96F7 /* TypeOfPayment.swift in Sources */,
 				2267EFF723E8A6090097BEB0 /* ActivityIndicatorViewService2.swift in Sources */,
@@ -1089,6 +1116,7 @@
 				394806232823F0EB007687EC /* AppConfig.swift in Sources */,
 				226E5AF623F9C020008CFD37 /* Coordinator.swift in Sources */,
 				228E3CB323E5F3A9001E06C4 /* ContractDetailsInfoTVControllerDelegate.swift in Sources */,
+				3972BC602929227300F69C47 /* XYMarkerView.swift in Sources */,
 				39F6BB702825A44100CB96C1 /* PayWithTinkoffViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1349,6 +1377,14 @@
 				minimumVersion = 0.0.3;
 			};
 		};
+		3972BC5129216FD000F69C47 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = exactVersion;
+				version = 4.1.0;
+			};
+		};
 		397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Tinkoff/AcquiringSdk_IOS.git";
@@ -1389,6 +1425,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 39696D6C2612F1D6004C9401 /* XCRemoteSwiftPackageReference "swift-atomics" */;
 			productName = Atomics;
+		};
+		3972BC5229216FD100F69C47 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3972BC5129216FD000F69C47 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
 		};
 		397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -117,7 +117,7 @@ class ApiServiceWrapper {
     }
     
     // проверка email
-    func checkByEmail(model: UserEmailModel, delegate: PasswordRecoveryTVControllerUserDelegate){
+    func checkByEmail(model: EmailModel, delegate: PasswordRecoveryTVControllerUserDelegate){
         api.requestByModel(model: model, method: MethodApi.checkEmail, completion: delegate.resultOfCheckEmail(result:))
     }
     
@@ -132,7 +132,7 @@ class ApiServiceWrapper {
     }
     
     // восстановление пароля
-    func passwordRecovery(model: UserEmailModel, delegate: PasswordRecoveryTVControllerUserDelegate){
+    func passwordRecovery(model: EmailModel, delegate: PasswordRecoveryTVControllerUserDelegate){
         api.requestByModel(model: model, method: MethodApi.passwordRecovery, completion: delegate.resultOfPasswordRecovery(result:))
     }
     
@@ -168,5 +168,15 @@ class ApiServiceWrapper {
     func getOffices(delegate: OfficesViewControllerDelegate)
     {
         api.requestByToken(method: MethodApi.getOfficesMark, completion: delegate.setOffices(for:))
+    }
+    
+    // запрос кода на удаление профиля
+    func getCodeForDeleteUser(model: EmailModel, delegate: PageEnterCodeTVControllerDelegate) {
+        api.requestByModel(model: model, method: MethodApi.sendCodeForDeleteUser, completion: delegate.responseAfterSendingCode(result:))
+    }
+    
+    // запрос на удаление пользователя
+    func userDelete(model: OtpVerificationModel, delegate: PageEnterCodeTVControllerDelegate) {
+        api.requestByModel(model: model, method: MethodApi.deleteUser, completion: delegate.responseOfDeleteUser(result:))
     }
 }
