@@ -118,7 +118,7 @@ class ApiServiceWrapper {
     
     // проверка email
     func checkByEmail(model: EmailModel, delegate: PasswordRecoveryTVControllerUserDelegate){
-        api.requestByModel(model: model, method: MethodApi.checkEmail, completion: delegate.resultOfCheckEmail(result:))
+        //api.requestByModel(model: model, method: MethodApi.checkEmail, completion: delegate.resultOfCheckEmail(result:))
     }
     
     // регистрация профиля

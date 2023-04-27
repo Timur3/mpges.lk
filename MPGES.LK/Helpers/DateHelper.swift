@@ -12,11 +12,7 @@ func UnixTimeToDateTime(unixtime: Int, fullFormat: Bool = false) -> String {
     let date = NSDate(timeIntervalSince1970: Double(unixtime))
     
     let dayTimePeriodFormatter = DateFormatter()
-    if (fullFormat) {
-        dayTimePeriodFormatter.dateFormat = "dd.MM.yyyy hh:mm"
-    } else {
-        dayTimePeriodFormatter.dateFormat = "dd.MM.yyyy"
-    }
+    dayTimePeriodFormatter.dateFormat = fullFormat ? "dd.MM.yyyy hh:mm" : "dd.MM.yyyy"
     let dateString = dayTimePeriodFormatter.string(from: date as Date)
     return dateString
 }

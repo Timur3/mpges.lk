@@ -142,6 +142,10 @@
 		392F836325F7E3C500040978 /* TokenRequestInterceptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */; };
 		39377AA1267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */; };
 		3938D1AA25D0615A00A470C1 /* InvoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938D1A825D0615A00A470C1 /* InvoicesViewController.swift */; };
+		3938DB252948D282000D264C /* PayWithSberPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938DB242948D282000D264C /* PayWithSberPayViewController.swift */; };
+		3938DB282948E06E000D264C /* ButtonSberPayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938DB272948E06E000D264C /* ButtonSberPayTableViewCell.swift */; };
+		3938DB292949EE67000D264C /* SberPaySDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3938DB222948D1C4000D264C /* SberPaySDK.xcframework */; };
+		3938DB2A2949EE67000D264C /* SberPaySDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3938DB222948D1C4000D264C /* SberPaySDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		394176DF2635F23F00E796B7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394176DE2635F23F00E796B7 /* UIImage+Extension.swift */; };
 		394176E6263808D200E796B7 /* OfficeMarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394176E5263808D200E796B7 /* OfficeMarkModel.swift */; };
 		39465BC025F7E55700D7B70F /* TokenRequestInterceptor3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39465BBF25F7E55700D7B70F /* TokenRequestInterceptor3.swift */; };
@@ -154,11 +158,11 @@
 		3962A83826DCD94A0028277D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 3962A83726DCD94A0028277D /* SwiftKeychainWrapper */; };
 		39696D6E2612F1D6004C9401 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 39696D6D2612F1D6004C9401 /* Atomics */; };
 		39696D78261A1A85004C9401 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39696D77261A1A85004C9401 /* GradientView.swift */; };
+		396E3543293CED2F00506971 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3542293CED2F00506971 /* KeyChainService.swift */; };
 		3972BC5329216FD100F69C47 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 3972BC5229216FD100F69C47 /* Charts */; };
 		3972BC572923FBDC00F69C47 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3972BC562923FBDC00F69C47 /* CustomTabBar.swift */; };
 		3972BC602929227300F69C47 /* XYMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3972BC5F2929227300F69C47 /* XYMarkerView.swift */; };
 		3972BC632929229D00F69C47 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3972BC622929229D00F69C47 /* BalloonMarker.swift */; };
-		397ED7CB28F04C4600F59B4C /* TinkoffASDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */; };
 		397ED7CD28F04C4600F59B4C /* TinkoffASDKUI in Frameworks */ = {isa = PBXBuildFile; productRef = 397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */; };
 		3982A0822829A60900276286 /* ButtonPayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */; };
 		3982A0842829A71500276286 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3982A0832829A71500276286 /* UIView+Extension.swift */; };
@@ -169,6 +173,7 @@
 		398A64DA28759E3100C5A99E /* OfficesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398A64D928759E3100C5A99E /* OfficesViewController.xib */; };
 		398A64DD28759F3600C5A99E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A64DB28759F3600C5A99E /* MapViewController.swift */; };
 		398A64DE28759F3600C5A99E /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398A64DC28759F3600C5A99E /* MapViewController.xib */; };
+		399A8D2D293F19B600C097BB /* CredentialProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399A8D2C293F19B600C097BB /* CredentialProviderViewController.swift */; };
 		39B23990261A2345000D3345 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */; };
 		39B55534288C670A000F9DFB /* CardAddTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B55533288C670A000F9DFB /* CardAddTVController.swift */; };
 		39BA7300292A8A76000BA4C5 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA72FF292A8A76000BA4C5 /* IndicatorView.swift */; };
@@ -191,6 +196,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3938DB2A2949EE67000D264C /* SberPaySDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,12 +344,16 @@
 		392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequestInterceptor2.swift; sourceTree = "<group>"; };
 		39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDeliveryMethodsViewController.swift; sourceTree = "<group>"; };
 		3938D1A825D0615A00A470C1 /* InvoicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesViewController.swift; sourceTree = "<group>"; };
+		3938DB222948D1C4000D264C /* SberPaySDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SberPaySDK.xcframework; sourceTree = "<group>"; };
+		3938DB242948D282000D264C /* PayWithSberPayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithSberPayViewController.swift; sourceTree = "<group>"; };
+		3938DB272948E06E000D264C /* ButtonSberPayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSberPayTableViewCell.swift; sourceTree = "<group>"; };
 		394176DE2635F23F00E796B7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		394176E5263808D200E796B7 /* OfficeMarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeMarkModel.swift; sourceTree = "<group>"; };
 		39465BBF25F7E55700D7B70F /* TokenRequestInterceptor3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequestInterceptor3.swift; sourceTree = "<group>"; };
 		394806222823F0EA007687EC /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		3956F26D25D8294800A3A110 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
 		39696D77261A1A85004C9401 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		396E3542293CED2F00506971 /* KeyChainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
 		3972BC562923FBDC00F69C47 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		3972BC5F2929227300F69C47 /* XYMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYMarkerView.swift; sourceTree = "<group>"; };
 		3972BC622929229D00F69C47 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
@@ -356,6 +366,7 @@
 		398A64D928759E3100C5A99E /* OfficesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OfficesViewController.xib; sourceTree = "<group>"; };
 		398A64DB28759F3600C5A99E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		398A64DC28759F3600C5A99E /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		399A8D2C293F19B600C097BB /* CredentialProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialProviderViewController.swift; sourceTree = "<group>"; };
 		39B2398F261A2345000D3345 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		39B55533288C670A000F9DFB /* CardAddTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddTVController.swift; sourceTree = "<group>"; };
 		39BA72FF292A8A76000BA4C5 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
@@ -377,8 +388,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3962A83326DCD9320028277D /* Realm in Frameworks */,
+				3938DB292949EE67000D264C /* SberPaySDK.xcframework in Frameworks */,
 				39696D6E2612F1D6004C9401 /* Atomics in Frameworks */,
-				397ED7CB28F04C4600F59B4C /* TinkoffASDKCore in Frameworks */,
 				3962A83526DCD9320028277D /* RealmSwift in Frameworks */,
 				39499ED426DC904E0060171C /* Alamofire in Frameworks */,
 				3972BC5329216FD100F69C47 /* Charts in Frameworks */,
@@ -515,6 +526,7 @@
 				392F836225F7E3C500040978 /* TokenRequestInterceptor2.swift */,
 				22A889EE25BF2043005629DF /* ActivityIndicationService.swift */,
 				39465BBF25F7E55700D7B70F /* TokenRequestInterceptor3.swift */,
+				396E3542293CED2F00506971 /* KeyChainService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -706,13 +718,14 @@
 		22DA8972242E8763002D4D57 /* Pay */ = {
 			isa = PBXGroup;
 			children = (
+				3938DB262948E054000D264C /* Buttons */,
 				39CF85C72824D8DD005BDCA8 /* PaymentConfiguration */,
 				22DA8979242E884A002D4D57 /* PayWithApplePayTVController.swift */,
+				3938DB242948D282000D264C /* PayWithSberPayViewController.swift */,
 				22EE5172246032F50075B6BE /* PayWithCreditCardViewController.swift */,
 				224A2AB0246584170078A484 /* PayWithSberbankOnlineTVController.swift */,
-				22DB7BC2253035AE00F70737 /* ResultOfPaymentTableViewController.swift */,
 				39F6BB6F2825A44100CB96C1 /* PayWithTinkoffViewController.swift */,
-				3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */,
+				22DB7BC2253035AE00F70737 /* ResultOfPaymentTableViewController.swift */,
 			);
 			path = Pay;
 			sourceTree = "<group>";
@@ -759,6 +772,7 @@
 		22F5DDA923CCE7AF000C3F32 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				399A8D2B293F195D00C097BB /* AutoFill */,
 				39E3E48A28F48CF7000CC84F /* PageEnterCodeTVController.swift */,
 				39E3E48928F48A44000CC84F /* Profile */,
 				390CDA3C288C5CB60065BBAF /* Card */,
@@ -792,6 +806,15 @@
 				39377A9F267FC21E00763627 /* InvoiceDeliveryMethodsViewController.swift */,
 			);
 			path = InvoiceDeliveryMethods;
+			sourceTree = "<group>";
+		};
+		3938DB262948E054000D264C /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				3938DB272948E06E000D264C /* ButtonSberPayTableViewCell.swift */,
+				3982A0812829A60900276286 /* ButtonPayTableViewCell.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		39696D79261A1A8A004C9401 /* CustomView */ = {
@@ -829,6 +852,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		399A8D2B293F195D00C097BB /* AutoFill */ = {
+			isa = PBXGroup;
+			children = (
+				399A8D2C293F19B600C097BB /* CredentialProviderViewController.swift */,
+			);
+			path = AutoFill;
+			sourceTree = "<group>";
+		};
 		39CF85C72824D8DD005BDCA8 /* PaymentConfiguration */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,6 +882,7 @@
 		5E5FDB0E4D4E9FB466307D27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3938DB222948D1C4000D264C /* SberPaySDK.xcframework */,
 				39E4A2E126DD29C200EE1DF8 /* MapKit.framework */,
 				22AF9ACE246145BC00FBB45F /* PassKit.framework */,
 			);
@@ -888,7 +920,6 @@
 				3962A83226DCD9320028277D /* Realm */,
 				3962A83426DCD9320028277D /* RealmSwift */,
 				3962A83726DCD94A0028277D /* SwiftKeychainWrapper */,
-				397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */,
 				397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */,
 				3972BC5229216FD100F69C47 /* Charts */,
 			);
@@ -968,10 +999,12 @@
 			files = (
 				22F07F0B23DF0E26007BF4A4 /* RouteDelegate.swift in Sources */,
 				22E2871C23E4A9F900453CF3 /* ActivityIndicationDelegate.swift in Sources */,
+				399A8D2D293F19B600C097BB /* CredentialProviderViewController.swift in Sources */,
 				22AE75A325056481002611CF /* TableViewHelper.swift in Sources */,
 				22F1736D23DA15400065751E /* ReceivedDataModel.swift in Sources */,
 				226A8B3E23D49ED7009B3B67 /* DateHelper.swift in Sources */,
 				220BF2BF253A0FBD00812330 /* UIDevice+Extension.swift in Sources */,
+				3938DB252948D282000D264C /* PayWithSberPayViewController.swift in Sources */,
 				220429F7235E22460054D4DD /* AppDelegate.swift in Sources */,
 				223FDF8B23D093180029E547 /* InvoiceModel.swift in Sources */,
 				2217F5022403D117006654F9 /* TextFieldHelper.swift in Sources */,
@@ -987,6 +1020,7 @@
 				228B8FA0249A9A4200D4E5E2 /* ApplePayModel.swift in Sources */,
 				22B2E812247849DE00749CA1 /* AboutTableViewController.swift in Sources */,
 				22F1736723D77DF90065751E /* ReceivedDataRegisterTVController.swift in Sources */,
+				396E3543293CED2F00506971 /* KeyChainService.swift in Sources */,
 				39FC9C02267F777D00C67D19 /* TableViewCellViewModelType.swift in Sources */,
 				2284AE70242A55660097E4C2 /* InvoiceDeliveryMethodsTableViewCell.swift in Sources */,
 				224D82BC2590C8D40086F796 /* UserDefaultsObserver.swift in Sources */,
@@ -1015,6 +1049,7 @@
 				22913B1D23FF0152000F9677 /* MainTabBarViewController.swift in Sources */,
 				225DFEA4247D850C0007A3DB /* BankPayModel.swift in Sources */,
 				39696D78261A1A85004C9401 /* GradientView.swift in Sources */,
+				3938DB282948E06E000D264C /* ButtonSberPayTableViewCell.swift in Sources */,
 				39BA7300292A8A76000BA4C5 /* IndicatorView.swift in Sources */,
 				226A8B3C23D43901009B3B67 /* ApiServiceWrapper.swift in Sources */,
 				22F07F0D23DF4E50007BF4A4 /* DataProviderService.swift in Sources */,
@@ -1148,6 +1183,7 @@
 		22042A08235E224D0054D4DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1210,6 +1246,7 @@
 		22042A09235E224D0054D4DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1270,7 +1307,7 @@
 				CODE_SIGN_ENTITLEMENTS = "mpges.lk/МП ГЭС.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8P5Z32Z62F;
 				INFOPLIST_FILE = mpges.lk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -1278,7 +1315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chalimovtimur.mpges.lk;
 				PRODUCT_NAME = "МП ГЭС";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1295,7 +1332,7 @@
 				CODE_SIGN_ENTITLEMENTS = "mpges.lk/МП ГЭС.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8P5Z32Z62F;
 				INFOPLIST_FILE = mpges.lk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -1303,7 +1340,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chalimovtimur.mpges.lk;
 				PRODUCT_NAME = "МП ГЭС";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1430,11 +1467,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3972BC5129216FD000F69C47 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
-		};
-		397ED7CA28F04C4600F59B4C /* TinkoffASDKCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 397ED7C928F04C4500F59B4C /* XCRemoteSwiftPackageReference "AcquiringSdk_IOS" */;
-			productName = TinkoffASDKCore;
 		};
 		397ED7CC28F04C4600F59B4C /* TinkoffASDKUI */ = {
 			isa = XCSwiftPackageProductDependency;

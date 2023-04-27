@@ -22,6 +22,7 @@ protocol InvoicesViewControllerUserDelegate: AnyObject {
 
 
 class InvoicesViewController: CommonViewController {
+    private let urlInvoice = "http://lk.mp-ges.ru/Bills/BillsPrintPdfForCash?InvoiceId="
     private var indexPath: IndexPath?
     
     public lazy var invoiceTableView: UITableView = {
@@ -170,7 +171,7 @@ extension InvoicesViewController: InvoiceCellDelegate {
         let actionOpenInvoice = UIAlertAction(title: "Скачать PDF-файл", style: .default) {
             (UIAlertAction) in
             let id = "\(self.invoiceList[indexPath.section].invoices[indexPath.row].id)"
-            self.showPdf(for: "http://lk.mp-ges.ru/Bills/BillsPrintPdfForCash?InvoiceId=" + id)
+            self.showPdf(for: id)
         }
         let actionSendInvoice = UIAlertAction(title: "Отправить на email", style: .default) {
             (UIAlertAction) in self.alertShowSendByEmail(indexPath: indexPath)

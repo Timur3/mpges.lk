@@ -95,7 +95,6 @@ extension InvoiceDeliveryMethodsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return deliveryMethodList.count
     }
     
@@ -116,7 +115,6 @@ extension InvoiceDeliveryMethodsViewController: UITableViewDelegate {
     
     // Override to support conditional editing of the table view.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return false
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import TinkoffASDKCore
 import TinkoffASDKUI
+import SberPaySDK
 
 protocol ContractDetailsInfoTVControllerDelegate: AnyObject {
     func navigateToBackPage()
@@ -21,6 +22,7 @@ protocol ContractDetailsInfoTVControllerDelegate: AnyObject {
     func navigateToPayWithSberbankOnlinePage(model: BankPayModel)
     func navigateToPayWithApplePayPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
     func navigateToPayWithTinkoffPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
+    func navigateToPayWithSberPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate)
     func navigationToResultOfPayment(for model: ResultModel<Double>)
 }
 
@@ -312,16 +314,26 @@ extension ContractDetailsInfoTVController {
             self.paymentOthersBank()
         }
         
-        /*let bankLogoImage = UIImage(systemName: "creditcard")
+        let bankLogoImage = UIImage(systemName: "creditcard")
          if let icon = bankLogoImage?.imageWithSize(scaledToSize: CGSize(width: 29, height: 29)) {
          actionOthersBank.setValue(icon, forKey: "image")
-         }*/
+         }
         
+        let actionSberPay = UIAlertAction(title: "Оплата SberPay", style: .default) {
+            (UIAlertAction) in
+           // if SberPay.isSberbankAppInstalled {
+                let model = self.getBankPayModel()
+                self.delegate?.navigateToPayWithSberPage(model: model, delegate: self)
+         //   } else {
+              //  self.showAlert(title: "Ошибка", mesg: "Приложение Сбербанк не найдено")
+          //  }
+        }
         
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alertController.addAction(actionApplePay)
-        alertController.addAction(actionSberBank)
-        //alertController.addAction(actionOthersBank)
+        //alertController.addAction(actionSberBank)
+        alertController.addAction(actionOthersBank)
+        alertController.addAction(actionSberPay)
         alertController.addAction(actionCancel)
         
         if UIDevice.isPad {
@@ -346,7 +358,7 @@ extension ContractDetailsInfoTVController {
         self.delegate?.navigateToPayWithTinkoffPage(model: model, delegate: self)
         //self.delegate?.navigateToPayWithCreditCardPage()
     }
-    
+
     func goToSberbankOnlinePage()
     {
         let model = getBankPayModel()

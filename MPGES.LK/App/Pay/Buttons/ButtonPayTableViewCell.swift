@@ -16,6 +16,7 @@ class ButtonPayTableViewCell: UITableViewCell {
         ai.hidesWhenStopped = true
         return ai
     }()
+    
     var button: UIButton = {
         var b = UIButton()
         b.setTitle("Оплатить", for: .normal)

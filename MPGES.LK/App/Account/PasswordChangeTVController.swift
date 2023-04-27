@@ -161,6 +161,9 @@ extension PasswordChangeTVController {
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
+        passwordTextField.textContentType = .newPassword
+        confirmPasswordTextField.textContentType = .newPassword
+        currentPasswordTextField.textContentType = .password
     }
 }
 

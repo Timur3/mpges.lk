@@ -70,4 +70,6 @@ enum AppImage: String {
     case figureWalk = "figure.walk"
     case ligthOn = "flashlight.on.fill"
     case ligthOff = "flashlight.off.fill"
+    case eye = "eye"
+    case eyeSlash = "eye.slash.fill"
 }

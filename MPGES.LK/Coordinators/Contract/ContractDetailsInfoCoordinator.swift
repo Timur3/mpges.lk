@@ -36,6 +36,15 @@ class ContractDetailsInfoCoordinator: Coordinator {
 }
 
 extension ContractDetailsInfoCoordinator: ContractDetailsInfoTVControllerDelegate {
+    func navigateToPayWithSberPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate) {
+        let payWithSberPayTVController : PayWithSberPayViewController = PayWithSberPayViewController()
+        payWithSberPayTVController.contractDelegate = delegate
+        payWithSberPayTVController.model = model
+        let navPayWithSberPayTVController: UINavigationController = UINavigationController(rootViewController: payWithSberPayTVController)
+        navPayWithSberPayTVController.modalPresentationStyle = .fullScreen
+        self.navigationController.present(navPayWithSberPayTVController, animated: true, completion: nil)
+    }
+    
     func navigateToPayWithTinkoffPage(model: BankPayModel, delegate: ContractDetailsInfoTVControllerUserDelegate) {
         let payWithTinkoffTVController : PayWithTinkoffViewController = PayWithTinkoffViewController()
         payWithTinkoffTVController.contractDelegate = delegate

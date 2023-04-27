@@ -176,7 +176,7 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
                 ActivityIndicatorViewForCellService.shared.showAI(cell: cell)
                 completionInput()
                 if isFilledAll {
-                    print("send server")
+                    lightOff()
                     let modelOfSend = createModelOfSend(model: self.mainModel!)
                     ApiServiceWrapper.shared.sendReceivedData(model: modelOfSend, delegate: self)
                 } else {
@@ -206,7 +206,8 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
     }
     
     func completionInput() {
-        if let row = self.mainModel?.receivedDataAddNewTemplates.firstIndex(where: {$0.tariffZoneId == self.model?.tariffZoneId }) {
+        print(#function)
+        if let row = self.mainModel?.receivedDataAddNewTemplates.firstIndex(where: { $0.tariffZoneId == self.model?.tariffZoneId }) {
             self.mainModel?.receivedDataAddNewTemplates[row].isFilled = true
             self.mainModel?.receivedDataAddNewTemplates[row].receivedData = Int(receivedDataTF.text!)
         }
@@ -220,7 +221,6 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
             self.isFilledAll = true
         }
         self.hiddenAI()
-        //receivedDataTF.becomeFirstResponder()
     }
     
     @objc func inputReceivedDataTFAction(){
@@ -237,8 +237,8 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
         guard let device: AVCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video) else {
             print(#function)
             showTorchNotSupported()
-            return }
-        
+            return
+        }
         if (device.hasTorch && device.isTorchAvailable){
             do {
                 try device.lockForConfiguration()
@@ -257,6 +257,26 @@ class ReceivedDataAddNewTemplateTVController: CommonTableViewController {
             }
         }
     }
+    
+    private func lightOff(){
+        guard let device: AVCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video) else {
+            print(#function)
+            showTorchNotSupported()
+            return
+        }
+        if (device.hasTorch && device.isTorchAvailable){
+            do {
+                try device.lockForConfiguration()
+                if (device.torchMode == .on) {
+                    device.torchMode = .off
+                }
+                device.unlockForConfiguration()
+            } catch {
+                showTorchNotSupported()
+            }
+        }
+    }
+    
     private func showTorchNotSupported() {
         self.showToast(message: "Фонарик не доступен", font: .systemFont(ofSize: 13))
     }

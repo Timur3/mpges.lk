@@ -14,33 +14,37 @@ public protocol SignInTVControllerUserDelegate: AnyObject {
 }
 
 class SignInTVController: CenterContentAndCommonTableViewController {
-    var sections: [String] {["Авторизация", "", ""]}
-    let userDataService = UserDataService.shared
+    private var sections: [String] {["Авторизация", "", ""]}
+    private let userDataService = UserDataService.shared
+    private let keyChain = KeyChain.shared
     
     public weak var delegate: MainCoordinator?
     public weak var delegateUser: SignInTVControllerUserDelegate?
     
-    var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.mail, textAlign: .left, accessoryType: .none) }()
-    var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
-    var inputCell: UITableViewCell { getCustomCell(textLabel: NSLocalizedString("button.signIn", comment: "Войти"), imageCell: AppImage.none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
-    var passwordRecoveryCell: UITableViewCell { getCustomCell(textLabel: "Забыли пароль", imageCell: AppImage.none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
+    private var emailCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.mail, textAlign: .left, accessoryType: .none) }()
+    private var passwordCell: UITableViewCell = { getCustomCell(textLabel: "", imageCell: AppImage.lock, textAlign: .left, accessoryType: .none) }()
+    private var inputCell: UITableViewCell { getCustomCell(textLabel: NSLocalizedString("button.signIn", comment: "Войти"), imageCell: AppImage.none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
+    private var passwordRecoveryCell: UITableViewCell { getCustomCell(textLabel: "Забыли пароль", imageCell: AppImage.none, textAlign: .center, textColor: .systemRed, accessoryType: .none) }
     
-    var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com") }()
-    var passwordTextField: UITextField = { getCustomTextField(placeholder: "Ваш пароль", isPassword: true) }()
+    private var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com", keyboardType: .emailAddress) }()
+    private var passwordTextField: UITextField = { getCustomTextField(placeholder: "Ваш пароль", isPassword: true) }()
     
     var user: UserModel? {
         didSet {
             DispatchQueue.main.async {
                 self.emailTextField.text = self.user?.email
-                //self.passwordTextField.text = self.user?.name
             }
         }
     }
     override func viewDidLoad() {
-        self.navigationItem.title = NSLocalizedString("title.signIn", comment: "Войти")
         super.viewDidLoad()
-        configuration()
         setUpLayout()
+        configuration()
+    }
+    
+    private func getPassFromKeyChain() {
+        guard let pass = keyChain.read(account: emailTextField.text!) else { return }
+        passwordTextField.text = String(decoding: pass, as: UTF8.self)
     }
     
     func setUpLayout(){
@@ -51,6 +55,7 @@ class SignInTVController: CenterContentAndCommonTableViewController {
         passwordTextField.leadingAnchor.constraint(equalTo: passwordCell.leadingAnchor, constant: 50).isActive = true
         passwordTextField.centerYAnchor.constraint(equalTo: passwordCell.centerYAnchor).isActive = true
         passwordTextField.rightAnchor.constraint(equalTo: passwordCell.rightAnchor, constant: 8).isActive = true
+        
     }
     // MARK: - Table view data source
     
@@ -123,6 +128,11 @@ class SignInTVController: CenterContentAndCommonTableViewController {
             debugPrint("authButton press")
             let access = ApiService.Connectivity.isConnectedToInternet
             if access {
+                guard let password = passwordTextField.text else { return }
+                if password.count == 0 {
+                    passwordTextField.shake(times: 3, delta: 5)
+                    return
+                }
                 if isValidEmail(emailTextField.text!) {
                     let deviceId = UIDevice.current.identifierForVendor!.uuidString
                     let model = SignInModel(email: emailTextField.text!, password: passwordTextField.text!, deviceId: deviceId)
@@ -161,6 +171,7 @@ class SignInTVController: CenterContentAndCommonTableViewController {
 //MARK: - CONFIGURE
 extension SignInTVController {
     private func configuration() {
+        self.navigationItem.title = NSLocalizedString("title.signIn", comment: "Войти")
         let demoBtn = UIBarButtonItem(title: "Demo", style: .plain, target: self, action: #selector(geToDemo))
         self.navigationItem.rightBarButtonItems = [demoBtn]
         self.tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
@@ -168,21 +179,43 @@ extension SignInTVController {
         delegateUser = self
         //-- заполняем email
         self.emailTextField.text = userDataService.getEmail()
-        self.passwordTextField.text = userDataService.getKey(keyName: "dwp")
+        //self.passwordTextField.text = userDataService.getKey(keyName: "dwp")
+        getPassFromKeyChain()
+        //-- глаз
+        passwordCell.accessoryView = getEyeImageView(AppImage.eye.rawValue)
+        
+        emailTextField.textContentType = .username
+        passwordTextField.textContentType = .password
+    }
+    
+    private func getEyeImageView(_ imageName: String) -> UIImageView {
+        let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 26, height: 18))
+        imgView.image = UIImage(systemName: imageName)
+        imgView.isUserInteractionEnabled = true
+        imgView.gestureRecognizers = [UITapGestureRecognizer(target: self, action: #selector(showOrHidePassword))]
+        return imgView
+    }
+    
+    @objc private func showOrHidePassword() {
+        if passwordTextField.isSecureTextEntry {
+            passwordCell.accessoryView = getEyeImageView(AppImage.eyeSlash.rawValue)
+        } else {
+            passwordCell.accessoryView = getEyeImageView(AppImage.eye.rawValue)
+        }
+        passwordTextField.isSecureTextEntry.toggle()
     }
 }
 
 extension SignInTVController: SignInTVControllerUserDelegate {
-    
     func authApi(model: SignInModel) {
+        let email = model.email.lowercased()
         if (self.indexPath != nil) {
             ActivityIndicatorViewForCellService.shared.showAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         }
-        userDataService.setEmail(model.email.lowercased())
-        userDataService.setKey(keyName: "dwp", keyValue: model.password)
-        debugPrint(model.password)
+        userDataService.setEmail(email)
+        //String(decoding: Data, as: UTF8.self)
+        keyChain.save(model.password.data(using: String.Encoding.utf8)!, account: email)
         ApiServiceWrapper.shared.authApi(model: model, delegate: self)
-        
     }
     
     func resultAuthApi(result: ResultModel<TokensModel>) {

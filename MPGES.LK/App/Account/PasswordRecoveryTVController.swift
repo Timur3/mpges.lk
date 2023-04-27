@@ -9,8 +9,6 @@
 import UIKit
 
 public protocol PasswordRecoveryTVControllerUserDelegate: AnyObject {
-    func goToRecoveryPassword()
-    func resultOfCheckEmail(result: ResultModel<String>)
     func resultOfPasswordRecovery(result: ResultModel<String>)
 }
 
@@ -27,7 +25,8 @@ class PasswordRecoveryTVController: CenterContentAndCommonTableViewController {
         let textField = UITextField()
         textField.placeholder = "example@email.com"
         textField.translatesAutoresizingMaskIntoConstraints = false
-        //textField.text = "timon2006tevriz@mail.ru"
+        textField.textContentType = .username
+        textField.keyboardType = .emailAddress
         return textField
     }()
     
@@ -48,13 +47,12 @@ class PasswordRecoveryTVController: CenterContentAndCommonTableViewController {
         emailTextField.centerYAnchor.constraint(equalTo: emailCell.centerYAnchor).isActive = true
     }
     // MARK: - Table view data source
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return sections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
             return 1
@@ -112,29 +110,19 @@ class PasswordRecoveryTVController: CenterContentAndCommonTableViewController {
 }
 
 extension PasswordRecoveryTVController: PasswordRecoveryTVControllerUserDelegate {
-    func resultOfCheckEmail(result: ResultModel<String>) {
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        // sendPassword.isEnabled = !result.isError
-        //  if result.isError {
-        //     errorTextLabel.text = result.message
-        //      emailTF.shake(times: 3, delta: 5)
-        //  } else {errorTextLabel.text = ""}
-    }
-    
-    @objc func goToRecoveryPassword() {
-        ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
-        //  model = UserEmailModel(email: emailTF.text!)
-        //ApiServiceAdapter.shared.passwordRecovery(model: model!, delegate: self)
-    }
-    
+
     func resultOfPasswordRecovery(result: ResultModel<String>) {
         ActivityIndicatorViewForCellService.shared.hiddenAI(cell: self.tableView.cellForRow(at: self.indexPath!)!)
         let isError = result.isError
         if (!isError){
+            showToast(message: "Успешно")
             guard let email = emailTextField.text?.lowercased() else { return }
             self.mainCoordinator?.navigationPasswordResetPage(navigationController: self.navigationController!, email: email)
         } else {
-            showToast(message: result.message ?? "Неизвестная ошибка")
+
+            self.showAlert(
+                title: "Ошибка",
+                mesg: result.message ?? "Неизвестная ошибка")
         }
     }
 }

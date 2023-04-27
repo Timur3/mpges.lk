@@ -31,11 +31,10 @@ class SignUpTVController: CommonTableViewController {
     var saveCell: UITableViewCell { getCustomCell(textLabel: "Зарегистрировать", imageCell: .none, textAlign: .center, textColor: .systemBlue, accessoryType: .none) }
     
     var nameTextField: UITextField = { getCustomTextField(placeholder: "Введите ваше имя") }()
-    var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com") }()
+    var emailTextField: UITextField = { getCustomTextField(placeholder: "example@email.com", keyboardType: .emailAddress) }()
     var mobileTextField: UITextField = { getCustomTextField(placeholder: "+7(909)-012-34-56") }()
     var passwordTextField: UITextField = { getCustomTextField(placeholder: "Придумайте пароль") }()
-    //var confirmPasswordTextField: UITextField = { getCustomTextField(placeholder: "Повторите пароль") }()
-    
+
     var user: UserModel?
     
     override func viewDidLoad() {
@@ -202,5 +201,11 @@ extension SignUpTVController {
         
         let cancelBtn = getCloseUIBarButtonItem(target: self, action: #selector(cancelButton))
         self.navigationItem.rightBarButtonItems = [cancelBtn]
+        
+        emailTextField.textContentType = .username
+        passwordTextField.textContentType = .newPassword
+        let passwordRuleDescription = "required: lower; required: upper; required: digit; minlength: 8; maxlength: 16;"
+        let passwordRules = UITextInputPasswordRules(descriptor: passwordRuleDescription)
+        passwordTextField.passwordRules = passwordRules
     }
 }

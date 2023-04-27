@@ -17,6 +17,7 @@
 "title.payments" = "Payments";
 "title.more" = "More";
 "title.deletedAccount" = "Deleted account";
+"title.sberPay" = "Pay with SberPay";
 
 //button
 "button.signIn" = "Sign in";
